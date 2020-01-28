@@ -1,4 +1,4 @@
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 from multicall.signature import Signature
 from multicall.call import Call
