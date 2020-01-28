@@ -28,4 +28,34 @@ multi = Multicall([
 ])
 
 multi()  # {'whale': 566437.0921992733, 'fish': 7005.0, 'supply': 1000003.1220798912}
+
+# seth-style calls
+Call(MKR_TOKEN, ['balanceOf(address)(uint256)', MKR_WHALE])()
+Call(MKR_TOKEN, 'balanceOf(address)(uint256)')(MKR_WHALE)
+# return values processing
+Call(MKR_TOKEN, 'totalSupply()(uint256)', [['supply', from_wei]])()
 ```
+
+## api
+
+### `Signature(signature)`
+
+- `signature` is a seth-style function signature of `function_name(input,types)(output,types)`. it also supports structs which need to be broken down to basic parts, e.g. `(address,bytes)[]`.
+
+use `encode_data(args)` with input args to get the calldata. use `decode_data(output)` with the output to decode the result.
+
+### `Call(target, function, returns)`
+
+- `target` is the `to` address which is supplied to `eth_call`.
+- `function` can be either seth-style signature of `method(input,types)(output,types)` or a list of `[signature, *args]`.
+- `returns` is a list of `[name, handler]` for return values. if `returns` argument is omitted, you get a tuple, otherwise you get a dict. to skip processing of a value, pass `None` as a handler.
+
+use `Call(...)()` with predefined args or `Call(...)(args)` to reuse a prepared call with different args.
+
+use `decode_output(output)` with to decode the output and process it with `returns` handlers.
+
+### `Multicall(calls)`
+
+- `calls` is a list of calls with prepared values.
+
+use `Multicall(...)()` to get the result of a prepared multicall.
