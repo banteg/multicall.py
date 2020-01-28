@@ -27,7 +27,7 @@ class Call:
                 in zip(self.returns, decoded)
             }
         else:
-            return decoded
+            return decoded if len(decoded) > 1 else decoded[0]
 
     def __call__(self, args=None):
         args = args or self.args
