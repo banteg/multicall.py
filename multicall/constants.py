@@ -9,7 +9,7 @@ class Network(IntEnum):
     xDai = 100
 
 
-MULTICALL_ADDRESS = {
+MULTICALL_ADDRESSES = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
     Network.Kovan: '0x2cc8688C5f75E365aaEEb4ea8D6a480405A48D2A',
     Network.Rinkeby: '0x42Ad527de7d4e9d9d011aC45B31D8551f8Fe9821',

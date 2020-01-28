@@ -1,4 +1,4 @@
-from eth_abi import encode_abi, decode_abi
+from eth_abi import encode_abi
 from multicall import Signature
 
 args = ((1, 2, 3), '0x' + 'f' * 40, b'data')
