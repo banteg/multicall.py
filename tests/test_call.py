@@ -1,4 +1,4 @@
-from multicall.call import Call
+from multicall import Call
 
 CHAI = '0x06AF07097C9Eeb7fD685c692751D5C66dB49c215'
 
