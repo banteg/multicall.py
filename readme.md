@@ -36,6 +36,9 @@ Call(MKR_TOKEN, 'balanceOf(address)(uint256)')(MKR_WHALE)
 Call(MKR_TOKEN, 'totalSupply()(uint256)', [['supply', from_wei]])()
 ```
 
+for a full example, see implementation of [daistats](https://github.com/banteg/multicall.py/blob/master/examples/daistats.py).
+original [daistats.com](https://daistats.com) made by [nanexcool](https://github.com/nanexcool/daistats).
+
 ## api
 
 ### `Signature(signature)`
