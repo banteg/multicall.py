@@ -1,4 +1,5 @@
 import time
+from functools import partial
 from decimal import Decimal
 from multicall import Call, Multicall
 from prometheus_client import start_http_server, Gauge
@@ -51,6 +52,15 @@ def from_ray(value):
 
 def from_rad(value):
     return Decimal(value) / 10**45
+
+
+def from_wei(value, decimals=18):
+    return Decimal(value) / 10**decimals
+
+
+from_wad = partial(from_wei, decimals=18)
+from_ray = partial(from_wei, decimals=27)
+from_rad = partial(from_wei, decimals=45)
 
 
 def from_ilk(values):
@@ -107,8 +117,8 @@ multi = Multicall([
     Call(ETH, ['balanceOf(address)(uint256)', MCD_JOIN_ETH_A], [['eth_locked', from_wad]]),
     Call(BAT, ['totalSupply()(uint256)'], [['bat_supply', from_wad]]),
     Call(BAT, ['balanceOf(address)(uint256)', MCD_JOIN_BAT_A], [['bat_locked', from_wad]]),
-    Call(USDC, ['totalSupply()(uint256)'], [['usdc_supply', from_wad]]),
-    Call(USDC, ['balanceOf(address)(uint256)', MCD_JOIN_USDC_A], [['usdc_locked', from_wad]]),
+    Call(USDC, ['totalSupply()(uint256)'], [['usdc_supply', partial(from_wei, decimals=6)]]),
+    Call(USDC, ['balanceOf(address)(uint256)', MCD_JOIN_USDC_A], [['usdc_locked', partial(from_wei, decimals=6)]]),
     Call(MCD_POT, ['Pie()(uint256)'], [['savings_pie', from_wad]]),
     Call(MCD_POT, ['chi()(uint256)'], [['pie_chi', from_ray]]),
     Call(MCD_POT, ['rho()(uint256)'], [['pot_drip', None]]),
@@ -143,12 +153,7 @@ def fetch_data():
     data['eth_price'] = data['eth_mat']['mat'] * data['eth_ilk']['spot']
     data['bat_price'] = data['bat_mat']['mat'] * data['bat_ilk']['spot']
     data['usdc_price'] = data['usdc_mat']['mat'] * data['usdc_ilk']['spot']
-    data['sys_locked'] = (
-        data['eth_price'] * data['eth_locked'] +
-        data['bat_price'] * data['bat_locked'] + 
-        data['usdc_price'] * data['usdc_locked'] +
-        data['sai_locked']
-    )
+    data['sys_locked'] = data['eth_price'] * data['eth_locked'] + data['bat_price'] * data['bat_locked'] + data['usdc_price'] * data['usdc_locked'] + data['sai_locked']
     data['sys_surplus'] = data['vow_dai'] - data['vow_sin']
     data['sys_debt'] = data['vow_sin'] - data['sin'] - data['ash']
     return data
