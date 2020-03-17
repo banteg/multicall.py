@@ -32,7 +32,13 @@ MCD_FLOP = '0x4D95A049d5B0b7d32058cd3F2163015747522e99'
 mcd = Gauge('mcd', 'multi-collateral dai', ['param'])
 
 ilks = ['eth', 'bat', 'sai', 'usdc']
-params = ['Line', 'debt', 'vice', 'vow_dai', 'vow_sin', 'surplus_buffer', 'debt_size', 'ash', 'sin', 'dai_supply', 'uniswap_dai', 'sai_supply', 'sai_locked', 'gem_pit', 'eth_locked', 'bat_supply', 'bat_locked', 'savings_pie', 'pie_chi', 'pot_drip', 'dsr', 'cdps', 'base', 'eth_kicks', 'bat_kicks', 'chai_supply', 'mkr_supply', 'eth_fee', 'bat_fee', 'sai_fee', 'pot_fee', 'savings_dai', 'eth_price', 'bat_price', 'sys_locked', 'sys_surplus', 'sys_debt', 'flop_kicks', 'flap_kicks']
+params = [
+    'Line', 'debt', 'vice', 'base', 'cdps', 'sys_locked', 'sys_surplus', 'sys_debt',
+    'vow_dai', 'vow_sin', 'surplus_buffer', 'debt_size', 'ash', 'sin',
+    'dai_supply', 'chai_supply', 'mkr_supply', 'uniswap_dai', 'gem_pit',
+    'savings_pie', 'pie_chi', 'pot_drip', 'dsr', 'pot_fee', 'savings_dai',
+    'flop_kicks', 'flap_kicks',
+]
 
 
 def from_wad(value):
@@ -131,11 +137,18 @@ def fetch_data():
     data['eth_fee'] = get_fee(data['base'], data['eth_jug'])
     data['bat_fee'] = get_fee(data['base'], data['bat_jug'])
     data['sai_fee'] = get_fee(data['base'], data['sai_jug'])
+    data['usdc_fee'] = get_fee(data['base'], data['usdc_jug'])
     data['pot_fee'] = calc_fee(data['dsr'])
     data['savings_dai'] = data['savings_pie'] * data['pie_chi']
     data['eth_price'] = data['eth_mat']['mat'] * data['eth_ilk']['spot']
     data['bat_price'] = data['bat_mat']['mat'] * data['bat_ilk']['spot']
-    data['sys_locked'] = data['eth_price'] * data['eth_locked'] + data['bat_price'] * data['bat_locked'] + data['sai_locked']
+    data['usdc_price'] = data['usdc_mat']['mat'] * data['usdc_ilk']['spot']
+    data['sys_locked'] = (
+        data['eth_price'] * data['eth_locked'] +
+        data['bat_price'] * data['bat_locked'] + 
+        data['usdc_price'] * data['usdc_locked'] +
+        data['sai_locked']
+    )
     data['sys_surplus'] = data['vow_dai'] - data['vow_sin']
     data['sys_debt'] = data['vow_sin'] - data['sin'] - data['ash']
     return data
@@ -146,6 +159,11 @@ def update():
     for param in params:
         mcd.labels(param).set(data[param])
     for ilk in ilks:
+        for param in ['supply', 'locked', 'price', 'kicks', 'fee']:
+            key = f'{ilk}_{param}'
+            if key not in data:
+                continue
+            mcd.labels(key).set(data[key])
         for param in ['Art', 'rate', 'spot', 'line', 'dust']:
             mcd.labels(f'{ilk}_{param}').set(data[f'{ilk}_ilk'][param])
         for param in ['duty', 'rho']:
