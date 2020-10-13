@@ -17,7 +17,9 @@ class Multicall:
         )
         args = [[[call.target, call.data] for call in self.calls]]
         block, outputs = aggregate(args)
-        result = {}
+        result = {
+            '_block': block
+        }
         for call, output in zip(self.calls, outputs):
             result.update(call.decode_output(output))
         return result
