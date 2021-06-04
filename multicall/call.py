@@ -4,7 +4,7 @@ from multicall import Signature
 
 
 class Call:
-    def __init__(self, target, function, returns=None, _w3=None):
+    def __init__(self, target, function, returns=None, _w3=None, block_id=None):
         self.target = to_checksum_address(target)
 
         if isinstance(function, list):
@@ -20,6 +20,7 @@ class Call:
 
         self.signature = Signature(self.function)
         self.returns = returns
+        self.block_id = block_id
 
     @property
     def data(self):
@@ -39,5 +40,5 @@ class Call:
     def __call__(self, args=None):
         args = args or self.args
         calldata = self.signature.encode_data(args)
-        output = self.w3.eth.call({'to': self.target, 'data': calldata})
+        output = self.w3.eth.call({'to': self.target, 'data': calldata}, block_identifier=self.block_id)
         return self.decode_output(output)

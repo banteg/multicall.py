@@ -7,9 +7,9 @@ from multicall.constants import MULTICALL_ADDRESSES
 
 
 class Multicall:
-    def __init__(self, calls: List[Call], _w3=None):
+    def __init__(self, calls: List[Call], _w3=None, block_id=None):
         self.calls = calls
-
+        self.block_id = block_id
         if _w3 is None:
             self.w3 = w3
         else:
@@ -19,8 +19,9 @@ class Multicall:
         aggregate = Call(
             MULTICALL_ADDRESSES[self.w3.eth.chainId],
             'aggregate((address,bytes)[])(uint256,bytes[])',
-            None,
-            self.w3
+            returns=None,
+            _w3=self.w3,
+            block_id=self.block_id
         )
         args = [[[call.target, call.data] for call in self.calls]]
         block, outputs = aggregate(args)
