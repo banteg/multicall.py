@@ -16,3 +16,10 @@ MULTICALL_ADDRESSES = {
     Network.Görli: '0x77dCa2C955b15e9dE4dbBCf1246B4B85b651e50e',
     Network.xDai: '0xb5b692a88BDFc81ca69dcB1d924f59f0413A602a',
 }
+
+MULTICALL2_ADDRESSES = {
+    Network.Mainnet: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
+    Network.Kovan: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
+    Network.Rinkeby: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
+    Network.Görli: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
+}
