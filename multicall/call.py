@@ -35,7 +35,10 @@ class Call:
             apply_handler = lambda handler, value: handler(success, value)
 
         if success is None or success:
-            decoded = self.signature.decode_data(output)
+            try:
+                decoded = self.signature.decode_data(output)
+            except:
+                success, decoded = False, [None] * len(self.returns)
         else:
             decoded = [None] * len(self.returns)
 
