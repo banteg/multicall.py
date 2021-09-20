@@ -10,7 +10,7 @@ class Network(IntEnum):
     Polygon = 137
     Bsc = 56
     Fantom = 250
-
+    Heco = 128
 
 MULTICALL_ADDRESSES = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
@@ -21,4 +21,5 @@ MULTICALL_ADDRESSES = {
     Network.Polygon: '0x95028E5B8a734bb7E2071F96De89BABe75be9C8E',
     Network.Bsc: '0x1Ee38d535d541c55C9dae27B12edf090C608E6Fb',
     Network.Fantom: '0xb828C456600857abd4ed6C32FAcc607bD0464F4F',
+    Network.Heco: '0xc9a9F768ebD123A00B52e7A0E590df2e9E998707',
 }
