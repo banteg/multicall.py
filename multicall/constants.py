@@ -11,6 +11,7 @@ class Network(IntEnum):
     Bsc = 56
     Fantom = 250
     Heco = 128
+    Harmony = 1666600000
 
 MULTICALL_ADDRESSES = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
@@ -22,4 +23,5 @@ MULTICALL_ADDRESSES = {
     Network.Bsc: '0x1Ee38d535d541c55C9dae27B12edf090C608E6Fb',
     Network.Fantom: '0xb828C456600857abd4ed6C32FAcc607bD0464F4F',
     Network.Heco: '0xc9a9F768ebD123A00B52e7A0E590df2e9E998707',
+    Network.Harmony: '0xFE4980f62D708c2A84D3929859Ea226340759320',
 }
