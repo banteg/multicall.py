@@ -25,3 +25,10 @@ MULTICALL_ADDRESSES = {
     Network.Heco: '0xc9a9F768ebD123A00B52e7A0E590df2e9E998707',
     Network.Harmony: '0xFE4980f62D708c2A84D3929859Ea226340759320',
 }
+
+MULTICALL2_ADDRESSES = {
+    Network.Mainnet: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
+    Network.Kovan: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
+    Network.Rinkeby: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
+    Network.Görli: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
+}

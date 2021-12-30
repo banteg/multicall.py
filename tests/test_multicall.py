@@ -19,3 +19,13 @@ def test_multicall():
     result = multi()
     assert isinstance(result['supply'], float)
     assert isinstance(result['balance'], float)
+
+def test_multicall_no_success():
+    multi = Multicall([
+        Call(CHAI, 'transfer(address,uint256)(bool)', [['success', lambda success, ret_flag: (success, ret_flag)]]),
+        Call(CHAI, ['balanceOf(address)(uint256)', CHAI], [['balance', lambda success, value: (success, from_ray(value))]]),
+    ], require_success=False)
+
+    result = multi()
+    assert isinstance(result['success'], tuple)
+    assert isinstance(result['balance'], tuple)
