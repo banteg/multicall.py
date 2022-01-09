@@ -12,6 +12,8 @@ class Network(IntEnum):
     Fantom = 250
     Heco = 128
     Harmony = 1666600000
+    Arbitrum = 42161
+    Avax = 43114
 
 MULTICALL_ADDRESSES = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
@@ -31,4 +33,10 @@ MULTICALL2_ADDRESSES = {
     Network.Kovan: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
     Network.Rinkeby: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
     Network.Görli: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
+    Network.xDai: '0x9903f30c1469d8A2f415D4E8184C93BD26992573',
+    Network.Polygon: '0xc8E51042792d7405184DfCa245F2d27B94D013b6',
+    Network.Bsc: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
+    Network.Fantom: '0xBAD2B082e2212DE4B065F636CA4e5e0717623d18',
+    Network.Arbitrum: '0x842eC2c7D803033Edf55E478F461FC547Bc54EB2',
+    Network.Avax: '0xBAD2B082e2212DE4B065F636CA4e5e0717623d18',
 }
