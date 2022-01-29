@@ -18,14 +18,14 @@ class Multicall:
 
     def __call__(self):
         if self.require_success is True:
-            multicall_map = MULTICALL_ADDRESSES if self.w3.eth.chainId in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
+            multicall_map = MULTICALL_ADDRESSES if self.w3.eth.chain_id in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
             multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
         else:
             multicall_map = MULTICALL2_ADDRESSES
             multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
 
         aggregate = Call(
-            multicall_map[self.w3.eth.chainId],
+            multicall_map[self.w3.eth.chain_id],
             multicall_sig,
             returns=None,
             _w3=self.w3,
