@@ -1,9 +1,8 @@
 from typing import List
 
-from web3.auto import w3
-
 from multicall import Call
-from multicall.constants import MULTICALL_ADDRESSES, MULTICALL2_ADDRESSES
+from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
+                                 MULTICALL_ADDRESSES, w3)
 
 
 class Multicall:
@@ -19,18 +18,19 @@ class Multicall:
 
     def __call__(self):
         if self.require_success is True:
-            multicall_map = MULTICALL_ADDRESSES
+            multicall_map = MULTICALL_ADDRESSES if self.w3.eth.chain_id in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
             multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
         else:
             multicall_map = MULTICALL2_ADDRESSES
             multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
 
         aggregate = Call(
-            multicall_map[self.w3.eth.chainId],
+            multicall_map[self.w3.eth.chain_id],
             multicall_sig,
             returns=None,
             _w3=self.w3,
-            block_id=self.block_id
+            block_id=self.block_id,
+            state_override_code=MULTICALL2_BYTECODE
         )
 
         if self.require_success is True:

@@ -1,13 +1,15 @@
 from typing import Optional
 
 from eth_utils import to_checksum_address
-from web3.auto import w3
+
 from multicall import Signature
+from multicall.constants import w3
 
 
 class Call:
-    def __init__(self, target, function, returns=None, _w3=None, block_id=None):
+    def __init__(self, target, function, returns=None, _w3=None, block_id=None, state_override_code:str = None):
         self.target = to_checksum_address(target)
+        self.state_override_code = state_override_code
 
         if isinstance(function, list):
             self.function, *self.args = function
@@ -54,5 +56,12 @@ class Call:
     def __call__(self, args=None):
         args = args or self.args
         calldata = self.signature.encode_data(args)
-        output = self.w3.eth.call({'to': self.target, 'data': calldata}, block_identifier=self.block_id)
+
+        args = [{'to': self.target, 'data': calldata}, self.block_id]
+
+        if self.state_override_code:
+            args.append({self.target: {'code': self.state_override_code}})
+
+        output = self.w3.eth.call(*args)
+
         return self.decode_output(output)
