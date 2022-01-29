@@ -1,9 +1,8 @@
 from typing import List
 
-from web3.auto import w3
-
 from multicall import Call
-from multicall.constants import MULTICALL_ADDRESSES, MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE
+from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
+                                 MULTICALL_ADDRESSES, w3)
 
 
 class Multicall:

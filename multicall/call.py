@@ -1,8 +1,9 @@
 from typing import Optional
 
 from eth_utils import to_checksum_address
-from web3.auto import w3
+
 from multicall import Signature
+from multicall.constants import w3
 
 
 class Call:
