@@ -1,7 +1,8 @@
 from enum import IntEnum
 
 try:
-    from brownie import web3 as w3
+    from brownie import web3, network
+    if network.is_connected(): w3 = web3
 except ImportError:
     from web3.auto import w3
 
