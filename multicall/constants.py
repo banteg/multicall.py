@@ -14,6 +14,7 @@ class Network(IntEnum):
     Harmony = 1666600000
     Arbitrum = 42161
     Avax = 43114
+    Moonriver = 1285
 
 MULTICALL_ADDRESSES = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
