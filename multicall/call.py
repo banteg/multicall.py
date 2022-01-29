@@ -55,18 +55,12 @@ class Call:
     def __call__(self, args=None):
         args = args or self.args
         calldata = self.signature.encode_data(args)
-        
+
+        args = [{'to': self.target, 'data': calldata}, self.block_id]
+
         if self.state_override_code:
-            output = self.w3.eth.call(
-                {'to': self.target, 'data': calldata},
-                self.block_id,
-                {self.target: self.state_override_code}
-            )
-        else:
-            output = self.w3.eth.call(
-                {'to': self.target, 'data': calldata},
-                self.block_id
-            )
+            args.append({self.target: self.state_override_code})
+
+        output = self.w3.eth.call(*args)
 
         return self.decode_output(output)
-    
