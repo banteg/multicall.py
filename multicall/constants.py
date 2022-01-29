@@ -16,6 +16,7 @@ class Network(IntEnum):
     Arbitrum = 42161
     Avax = 43114
     Moonriver = 1285
+    Aurora = 1313161554
 
 MULTICALL_ADDRESSES = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
@@ -43,4 +44,5 @@ MULTICALL2_ADDRESSES = {
     Network.Arbitrum: '0x842eC2c7D803033Edf55E478F461FC547Bc54EB2',
     Network.Avax: '0xdf2122931FEb939FB8Cf4e67Ea752D1125e18858',
     Network.Heco: '0xd1F3BE686D64e1EA33fcF64980b65847aA43D79C',
+    Network.Aurora: '0xe0e3887b158F7F9c80c835a61ED809389BC08d1b',
 }
