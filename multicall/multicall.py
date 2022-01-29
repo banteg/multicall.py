@@ -3,7 +3,7 @@ from typing import List
 from web3.auto import w3
 
 from multicall import Call
-from multicall.constants import MULTICALL_ADDRESSES, MULTICALL2_ADDRESSES
+from multicall.constants import MULTICALL_ADDRESSES, MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE
 
 
 class Multicall:
@@ -30,7 +30,8 @@ class Multicall:
             multicall_sig,
             returns=None,
             _w3=self.w3,
-            block_id=self.block_id
+            block_id=self.block_id,
+            state_override_code=MULTICALL2_BYTECODE
         )
 
         if self.require_success is True:
