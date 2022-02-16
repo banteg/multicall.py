@@ -60,7 +60,11 @@ class AbstractBase:
             _w3 = self.get_w3()
             multi = Multicall(
                 [
-                    Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], [[self.ORACLE_1, from_v4]])
+                    Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], 
+                    [
+                        [self.ORACLE_1, from_v4]
+                    ]
+                    )
                 ]
             , _w3 = _w3, block_id="latest")
             resp = multi()
@@ -76,7 +80,6 @@ class Test_ARBITRUM_MultiCall(AbstractBase.BaseMultiCall):
         cls.ORACLE_1 = "0x01f4e56D5ee46e84Edf8595ca7A7B62a3306De76"
         cls.ORACLE_2 = "0x1a6d5C4396EaF8ED93Ec77bf1aF9B43ffeD7814d"
         cls.contract_interface = 'owedPayment(address)(uint256)'
-
 
 class Test_AVAX_MultiCall(AbstractBase.BaseMultiCall):
     @classmethod
@@ -126,8 +129,8 @@ class Test_HECO_MultiCall(AbstractBase.BaseMultiCall):
         cls.CONTRACT = "0x0AF7cEb1D2f3F5ceC626aEe32fF89EB15D40C586"
         cls.ORACLE_1 = "0x071FE390b362b866257c739C402f1e33FACC6181"
         cls.ORACLE_2 = "0x1834B7bF0a669D44948460B61b93A16154eda4B5"
-        cls.contract_interface = 'owedPayment(address)(uint256)'
 
+@pytest.mark.skip(reason='Could not find working Multicall contrac, check constants.py for examples')
 class Test_MOONRIVER_MultiCall(AbstractBase.BaseMultiCall):
     @classmethod
     def setUpClass(cls):
@@ -158,6 +161,7 @@ class Test_POLYGON_MultiCall(AbstractBase.BaseMultiCall):
         cls.ORACLE_2 = "0x250ABd1D4EBC8e70a4981677D5525f827660bDE4"
         cls.contract_interface = 'owedPayment(address)(uint256)'
 
+@pytest.mark.skip(reason='Could not find working Multicall contrac, check constants.py for examples')
 class Test_XDAI_MultiCall(AbstractBase.BaseMultiCall):
     @classmethod
     def setUpClass(cls):
