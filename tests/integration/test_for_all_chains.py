@@ -11,6 +11,7 @@ from multicall.constants import (
     CHAIN_BSC,
     CHAIN_ETHEREUM,
     CHAIN_FANTOM,
+    CHAIN_HARMONY,
     CHAIN_HECO,
     CHAIN_POLYGON,
     CHAIN_MOONRIVER,
@@ -41,7 +42,7 @@ class AbstractBase:
             cls.contract_interface = 'owedPayment(address)(uint256)'
 
         def get_w3(self):
-            w3_url = self.rpc_endpoint_map(self.CHAIN,w3)
+            w3_url = self.rpc_endpoint_map.get(self.CHAIN,w3)
             return Web3(Web3.HTTPProvider(w3_url))
 
         def test_singe_call(self):
@@ -162,3 +163,12 @@ class Test_XDAI_MultiCall(AbstractBase.BaseMultiCall):
         cls.ORACLE_1 = "0x11eB6a69A56DF3a89b99c4b1484691Af4AB0c508"
         cls.ORACLE_2 = "0x3036c926cCc3096beCF584E7523A1a57fdebba77"
         cls.contract_interface = 'owedPayment(address)(uint256)'
+
+@pytest.mark.skip(reason='TODO find usecase on HARMONY chain')
+class Test_HARMONY_MultiCall(AbstractBase.BaseMultiCall):
+    @classmethod
+    def setUpClass(cls):
+        super(Test_HARMONY_MultiCall, cls).setUpClass()
+        cls.CHAIN = CHAIN_HARMONY
+        cls.CONTRACT = ""
+        cls.contract_interface = ''
