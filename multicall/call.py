@@ -61,7 +61,8 @@ class Call:
 
         if self.state_override_code:
             args.append({self.target: {'code': self.state_override_code}})
-
+        
         output = self.w3.eth.call(*args)
+
 
         return self.decode_output(output)

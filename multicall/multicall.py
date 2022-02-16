@@ -1,8 +1,13 @@
 from typing import List
 
 from multicall import Call
-from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
-                                 MULTICALL_ADDRESSES, w3)
+from multicall.constants import (
+    MULTICALL2_ADDRESSES, 
+    MULTICALL2_BYTECODE,
+    MULTICALL_ADDRESSES, 
+    w3
+)
+from multicall.signature import Signature
 
 def get_multicall_map(chain_id):
     return MULTICALL_ADDRESSES if chain_id in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
@@ -18,17 +23,29 @@ class Multicall:
         else:
             self.w3 = _w3
 
+    
+    def _call(self,args):
+        contract = self.w3.eth.contract(address=self.multicall_contract_address, abi=self.multicall_sig)
+        self.parsed_sig = Signature(self.multicall_sig)
+        calldata = self.parsed_sig.signature.encode_data(args)
+  
+        return contract.functions.aggregate([{"target":self.CONTRACT,"callData":calldata}]).call()
+
+
     def __call__(self):
+        
         if self.require_success is True:
             multicall_map = get_multicall_map(self.w3.eth.chain_id)
-            multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
+            self.multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
         else:
             multicall_map = MULTICALL2_ADDRESSES
-            multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
+            self.multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
 
+        self.multicall_contract_address = multicall_map[self.w3.eth.chain_id]
+        
         aggregate = Call(
-            multicall_map[self.w3.eth.chain_id],
-            multicall_sig,
+            self.multicall_contract_address,
+            self.multicall_sig,
             returns=None,
             _w3=self.w3,
             block_id=self.block_id,
@@ -37,12 +54,13 @@ class Multicall:
 
         if self.require_success is True:
             args = [[[call.target, call.data] for call in self.calls]]
-            _, outputs = aggregate(args)
+            block_id, outputs = aggregate(args)
             outputs = ((None, output) for output in outputs)
         else:
             args = [self.require_success, [[call.target, call.data] for call in self.calls]]
-            _, _, outputs = aggregate(args)
-
+            block_id, _, outputs = aggregate(args)
+        
+        self.block_id = block_id
 
         result = {}
         for call, (success, output) in zip(self.calls, outputs):
