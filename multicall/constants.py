@@ -55,3 +55,35 @@ MULTICALL2_ADDRESSES = {
     Network.Heco: '0xd1F3BE686D64e1EA33fcF64980b65847aA43D79C',
     Network.Aurora: '0xe0e3887b158F7F9c80c835a61ED809389BC08d1b',
 }
+
+
+CHAIN_ARBITRUM = "ARBITRUM"
+CHAIN_AVALANCHE = "AVALANCHE"
+CHAIN_AVAX = "AVAX"
+CHAIN_BSC = "BSC"
+CHAIN_ETHEREUM = "ETHEREUM"
+CHAIN_FANTOM = "FANTOM"
+CHAIN_HARMONY = "HARMONY"
+CHAIN_HECO = "HECO"
+CHAIN_MATIC = "MATIC"
+CHAIN_POLYGON = "POLYGON"
+CHAIN_MOONRIVER = "MOONRIVER"
+CHAIN_OPTIMISM = "OPTIMISM"
+CHAIN_XDAI = "XDAI"
+
+PUBLIC_RPC_ENDPOINT_MAP = {
+  CHAIN_ARBITRUM:"https://rpc.ankr.com/arbitrum",
+  CHAIN_AVAX:"https://api.avax.network/ext/bc/C/rpc",
+  CHAIN_AVALANCHE:"https://api.avax.network/ext/bc/C/rpc",
+  CHAIN_BSC:"https://bsc-dataseed1.binance.org",
+  CHAIN_ETHEREUM:"https://rpc.ankr.com/eth",
+  CHAIN_FANTOM:"https://rpc.ftm.tools",
+  CHAIN_HARMONY:"https://api.harmony.one",
+  CHAIN_HECO:"https://http-mainnet.hecochain.com",
+  CHAIN_MATIC:"https://polygon-rpc.com",
+  CHAIN_POLYGON:"https://polygon-rpc.com",
+  CHAIN_MOONRIVER:"https://rpc.moonriver.moonbeam.network",
+  CHAIN_OPTIMISM:"https://mainnet.optimism.io/",
+  CHAIN_XDAI:"https://rpc.xdaichain.com",
+}
+
