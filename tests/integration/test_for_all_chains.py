@@ -42,23 +42,27 @@ class AbstractBase:
             cls.contract_interface = 'owedPayment(address)(uint256)'
 
         def get_w3(self):
-            w3_url = self.rpc_endpoint_map.get(self.CHAIN,w3)
-            return Web3(Web3.HTTPProvider(w3_url))
+            w3_url = self.rpc_endpoint_map.get(self.CHAIN,None)
+            if w3_url is None:
+                _w3 = w3
+            else:
+                _w3 = Web3(Web3.HTTPProvider(w3_url))
+            return _w3
 
         def test_singe_call(self):
-            w3 = self.get_w3()
-            call = Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], [[self.ORACLE_1, from_v4]], _w3 = w3, block_id="latest")
+            _w3 = self.get_w3()
+            call = Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], [[self.ORACLE_1, from_v4]], _w3 = _w3, block_id="latest")
             resp = call()
             assert self.ORACLE_1 in resp
             assert resp[self.ORACLE_1] >= 0
              
         def test_simple_case(self):
-            w3 = self.get_w3()
+            _w3 = self.get_w3()
             multi = Multicall(
                 [
                     Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], [[self.ORACLE_1, from_v4]])
                 ]
-            , _w3 = w3, block_id="latest")
+            , _w3 = _w3, block_id="latest")
             resp = multi()
             assert resp[self.ORACLE_1] is not None
             assert resp[self.ORACLE_1] >= 0
@@ -164,7 +168,7 @@ class Test_XDAI_MultiCall(AbstractBase.BaseMultiCall):
         cls.ORACLE_2 = "0x3036c926cCc3096beCF584E7523A1a57fdebba77"
         cls.contract_interface = 'owedPayment(address)(uint256)'
 
-@pytest.mark.skip(reason='TODO find usecase on HARMONY chain')
+@pytest.mark.skip(reason='TODO find target contract on HARMONY chain')
 class Test_HARMONY_MultiCall(AbstractBase.BaseMultiCall):
     @classmethod
     def setUpClass(cls):
