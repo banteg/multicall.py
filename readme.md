@@ -62,3 +62,27 @@ use `decode_output(output)` with to decode the output and process it with `retur
 - `calls` is a list of calls with prepared values.
 
 use `Multicall(...)()` to get the result of a prepared multicall.
+
+
+# dev
+## setup
+### install poetry ( assumung you have python )
+```bash
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+```
+### install packages
+```bash
+cd multicall.py
+poetry install
+```
+## testing
+### activate virtualenv
+```bash
+poetry shell
+```
+### run test in virtualenv
+```bash
+# optional for the normies
+# export WEB3_PROVIDER_URI=https://mainnet.infura.io/v3/<secret>
+poetry run pytest
+```
