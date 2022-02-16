@@ -130,7 +130,7 @@ class Test_HECO_MultiCall(AbstractBase.BaseMultiCall):
         cls.ORACLE_1 = "0x071FE390b362b866257c739C402f1e33FACC6181"
         cls.ORACLE_2 = "0x1834B7bF0a669D44948460B61b93A16154eda4B5"
 
-#@pytest.mark.skip(reason='Could not find working Multicall contrac, check constants.py for examples')
+@pytest.mark.skip(reason='Could not find working Multicall contrac, check constants.py for examples')
 class Test_MOONRIVER_MultiCall(AbstractBase.BaseMultiCall):
     @classmethod
     def setUpClass(cls):
@@ -161,7 +161,7 @@ class Test_POLYGON_MultiCall(AbstractBase.BaseMultiCall):
         cls.ORACLE_2 = "0x250ABd1D4EBC8e70a4981677D5525f827660bDE4"
         cls.contract_interface = 'owedPayment(address)(uint256)'
 
-#@pytest.mark.skip(reason='Could not find working Multicall contrac, check constants.py for examples')
+@pytest.mark.skip(reason='Could not find working Multicall contrac, check constants.py for examples')
 class Test_XDAI_MultiCall(AbstractBase.BaseMultiCall):
     @classmethod
     def setUpClass(cls):
