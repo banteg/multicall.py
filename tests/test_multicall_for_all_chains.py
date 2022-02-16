@@ -3,6 +3,9 @@ import unittest
 from decimal import Decimal
 from web3 import Web3
 import pytest
+import json
+from pathlib import Path
+from eth_utils import to_hex
 
 from multicall.constants import (
     w3,
@@ -32,7 +35,6 @@ def from_v4(value):
 class AbstractBase:
     class BaseMultiCall(unittest.TestCase):
         @classmethod
-
         def setUpClass(cls):
 
             cls.rpc_endpoint_map = PUBLIC_RPC_ENDPOINT_MAP
@@ -44,6 +46,17 @@ class AbstractBase:
             cls.ORACLE_2 = "0x4D447f5479DF06Bf630bf836237352AfDB7680B0"
             cls.contract_interface = 'owedPayment(address)(uint256)'
 
+        def load_abi(self):
+
+            file_content = {}
+
+            file_dir = Path(__file__).parent
+
+            with open(file_dir/'mc_contract_abi_0xeefba1e63905ef1d7acba5a8513c70307c1ce441.json') as f:
+                file_content = json.load(f)
+
+            return file_content
+
         def get_w3(self):
             w3_url = self.rpc_endpoint_map.get(self.CHAIN,None)
             if w3_url is None:
@@ -52,10 +65,16 @@ class AbstractBase:
                 _w3 = Web3(Web3.HTTPProvider(w3_url))
             return _w3
 
-        def test_multicall_contract_aggregate_method(self):
+        def test_multicall_contract_getLastBlockHash_method(self):
             _w3 = self.get_w3()
-            multicall_address = get_multicall_map(_w3.eth.chain_id)[self.CHAIN]
-            contract = _w3.eth.contract(address=multicall_address, abi=contract_abi)
+            multicall_address = get_multicall_map(_w3.eth.chain_id)[_w3.eth.chain_id]
+            contract = _w3.eth.contract(address=multicall_address, abi=self.load_abi())
+            latest_block_hash = to_hex(contract.functions.getLastBlockHash().call())
+            assert latest_block_hash.startswith('0x')
+            assert latest_block_hash.isalnum()
+            assert len(latest_block_hash) == 66
+
+
 
         def test_singe_call(self):
             _w3 = self.get_w3()
