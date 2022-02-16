@@ -2,6 +2,7 @@ import sys
 import unittest
 from decimal import Decimal
 from web3 import Web3
+from web3.middleware import geth_poa_middleware
 import pytest
 import json
 from pathlib import Path
@@ -60,11 +61,24 @@ class AbstractBase:
             return file_content
 
         def get_w3(self):
+
+
             w3_url = self.rpc_endpoint_map.get(self.CHAIN,None)
             if w3_url is None:
                 _w3 = w3
             else:
                 _w3 = Web3(Web3.HTTPProvider(w3_url))
+
+            # 
+            # for block_number_attr_format in [
+            #     'middleware_onion',
+            #     'middleware_stack',
+            # ]:
+            #     if hasattr(w3, block_number_attr_format):
+            #         w3_middleware = getattr(_w3, block_number_attr_format)
+
+            # w3_middleware.inject(geth_poa_middleware, layer=0)
+
             return _w3
 
         def get_decimals_call(self):
