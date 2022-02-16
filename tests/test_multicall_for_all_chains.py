@@ -81,9 +81,13 @@ class AbstractBase:
 
             return _w3
 
-        def get_decimals_call(self):
+        def get_no_params_call(self):
             _w3 = self.get_w3()
             return Call(self.CONTRACT, ['decimals()(uint8)'], [[self.CONTRACT,from_decimals]], _w3 = _w3, block_id="latest")
+
+        def get_with_params_call(self):
+            _w3 = self.get_w3()
+            return Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], [[self.ORACLE_1, from_v4]], _w3 = _w3, block_id="latest")
 
         def test_multicall_contract_getLastBlockHash_method(self):
             _w3 = self.get_w3()
@@ -96,26 +100,44 @@ class AbstractBase:
             assert len(latest_block_hash) == 66
 
 
-        def test_multicall_contract_aggregate_method(self):
+        def test_multicall_contract_aggregate_method_no_params(self):
             if self.CONTRACT is not None:
                 _w3 = self.get_w3()
                 multicall_address = get_multicall_map(_w3.eth.chain_id)[_w3.eth.chain_id]
                 contract = _w3.eth.contract(address=multicall_address, abi=self.load_abi())
 
 
-                call = self.get_decimals_call()
+                call = self.get_no_params_call()
                 calldata = call.signature.encode_data(call.args)
                 block_id, decimals = contract.functions.aggregate([{"target":self.CONTRACT,"callData":calldata}]).call()
                 
                 assert block_id > 0
-                decoded_decimal = int(remove_0x_prefix(to_hex(decimals[0])))
+                decoded_decimal = call.signature.decode_data(decimals[0])[0]
                 assert decoded_decimal >= 8 and decoded_decimal <= 18
+            else:
+                print(">> CONTRACT is not set")
+
+        def test_multicall_contract_aggregate_method_with_params(self):
+            if self.CONTRACT is not None:
+                _w3 = self.get_w3()
+                multicall_address = get_multicall_map(_w3.eth.chain_id)[_w3.eth.chain_id]
+                contract = _w3.eth.contract(address=multicall_address, abi=self.load_abi())
+
+
+                call = self.get_with_params_call()
+                calldata = call.signature.encode_data(call.args)
+                block_id, resp = contract.functions.aggregate([{"target":self.CONTRACT,"callData":calldata}]).call()
+                
+                assert block_id > 0
+
+                decoded_resp = call.signature.decode_data(resp[0])[0]
+                assert decoded_resp >= 0
             else:
                 print(">> CONTRACT is not set")
 
         def test_singe_call_no_params(self):
             if self.CONTRACT is not None:
-                call = self.get_decimals_call()
+                call = self.get_no_params_call()
                 decimals = call()
                 
                 assert len(decimals) == 1
@@ -126,7 +148,7 @@ class AbstractBase:
         def test_singe_call_with_params(self):
             if self.CONTRACT is not None:
                 _w3 = self.get_w3()
-                call = Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], [[self.ORACLE_1, from_v4]], _w3 = _w3, block_id="latest")
+                call = self.get_with_params_call()
                 resp = call()
                 assert self.ORACLE_1 in resp
                 assert resp[self.ORACLE_1] >= 0
@@ -138,7 +160,7 @@ class AbstractBase:
                 _w3 = self.get_w3()
                 multi = Multicall(
                     [
-                        self.get_decimals_call()
+                        self.get_no_params_call()
                     ]
                 , _w3 = _w3, block_id="latest")
                 decimals = multi()
@@ -147,16 +169,12 @@ class AbstractBase:
             else:
                 print(">> CONTRACT is not set")
 
-        def test_multicall_params(self):
+        def test_multicall_with_params(self):
             if self.CONTRACT is not None:
                 _w3 = self.get_w3()
                 multi = Multicall(
                     [
-                        Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], 
-                        [
-                            [self.ORACLE_1, from_v4]
-                        ]
-                        )
+                        self.get_with_params_call()
                     ]
                 , _w3 = _w3, block_id="latest")
                 resp = multi()
