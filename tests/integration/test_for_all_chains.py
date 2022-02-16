@@ -180,3 +180,4 @@ class Test_HARMONY_MultiCall(AbstractBase.BaseMultiCall):
         cls.CHAIN = CHAIN_HARMONY
         cls.CONTRACT = ""
         cls.contract_interface = ''
+        
