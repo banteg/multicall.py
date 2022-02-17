@@ -45,8 +45,7 @@ class Multicall:
         contract = self.w3.eth.contract(address=self.multicall_contract_address, abi=self._load_abi())
  
         return contract.functions.aggregate([{"target":call.target, "callData":call.data} for call in self.calls]).call(
-            block_identifier=self.block_id,
-            state_override_code=MULTICALL2_BYTECODE)
+            block_identifier=self.block_id)
 
 
     def __call__(self):
