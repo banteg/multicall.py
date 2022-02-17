@@ -41,11 +41,15 @@ class Multicall:
     def _load_abi(self):
         return load_abi(self.abi_rel_path)
 
-    def multicall(self,args):
+    def multicall(self):
         contract = self.w3.eth.contract(address=self.multicall_contract_address, abi=self._load_abi())
- 
-        return contract.functions.aggregate([{"target":call.target, "callData":call.data} for call in self.calls]).call(
-            block_identifier=self.block_id)
+
+        aggregate_args = [{"target":call.target, "callData":call.data} for call in self.calls]
+
+        return contract.functions.aggregate(aggregate_args).call(
+            block_identifier=self.block_id,
+            #state_override={self.multicall_contract_address: {'code': MULTICALL2_BYTECODE}}
+            )
 
 
     def __call__(self):
@@ -69,12 +73,11 @@ class Multicall:
         # )
 
         if self.require_success is True:
-            args = [[[call.target, call.data] for call in self.calls]]
-            block_id, outputs = self.multicall(args)
+
+            block_id, outputs = self.multicall()
             outputs = ((None, output) for output in outputs)
         else:
-            args = [self.require_success, [[call.target, call.data] for call in self.calls]]
-            block_id, _, outputs = self.multicall(args)
+            block_id, _, outputs = self.multicall()
         
         self.resp_block_id = block_id
         print(f"Last block is > {self.resp_block_id} < on chain_id: > {self.w3.eth.chain_id} <")

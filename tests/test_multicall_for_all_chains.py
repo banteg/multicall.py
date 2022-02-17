@@ -172,6 +172,7 @@ class AbstractBase:
                 resp = multi()
                 assert resp[self.ORACLE_1] is not None
                 assert resp[self.ORACLE_1] >= 0
+                print(f"{self.ORACLE_1},{resp[self.ORACLE_1]}")
             else:
                 print(">> CONTRACT is not set")
 
