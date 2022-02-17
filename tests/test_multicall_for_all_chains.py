@@ -24,7 +24,7 @@ from multicall.constants import (
     PUBLIC_RPC_ENDPOINT_MAP,
 )
 
-from multicall.multicall import get_multicall_map
+from multicall.multicall import get_multicall_map, load_abi
 
 from multicall import Call, Multicall
 
@@ -47,18 +47,16 @@ class AbstractBase:
             cls.CONTRACT = "0x00260Db07a22a6a5182213d8de1AbA0705A6Cd78"
             cls.ORACLE_1 = "0x1589d072aC911a55c2010D97839a1f61b1e3323A"
             cls.ORACLE_2 = "0x4D447f5479DF06Bf630bf836237352AfDB7680B0"
-            cls.contract_interface = 'owedPayment(address)(uint256)'
+            cls.contract_interface = "owedPayment(address)(uint256)"
+            cls.abi_rel_path = "../multicall/mc_contract_abi_0xeefba1e63905ef1d7acba5a8513c70307c1ce441.json"
 
-        def load_abi(self):
+        def get_abi(self):
+            return load_abi(self.abi_rel_path)
 
-            file_content = {}
-
-            file_dir = Path(__file__).parent
-
-            with open(file_dir/'mc_contract_abi_0xeefba1e63905ef1d7acba5a8513c70307c1ce441.json') as f:
-                file_content = json.load(f)
-
-            return file_content
+        def get_contract(self):
+            _w3 = self.get_w3()
+            multicall_address = get_multicall_map(_w3.eth.chain_id)[_w3.eth.chain_id]
+            return _w3.eth.contract(address=multicall_address, abi=self.get_abi())
 
         def get_w3(self):
 
@@ -90,9 +88,7 @@ class AbstractBase:
             return Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], [[self.ORACLE_1, from_v4]], _w3 = _w3, block_id="latest")
 
         def test_multicall_contract_getLastBlockHash_method(self):
-            _w3 = self.get_w3()
-            multicall_address = get_multicall_map(_w3.eth.chain_id)[_w3.eth.chain_id]
-            contract = _w3.eth.contract(address=multicall_address, abi=self.load_abi())
+            contract = self.get_contract()
             
             latest_block_hash = to_hex(contract.functions.getLastBlockHash().call())
             
@@ -102,9 +98,7 @@ class AbstractBase:
 
         def test_multicall_contract_aggregate_method_no_params(self):
             if self.CONTRACT is not None:
-                _w3 = self.get_w3()
-                multicall_address = get_multicall_map(_w3.eth.chain_id)[_w3.eth.chain_id]
-                contract = _w3.eth.contract(address=multicall_address, abi=self.load_abi())
+                contract = self.get_contract()
 
 
                 call = self.get_no_params_call()
@@ -119,9 +113,7 @@ class AbstractBase:
 
         def test_multicall_contract_aggregate_method_with_params(self):
             if self.CONTRACT is not None:
-                _w3 = self.get_w3()
-                multicall_address = get_multicall_map(_w3.eth.chain_id)[_w3.eth.chain_id]
-                contract = _w3.eth.contract(address=multicall_address, abi=self.load_abi())
+                contract = self.get_contract()
 
 
                 call = self.get_with_params_call()

@@ -8,6 +8,19 @@ from multicall.constants import (
     w3
 )
 from multicall.signature import Signature
+import json
+from pathlib import Path
+
+def load_abi(rel_file_path):
+
+    file_content = {}
+
+    file_dir = Path(__file__).parent
+
+    with open(file_dir/'mc_contract_abi_0xeefba1e63905ef1d7acba5a8513c70307c1ce441.json') as f:
+        file_content = json.load(f)
+
+    return file_content
 
 def get_multicall_map(chain_id):
     return MULTICALL_ADDRESSES if chain_id in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
@@ -42,7 +55,7 @@ class Multicall:
             self.multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
 
         self.multicall_contract_address = multicall_map[self.w3.eth.chain_id]
-        
+
         aggregate = Call(
             self.multicall_contract_address,
             self.multicall_sig,
