@@ -119,7 +119,7 @@ class Test_BSC_MultiCall(AbstractBase.BaseMultiCall):
         super(Test_BSC_MultiCall, cls).setUpClass()
         cls.CHAIN = CHAIN_BSC
         cls.CONTRACT = "0x000f46946d47647c04A5f10269e9084FB8c8637A"
-0xbf8f337b1863dee5e251358834dbecdeafb64ce2
+
 class Test_ETHEREUM_MultiCall(AbstractBase.BaseMultiCall):
     @classmethod
     def setUpClass(cls):
