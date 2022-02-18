@@ -24,7 +24,7 @@ from multicall.constants import (
     PUBLIC_RPC_ENDPOINT_MAP,
 )
 
-from multicall.multicall import get_multicall_map, load_abi
+from multicall.multicall import get_multicall_map
 
 from multicall import Call, Multicall
 
@@ -48,34 +48,14 @@ class AbstractBase:
             cls.ORACLE_1 = "0x1589d072aC911a55c2010D97839a1f61b1e3323A"
             cls.ORACLE_2 = "0x4D447f5479DF06Bf630bf836237352AfDB7680B0"
             cls.contract_interface = "owedPayment(address)(uint256)"
-            cls.abi_rel_path = "../multicall/mc_contract_abi_0xeefba1e63905ef1d7acba5a8513c70307c1ce441.json"
-
-        def get_abi(self):
-            return load_abi(self.abi_rel_path)
-
-        def get_contract(self):
-            _w3 = self.get_w3()
-            multicall_address = get_multicall_map(_w3.eth.chain_id)[_w3.eth.chain_id]
-            return _w3.eth.contract(address=multicall_address, abi=self.get_abi())
 
         def get_w3(self):
-
 
             w3_url = self.rpc_endpoint_map.get(self.CHAIN,None)
             if w3_url is None:
                 _w3 = w3
             else:
                 _w3 = Web3(Web3.HTTPProvider(w3_url))
-
-            # 
-            # for block_number_attr_format in [
-            #     'middleware_onion',
-            #     'middleware_stack',
-            # ]:
-            #     if hasattr(w3, block_number_attr_format):
-            #         w3_middleware = getattr(_w3, block_number_attr_format)
-
-            # w3_middleware.inject(geth_poa_middleware, layer=0)
 
             return _w3
 
@@ -87,65 +67,6 @@ class AbstractBase:
             _w3 = self.get_w3()
             return Call(self.CONTRACT, [self.contract_interface,self.ORACLE_1], [[self.ORACLE_1, from_v4]], _w3 = _w3, block_id="latest")
 
-        def test_multicall_contract_getLastBlockHash_method(self):
-            contract = self.get_contract()
-            
-            latest_block_hash = to_hex(contract.functions.getLastBlockHash().call())
-            
-            assert is_hexstr(latest_block_hash)
-            assert len(latest_block_hash) == 66
-
-
-        def test_multicall_contract_aggregate_method_no_params(self):
-            if self.CONTRACT is not None:
-                contract = self.get_contract()
-
-
-                call = self.get_no_params_call()
-                calldata = call.signature.encode_data(call.args)
-                block_id, decimals = contract.functions.aggregate([{"target":self.CONTRACT,"callData":calldata}]).call()
-                
-                assert block_id > 0
-                decoded_decimal = call.signature.decode_data(decimals[0])[0]
-                assert decoded_decimal >= 8 and decoded_decimal <= 18
-            else:
-                print(">> CONTRACT is not set")
-
-        def test_multicall_contract_aggregate_method_with_params(self):
-            if self.CONTRACT is not None:
-                contract = self.get_contract()
-
-
-                call = self.get_with_params_call()
-                calldata = call.signature.encode_data(call.args)
-                block_id, resp = contract.functions.aggregate([{"target":self.CONTRACT,"callData":calldata}]).call()
-                
-                assert block_id > 0
-
-                decoded_resp = call.signature.decode_data(resp[0])[0]
-                assert decoded_resp >= 0
-            else:
-                print(">> CONTRACT is not set")
-
-        def test_singe_call_no_params(self):
-            if self.CONTRACT is not None:
-                call = self.get_no_params_call()
-                decimals = call()
-                
-                assert len(decimals) == 1
-                assert decimals[self.CONTRACT] >= 8 and decimals[self.CONTRACT] <= 18
-            else:
-                print(">> CONTRACT is not set")
-
-        def test_singe_call_with_params(self):
-            if self.CONTRACT is not None:
-                _w3 = self.get_w3()
-                call = self.get_with_params_call()
-                resp = call()
-                assert self.ORACLE_1 in resp
-                assert resp[self.ORACLE_1] >= 0
-            else:
-                print(">> CONTRACT is not set")
         
         def test_multicall_no_params(self):
             if self.CONTRACT is not None:
