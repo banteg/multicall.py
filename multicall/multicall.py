@@ -19,6 +19,16 @@ class Multicall:
             self.w3 = _w3
 
     def __call__(self):
+        result = {}
+        for call, (success, output) in zip(self.calls, self.fetch_outputs()):
+            result.update(call.decode_output(output, success))
+
+        return result
+
+    def fetch_outputs(self, aggregate, calls = None):
+        if calls is None:
+            calls = self.calls
+        
         if self.require_success is True:
             multicall_map = get_multicall_map(self.w3.eth.chain_id)
             multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
@@ -35,17 +45,26 @@ class Multicall:
             state_override_code=MULTICALL2_BYTECODE
         )
 
-        if self.require_success is True:
-            args = [[[call.target, call.data] for call in self.calls]]
-            _, outputs = aggregate(args)
-            outputs = ((None, output) for output in outputs)
-        else:
-            args = [self.require_success, [[call.target, call.data] for call in self.calls]]
-            _, _, outputs = aggregate(args)
+        try:
+            if self.require_success is True:
+                args = [[[call.target, call.data] for call in calls]]
+                _, outputs = aggregate(args)
+                outputs = ((None, output) for output in outputs)
+            else:
+                args = [self.require_success, [[call.target, call.data] for call in calls]]
+                _, _, outputs = aggregate(args)
+            return outputs
+        except Exception as e:
+            if e:
+                pass
+            chunk_1, chunk_2 = split_calls(self.calls)
+            chunk_1 = self.fetch_outputs(chunk_1)
+            chunk_2 = self.fetch_outputs(chunk_2)
+            return chunk_1 + chunk_2
 
 
-        result = {}
-        for call, (success, output) in zip(self.calls, outputs):
-            result.update(call.decode_output(output, success))
-
-        return result
+def split_calls(calls):
+    half_point = len(calls) // 2
+    chunk_1 = calls[:half_point]
+    chunk_2 = calls[half_point+1:]
+    return chunk_1, chunk_2
