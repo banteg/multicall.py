@@ -25,7 +25,7 @@ class Multicall:
 
         return result
 
-    def fetch_outputs(self, aggregate, calls = None):
+    def fetch_outputs(self, calls = None):
         if calls is None:
             calls = self.calls
         
