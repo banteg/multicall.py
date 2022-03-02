@@ -59,15 +59,9 @@ class Call:
 
         args = [{'to': self.target, 'data': calldata}, self.block_id]
 
-        no_state_override_args = args[:]
-
         if self.state_override_code:
-           args.append({self.target: {'code': self.state_override_code}})
-        
-        try:
-            output = self.w3.eth.call(*args)
-        except ValueError as val_error:
-            print(f"{val_error} retrying without state override")
-            output = self.w3.eth.call(*no_state_override_args)
+            args.append({self.target: {'code': self.state_override_code}})
+
+        output = self.w3.eth.call(*args)
 
         return self.decode_output(output)

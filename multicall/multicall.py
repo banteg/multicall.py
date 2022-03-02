@@ -4,8 +4,6 @@ from multicall import Call
 from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL_ADDRESSES, w3)
 
-def get_multicall_map(chain_id):
-    return MULTICALL_ADDRESSES if chain_id in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
 
 class Multicall:
     def __init__(self, calls: List[Call], _w3=None, block_id=None, require_success: bool=True):
@@ -30,7 +28,7 @@ class Multicall:
             calls = self.calls
         
         if self.require_success is True:
-            multicall_map = get_multicall_map(self.w3.eth.chain_id)
+            multicall_map = MULTICALL_ADDRESSES if self.w3.eth.chain_id in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
             multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
         else:
             multicall_map = MULTICALL2_ADDRESSES
