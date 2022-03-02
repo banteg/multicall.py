@@ -62,7 +62,7 @@ class Multicall:
 
 
 def split_calls(calls):
-    half_point = len(calls) // 2
-    chunk_1 = calls[:half_point]
-    chunk_2 = calls[half_point+1:]
+    center = len(calls) // 2
+    chunk_1 = calls[:center]
+    chunk_2 = calls[center:]
     return chunk_1, chunk_2
