@@ -53,8 +53,8 @@ class Multicall:
                 _, _, outputs = aggregate(args)
             return outputs
         except Exception as e:
-            if e:
-                pass
+            if 'too large' not in str(e):
+                raise
             chunk_1, chunk_2 = split_calls(self.calls)
             chunk_1 = self.fetch_outputs(chunk_1)
             chunk_2 = self.fetch_outputs(chunk_2)
