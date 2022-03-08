@@ -7,9 +7,12 @@ from multicall.constants import w3
 
 
 class Call:
-    def __init__(self, target, function, returns=None, _w3=None, block_id=None, state_override_code:str = None):
+    def __init__(self, target, function, returns=None, block_id=None, state_override_code:str = None, _w3=w3):
         self.target = to_checksum_address(target)
+        self.returns = returns
+        self.block_id = block_id
         self.state_override_code = state_override_code
+        self.w3 = _w3
 
         if isinstance(function, list):
             self.function, *self.args = function
@@ -17,14 +20,7 @@ class Call:
             self.function = function
             self.args = None
 
-        if _w3 is None:
-            self.w3 = w3
-        else:
-            self.w3 = _w3
-
         self.signature = Signature(self.function)
-        self.returns = returns
-        self.block_id = block_id
 
     @property
     def data(self):
