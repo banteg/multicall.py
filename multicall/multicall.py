@@ -5,18 +5,41 @@ from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL_ADDRESSES, w3)
 
 
+chainids = {}
+
+def chain_id(w3):
+    '''
+    Helps save repeat calls to node
+    '''
+    try:
+        return chainids[w3]
+    except KeyError:
+        chainids[w3] = w3.eth.chain_id
+        return chainids[w3]
+
+def split_calls(calls):
+    '''
+    Split calls into 2 batches in case request is too large
+    '''
+    center = len(calls) // 2
+    chunk_1 = calls[:center]
+    chunk_2 = calls[center:]
+    return chunk_1, chunk_2
+
 class Multicall:
-    def __init__(self, calls: List[Call], _w3=None, block_id=None, require_success: bool=True):
+    def __init__(self, calls: List[Call], block_id=None, require_success: bool=True, _w3=w3):
         self.calls = calls
         self.block_id = block_id
         self.require_success = require_success
-
-        if _w3 is None:
-            self.w3 = w3
-        else:
-            self.w3 = _w3
-
+        self.w3 = _w3
         self.chainid = chain_id(self.w3)
+        if require_success is True:
+            multicall_map = MULTICALL_ADDRESSES if self.chainid in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
+            self.multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
+        else:
+            multicall_map = MULTICALL2_ADDRESSES
+            self.multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
+        self.multicall_address = multicall_map[self.chainid]
 
     def __call__(self):
         result = {}
@@ -29,16 +52,9 @@ class Multicall:
         if calls is None:
             calls = self.calls
         
-        if self.require_success is True:
-            multicall_map = MULTICALL_ADDRESSES if self.chainid in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
-            multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
-        else:
-            multicall_map = MULTICALL2_ADDRESSES
-            multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
-
         aggregate = Call(
-            multicall_map[self.chainid],
-            multicall_sig,
+            self.multicall_address,
+            self.multicall_sig,
             returns=None,
             _w3=self.w3,
             block_id=self.block_id,
@@ -58,23 +74,4 @@ class Multicall:
             if 'too large' not in str(e):
                 raise
             chunk_1, chunk_2 = split_calls(self.calls)
-            chunk_1 = self.fetch_outputs(chunk_1)
-            chunk_2 = self.fetch_outputs(chunk_2)
-            return chunk_1 + chunk_2
-
-
-def split_calls(calls):
-    center = len(calls) // 2
-    chunk_1 = calls[:center]
-    chunk_2 = calls[center:]
-    return chunk_1, chunk_2
-
-chainids = {}
-
-def chain_id(w3):
-    '''Helps save repeat calls to node'''
-    try:
-        return chainids[w3]
-    except KeyError:
-        chainids[w3] = w3.eth.chain_id
-        return chainids[w3]
+            return self.fetch_outputs(chunk_1) + self.fetch_outputs(chunk_2)
