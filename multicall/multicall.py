@@ -16,6 +16,8 @@ class Multicall:
         else:
             self.w3 = _w3
 
+        self.chainid = chain_id(self.w3)
+
     def __call__(self):
         result = {}
         for call, (success, output) in zip(self.calls, self.fetch_outputs()):
@@ -28,14 +30,14 @@ class Multicall:
             calls = self.calls
         
         if self.require_success is True:
-            multicall_map = MULTICALL_ADDRESSES if self.w3.eth.chain_id in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
+            multicall_map = MULTICALL_ADDRESSES if self.chainid in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
             multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
         else:
             multicall_map = MULTICALL2_ADDRESSES
             multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
 
         aggregate = Call(
-            multicall_map[self.w3.eth.chain_id],
+            multicall_map[self.chainid],
             multicall_sig,
             returns=None,
             _w3=self.w3,
@@ -66,3 +68,13 @@ def split_calls(calls):
     chunk_1 = calls[:center]
     chunk_2 = calls[center:]
     return chunk_1, chunk_2
+
+chainids = {}
+
+def chain_id(w3):
+    '''Helps save repeat calls to node'''
+    try:
+        return chainids[w3]
+    except KeyError:
+        chainids[w3] = w3.eth.chain_id
+        return chainids[w3]
