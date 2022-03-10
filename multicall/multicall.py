@@ -1,9 +1,10 @@
 from typing import List
 
+from requests.exceptions import HTTPError
+
 from multicall import Call
 from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL_ADDRESSES, w3)
-
 
 chainids = {}
 
@@ -70,8 +71,8 @@ class Multicall:
                 args = [self.require_success, [[call.target, call.data] for call in calls]]
                 _, _, outputs = aggregate(args)
             return outputs
-        except Exception as e:
-            if 'too large' not in str(e):
+        except HTTPError as e:
+            if 'request entity too large' not in str(e).lower():
                 raise
             chunk_1, chunk_2 = split_calls(self.calls)
             return self.fetch_outputs(chunk_1) + self.fetch_outputs(chunk_2)
