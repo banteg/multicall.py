@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "multicall"
-version = "0.2.0"
+version = "0.3.0"
 description = "aggregate results from multiple ethereum contract calls"
 authors = ["banteg <banteeg@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-web3 = "^5.26.0"
+web3 = "^5.28.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
