@@ -78,7 +78,8 @@ class AbstractBase:
                 decimals = multi()
                 assert len(decimals) == 1
                 assert decimals[self.CONTRACT] >= 8 and decimals[self.CONTRACT] <= 18
-                assert multi.get_last_calls_block_id is not None
+                assert multi.get_last_calls_block_id() is not None
+                assert isinstance(multi.get_last_calls_block_id(),int)
             else:
                 print(">> CONTRACT is not set")
 
@@ -93,7 +94,8 @@ class AbstractBase:
                 resp = multi()
                 assert resp[self.RQST_PARAM] is not None
                 assert resp[self.RQST_PARAM] >= 0
-                assert multi.get_last_calls_block_id is not None
+                assert multi.get_last_calls_block_id() is not None
+                assert isinstance(multi.get_last_calls_block_id(),int)
             else:
                 print(">> CONTRACT is not set")
 
