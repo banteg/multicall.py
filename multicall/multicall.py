@@ -12,6 +12,7 @@ class Multicall:
         self.calls = calls
         self.block_id = block_id
         self.require_success = require_success
+        self._last_calls_block_id = None
 
         if _w3 is None:
             self.w3 = w3
@@ -35,17 +36,24 @@ class Multicall:
             state_override_code=MULTICALL2_BYTECODE
         )
 
+        _last_calls_block_id = None
+
         if self.require_success is True:
             args = [[[call.target, call.data] for call in self.calls]]
-            _, outputs = aggregate(args)
+            _last_calls_block_id, outputs = aggregate(args)
             outputs = ((None, output) for output in outputs)
         else:
             args = [self.require_success, [[call.target, call.data] for call in self.calls]]
-            _, _, outputs = aggregate(args)
+            _last_calls_block_id, _, outputs = aggregate(args)
 
+
+        self._last_calls_block_id = _last_calls_block_id
 
         result = {}
         for call, (success, output) in zip(self.calls, outputs):
             result.update(call.decode_output(output, success))
 
         return result
+
+    def get_last_calls_block_id(self):
+        return self._last_calls_block_id
