@@ -1,13 +1,24 @@
-from typing import Optional
+from typing import Any, Callable, Iterable, Optional
 
+from eth_typing import AnyAddress
+from eth_typing.abi import Decodable
 from eth_utils import to_checksum_address
+from web3 import Web3
 
 from multicall import Signature
 from multicall.constants import w3
 
 
 class Call:
-    def __init__(self, target, function, returns=None, block_id=None, state_override_code:str = None, _w3=w3):
+    def __init__(
+        self, 
+        target: AnyAddress, 
+        function: str, # funcName(dtype)(dtype)
+        returns: Optional[Iterable[str,Callable]] = None, 
+        block_id: Optional[int] = None, 
+        state_override_code: Optional[str] = None, 
+        _w3: Optional[Web3] = w3
+    ) -> None:
         self.target = to_checksum_address(target)
         self.returns = returns
         self.block_id = block_id
@@ -23,10 +34,10 @@ class Call:
         self.signature = Signature(self.function)
 
     @property
-    def data(self):
+    def data(self) -> bytes:
         return self.signature.encode_data(self.args)
 
-    def decode_output(self, output, success: Optional[bool]=None):
+    def decode_output(self, output: Decodable, success: Optional[bool] = None) -> Any:
         if success is None:
             apply_handler = lambda handler, value: handler(value)
         else:
@@ -49,7 +60,7 @@ class Call:
         else:
             return decoded if len(decoded) > 1 else decoded[0]
 
-    def __call__(self, args=None):
+    def __call__(self, args: Optional[Any] = None) -> Any:
         args = args or self.args
         calldata = self.signature.encode_data(args)
 

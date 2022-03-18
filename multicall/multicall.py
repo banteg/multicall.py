@@ -1,6 +1,7 @@
-from typing import List
+from typing import Any, Dict, List, Optional, Tuple
 
-from requests.exceptions import HTTPError
+import requests
+from web3 import Web3
 
 from multicall import Call
 from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
@@ -8,9 +9,9 @@ from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
 
 chainids = {}
 
-def chain_id(w3):
+def chain_id(w3: Web3) -> int:
     '''
-    Helps save repeat calls to node
+    Returns chain id for an instance of Web3. Helps save repeat calls to node.
     '''
     try:
         return chainids[w3]
@@ -18,7 +19,7 @@ def chain_id(w3):
         chainids[w3] = w3.eth.chain_id
         return chainids[w3]
 
-def split_calls(calls):
+def split_calls(calls: List[Call]) -> Tuple[List[Call],List[Call]]:
     '''
     Split calls into 2 batches in case request is too large
     '''
@@ -28,7 +29,13 @@ def split_calls(calls):
     return chunk_1, chunk_2
 
 class Multicall:
-    def __init__(self, calls: List[Call], block_id=None, require_success: bool=True, _w3=w3):
+    def __init__(
+        self, 
+        calls: List[Call], 
+        block_id: Optional[int] = None, 
+        require_success: Optional[bool] = True, 
+        _w3: Optional[Web3] = w3
+    ) -> None:
         self.calls = calls
         self.block_id = block_id
         self.require_success = require_success
@@ -42,14 +49,14 @@ class Multicall:
             self.multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
         self.multicall_address = multicall_map[self.chainid]
 
-    def __call__(self):
+    def __call__(self) -> Dict[str,Any]:
         result = {}
         for call, (success, output) in zip(self.calls, self.fetch_outputs()):
             result.update(call.decode_output(output, success))
 
         return result
 
-    def fetch_outputs(self, calls = None):
+    def fetch_outputs(self, calls: Optional[List[Call]] = None) -> Tuple[Tuple[bool,Any]]:
         if calls is None:
             calls = self.calls
         

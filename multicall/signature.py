@@ -1,8 +1,11 @@
-from eth_abi import encode_single, decode_single
+from typing import Any, List, Optional
+
+from eth_abi import decode_single, encode_single
+from eth_typing.abi import Decodable
 from eth_utils import function_signature_to_4byte_selector
 
 
-def parse_signature(signature):
+def parse_signature(signature: str) -> List[str,str,str]:
     """
     Breaks 'func(address)(uint256)' into ['func', '(address)', '(uint256)']
     """
@@ -24,7 +27,7 @@ def parse_signature(signature):
 
 
 class Signature:
-    def __init__(self, signature):
+    def __init__(self, signature: str) -> None:
         self.signature = signature
         self.parts = parse_signature(signature)
         self.input_types = self.parts[1]
@@ -32,8 +35,8 @@ class Signature:
         self.function = ''.join(self.parts[:2])
         self.fourbyte = function_signature_to_4byte_selector(self.function)
 
-    def encode_data(self, args=None):
+    def encode_data(self, args: Optional[Any] = None) -> bytes:
         return self.fourbyte + encode_single(self.input_types, args) if args else self.fourbyte
 
-    def decode_data(self, output):
+    def decode_data(self, output: Decodable) -> Any:
         return decode_single(self.output_types, output)
