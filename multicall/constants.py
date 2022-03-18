@@ -2,7 +2,7 @@ from enum import IntEnum
 from typing import Dict
 
 try:
-    from brownie import network, web3
+    from brownie import network, web3 # type: ignore
     if network.is_connected():
         w3 = web3
     else:

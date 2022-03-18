@@ -49,9 +49,9 @@ class Call:
             try:
                 decoded = self.signature.decode_data(output)
             except:
-                success, decoded = False, [None] * len(self.returns)
+                success, decoded = False, [None] * len(self.returns) # type: ignore
         else:
-            decoded = [None] * len(self.returns)
+            decoded = [None] * len(self.returns) # type: ignore
 
         if self.returns:
             return {
