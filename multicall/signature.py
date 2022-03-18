@@ -1,4 +1,4 @@
-from typing import Any, Optional, Tuple
+from typing import Any, List, Optional, Tuple
 
 from eth_abi import decode_single, encode_single
 from eth_typing.abi import Decodable
@@ -9,9 +9,9 @@ def parse_signature(signature: str) -> Tuple[str,str,str]:
     """
     Breaks 'func(address)(uint256)' into ['func', '(address)', '(uint256)']
     """
-    parts = []
-    stack = []
-    start = 0
+    parts: List[str] = []
+    stack: List[str] = []
+    start: int = 0
     for end, letter in enumerate(signature):
         if letter == '(':
             stack.append(letter)

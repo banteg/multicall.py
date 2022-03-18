@@ -1,6 +1,6 @@
-from typing import Any, Callable, Iterable, Optional
+from typing import Any, Callable, Iterable, List, Optional, Tuple, Union
 
-from eth_typing import AnyAddress
+from eth_typing import Address, ChecksumAddress, HexAddress
 from eth_typing.abi import Decodable
 from eth_utils import to_checksum_address
 from web3 import Web3
@@ -8,16 +8,17 @@ from web3 import Web3
 from multicall import Signature
 from multicall.constants import w3
 
+AnyAddress = Union[str,Address,ChecksumAddress,HexAddress]
 
 class Call:
     def __init__(
         self, 
         target: AnyAddress, 
-        function: str, # funcName(dtype)(dtype)
-        returns: Optional[Iterable[str,Callable]] = None, 
+        function: Union[str,Iterable[Union[str,Any]]], # 'funcName(dtype)(dtype)' or ['funcName(dtype)(dtype)', input0, input1, ...]
+        returns: Optional[Iterable[Tuple[str,Callable]]] = None, 
         block_id: Optional[int] = None, 
         state_override_code: Optional[str] = None, 
-        _w3: Optional[Web3] = w3
+        _w3: Web3 = w3
     ) -> None:
         self.target = to_checksum_address(target)
         self.returns = returns
@@ -25,6 +26,7 @@ class Call:
         self.state_override_code = state_override_code
         self.w3 = _w3
 
+        self.args: Optional[List[Any]]
         if isinstance(function, list):
             self.function, *self.args = function
         else:

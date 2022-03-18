@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import requests
 from web3 import Web3
@@ -7,7 +7,7 @@ from multicall import Call
 from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL_ADDRESSES, w3)
 
-chainids = {}
+chainids: Dict[Web3,int] = {}
 
 def chain_id(w3: Web3) -> int:
     '''
@@ -33,8 +33,8 @@ class Multicall:
         self, 
         calls: List[Call], 
         block_id: Optional[int] = None, 
-        require_success: Optional[bool] = True, 
-        _w3: Optional[Web3] = w3
+        require_success: bool = True, 
+        _w3: Web3 = w3
     ) -> None:
         self.calls = calls
         self.block_id = block_id
@@ -50,13 +50,13 @@ class Multicall:
         self.multicall_address = multicall_map[self.chainid]
 
     def __call__(self) -> Dict[str,Any]:
-        result = {}
+        result: Dict[str,Any] = {}
         for call, (success, output) in zip(self.calls, self.fetch_outputs()):
             result.update(call.decode_output(output, success))
 
         return result
 
-    def fetch_outputs(self, calls: Optional[List[Call]] = None) -> Tuple[Tuple[bool,Any]]:
+    def fetch_outputs(self, calls: Optional[List[Call]] = None) -> List[Tuple[bool,Any]]:
         if calls is None:
             calls = self.calls
         
@@ -70,12 +70,11 @@ class Multicall:
         )
 
         try:
+            args = self.get_args(calls)
             if self.require_success is True:
-                args = [[[call.target, call.data] for call in calls]]
                 _, outputs = aggregate(args)
                 outputs = ((None, output) for output in outputs)
             else:
-                args = [self.require_success, [[call.target, call.data] for call in calls]]
                 _, _, outputs = aggregate(args)
             return outputs
         except requests.HTTPError as e:
@@ -83,3 +82,8 @@ class Multicall:
                 raise
             chunk_1, chunk_2 = split_calls(self.calls)
             return self.fetch_outputs(chunk_1) + self.fetch_outputs(chunk_2)
+
+    def get_args(self, calls: List[Call]) -> List[Union[bool,List[List[Any]]]]:
+        if self.require_success is True:
+            return [[[call.target, call.data] for call in calls]]
+        return [self.require_success, [[call.target, call.data] for call in calls]]

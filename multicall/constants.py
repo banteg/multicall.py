@@ -1,9 +1,12 @@
 from enum import IntEnum
+from typing import Dict
 
 try:
-    from brownie import web3, network
-    if network.is_connected(): w3 = web3
-    else: from web3.auto import w3
+    from brownie import network, web3
+    if network.is_connected():
+        w3 = web3
+    else:
+        from web3.auto import w3
 except ImportError:
     from web3.auto import w3
 
@@ -26,7 +29,7 @@ class Network(IntEnum):
     Aurora = 1313161554
     Cronos = 25
 
-MULTICALL_ADDRESSES = {
+MULTICALL_ADDRESSES: Dict[int,str] = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
     Network.Kovan: '0x2cc8688C5f75E365aaEEb4ea8D6a480405A48D2A',
     Network.Rinkeby: '0x42Ad527de7d4e9d9d011aC45B31D8551f8Fe9821',
@@ -40,7 +43,7 @@ MULTICALL_ADDRESSES = {
     Network.Cronos: '0x5e954f5972EC6BFc7dECd75779F10d848230345F',
 }
 
-MULTICALL2_ADDRESSES = {
+MULTICALL2_ADDRESSES: Dict[int,str] = {
     Network.Mainnet: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
     Network.Kovan: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
     Network.Rinkeby: '0x5ba1e12693dc8f9c48aad8770482f4739beed696',
