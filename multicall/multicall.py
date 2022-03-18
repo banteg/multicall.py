@@ -78,7 +78,7 @@ class Multicall:
                 args = [self.require_success, [[call.target, call.data] for call in calls]]
                 _, _, outputs = aggregate(args)
             return outputs
-        except HTTPError as e:
+        except requests.HTTPError as e:
             if 'request entity too large' not in str(e).lower():
                 raise
             chunk_1, chunk_2 = split_calls(self.calls)
