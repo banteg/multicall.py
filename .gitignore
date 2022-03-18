@@ -2,3 +2,6 @@ __pycache__
 .vscode
 dist
 env/
+cache/
+.mypy_cache
+.pytest_cache
