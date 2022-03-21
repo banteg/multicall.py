@@ -1,36 +1,45 @@
-from typing import Optional
+from typing import Any, Callable, Iterable, List, Optional, Tuple, Union
 
+from eth_typing import Address, ChecksumAddress, HexAddress
+from eth_typing.abi import Decodable
 from eth_utils import to_checksum_address
+from web3 import Web3
 
 from multicall import Signature
 from multicall.constants import w3
 
+AnyAddress = Union[str,Address,ChecksumAddress,HexAddress]
 
 class Call:
-    def __init__(self, target, function, returns=None, _w3=None, block_id=None, state_override_code:str = None):
+    def __init__(
+        self, 
+        target: AnyAddress, 
+        function: Union[str,Iterable[Union[str,Any]]], # 'funcName(dtype)(dtype)' or ['funcName(dtype)(dtype)', input0, input1, ...]
+        returns: Optional[Iterable[Tuple[str,Callable]]] = None, 
+        block_id: Optional[int] = None, 
+        state_override_code: Optional[str] = None, 
+        _w3: Web3 = w3
+    ) -> None:
         self.target = to_checksum_address(target)
+        self.returns = returns
+        self.block_id = block_id
         self.state_override_code = state_override_code
+        self.w3 = _w3
 
+        self.args: Optional[List[Any]]
         if isinstance(function, list):
             self.function, *self.args = function
         else:
             self.function = function
             self.args = None
 
-        if _w3 is None:
-            self.w3 = w3
-        else:
-            self.w3 = _w3
-
         self.signature = Signature(self.function)
-        self.returns = returns
-        self.block_id = block_id
 
     @property
-    def data(self):
+    def data(self) -> bytes:
         return self.signature.encode_data(self.args)
 
-    def decode_output(self, output, success: Optional[bool]=None):
+    def decode_output(self, output: Decodable, success: Optional[bool] = None) -> Any:
         if success is None:
             apply_handler = lambda handler, value: handler(value)
         else:
@@ -40,9 +49,9 @@ class Call:
             try:
                 decoded = self.signature.decode_data(output)
             except:
-                success, decoded = False, [None] * len(self.returns)
+                success, decoded = False, [None] * len(self.returns) # type: ignore
         else:
-            decoded = [None] * len(self.returns)
+            decoded = [None] * len(self.returns) # type: ignore
 
         if self.returns:
             return {
@@ -53,21 +62,15 @@ class Call:
         else:
             return decoded if len(decoded) > 1 else decoded[0]
 
-    def __call__(self, args=None):
+    def __call__(self, args: Optional[Any] = None) -> Any:
         args = args or self.args
         calldata = self.signature.encode_data(args)
 
         args = [{'to': self.target, 'data': calldata}, self.block_id]
 
-        no_state_override_args = args[:]
-
         if self.state_override_code:
-           args.append({self.target: {'code': self.state_override_code}})
-        
-        try:
-            output = self.w3.eth.call(*args)
-        except ValueError as val_error:
-            print(f"{val_error} retrying without state override")
-            output = self.w3.eth.call(*no_state_override_args)
+            args.append({self.target: {'code': self.state_override_code}})
+
+        output = self.w3.eth.call(*args)
 
         return self.decode_output(output)

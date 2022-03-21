@@ -1,51 +1,89 @@
-from typing import List
+from typing import Any, Dict, List, Optional, Tuple, Union
+
+import requests
+from web3 import Web3
 
 from multicall import Call
 from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL_ADDRESSES, w3)
 
-def get_multicall_map(chain_id):
-    return MULTICALL_ADDRESSES if chain_id in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
+chainids: Dict[Web3,int] = {}
+
+def chain_id(w3: Web3) -> int:
+    '''
+    Returns chain id for an instance of Web3. Helps save repeat calls to node.
+    '''
+    try:
+        return chainids[w3]
+    except KeyError:
+        chainids[w3] = w3.eth.chain_id
+        return chainids[w3]
+
+def split_calls(calls: List[Call]) -> Tuple[List[Call],List[Call]]:
+    '''
+    Split calls into 2 batches in case request is too large
+    '''
+    center = len(calls) // 2
+    chunk_1 = calls[:center]
+    chunk_2 = calls[center:]
+    return chunk_1, chunk_2
 
 class Multicall:
-    def __init__(self, calls: List[Call], _w3=None, block_id=None, require_success: bool=True):
+    def __init__(
+        self, 
+        calls: List[Call], 
+        block_id: Optional[int] = None, 
+        require_success: bool = True, 
+        _w3: Web3 = w3
+    ) -> None:
         self.calls = calls
         self.block_id = block_id
         self.require_success = require_success
-
-        if _w3 is None:
-            self.w3 = w3
-        else:
-            self.w3 = _w3
-
-    def __call__(self):
-        if self.require_success is True:
-            multicall_map = get_multicall_map(self.w3.eth.chain_id)
-            multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
+        self.w3 = _w3
+        self.chainid = chain_id(self.w3)
+        if require_success is True:
+            multicall_map = MULTICALL_ADDRESSES if self.chainid in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
+            self.multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
         else:
             multicall_map = MULTICALL2_ADDRESSES
-            multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
+            self.multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
+        self.multicall_address = multicall_map[self.chainid]
 
+    def __call__(self) -> Dict[str,Any]:
+        result: Dict[str,Any] = {}
+        for call, (success, output) in zip(self.calls, self.fetch_outputs()):
+            result.update(call.decode_output(output, success))
+
+        return result
+
+    def fetch_outputs(self, calls: Optional[List[Call]] = None) -> List[Tuple[bool,Any]]:
+        if calls is None:
+            calls = self.calls
+        
         aggregate = Call(
-            multicall_map[self.w3.eth.chain_id],
-            multicall_sig,
+            self.multicall_address,
+            self.multicall_sig,
             returns=None,
             _w3=self.w3,
             block_id=self.block_id,
             state_override_code=MULTICALL2_BYTECODE
         )
 
+        try:
+            args = self.get_args(calls)
+            if self.require_success is True:
+                _, outputs = aggregate(args)
+                outputs = ((None, output) for output in outputs)
+            else:
+                _, _, outputs = aggregate(args)
+            return outputs
+        except requests.HTTPError as e:
+            if 'request entity too large' not in str(e).lower():
+                raise
+            chunk_1, chunk_2 = split_calls(self.calls)
+            return self.fetch_outputs(chunk_1) + self.fetch_outputs(chunk_2)
+
+    def get_args(self, calls: List[Call]) -> List[Union[bool,List[List[Any]]]]:
         if self.require_success is True:
-            args = [[[call.target, call.data] for call in self.calls]]
-            _, outputs = aggregate(args)
-            outputs = ((None, output) for output in outputs)
-        else:
-            args = [self.require_success, [[call.target, call.data] for call in self.calls]]
-            _, _, outputs = aggregate(args)
-
-
-        result = {}
-        for call, (success, output) in zip(self.calls, outputs):
-            result.update(call.decode_output(output, success))
-
-        return result
+            return [[[call.target, call.data] for call in calls]]
+        return [self.require_success, [[call.target, call.data] for call in calls]]
