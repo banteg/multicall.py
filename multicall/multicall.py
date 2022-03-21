@@ -21,7 +21,7 @@ def chain_id(w3: Web3) -> int:
 
 def split_calls(calls: List[Call]) -> Tuple[List[Call],List[Call]]:
     '''
-    Split calls into 2 batches in case request is too large
+    Split calls into 2 batches in case request is too large.
     '''
     center = len(calls) // 2
     chunk_1 = calls[:center]
@@ -56,7 +56,7 @@ class Multicall:
 
         return result
 
-    def fetch_outputs(self, calls: Optional[List[Call]] = None) -> List[Tuple[bool,Any]]:
+    def fetch_outputs(self, calls: Optional[List[Call]] = None, ConnErr_retries: int = 0) -> List[Tuple[bool,Any]]:
         if calls is None:
             calls = self.calls
         
@@ -77,11 +77,15 @@ class Multicall:
             else:
                 _, _, outputs = aggregate(args)
             return outputs
+        except requests.ConnectionError as e:
+            if "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))" not in str(e) or ConnErr_retries > 5:
+                raise
         except requests.HTTPError as e:
             if 'request entity too large' not in str(e).lower():
                 raise
-            chunk_1, chunk_2 = split_calls(self.calls)
-            return self.fetch_outputs(chunk_1) + self.fetch_outputs(chunk_2)
+
+        chunk_1, chunk_2 = split_calls(self.calls)
+        return self.fetch_outputs(chunk_1,ConnErr_retries=ConnErr_retries+1) + self.fetch_outputs(chunk_2,ConnErr_retries=ConnErr_retries+1)
 
     def get_args(self, calls: List[Call]) -> List[Union[bool,List[List[Any]]]]:
         if self.require_success is True:
