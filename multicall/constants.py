@@ -28,6 +28,7 @@ class Network(IntEnum):
     Moonriver = 1285
     Aurora = 1313161554
     Cronos = 25
+    Oec = 66
 
 MULTICALL_ADDRESSES: Dict[int,str] = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
@@ -58,4 +59,5 @@ MULTICALL2_ADDRESSES: Dict[int,str] = {
     Network.Heco: '0xd1F3BE686D64e1EA33fcF64980b65847aA43D79C',
     Network.Aurora: '0xe0e3887b158F7F9c80c835a61ED809389BC08d1b',
     Network.Cronos: '0x5e954f5972EC6BFc7dECd75779F10d848230345F',
+    Network.Oec: '0xddBDA43E5675C8A35dcA19007061A1D4A28F9452',
 }
