@@ -1,3 +1,4 @@
+import logging
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import requests
@@ -6,6 +7,9 @@ from web3 import Web3
 from multicall import Call
 from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL_ADDRESSES, w3)
+
+logger = logging.getLogger(__name__)
+
 
 chainids: Dict[Web3,int] = {}
 
@@ -19,19 +23,13 @@ def chain_id(w3: Web3) -> int:
         chainids[w3] = w3.eth.chain_id
         return chainids[w3]
 
-def split_calls(calls: List[Call]) -> Tuple[List[Call],List[Call]]:
-    '''
-    Split calls into 2 batches in case request is too large.
-    '''
-    center = len(calls) // 2
-    chunk_1 = calls[:center]
-    chunk_2 = calls[center:]
-    return chunk_1, chunk_2
+
+CallResponse = Tuple[bool,Any]
 
 class Multicall:
     def __init__(
         self, 
-        calls: List[Call], 
+        calls: List[Call],
         block_id: Optional[int] = None, 
         require_success: bool = True, 
         _w3: Web3 = w3
@@ -50,13 +48,19 @@ class Multicall:
         self.multicall_address = multicall_map[self.chainid]
 
     def __call__(self) -> Dict[str,Any]:
-        result: Dict[str,Any] = {}
-        for call, (success, output) in zip(self.calls, self.fetch_outputs()):
-            result.update(call.decode_output(output, success))
+        outputs: List[CallResponse] = [
+            (success, output)
+            for batch in batcher.batch_calls(self.calls)
+            for (success, output) in self.fetch_outputs(batch)
+        ]
 
-        return result
+        return {
+            name: result
+            for call, (success, output) in zip(self.calls, outputs)
+            for name, result in call.decode_output(output, success).items()
+        }
 
-    def fetch_outputs(self, calls: Optional[List[Call]] = None, ConnErr_retries: int = 0) -> List[Tuple[bool,Any]]:
+    def fetch_outputs(self, calls: List[Call], ConnErr_retries: int = 0) -> List[CallResponse]:
         if calls is None:
             calls = self.calls
         
@@ -81,13 +85,54 @@ class Multicall:
             if "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))" not in str(e) or ConnErr_retries > 5:
                 raise
         except requests.HTTPError as e:
-            if 'request entity too large' not in str(e).lower():
+            strings = 'request entity too large','payload too large','time-out','520 server error'
+            if not any([string in str(e).lower() for string in strings]):
                 raise
-
-        chunk_1, chunk_2 = split_calls(self.calls)
+        
+        chunk_1, chunk_2 = batcher.split_calls(self.calls)
         return self.fetch_outputs(chunk_1,ConnErr_retries=ConnErr_retries+1) + self.fetch_outputs(chunk_2,ConnErr_retries=ConnErr_retries+1)
 
     def get_args(self, calls: List[Call]) -> List[Union[bool,List[List[Any]]]]:
         if self.require_success is True:
             return [[[call.target, call.data] for call in calls]]
         return [self.require_success, [[call.target, call.data] for call in calls]]
+
+
+class NotSoBrightBatcher:
+    """
+    This class helps with processing a large volume of large multicalls.
+    It's not so bright, but should quickly bring the batch size down to something reasonable for your node.
+    """
+    def __init__(self) -> None:
+        self.step = 99999
+    
+    def batch_calls(self, calls: List[Call]) -> List[List[Call]]:
+        '''
+        Batch calls into chunks of size `self.step`.
+        '''
+        batches = []
+        start = 0
+        done = len(calls) - 1
+        while True:
+            end = start + self.step
+            batches.append(calls[start:end])
+            if end >= done:
+                return batches
+            start = end
+        
+    def split_calls(self, calls: List[Call]) -> Tuple[List[Call],List[Call]]:
+        '''
+        Split calls into 2 batches in case request is too large.
+        We do this to help us find optimal `self.step`.
+        '''
+        
+        if self.step >= len(calls):
+            logger.warn(f'Multicall batch size reduced from {self.step} to {len(calls) - 1}. The failed batch had {len(calls)} calls.')
+            self.step = len(calls) - 1
+        
+        center = len(calls) // 2
+        chunk_1 = calls[:center]
+        chunk_2 = calls[center:]
+        return chunk_1, chunk_2
+
+batcher = NotSoBrightBatcher()
