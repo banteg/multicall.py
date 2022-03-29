@@ -104,7 +104,7 @@ class NotSoBrightBatcher:
     It's not so bright, but should quickly bring the batch size down to something reasonable for your node.
     """
     def __init__(self) -> None:
-        self.step = 99999
+        self.step = 10000
     
     def batch_calls(self, calls: List[Call]) -> List[List[Call]]:
         '''
