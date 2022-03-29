@@ -127,7 +127,7 @@ class NotSoBrightBatcher:
         '''
         
         if self.step >= len(calls):
-            logger.warn(f'Multicall batch size reduced from {self.step} to {len(calls) - 1}. The failed batch had {len(calls)} calls.')
+            logger.warning(f'Multicall batch size reduced from {self.step} to {len(calls) - 1}. The failed batch had {len(calls)} calls.')
             self.step = len(calls) - 1
         
         center = len(calls) // 2
