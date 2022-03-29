@@ -65,4 +65,4 @@ use `Multicall(...)()` to get the result of a prepared multicall.
 
 ### Environment Variables
 
-- GAS_LIMIT sets overridable default gas limit for Multicall to prevent out of gas errors. Default: 10,000,000
+- GAS_LIMIT sets overridable default gas limit for Multicall to prevent out of gas errors. Default: 10,000,000,000
