@@ -34,6 +34,9 @@ class Call:
             self.args = None
 
         self.signature = Signature(self.function)
+    
+    def __repr__(self) -> str:
+        return f'<Call {self.function} on {self.target[:8]}>'
 
     @property
     def data(self) -> bytes:
