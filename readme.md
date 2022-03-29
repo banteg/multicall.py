@@ -62,3 +62,7 @@ use `decode_output(output)` with to decode the output and process it with `retur
 - `calls` is a list of calls with prepared values.
 
 use `Multicall(...)()` to get the result of a prepared multicall.
+
+### Environment Variables
+
+- GAS_LIMIT sets overridable default gas limit for Multicall to prevent out of gas errors. Default: 10,000,000

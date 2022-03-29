@@ -17,12 +17,14 @@ class Call:
         function: Union[str,Iterable[Union[str,Any]]], # 'funcName(dtype)(dtype)' or ['funcName(dtype)(dtype)', input0, input1, ...]
         returns: Optional[Iterable[Tuple[str,Callable]]] = None, 
         block_id: Optional[int] = None, 
+        gas_limit: Optional[int] = None,
         state_override_code: Optional[str] = None, 
         _w3: Web3 = w3
     ) -> None:
         self.target = to_checksum_address(target)
         self.returns = returns
         self.block_id = block_id
+        self.gas_limit = gas_limit
         self.state_override_code = state_override_code
         self.w3 = _w3
 
@@ -71,6 +73,8 @@ class Call:
 
         args = [{'to': self.target, 'data': calldata}, self.block_id]
 
+        if self.gas_limit:
+            args[0]['gas'] = self.gas_limit
         if self.state_override_code:
             args.append({self.target: {'code': self.state_override_code}})
 

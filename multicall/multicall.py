@@ -5,7 +5,7 @@ import requests
 from web3 import Web3
 
 from multicall import Call
-from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
+from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL_ADDRESSES, w3)
 
 logger = logging.getLogger(__name__)
@@ -31,12 +31,14 @@ class Multicall:
         self, 
         calls: List[Call],
         block_id: Optional[int] = None, 
-        require_success: bool = True, 
+        require_success: bool = True,
+        gas_limit: int = GAS_LIMIT,
         _w3: Web3 = w3
     ) -> None:
         self.calls = calls
         self.block_id = block_id
         self.require_success = require_success
+        self.gas_limit = gas_limit
         self.w3 = _w3
         self.chainid = chain_id(self.w3)
         if require_success is True:
@@ -70,6 +72,7 @@ class Multicall:
             returns=None,
             _w3=self.w3,
             block_id=self.block_id,
+            gas_limit=self.gas_limit,
             state_override_code=MULTICALL2_BYTECODE
         )
 
