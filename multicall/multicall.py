@@ -122,8 +122,8 @@ class NotSoBrightBatcher:
         
     def split_calls(self, calls: List[Call]) -> Tuple[List[Call],List[Call]]:
         '''
-        Split calls into 2 batches in case request is too large.
-        We do this to help us find optimal `self.step`.
+        Split calls into 2 batches in case request is too large, and reduce `self.step`.
+        We do this to help us find optimal `self.step` value.
         '''
         
         if self.step >= len(calls):
