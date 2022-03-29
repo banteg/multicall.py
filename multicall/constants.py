@@ -1,8 +1,10 @@
 from enum import IntEnum
 from typing import Dict
 
+# If brownie is installed and connected, we will use brownie's Web3
+# Otherwise, we will use w3 from web3py.
 try:
-    from brownie import network, web3 # type: ignore
+    from brownie import network, web3  # type: ignore
     if network.is_connected():
         w3 = web3
     else:
