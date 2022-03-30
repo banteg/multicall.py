@@ -91,8 +91,13 @@ class Multicall:
             strings = 'request entity too large','payload too large','time-out','520 server error'
             if not any([string in str(e).lower() for string in strings]):
                 raise
+        except ValueError as e:
+            if 'out of gas' not in str(e).lower():
+                raise
+            if len(calls) == 1:
+                raise
         
-        chunk_1, chunk_2 = batcher.split_calls(self.calls)
+        chunk_1, chunk_2 = batcher.split_calls(calls)
         return self.fetch_outputs(chunk_1,ConnErr_retries=ConnErr_retries+1) + self.fetch_outputs(chunk_2,ConnErr_retries=ConnErr_retries+1)
 
     def get_args(self, calls: List[Call]) -> List[Union[bool,List[List[Any]]]]:
