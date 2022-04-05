@@ -81,9 +81,9 @@ class Call:
         if self.gas_limit:
             args[0]['gas'] = self.gas_limit
 
-        if self.state_override_code and not state_override_supported(self.w3):
-            raise StateOverrideNotSupported(f'State override is not supported on {Network(chain_id(self.w3)).__repr__()[1:-1]}.')
-        elif self.state_override_code:
+        if self.state_override_code:
+            if not state_override_supported(self.w3):
+                raise StateOverrideNotSupported(f'State override is not supported on {Network(chain_id(self.w3)).__repr__()[1:-1]}.')
             args.append({self.target: {'code': self.state_override_code}})
 
         output = self.w3.eth.call(*args)
