@@ -62,7 +62,7 @@ class Call:
         else:
             return decoded if len(decoded) > 1 else decoded[0]
 
-    def __call__(self, args: Optional[Any] = None) -> Any:
+    async def __call__(self, args: Optional[Any] = None) -> Any:
         args = args or self.args
         calldata = self.signature.encode_data(args)
 
@@ -70,7 +70,6 @@ class Call:
 
         if self.state_override_code:
             args.append({self.target: {'code': self.state_override_code}})
-
-        output = self.w3.eth.call(*args)
+        output = await self.w3.eth.call(*args)
 
         return self.decode_output(output)

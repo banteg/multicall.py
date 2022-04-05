@@ -5,7 +5,7 @@ from web3 import Web3
 
 from multicall import Call
 from multicall.constants import (MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
-                                 MULTICALL_ADDRESSES, w3)
+                                 MULTICALL_ADDRESSES, Network, w3)
 
 chainids: Dict[Web3,int] = {}
 
@@ -34,13 +34,14 @@ class Multicall:
         calls: List[Call], 
         block_id: Optional[int] = None, 
         require_success: bool = True, 
-        _w3: Web3 = w3
+        _w3: Web3 = w3,
+        chainid: Network = Network.Mainnet
     ) -> None:
         self.calls = calls
         self.block_id = block_id
         self.require_success = require_success
         self.w3 = _w3
-        self.chainid = chain_id(self.w3)
+        self.chainid = chainid
         if require_success is True:
             multicall_map = MULTICALL_ADDRESSES if self.chainid in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
             self.multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
@@ -49,14 +50,14 @@ class Multicall:
             self.multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
         self.multicall_address = multicall_map[self.chainid]
 
-    def __call__(self) -> Dict[str,Any]:
+    async def __call__(self) -> Dict[str,Any]:
         result: Dict[str,Any] = {}
-        for call, (success, output) in zip(self.calls, self.fetch_outputs()):
+        for call, (success, output) in zip(self.calls, await self.fetch_outputs()):
             result.update(call.decode_output(output, success))
 
         return result
 
-    def fetch_outputs(self, calls: Optional[List[Call]] = None, ConnErr_retries: int = 0) -> List[Tuple[bool,Any]]:
+    async def fetch_outputs(self, calls: Optional[List[Call]] = None, ConnErr_retries: int = 0) -> List[Tuple[bool,Any]]:
         if calls is None:
             calls = self.calls
         
@@ -72,10 +73,10 @@ class Multicall:
         try:
             args = self.get_args(calls)
             if self.require_success is True:
-                _, outputs = aggregate(args)
+                _, outputs = await aggregate(args)
                 outputs = ((None, output) for output in outputs)
             else:
-                _, _, outputs = aggregate(args)
+                _, _, outputs = await aggregate(args)
             return outputs
         except requests.ConnectionError as e:
             if "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))" not in str(e) or ConnErr_retries > 5:
@@ -85,7 +86,7 @@ class Multicall:
                 raise
 
         chunk_1, chunk_2 = split_calls(self.calls)
-        return self.fetch_outputs(chunk_1,ConnErr_retries=ConnErr_retries+1) + self.fetch_outputs(chunk_2,ConnErr_retries=ConnErr_retries+1)
+        return await self.fetch_outputs(chunk_1,ConnErr_retries=ConnErr_retries+1) + await self.fetch_outputs(chunk_2,ConnErr_retries=ConnErr_retries+1)
 
     def get_args(self, calls: List[Call]) -> List[Union[bool,List[List[Any]]]]:
         if self.require_success is True:

@@ -1,7 +1,9 @@
 from decimal import Decimal
 from web3.datastructures import AttributeDict
 from multicall import Call, Multicall
-
+from web3.eth import AsyncEth
+from web3 import Web3
+import asyncio
 
 MCD_VAT = '0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b'
 MCD_VOW = '0xa950524441892a31ebddf91d3ceefa04bf454466'
@@ -23,6 +25,9 @@ MCD_FLIP_BAT_A = '0xaa745404d55f88c108a28c86abe7b5a1e7817c07'
 MCD_SPOT = '0x65c79fcb50ca1594b025960e539ed7a9a6d434a3'
 CHAI = '0x06AF07097C9Eeb7fD685c692751D5C66dB49c215'
 
+def async_web3():
+    base_provider = Web3.AsyncHTTPProvider('http://localhost:8545', request_kwargs={"timeout": 30})
+    return Web3(base_provider, modules={"eth": (AsyncEth, )}, middlewares=[])
 
 def from_wad(value):
     return Decimal(value) / 10**18
@@ -104,11 +109,11 @@ multi = Multicall([
     Call(MCD_SPOT, ['ilks(bytes32)((address,uint256))', b'BAT-A'], [['bat_mat', from_spot]]),
     Call(CHAI, ['totalSupply()(uint256)'], [['chai_supply', from_wad]]),
     Call(MCD_GOV, ['totalSupply()(uint256)'], [['mkr_supply', from_wad]]),
-])
+], None, True, async_web3())
 
 
-def fetch_data():
-    data = multi()
+async def fetch_data():
+    data = await multi()
     data['eth_fee'] = get_fee(data['base'], data['eth_jug'])
     data['bat_fee'] = get_fee(data['base'], data['bat_jug'])
     data['sai_fee'] = get_fee(data['base'], data['sai_jug'])
@@ -122,8 +127,8 @@ def fetch_data():
     return data
 
 
-def main():
-    data = fetch_data()
+async def main():
+    data = await fetch_data()
     data = AttributeDict.recursive(data)
     print('The Fundamental Equation of Dai')
     print(f"{data.eth_ilk.Art * data.eth_ilk.rate:,.0f} + {data.bat_ilk.Art * data.bat_ilk.rate:,.0f} + {data.sai_ilk.Art:,.0f} + {data.vice:,.0f} = {data.debt:,.0f}")
@@ -174,4 +179,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    asyncio.run(main())
