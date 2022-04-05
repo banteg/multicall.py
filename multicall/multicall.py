@@ -7,7 +7,7 @@ from web3 import Web3
 from multicall import Call
 from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL_ADDRESSES, w3)
-from multicall.utils import chain_id
+from multicall.utils import chain_id, state_override_supported
 
 logger = logging.getLogger(__name__)
 
@@ -53,15 +53,28 @@ class Multicall:
         if calls is None:
             calls = self.calls
         
-        aggregate = Call(
-            self.multicall_address,
-            self.multicall_sig,
-            returns=None,
-            _w3=self.w3,
-            block_id=self.block_id,
-            gas_limit=self.gas_limit,
-            state_override_code=MULTICALL2_BYTECODE
-        )
+        if state_override_supported(self.w3):
+            aggregate = Call(
+                self.multicall_address,
+                self.multicall_sig,
+                returns=None,
+                _w3=self.w3,
+                block_id=self.block_id,
+                gas_limit=self.gas_limit,
+                state_override_code=MULTICALL2_BYTECODE
+            )
+        
+        else:
+            # If state override is not supported, we simply skip it.
+            # This will mean you're unable to access full historical data on chains without state override support.
+            aggregate = Call(
+                self.multicall_address,
+                self.multicall_sig,
+                returns=None,
+                _w3=self.w3,
+                block_id=self.block_id,
+                gas_limit=self.gas_limit,
+            )
 
         try:
             args = self.get_args(calls)

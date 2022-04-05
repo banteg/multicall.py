@@ -16,3 +16,8 @@ def chain_id(w3: Web3) -> int:
     except KeyError:
         chainids[w3] = w3.eth.chain_id
         return chainids[w3]
+
+def state_override_supported(w3: Web3) -> bool:
+    if chain_id(w3) in [ Network.Gnosis ]:
+        return False
+    return True
