@@ -7,7 +7,7 @@ types = ['uint256[]', 'address', 'bytes']
 
 def test_signature_parsing():
     sig = Signature('aggregate((address,bytes)[])(uint256,bytes[])')
-    assert sig.parts == ['aggregate', '((address,bytes)[])', '(uint256,bytes[])']
+    assert sig.function == 'aggregate((address,bytes)[])'
     assert sig.input_types == '((address,bytes)[])'
     assert sig.output_types == '(uint256,bytes[])'
 
