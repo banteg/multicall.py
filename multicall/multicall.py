@@ -7,22 +7,9 @@ from web3 import Web3
 from multicall import Call
 from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL_ADDRESSES, w3)
+from multicall.utils import chain_id
 
 logger = logging.getLogger(__name__)
-
-
-chainids: Dict[Web3,int] = {}
-
-def chain_id(w3: Web3) -> int:
-    '''
-    Returns chain id for an instance of Web3. Helps save repeat calls to node.
-    '''
-    try:
-        return chainids[w3]
-    except KeyError:
-        chainids[w3] = w3.eth.chain_id
-        return chainids[w3]
-
 
 CallResponse = Tuple[bool,Any]
 
