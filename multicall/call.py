@@ -1,4 +1,3 @@
-import logging
 from typing import Any, Callable, Iterable, List, Optional, Tuple, Union
 
 from eth_typing import Address, ChecksumAddress, HexAddress
@@ -11,7 +10,6 @@ from multicall.constants import Network, w3
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.utils import chain_id, state_override_supported
 
-logger = logging.getLogger(__name__)
 
 AnyAddress = Union[str,Address,ChecksumAddress,HexAddress]
 
