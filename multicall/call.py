@@ -7,10 +7,10 @@ from eth_utils import to_checksum_address
 from web3 import Web3
 
 from multicall import Signature
+from multicall.asyncio import get_async_w3
 from multicall.constants import Network, w3
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.utils import chain_id, state_override_supported
-
 
 AnyAddress = Union[str,Address,ChecksumAddress,HexAddress]
 
@@ -73,6 +73,14 @@ class Call:
 
     @eth_retry.auto_retry
     def __call__(self, args: Optional[Any] = None) -> Any:
+        output = self.w3.eth.call(*self.prep_args(args))
+        return self.decode_output(output)
+
+    async def call(self, args: Optional[Any] = None) -> Any:
+        output = await get_async_w3(self.w3).eth.call(*self.prep_args(args))
+        return self.decode_output(output)
+    
+    def prep_args(self, args: Optional[Any] = None) -> List:
         args = args or self.args
         calldata = self.signature.encode_data(args)
 
@@ -86,6 +94,4 @@ class Call:
                 raise StateOverrideNotSupported(f'State override is not supported on {Network(chain_id(self.w3)).__repr__()[1:-1]}.')
             args.append({self.target: {'code': self.state_override_code}})
 
-        output = self.w3.eth.call(*args)
-
-        return self.decode_output(output)
+        return args

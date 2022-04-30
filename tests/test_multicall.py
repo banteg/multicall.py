@@ -4,12 +4,18 @@ from multicall.multicall import batcher
 CHAI = '0x06AF07097C9Eeb7fD685c692751D5C66dB49c215'
 DUMMY_CALL = Call(CHAI, 'totalSupply()(uint)', [['totalSupply',None]])
 
-
 def from_wei(val):
     return val / 1e18
 
+def from_wei_require_success(success,val):
+    assert success
+    return val / 1e18
 
 def from_ray(val):
+    return val / 1e18
+
+def from_ray_require_success(success,val):
+    assert success
     return val / 1e27
 
 
@@ -19,6 +25,7 @@ def test_multicall():
         Call(CHAI, ['balanceOf(address)(uint256)', CHAI], [['balance', from_ray]]),
     ])
     result = multi()
+    print(result)
     assert isinstance(result['supply'], float)
     assert isinstance(result['balance'], float)
 
@@ -29,6 +36,7 @@ def test_multicall_no_success():
     ], require_success=False)
 
     result = multi()
+    print(result)
     assert isinstance(result['success'], tuple)
     assert isinstance(result['balance'], tuple)
 

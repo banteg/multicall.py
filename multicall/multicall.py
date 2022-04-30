@@ -1,12 +1,16 @@
+import asyncio
 import logging
+from time import sleep, time
 from typing import Any, Dict, List, Optional, Tuple, Union
 
+import aiohttp
 import requests
 from web3 import Web3
 
 from multicall import Call
-from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
-                                 MULTICALL_ADDRESSES, w3)
+from multicall.asyncio import async_loop
+from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES,
+                                 MULTICALL2_BYTECODE, MULTICALL_ADDRESSES, w3)
 from multicall.utils import chain_id, state_override_supported
 
 logger = logging.getLogger(__name__)
@@ -37,10 +41,25 @@ class Multicall:
         self.multicall_address = multicall_map[self.chainid]
 
     def __call__(self) -> Dict[str,Any]:
+        start = time()
+        if self.w3.eth.is_async:
+            return self.async_call()
+        task = asyncio.run_coroutine_threadsafe(self.async_call(), async_loop)
+        while not task.done():
+            if e := task.exception(300): 
+                raise e
+            sleep(.1)
+        print(time() - start, 's')
+        return task.result()
+
+    async def async_call(self) -> Dict[str,Any]:
         outputs: List[CallResponse] = [
-            (success, output)
-            for batch in batcher.batch_calls(self.calls)
-            for (success, output) in self.fetch_outputs(batch)
+            output 
+            for batch in await asyncio.gather(*[
+                self.fetch_outputs(batch, tempvar=i) 
+                for i,batch in enumerate(batcher.batch_calls(self.calls))
+            ])
+            for output in batch
         ]
 
         return {
@@ -49,7 +68,9 @@ class Multicall:
             for name, result in call.decode_output(output, success).items()
         }
 
-    def fetch_outputs(self, calls: List[Call], ConnErr_retries: int = 0) -> List[CallResponse]:
+    async def fetch_outputs(self, calls: List[Call], ConnErr_retries: int = 0, tempvar = 0) -> List[CallResponse]:
+        
+        print(f"I am coroutine {tempvar} started")
         if calls is None:
             calls = self.calls
         
@@ -79,11 +100,17 @@ class Multicall:
         try:
             args = self.get_args(calls)
             if self.require_success is True:
-                _, outputs = aggregate(args)
+                _, outputs = await aggregate.call(args)
                 outputs = ((None, output) for output in outputs)
             else:
                 _, _, outputs = aggregate(args)
+            print(f"I am coroutine {tempvar} finished")
             return outputs
+        except aiohttp.ClientResponseError as e:
+            strings = ['request entity too large','connection reset by peer']
+            if not any([string in str(e).lower() for string in strings]):
+                raise
+            logger.warning(e)
         except requests.ConnectionError as e:
             if "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))" not in str(e) or ConnErr_retries > 5:
                 raise
@@ -100,8 +127,17 @@ class Multicall:
                 raise
             logger.warning(e)
         
-        chunk_1, chunk_2 = batcher.split_calls(calls)
-        return list(self.fetch_outputs(chunk_1,ConnErr_retries=ConnErr_retries+1)) + list(self.fetch_outputs(chunk_2,ConnErr_retries=ConnErr_retries+1))
+        print(f"I am coroutine {tempvar} finished")
+        
+        return [
+            result
+            for batch in 
+            await asyncio.gather(*[
+                self.fetch_outputs(chunk,ConnErr_retries=ConnErr_retries+1)
+                for chunk in batcher.split_calls(calls)
+            ])
+            for result in batch 
+        ]
 
     def get_args(self, calls: List[Call]) -> List[Union[bool,List[List[Any]]]]:
         if self.require_success is True:
