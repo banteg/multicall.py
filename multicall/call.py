@@ -1,5 +1,6 @@
 from typing import Any, Callable, Iterable, List, Optional, Tuple, Union
 
+import eth_retry
 from eth_typing import Address, ChecksumAddress, HexAddress
 from eth_typing.abi import Decodable
 from eth_utils import to_checksum_address
@@ -70,6 +71,7 @@ class Call:
         else:
             return decoded if len(decoded) > 1 else decoded[0]
 
+    @eth_retry.auto_retry
     def __call__(self, args: Optional[Any] = None) -> Any:
         args = args or self.args
         calldata = self.signature.encode_data(args)

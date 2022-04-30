@@ -1,12 +1,15 @@
 
 from typing import Dict
 
+import eth_retry
 from web3 import Web3
 
 from multicall.constants import Network
 
 chainids: Dict[Web3,int] = {}
 
+
+@eth_retry.auto_retry
 def chain_id(w3: Web3) -> int:
     '''
     Returns chain id for an instance of Web3. Helps save repeat calls to node.
