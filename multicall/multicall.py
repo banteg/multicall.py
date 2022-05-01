@@ -118,7 +118,7 @@ class Multicall:
 
             outputs = await asyncio.gather(*[
                 async_loop.run_in_executor(process_pool_executor, Call.decode_output, output, call.signature, call.returns, success)
-                for call, (success, output) in zip(self.calls, outputs)
+                for call, (success, output) in zip(calls, outputs)
             ])
 
             logger.debug(f"I am coroutine {tempvar} finished")
@@ -148,11 +148,13 @@ class Multicall:
         # Failed, we need to rebatch the calls,
         # Sometimes a separate coroutine will lower batcher.step before we get here. 
         # If so, we can use its value rather than splitting in half.
-        batches = batcher.batch_calls(calls) if batcher.step <= len(calls) // 2 else batcher.split_calls(calls) 
+        batches = async_loop.run_in_executor(
+            process_pool_executor,
+            batcher.batch_calls if batcher.step <= len(calls) // 2 else batcher.split_calls,
+            calls
+        )
         
-        return_val = [
-            result
-            for batch in await asyncio.gather(*[
+        batch_results = await asyncio.gather(*[
                 self.fetch_outputs(
                     chunk,
                     ConnErr_retries+1,
@@ -160,11 +162,14 @@ class Multicall:
                 )
                 for i, chunk in enumerate(batches)
             ])
-            for result in batch
-        ]
+            
+        return_val = await async_loop.run_in_executor(process_pool_executor,unpack_batch_results,batch_results)
     
         logger.debug(f"I am coroutine {tempvar} finished")
         return return_val
+
+def unpack_batch_results(batch_results: List[List[CallResponse]]) -> List[CallResponse]:
+    return [result for batch in batch_results for result in batch]
 
 
 class NotSoBrightBatcher:
