@@ -7,7 +7,7 @@ from eth_utils import to_checksum_address
 from web3 import Web3
 
 from multicall import Signature
-from multicall.asyncio import get_async_w3
+from multicall.asyncio import async_loop, get_async_w3, process_pool_executor
 from multicall.constants import Network, w3
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.utils import chain_id, state_override_supported
@@ -23,7 +23,8 @@ class Call:
         block_id: Optional[int] = None, 
         gas_limit: Optional[int] = None,
         state_override_code: Optional[str] = None, 
-        _w3: Web3 = w3
+        # This needs to be None in order to use process_pool_executor
+        _w3: Web3 = None
     ) -> None:
         self.target = to_checksum_address(target)
         self.returns = returns
@@ -48,7 +49,13 @@ class Call:
     def data(self) -> bytes:
         return self.signature.encode_data(self.args)
 
-    def decode_output(self, output: Decodable, success: Optional[bool] = None) -> Any:
+    def decode_output(
+        output: Decodable,
+        signature: Signature,
+        returns: Optional[Iterable[Tuple[str,Callable]]] = None,
+        success: Optional[bool] = None
+    ) -> Any:
+    
         if success is None:
             apply_handler = lambda handler, value: handler(value)
         else:
@@ -56,42 +63,65 @@ class Call:
 
         if success is None or success:
             try:
-                decoded = self.signature.decode_data(output)
+                decoded = signature.decode_data(output)
             except:
-                success, decoded = False, [None] * len(self.returns) # type: ignore
+                success, decoded = False, [None] * len(returns) # type: ignore
         else:
-            decoded = [None] * len(self.returns) # type: ignore
+            decoded = [None] * len(returns) # type: ignore
 
-        if self.returns:
+        if returns:
             return {
                 name: apply_handler(handler, value) if handler else value
                 for (name, handler), value
-                in zip(self.returns, decoded)
+                in zip(returns, decoded)
             }
         else:
             return decoded if len(decoded) > 1 else decoded[0]
 
     @eth_retry.auto_retry
-    def __call__(self, args: Optional[Any] = None) -> Any:
-        output = self.w3.eth.call(*self.prep_args(args))
+    def __call__(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
+        _w3 = self.w3 or _w3 or w3
+        output = _w3.eth.call(*self.prep_args(args))
         return self.decode_output(output)
 
-    async def call(self, args: Optional[Any] = None) -> Any:
-        output = await get_async_w3(self.w3).eth.call(*self.prep_args(args))
-        return self.decode_output(output)
+    async def call(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
+        _w3 = self.w3 or _w3 or w3
+
+        if self.state_override_code and not state_override_supported(_w3):
+            raise StateOverrideNotSupported(f'State override is not supported on {Network(chain_id(_w3)).__repr__()[1:-1]}.')
+        
+        args = await async_loop.run_in_executor(
+                process_pool_executor,
+                prep_args,
+                self.target,
+                self.signature,
+                args or self.args,
+                self.block_id,
+                self.gas_limit,
+                self.state_override_code,
+            )
+
+        output = await get_async_w3(_w3).eth.call(*args)
+
+        return await async_loop.run_in_executor(process_pool_executor, Call.decode_output, output, self.signature, self.returns)
     
-    def prep_args(self, args: Optional[Any] = None) -> List:
-        args = args or self.args
-        calldata = self.signature.encode_data(args)
+def prep_args(
+    target: str, 
+    signature: Signature, 
+    args: Optional[Any], 
+    block_id: Optional[int], 
+    gas_limit: int, 
+    state_override_code: str,
+) -> List:
 
-        args = [{'to': self.target, 'data': calldata}, self.block_id]
+    calldata = signature.encode_data(args)
 
-        if self.gas_limit:
-            args[0]['gas'] = self.gas_limit
+    args = [{'to': target, 'data': calldata}, block_id]
 
-        if self.state_override_code:
-            if not state_override_supported(self.w3):
-                raise StateOverrideNotSupported(f'State override is not supported on {Network(chain_id(self.w3)).__repr__()[1:-1]}.')
-            args.append({self.target: {'code': self.state_override_code}})
+    if gas_limit:
+        args[0]['gas'] = gas_limit
 
-        return args
+    if state_override_code:            
+        args.append({target: {'code': state_override_code}})
+
+    return args
