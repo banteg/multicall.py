@@ -89,7 +89,11 @@ class Call:
             self.gas_limit,
             self.state_override_code,
         )
-        return self.decode_output(_w3.eth.call(*args))
+        return self.decode_output(
+            _w3.eth.call(*args),
+            self.signature,
+            self.returns,
+        )
 
     async def call(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
         _w3 = self.w3 or _w3 or w3
