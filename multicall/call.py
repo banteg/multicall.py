@@ -89,7 +89,7 @@ class Call:
             self.gas_limit,
             self.state_override_code,
         )
-        return self.decode_output(
+        return Call.decode_output(
             _w3.eth.call(*args),
             self.signature,
             self.returns,
