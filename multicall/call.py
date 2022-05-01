@@ -81,7 +81,7 @@ class Call:
     @eth_retry.auto_retry
     def __call__(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
         _w3 = self.w3 or _w3 or w3
-        output = _w3.eth.call(*self.prep_args(args))
+        output = _w3.eth.call(*prep_args(args))
         return self.decode_output(output)
 
     async def call(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
