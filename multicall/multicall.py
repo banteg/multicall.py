@@ -62,11 +62,17 @@ class Multicall:
     async def async_call(self) -> Dict[str,Any]:
         batches = await asyncio.gather(*[
             self.fetch_outputs(batch, tempvar=str(i)) 
-            for i,batch in enumerate(batcher.batch_calls(self.calls))
+            for i,batch in enumerate(batcher.batch_calls(self.calls,batcher.step))
         ])
 
         # TODO this appears to be blocking, refactor it out later so async clients can use
-        outputs = [output for batch in batches for output in batch]
+        #outputs = [output for batch in batches for output in batch]
+        outputs = await async_loop.run_in_executor(
+            process_pool_executor,
+            unpack_batch_results,
+            batches
+        )
+
         return {
             name: result
             for output in outputs
@@ -148,10 +154,20 @@ class Multicall:
         # Failed, we need to rebatch the calls,
         # Sometimes a separate coroutine will lower batcher.step before we get here. 
         # If so, we can use its value rather than splitting in half.
-        batches = async_loop.run_in_executor(
+        if batcher.step <= len(calls) // 2:
+            batch_func = batcher.batch_calls
+        else:
+            batch_func = batcher.split_calls
+            if batcher.step >= len(calls):
+                new_step = round(len(calls) * 0.99) if len(calls) >= 100 else len(calls) - 1
+                logger.warning(f'Multicall batch size reduced from {batcher.step} to {new_step}. The failed batch had {len(calls)} calls.')
+                batcher.step = new_step
+
+        batches = await async_loop.run_in_executor(
             process_pool_executor,
-            batcher.batch_calls if batcher.step <= len(calls) // 2 else batcher.split_calls,
-            calls
+            batch_func,
+            calls,
+            batcher.step
         )
         
         batch_results = await asyncio.gather(*[
@@ -180,7 +196,7 @@ class NotSoBrightBatcher:
     def __init__(self) -> None:
         self.step = 10000
     
-    def batch_calls(self, calls: List[Call]) -> List[List[Call]]:
+    def batch_calls(self, calls: List[Call], step: int) -> List[List[Call]]:
         '''
         Batch calls into chunks of size `self.step`.
         '''
@@ -188,21 +204,16 @@ class NotSoBrightBatcher:
         start = 0
         done = len(calls) - 1
         while True:
-            end = start + self.step
+            end = start + step
             batches.append(calls[start:end])
             if end >= done:
                 return batches
             start = end
         
-    def split_calls(self, calls: List[Call]) -> Tuple[List[Call],List[Call]]:
+    def split_calls(self, calls: List[Call], unused: None = None) -> Tuple[List[Call],List[Call]]:
         '''
-        Split calls into 2 batches in case request is too large, and reduce `self.step`.
-        We do this to help us find optimal `self.step` value.
+        Split calls into 2 batches in case request is too large. We do this to help us find optimal `self.step` value.
         '''
-        
-        if self.step >= len(calls):
-            logger.warning(f'Multicall batch size reduced from {self.step} to {len(calls) - 1}. The failed batch had {len(calls)} calls.')
-            self.step = len(calls) - 1
         
         center = len(calls) // 2
         chunk_1 = calls[:center]

@@ -3,6 +3,7 @@ from multicall.multicall import batcher
 
 CHAI = '0x06AF07097C9Eeb7fD685c692751D5C66dB49c215'
 DUMMY_CALL = Call(CHAI, 'totalSupply()(uint)', [['totalSupply',None]])
+batcher.step = 10_000
 
 def from_wei(val):
     return val / 1e18
@@ -41,8 +42,9 @@ def test_multicall_no_success():
     assert isinstance(result['balance'], tuple)
 
 def test_batcher_batch_calls_even():
+    batcher.step = 10_000
     calls = [DUMMY_CALL for i in range(30_000)]
-    batches = batcher.batch_calls(calls)
+    batches = batcher.batch_calls(calls,batcher.step)
     # NOTE batcher.step == 10_000, so with 30_000 calls you should have 3 batches
     assert len(batches) == 3
     for batch in batches:
@@ -50,8 +52,9 @@ def test_batcher_batch_calls_even():
     assert sum(len(batch) for batch in batches) == len(calls)
 
 def test_batcher_batch_calls_odd():
+    batcher.step = 10_000
     calls = [DUMMY_CALL for i in range(29_999)]
-    batches = batcher.batch_calls(calls)
+    batches = batcher.batch_calls(calls,batcher.step)
     # NOTE batcher.step == 10_000, so with 30_000 calls you should have 3 batches
     assert len(batches) == 3
     for batch in batches:
@@ -60,7 +63,7 @@ def test_batcher_batch_calls_odd():
 
 def test_batcher_split_calls_even():
     calls = [DUMMY_CALL for i in range(30_000)]
-    split = batcher.split_calls(calls)
+    split = batcher.split_calls(calls,batcher.step)
     assert len(split) == 2
     assert sum(len(batch) for batch in split) == len(calls)
     assert len(split[0]) == 15_000
@@ -68,7 +71,7 @@ def test_batcher_split_calls_even():
 
 def test_batcher_split_calls_odd():
     calls = [DUMMY_CALL for i in range(29_999)]
-    split = batcher.split_calls(calls)
+    split = batcher.split_calls(calls,batcher.step)
     assert len(split) == 2
     assert sum(len(batch) for batch in split) == len(calls)
     assert len(split[0]) == 14_999
