@@ -95,7 +95,7 @@ class Call:
             self.returns,
         )
 
-    @eth_retry.auto_retry_async
+    @eth_retry.auto_retry
     async def async_call(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
         _w3 = self.w3 or _w3 or w3
 
