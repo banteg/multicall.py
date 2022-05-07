@@ -65,9 +65,9 @@ class Call:
             try:
                 decoded = signature.decode_data(output)
             except:
-                success, decoded = False, [None] * len(returns) # type: ignore
+                success, decoded = False, [None] * (1 if not returns else len(returns)) # type: ignore
         else:
-            decoded = [None] * len(returns) # type: ignore
+            decoded = [None] * (1 if not returns else len(returns)) # type: ignore
 
         if returns:
             return {
