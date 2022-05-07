@@ -1,5 +1,6 @@
 from multicall import Call, Multicall
 from multicall.multicall import batcher
+from tests.fixtures import await_awaitable
 
 CHAI = '0x06AF07097C9Eeb7fD685c692751D5C66dB49c215'
 DUMMY_CALL = Call(CHAI, 'totalSupply()(uint)', [['totalSupply',None]])
@@ -37,6 +38,27 @@ def test_multicall_no_success():
     ], require_success=False)
 
     result = multi()
+    print(result)
+    assert isinstance(result['success'], tuple)
+    assert isinstance(result['balance'], tuple)
+
+def test_multicall_async():
+    multi = Multicall([
+        Call(CHAI, 'totalSupply()(uint256)', [['supply', from_wei]]),
+        Call(CHAI, ['balanceOf(address)(uint256)', CHAI], [['balance', from_ray]]),
+    ])
+    result = await_awaitable(multi.async_call())
+    print(result)
+    assert isinstance(result['supply'], float)
+    assert isinstance(result['balance'], float)
+
+def test_multicall_no_success_async():
+    multi = Multicall([
+        Call(CHAI, 'transfer(address,uint256)(bool)', [['success', lambda success, ret_flag: (success, ret_flag)]]),
+        Call(CHAI, ['balanceOf(address)(uint256)', CHAI], [['balance', lambda success, value: (success, from_ray(value))]]),
+    ], require_success=False)
+
+    result = await_awaitable(multi.async_call())
     print(result)
     assert isinstance(result['success'], tuple)
     assert isinstance(result['balance'], tuple)
