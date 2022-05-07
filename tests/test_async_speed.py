@@ -20,5 +20,5 @@ def do_big_work():
 def test_async_improves_speed():
     first_run_with_bad_batcher_size = do_big_work()
     second_run_with_good_batcher_size = do_big_work()
-    assert first_run_with_bad_batcher_size == second_run_with_good_batcher_size
+    assert (first_run_with_bad_batcher_size * .75) > second_run_with_good_batcher_size
     
