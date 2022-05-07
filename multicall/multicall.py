@@ -49,15 +49,9 @@ class Multicall:
 
     def __call__(self) -> Dict[str,Any]:
         start = time()
-        if self.w3.eth.is_async:
-            return self.async_call()
-        task = asyncio.run_coroutine_threadsafe(self.async_call(), async_loop)
-        while not task.done():
-            if e := task.exception(300): 
-                raise e
-            sleep(.1)
+        response = async_loop.run_until_complete(self.async_call())
         logger.debug(f"Multicall took {time() - start}s")
-        return task.result()
+        return response
 
     async def async_call(self) -> Dict[str,Any]:
         batches = await asyncio.gather(*[
