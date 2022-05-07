@@ -117,10 +117,10 @@ class Multicall:
                 self.require_success
             ) # await async_loop.run_in_executor(process_pool_executor, get_args, calls) # self.get_args(calls) #
             if self.require_success is True:
-                _, outputs = await aggregate.call(args)
+                _, outputs = await aggregate.async_call(args)
                 outputs = ((None, output) for output in outputs)
             else:
-                _, _, outputs = await aggregate.call(args)
+                _, _, outputs = await aggregate.async_call(args)
 
             outputs = await asyncio.gather(*[
                 async_loop.run_in_executor(process_pool_executor, Call.decode_output, output, call.signature, call.returns, success)
