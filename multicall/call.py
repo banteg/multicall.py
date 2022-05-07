@@ -10,7 +10,10 @@ from multicall import Signature
 from multicall.asyncio import async_loop, get_async_w3, process_pool_executor
 from multicall.constants import Network, w3
 from multicall.exceptions import StateOverrideNotSupported
+from multicall.loggers import setup_logger
 from multicall.utils import chain_id, state_override_supported
+
+logger = setup_logger(__name__)
 
 AnyAddress = Union[str,Address,ChecksumAddress,HexAddress]
 
@@ -68,6 +71,9 @@ class Call:
                 success, decoded = False, [None] * (1 if not returns else len(returns)) # type: ignore
         else:
             decoded = [None] * (1 if not returns else len(returns)) # type: ignore
+
+        logger.debug(f'returns: {returns}')
+        logger.debug(f'decoded: {decoded}')
 
         if returns:
             return {

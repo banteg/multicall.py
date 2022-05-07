@@ -1,5 +1,4 @@
 import asyncio
-import logging
 from time import sleep, time
 from typing import Any, Dict, List, Optional, Tuple, Union
 
@@ -11,9 +10,10 @@ from multicall import Call
 from multicall.asyncio import async_loop, process_pool_executor
 from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES,
                                  MULTICALL2_BYTECODE, MULTICALL_ADDRESSES, w3)
+from multicall.loggers import setup_logger
 from multicall.utils import chain_id, state_override_supported
 
-logger = logging.getLogger(__name__)
+logger = setup_logger(__name__)
 
 CallResponse = Tuple[bool,Any]
 
@@ -56,7 +56,7 @@ class Multicall:
             if e := task.exception(300): 
                 raise e
             sleep(.1)
-        print(time() - start, 's')
+        logger.debug(f"Multicall took {time() - start}s")
         return task.result()
 
     async def async_call(self) -> Dict[str,Any]:
