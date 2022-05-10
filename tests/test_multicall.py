@@ -47,7 +47,7 @@ def test_multicall_async():
         Call(CHAI, 'totalSupply()(uint256)', [['supply', from_wei]]),
         Call(CHAI, ['balanceOf(address)(uint256)', CHAI], [['balance', from_ray]]),
     ])
-    result = await_awaitable(multi.async_call())
+    result = await_awaitable(multi.coroutine())
     print(result)
     assert isinstance(result['supply'], float)
     assert isinstance(result['balance'], float)
@@ -58,7 +58,7 @@ def test_multicall_no_success_async():
         Call(CHAI, ['balanceOf(address)(uint256)', CHAI], [['balance', lambda success, value: (success, from_ray(value))]]),
     ], require_success=False)
 
-    result = await_awaitable(multi.async_call())
+    result = await_awaitable(multi.coroutine())
     print(result)
     assert isinstance(result['success'], tuple)
     assert isinstance(result['balance'], tuple)

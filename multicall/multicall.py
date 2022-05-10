@@ -49,7 +49,7 @@ class Multicall:
 
     def __call__(self) -> Dict[str,Any]:
         start = time()
-        response = async_loop.run_until_complete(self.async_call())
+        response = async_loop.run_until_complete(self.coroutine())
         logger.debug(f"Multicall took {time() - start}s")
         return response
 
@@ -111,10 +111,10 @@ class Multicall:
                 self.require_success
             ) # await async_loop.run_in_executor(process_pool_executor, get_args, calls) # self.get_args(calls) #
             if self.require_success is True:
-                _, outputs = await aggregate.async_call(args)
+                _, outputs = await aggregate.coroutine(args)
                 outputs = ((None, output) for output in outputs)
             else:
-                _, _, outputs = await aggregate.async_call(args)
+                _, _, outputs = await aggregate.coroutine(args)
 
             outputs = await asyncio.gather(*[
                 async_loop.run_in_executor(process_pool_executor, Call.decode_output, output, call.signature, call.returns, success)
