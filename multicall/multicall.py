@@ -53,7 +53,7 @@ class Multicall:
         logger.debug(f"Multicall took {time() - start}s")
         return response
 
-    async def async_call(self) -> Dict[str,Any]:
+    async def coroutine(self) -> Dict[str,Any]:
         batches = await asyncio.gather(*[
             self.fetch_outputs(batch, tempvar=str(i)) 
             for i,batch in enumerate(batcher.batch_calls(self.calls,batcher.step))
