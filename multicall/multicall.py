@@ -59,8 +59,6 @@ class Multicall:
             for i,batch in enumerate(batcher.batch_calls(self.calls,batcher.step))
         ])
 
-        # TODO this appears to be blocking, refactor it out later so async clients can use
-        #outputs = [output for batch in batches for output in batch]
         outputs = await async_loop.run_in_executor(
             process_pool_executor,
             unpack_batch_results,
