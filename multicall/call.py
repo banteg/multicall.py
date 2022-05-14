@@ -7,11 +7,11 @@ from eth_utils import to_checksum_address
 from web3 import Web3
 
 from multicall import Signature
-from multicall.asyncio import async_loop, get_async_w3, process_pool_executor
 from multicall.constants import Network, w3
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.loggers import setup_logger
-from multicall.utils import chain_id, state_override_supported
+from multicall.utils import (chain_id, get_async_w3, run_in_subprocess,
+                             state_override_supported)
 
 logger = setup_logger(__name__)
 
@@ -108,20 +108,19 @@ class Call:
         if self.state_override_code and not state_override_supported(_w3):
             raise StateOverrideNotSupported(f'State override is not supported on {Network(chain_id(_w3)).__repr__()[1:-1]}.')
         
-        args = await async_loop.run_in_executor(
-                process_pool_executor,
-                prep_args,
-                self.target,
-                self.signature,
-                args or self.args,
-                self.block_id,
-                self.gas_limit,
-                self.state_override_code,
-            )
+        args = await run_in_subprocess(
+            prep_args,
+            self.target,
+            self.signature,
+            args or self.args,
+            self.block_id,
+            self.gas_limit,
+            self.state_override_code,
+        )
 
         output = await get_async_w3(_w3).eth.call(*args)
 
-        return await async_loop.run_in_executor(process_pool_executor, Call.decode_output, output, self.signature, self.returns)
+        return await run_in_subprocess(Call.decode_output, output, self.signature, self.returns)
     
 def prep_args(
     target: str, 
