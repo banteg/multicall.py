@@ -1,5 +1,5 @@
 import asyncio
-from time import sleep, time
+from time import time
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import aiohttp
@@ -7,7 +7,7 @@ import requests
 from web3 import Web3
 
 from multicall import Call
-from multicall.asyncio import async_loop, process_pool_executor
+from multicall.asyncio import async_loop, gather, run_in_subprocess
 from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES,
                                  MULTICALL2_BYTECODE, MULTICALL_ADDRESSES, w3)
 from multicall.loggers import setup_logger
@@ -15,13 +15,18 @@ from multicall.utils import chain_id, state_override_supported
 
 logger = setup_logger(__name__)
 
-CallResponse = Tuple[bool,Any]
-
+CallResponse = Tuple[Union[None,bool],bytes]
 
 def get_args(calls: List[Call], require_success: bool = True) -> List[Union[bool,List[List[Any]]]]:
     if require_success is True:
         return [[[call.target, call.data] for call in calls]]
     return [require_success, [[call.target, call.data] for call in calls]]
+
+def unpack_aggregate_outputs(outputs: Any) -> Tuple[CallResponse,...]:
+    return tuple((None, output) for output in outputs)
+
+def unpack_batch_results(batch_results: List[List[CallResponse]]) -> List[CallResponse]:
+    return [result for batch in batch_results for result in batch]
 
 
 class Multicall:
@@ -54,16 +59,11 @@ class Multicall:
         return response
 
     async def coroutine(self) -> Dict[str,Any]:
-        batches = await asyncio.gather(*[
-            self.fetch_outputs(batch, tempvar=str(i)) 
+        batches = await gather([
+            self.fetch_outputs(batch, id=str(i)) 
             for i,batch in enumerate(batcher.batch_calls(self.calls,batcher.step))
         ])
-
-        outputs = await async_loop.run_in_executor(
-            process_pool_executor,
-            unpack_batch_results,
-            batches
-        )
+        outputs = await run_in_subprocess(unpack_batch_results, batches)
 
         return {
             name: result
@@ -71,15 +71,42 @@ class Multicall:
             for name, result in output.items()
         }
 
-    async def fetch_outputs(self, calls: List[Call], ConnErr_retries: int = 0, tempvar = '') -> List[CallResponse]:
-        
-        logger.debug(f"I am coroutine {tempvar} started")
+    async def fetch_outputs(self, calls: List[Call], ConnErr_retries: int = 0, id: str = '') -> List[CallResponse]:
+        logger.debug(f"I am coroutine {id} started")
 
         if calls is None:
             calls = self.calls
         
+        try:
+            args = await run_in_subprocess(get_args, calls, self.require_success)
+            if self.require_success is True:
+                _, outputs = await self.aggregate.coroutine(args)
+                outputs = await run_in_subprocess(unpack_aggregate_outputs, outputs)
+            else:
+                _, _, outputs = await self.aggregate.coroutine(args)
+            outputs = await gather([
+                run_in_subprocess(Call.decode_output, output, call.signature, call.returns, success)
+                for call, (success, output) in zip(calls, outputs)
+            ])
+            logger.debug(f"I am coroutine {id} finished")
+            return outputs
+        except Exception as e:
+            _raise_or_proceed(e, len(calls), ConnErr_retries=ConnErr_retries)
+        
+        # Failed, we need to rebatch the calls and try again.
+        batch_results = await gather([
+            self.fetch_outputs(chunk, ConnErr_retries+1, f"{id}_{i}")
+            for i, chunk in enumerate(await batcher.rebatch(calls))
+        ])
+            
+        return_val = await run_in_subprocess(unpack_batch_results,batch_results)
+        logger.debug(f"I am coroutine {id} finished")
+        return return_val
+
+    @property
+    def aggregate(self) -> Call:
         if state_override_supported(self.w3):
-            aggregate = Call(
+            return Call(
                 self.multicall_address,
                 self.multicall_sig,
                 returns=None,
@@ -89,95 +116,16 @@ class Multicall:
                 state_override_code=MULTICALL2_BYTECODE
             )
         
-        else:
-            # If state override is not supported, we simply skip it.
-            # This will mean you're unable to access full historical data on chains without state override support.
-            aggregate = Call(
-                self.multicall_address,
-                self.multicall_sig,
-                returns=None,
-                _w3=self.w3,
-                block_id=self.block_id,
-                gas_limit=self.gas_limit,
-            )
-
-        try:
-            args = await async_loop.run_in_executor(
-                process_pool_executor,
-                get_args,
-                calls,
-                self.require_success
-            ) # await async_loop.run_in_executor(process_pool_executor, get_args, calls) # self.get_args(calls) #
-            if self.require_success is True:
-                _, outputs = await aggregate.coroutine(args)
-                outputs = ((None, output) for output in outputs)
-            else:
-                _, _, outputs = await aggregate.coroutine(args)
-
-            outputs = await asyncio.gather(*[
-                async_loop.run_in_executor(process_pool_executor, Call.decode_output, output, call.signature, call.returns, success)
-                for call, (success, output) in zip(calls, outputs)
-            ])
-
-            logger.debug(f"I am coroutine {tempvar} finished")
-            return outputs
-            
-        except aiohttp.ClientResponseError as e:
-            strings = ['request entity too large','connection reset by peer']
-            if not any([string in str(e).lower() for string in strings]):
-                raise
-            logger.warning(e)
-        except requests.ConnectionError as e:
-            if "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))" not in str(e) or ConnErr_retries > 5:
-                raise
-            logger.warning(e)
-        except requests.HTTPError as e:
-            strings = 'request entity too large','payload too large','time-out','520 server error'
-            if not any([string in str(e).lower() for string in strings]):
-                raise
-            logger.warning(e)
-        except ValueError as e:
-            if 'out of gas' not in str(e).lower():
-                raise
-            if len(calls) == 1:
-                raise
-            logger.warning(e)
-        
-        # Failed, we need to rebatch the calls,
-        # Sometimes a separate coroutine will lower batcher.step before we get here. 
-        # If so, we can use its value rather than splitting in half.
-        if batcher.step <= len(calls) // 2:
-            batch_func = batcher.batch_calls
-        else:
-            batch_func = batcher.split_calls
-            if batcher.step >= len(calls):
-                new_step = round(len(calls) * 0.99) if len(calls) >= 100 else len(calls) - 1
-                logger.warning(f'Multicall batch size reduced from {batcher.step} to {new_step}. The failed batch had {len(calls)} calls.')
-                batcher.step = new_step
-
-        batches = await async_loop.run_in_executor(
-            process_pool_executor,
-            batch_func,
-            calls,
-            batcher.step
+        # If state override is not supported, we simply skip it.
+        # This will mean you're unable to access full historical data on chains without state override support.
+        return Call(
+            self.multicall_address,
+            self.multicall_sig,
+            returns=None,
+            _w3=self.w3,
+            block_id=self.block_id,
+            gas_limit=self.gas_limit,
         )
-        
-        batch_results = await asyncio.gather(*[
-                self.fetch_outputs(
-                    chunk,
-                    ConnErr_retries+1,
-                    f"{tempvar}_{i}",
-                )
-                for i, chunk in enumerate(batches)
-            ])
-            
-        return_val = await async_loop.run_in_executor(process_pool_executor,unpack_batch_results,batch_results)
-    
-        logger.debug(f"I am coroutine {tempvar} finished")
-        return return_val
-
-def unpack_batch_results(batch_results: List[List[CallResponse]]) -> List[CallResponse]:
-    return [result for batch in batch_results for result in batch]
 
 
 class NotSoBrightBatcher:
@@ -203,13 +151,57 @@ class NotSoBrightBatcher:
             start = end
         
     def split_calls(self, calls: List[Call], unused: None = None) -> Tuple[List[Call],List[Call]]:
-        '''
-        Split calls into 2 batches in case request is too large. We do this to help us find optimal `self.step` value.
-        '''
-        
+        """
+        Split calls into 2 batches in case request is too large.
+        We do this to help us find optimal `self.step` value.
+        """
         center = len(calls) // 2
         chunk_1 = calls[:center]
         chunk_2 = calls[center:]
         return chunk_1, chunk_2
+    
+    async def rebatch(self, calls):
+        # If a separate coroutine changed `step` after calls were last batched, we will use the new `step` for rebatching.
+        if self.step <= len(calls) // 2:
+            return await run_in_subprocess(self.batch_calls, calls, self.step)
+        
+        # Otherwise we will split calls in half.
+        if self.step >= len(calls):
+            new_step = round(len(calls) * 0.99) if len(calls) >= 100 else len(calls) - 1
+            logger.warning(f'Multicall batch size reduced from {self.step} to {new_step}. The failed batch had {len(calls)} calls.')
+            self.step = new_step
+        return await run_in_subprocess(self.split_calls, calls, self.step)
+
 
 batcher = NotSoBrightBatcher()
+
+
+def _raise_or_proceed(e: Exception, ct_calls: int, ConnErr_retries: int) -> None:
+    """ Depending on the exception, either raises or ignores and allows `batcher` to rebatch. """
+    if isinstance(e, aiohttp.ClientOSError):
+        if 'broken pipe' not in str(e).lower():
+            raise e
+        logger.warning(e)
+    elif isinstance(e, aiohttp.ClientResponseError):
+        strings = ['request entity too large','connection reset by peer']
+        if not any([string in str(e).lower() for string in strings]):
+            raise e
+        logger.warning(e)
+    elif isinstance(e, requests.ConnectionError):
+        if "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))" not in str(e) or ConnErr_retries > 5:
+            raise e
+    elif isinstance(e, requests.HTTPError):
+        strings = 'request entity too large','payload too large','time-out','520 server error'
+        if not any([string in str(e).lower() for string in strings]):
+            raise e
+        logger.warning(e)
+    elif isinstance(e, asyncio.TimeoutError):
+        pass
+    elif isinstance(e, ValueError):
+        if 'out of gas' not in str(e).lower():
+            raise e
+        if ct_calls == 1:
+            raise e
+        logger.warning(e)
+    else:
+        raise e
