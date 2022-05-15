@@ -6,6 +6,7 @@ from typing import Any, Awaitable, Coroutine, Dict, Iterable
 import eth_retry
 from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
+from web3.providers.async_base import AsyncBaseProvider
 
 from multicall.constants import Network
 
@@ -29,13 +30,24 @@ process_pool_executor = ProcessPoolExecutor(16)
 def get_async_w3(w3: Web3) -> Web3:
     if w3 in async_w3s:
         return async_w3s[w3]
+    if w3.eth.is_async and isinstance(w3.provider, AsyncBaseProvider):
+        async_w3s[w3] = w3
+        return w3
     async_w3 = Web3(
         provider=AsyncHTTPProvider(w3.provider.endpoint_uri),
+        # In older web3 versions, Web3 objects come with
+        # incompatible synchronous middleware by default.
         middlewares=[],
     )
     async_w3.eth = AsyncEth(async_w3)
     async_w3s[w3] = async_w3
     return async_w3
+
+def await_awaitable(awaitable: Awaitable) -> Any:
+    return async_loop.run_until_complete(awaitable)
+
+async def run_in_subprocess(coro: Coroutine, *args: Any, **kwargs) -> Any:
+    return await async_loop.run_in_executor(process_pool_executor, coro, *args, **kwargs)
 
 def raise_if_exception(obj: Any) -> None:
     if isinstance(obj, Exception):
@@ -49,12 +61,6 @@ async def gather(coroutines: Iterable[Coroutine]) -> None:
     results = await asyncio.gather(*coroutines, return_exceptions=True)
     raise_if_exception_in(results)
     return results
-
-def await_awaitable(awaitable: Awaitable) -> Any:
-    return async_loop.run_until_complete(awaitable)
-
-async def run_in_subprocess(coro: Coroutine, *args: Any, **kwargs) -> Any:
-    return await async_loop.run_in_executor(process_pool_executor, coro, *args, **kwargs)
 
 def state_override_supported(w3: Web3) -> bool:
     if chain_id(w3) in [ Network.Gnosis ]:
