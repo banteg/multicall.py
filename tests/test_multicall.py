@@ -1,7 +1,8 @@
 from typing import Any, Tuple
+
 from multicall import Call, Multicall
 from multicall.multicall import batcher
-from tests.fixtures import await_awaitable
+from multicall.utils import await_awaitable
 
 CHAI = '0x06AF07097C9Eeb7fD685c692751D5C66dB49c215'
 DUMMY_CALL = Call(CHAI, 'totalSupply()(uint)', [['totalSupply',None]])

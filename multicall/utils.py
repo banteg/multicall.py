@@ -1,7 +1,7 @@
 
 import asyncio
 from concurrent.futures import ProcessPoolExecutor
-from typing import Any, Coroutine, Dict, Iterable
+from typing import Any, Awaitable, Coroutine, Dict, Iterable
 
 import eth_retry
 from web3 import AsyncHTTPProvider, Web3
@@ -49,6 +49,9 @@ async def gather(coroutines: Iterable[Coroutine]) -> None:
     results = await asyncio.gather(*coroutines, return_exceptions=True)
     raise_if_exception_in(results)
     return results
+
+def await_awaitable(awaitable: Awaitable) -> Any:
+    return async_loop.run_until_complete(awaitable)
 
 async def run_in_subprocess(coro: Coroutine, *args: Any, **kwargs) -> Any:
     return await async_loop.run_in_executor(process_pool_executor, coro, *args, **kwargs)

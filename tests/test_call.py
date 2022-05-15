@@ -1,5 +1,5 @@
 from multicall import Call
-from tests.fixtures import await_awaitable
+from multicall.utils import await_awaitable
 
 CHAI = '0x06AF07097C9Eeb7fD685c692751D5C66dB49c215'
 

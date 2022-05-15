@@ -10,8 +10,8 @@ from multicall import Call
 from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES,
                                  MULTICALL2_BYTECODE, MULTICALL_ADDRESSES, w3)
 from multicall.loggers import setup_logger
-from multicall.utils import (async_loop, chain_id, gather, run_in_subprocess,
-                             state_override_supported)
+from multicall.utils import (await_awaitable, chain_id, gather,
+                             run_in_subprocess, state_override_supported)
 
 logger = setup_logger(__name__)
 
@@ -54,7 +54,7 @@ class Multicall:
 
     def __call__(self) -> Dict[str,Any]:
         start = time()
-        response = async_loop.run_until_complete(self.coroutine())
+        response = await_awaitable(self.coroutine())
         logger.debug(f"Multicall took {time() - start}s")
         return response
 
