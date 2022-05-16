@@ -2,6 +2,8 @@ import os
 from enum import IntEnum
 from typing import Dict
 
+from aiohttp import ClientTimeout
+
 # If brownie is installed and connected, we will use brownie's Web3
 # Otherwise, we will use w3 from web3py.
 try:
@@ -64,3 +66,7 @@ MULTICALL2_ADDRESSES: Dict[int,str] = {
     Network.Aurora: '0xe0e3887b158F7F9c80c835a61ED809389BC08d1b',
     Network.Cronos: '0x5e954f5972EC6BFc7dECd75779F10d848230345F',
 }
+
+# With default AsyncBaseProvider settings, some dense calls will fail
+#   due to aiohttp.TimeoutError where they would otherwise succeed.
+AIOHTTP_TIMEOUT = ClientTimeout(int(os.environ.get("AIOHTTP_TIMEOUT", 30)))

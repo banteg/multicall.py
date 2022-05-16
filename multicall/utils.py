@@ -8,7 +8,7 @@ from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
-from multicall.constants import Network
+from multicall.constants import AIOHTTP_TIMEOUT, Network
 
 chainids: Dict[Web3,int] = {}
 
@@ -31,12 +31,15 @@ def get_async_w3(w3: Web3) -> Web3:
     if w3 in async_w3s:
         return async_w3s[w3]
     if w3.eth.is_async and isinstance(w3.provider, AsyncBaseProvider):
+        if w3.provider._request_kwargs["timeout"].total < AIOHTTP_TIMEOUT.total:
+            w3.provider._request_kwargs["timeout"] = AIOHTTP_TIMEOUT
         async_w3s[w3] = w3
         return w3
+    request_kwargs = {'timeout': AIOHTTP_TIMEOUT}
     async_w3 = Web3(
-        provider=AsyncHTTPProvider(w3.provider.endpoint_uri),
-        # In older web3 versions, Web3 objects come with
-        # incompatible synchronous middleware by default.
+        provider=AsyncHTTPProvider(w3.provider.endpoint_uri, request_kwargs),
+        # In older web3 versions, AsyncHTTPProvider objects come
+        # with incompatible synchronous middlewares by default.
         middlewares=[],
     )
     async_w3.eth = AsyncEth(async_w3)
