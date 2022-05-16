@@ -39,7 +39,7 @@ def test_gather():
 
 def test_gather_with_exception():
     with pytest.raises(UST):
-        await_awaitable(gather([coro(),coro(),coro(),exception_coro(),coro()]))
+        await_awaitable(gather([coro(),coro(),coro(),coro(),exception_coro()]))
 
 def test_get_async_w3_with_sync():
     w3 = get_async_w3(web3)
