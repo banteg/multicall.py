@@ -27,6 +27,14 @@ async_w3s: Dict[Web3,Web3] = {}
 async_loop = asyncio.get_event_loop()
 process_pool_executor = ProcessPoolExecutor(16)
 
+def get_endpoint(w3: Web3) -> str:
+    provider = w3.provider
+    if isinstance(provider, str):
+        return provider
+    if hasattr(provider, "_active_provider"):
+        provider = provider._get_active_provider(False)
+    return provider.endpoint_uri
+
 def get_async_w3(w3: Web3) -> Web3:
     if w3 in async_w3s:
         return async_w3s[w3]
@@ -37,7 +45,7 @@ def get_async_w3(w3: Web3) -> Web3:
         return w3
     request_kwargs = {'timeout': AIOHTTP_TIMEOUT}
     async_w3 = Web3(
-        provider=AsyncHTTPProvider(w3.provider.endpoint_uri, request_kwargs),
+        provider=AsyncHTTPProvider(get_endpoint(w3), request_kwargs),
         # In older web3 versions, AsyncHTTPProvider objects come
         # with incompatible synchronous middlewares by default.
         middlewares=[],
