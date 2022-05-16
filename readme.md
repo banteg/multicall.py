@@ -62,3 +62,9 @@ use `decode_output(output)` with to decode the output and process it with `retur
 - `calls` is a list of calls with prepared values.
 
 use `Multicall(...)()` to get the result of a prepared multicall.
+
+### Environment Variables
+
+- GAS_LIMIT: sets overridable default gas limit for Multicall to prevent out of gas errors. Default: 50,000,000
+- MULTICALL_DEBUG: if set, sets logging level for all library loggers to logging.DEBUG
+- AIOHTTP_TIMEOUT: sets aiohttp timeout period in seconds for async calls to node. Default: 20

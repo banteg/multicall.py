@@ -678,14 +678,6 @@ category = "main"
 optional = false
 python-versions = "*"
 
-[[package]]
-name = "web3"
-version = "5.27.0"
-description = "Web3.py"
-category = "main"
-optional = false
-python-versions = ">=3.6,<4"
-
 [package.dependencies]
 aiohttp = ">=3.7.4.post0,<4"
 eth-abi = ">=2.0.0b6,<3.0.0"
