@@ -1,5 +1,7 @@
 from typing import Any, Tuple
 
+from brownie import web3
+from joblib import Parallel, delayed
 from multicall import Call, Multicall
 from multicall.multicall import batcher
 from multicall.utils import await_awaitable
@@ -114,3 +116,16 @@ def test_batcher_step_down_and_retry():
     results = Multicall(calls)()
     assert batcher.step < 100_000
     assert len(results) == len(calls)
+
+def test_multicall_threading():
+    calls = [Call(CHAI, 'totalSupply()(uint)', [[f'totalSupply{i}',None]]) for i in range(50_000)]
+    Parallel(4,'threading')(delayed(Multicall(batch))() for batch in batcher.batch_calls(calls, batcher.step))
+
+def test_multicall_multiprocessing():
+    # NOTE can't have middlewares for multiprocessing
+    web3.provider.middlewares = tuple()
+    web3.middleware_onion.clear()
+    # TODO figure out why multiprocessing fails if you don't call request_func here
+    web3.provider.request_func(web3, web3.middleware_onion)
+    calls = [Call(CHAI, 'totalSupply()(uint)', [[f'totalSupply{i}',None]]) for i in range(50_000)]
+    Parallel(4,'multiprocessing')(delayed(Multicall(batch, _w3=web3))() for batch in batcher.batch_calls(calls, batcher.step))
