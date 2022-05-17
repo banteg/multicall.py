@@ -24,7 +24,6 @@ def chain_id(w3: Web3) -> int:
         return chainids[w3]
 
 async_w3s: Dict[Web3,Web3] = {}
-async_loop = asyncio.get_event_loop()
 process_pool_executor = ProcessPoolExecutor(16)
 
 def get_endpoint(w3: Web3) -> str:
@@ -54,11 +53,21 @@ def get_async_w3(w3: Web3) -> Web3:
     async_w3s[w3] = async_w3
     return async_w3
 
+def get_event_loop() -> asyncio.AbstractEventLoop:
+    try:
+        return asyncio.get_event_loop()
+    except RuntimeError as e: # Necessary for use with multi-threaded applications.
+        if not str(e).startswith("There is no current event loop in thread"):
+            raise e
+        loop = asyncio.new_event_loop()
+        #asyncio.set_event_loop(loop)
+        return loop
+
 def await_awaitable(awaitable: Awaitable) -> Any:
-    return async_loop.run_until_complete(awaitable)
+    return get_event_loop().run_until_complete(awaitable)
 
 async def run_in_subprocess(coro: Coroutine, *args: Any, **kwargs) -> Any:
-    return await async_loop.run_in_executor(process_pool_executor, coro, *args, **kwargs)
+    return await asyncio.get_event_loop().run_in_executor(process_pool_executor, coro, *args, **kwargs)
 
 def raise_if_exception(obj: Any) -> None:
     if isinstance(obj, Exception):
