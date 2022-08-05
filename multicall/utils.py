@@ -1,5 +1,6 @@
 
 import asyncio
+import os
 from concurrent.futures import ProcessPoolExecutor
 from typing import Any, Awaitable, Coroutine, Dict, Iterable
 
@@ -24,7 +25,7 @@ def chain_id(w3: Web3) -> int:
         return chainids[w3]
 
 async_w3s: Dict[Web3,Web3] = {}
-process_pool_executor = ProcessPoolExecutor(16)
+process_pool_executor = ProcessPoolExecutor(os.cpu_count() -1 )
 
 def get_endpoint(w3: Web3) -> str:
     provider = w3.provider
