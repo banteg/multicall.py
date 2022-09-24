@@ -9,7 +9,7 @@ from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
-from multicall.constants import AIOHTTP_TIMEOUT, Network
+from multicall.constants import AIOHTTP_TIMEOUT, NUM_PROCESSES, Network
 
 chainids: Dict[Web3,int] = {}
 
@@ -25,7 +25,7 @@ def chain_id(w3: Web3) -> int:
         return chainids[w3]
 
 async_w3s: Dict[Web3,Web3] = {}
-process_pool_executor = ProcessPoolExecutor(max(1,os.cpu_count() -1 ))
+process_pool_executor = ProcessPoolExecutor(NUM_PROCESSES)
 
 def get_endpoint(w3: Web3) -> str:
     provider = w3.provider
