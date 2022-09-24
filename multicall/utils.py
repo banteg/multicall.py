@@ -2,7 +2,7 @@
 import asyncio
 import os
 from concurrent.futures import ProcessPoolExecutor
-from typing import Any, Awaitable, Coroutine, Dict, Iterable
+from typing import Any, Awaitable, Callable, Coroutine, Dict, Iterable
 
 import eth_retry
 from web3 import AsyncHTTPProvider, Web3
@@ -65,7 +65,7 @@ def get_event_loop() -> asyncio.AbstractEventLoop:
 def await_awaitable(awaitable: Awaitable) -> Any:
     return get_event_loop().run_until_complete(awaitable)
 
-async def run_in_subprocess(coro: Coroutine, *args: Any, **kwargs) -> Any:
+async def run_in_subprocess(callable: Callable, *args: Any, **kwargs) -> Any:
     return await asyncio.get_event_loop().run_in_executor(process_pool_executor, coro, *args, **kwargs)
 
 def raise_if_exception(obj: Any) -> None:
