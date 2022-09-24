@@ -76,3 +76,8 @@ MULTICALL2_ADDRESSES: Dict[int,str] = {
 # With default AsyncBaseProvider settings, some dense calls will fail
 #   due to aiohttp.TimeoutError where they would otherwise succeed.
 AIOHTTP_TIMEOUT = ClientTimeout(int(os.environ.get("AIOHTTP_TIMEOUT", 30)))
+
+# Parallelism
+user_choice = max(1, int(os.environ.get("MULTICALL_PROCESSES", 1)))
+parallelism_capacity = max(1, os.cpu_count() - 1)
+NUM_PROCESSES = min(user_choice, parallelism_capacity)

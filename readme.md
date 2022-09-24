@@ -67,4 +67,5 @@ use `Multicall(...)()` to get the result of a prepared multicall.
 
 - GAS_LIMIT: sets overridable default gas limit for Multicall to prevent out of gas errors. Default: 50,000,000
 - MULTICALL_DEBUG: if set, sets logging level for all library loggers to logging.DEBUG
+- MULTICALL_PROCESSES: pass an integer > 1 to use multiprocessing for encoding args and decoding results. Default: 1, which executes all code in the main process.
 - AIOHTTP_TIMEOUT: sets aiohttp timeout period in seconds for async calls to node. Default: 30
