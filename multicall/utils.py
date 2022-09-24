@@ -60,8 +60,7 @@ def get_event_loop() -> asyncio.AbstractEventLoop:
     except RuntimeError as e: # Necessary for use with multi-threaded applications.
         if not str(e).startswith("There is no current event loop in thread"):
             raise e
-        loop = asyncio.new_event_loop()
-        return loop
+        return asyncio.new_event_loop()
 
 def await_awaitable(awaitable: Awaitable) -> Any:
     return get_event_loop().run_until_complete(awaitable)
