@@ -61,7 +61,6 @@ def get_event_loop() -> asyncio.AbstractEventLoop:
         if not str(e).startswith("There is no current event loop in thread"):
             raise e
         loop = asyncio.new_event_loop()
-        #asyncio.set_event_loop(loop)
         return loop
 
 def await_awaitable(awaitable: Awaitable) -> Any:
