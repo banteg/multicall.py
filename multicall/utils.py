@@ -1,8 +1,7 @@
 
 import asyncio
-import os
 from concurrent.futures import ProcessPoolExecutor
-from typing import Any, Awaitable, Coroutine, Dict, Iterable
+from typing import Any, Awaitable, Callable, Coroutine, Dict, Iterable
 
 import eth_retry
 from web3 import AsyncHTTPProvider, Web3
@@ -60,14 +59,15 @@ def get_event_loop() -> asyncio.AbstractEventLoop:
     except RuntimeError as e: # Necessary for use with multi-threaded applications.
         if not str(e).startswith("There is no current event loop in thread"):
             raise e
-        loop = asyncio.new_event_loop()
-        return loop
+        return asyncio.new_event_loop()
 
 def await_awaitable(awaitable: Awaitable) -> Any:
     return get_event_loop().run_until_complete(awaitable)
 
-async def run_in_subprocess(coro: Coroutine, *args: Any, **kwargs) -> Any:
-    return await asyncio.get_event_loop().run_in_executor(process_pool_executor, coro, *args, **kwargs)
+async def run_in_subprocess(callable: Callable, *args: Any, **kwargs) -> Any:
+    if NUM_PROCESSES == 1:
+        return callable(*args, **kwargs)
+    return await asyncio.get_event_loop().run_in_executor(process_pool_executor, callable, *args, **kwargs)
 
 def raise_if_exception(obj: Any) -> None:
     if isinstance(obj, Exception):
