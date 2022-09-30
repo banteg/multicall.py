@@ -6,7 +6,7 @@ authors = ["banteg"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-web3 = "^5.31"
+web3 = "^5.27"
 eth_retry = "^0.1.8"
 
 [tool.poetry.dev-dependencies]
