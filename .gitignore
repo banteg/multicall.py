@@ -5,3 +5,6 @@ env/
 cache/
 .mypy_cache
 .pytest_cache
+
+# IDE
+.idea
