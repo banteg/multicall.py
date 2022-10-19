@@ -1,6 +1,12 @@
 from typing import Any, List, Optional, Tuple
 
-from eth_abi import decode, encode
+# For eth_abi versions < 2.2.0, `decode` and `encode` have not yet been added.
+# As we require web3 ^5.27, we require eth_abi compatability with eth_abi v2.0.0b6 and greater.
+try:
+    from eth_abi import decode, encode
+except ImportError: 
+    from eth_abi import encode_abi as encode, decode_abi as decode
+
 from eth_typing.abi import Decodable, TypeStr
 from eth_utils import function_signature_to_4byte_selector
 
