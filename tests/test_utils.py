@@ -17,7 +17,7 @@ async def coro():
     return
 
 def exception_coro():
-        raise oopsie
+    raise oopsie
 
 
 def test_chain_id():

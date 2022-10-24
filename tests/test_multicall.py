@@ -1,4 +1,5 @@
 from typing import Any, Tuple
+import pytest
 
 from brownie import web3
 from joblib import Parallel, delayed
@@ -121,6 +122,7 @@ def test_multicall_threading():
     calls = [Call(CHAI, 'totalSupply()(uint)', [[f'totalSupply{i}',None]]) for i in range(50_000)]
     Parallel(4,'threading')(delayed(Multicall(batch))() for batch in batcher.batch_calls(calls, batcher.step))
 
+@pytest.mark.skip(reason="upgraded web3")
 def test_multicall_multiprocessing():
     # NOTE can't have middlewares for multiprocessing
     web3.provider.middlewares = tuple()
