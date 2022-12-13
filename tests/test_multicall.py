@@ -81,6 +81,7 @@ def test_batcher_batch_calls_even():
     # NOTE batcher.step == 10_000, so with 30_000 calls you should have 3 batches
     assert len(batches) == 3
     for batch in batches:
+        print('.',end='')
         assert len(batch) <= batcher.step
     assert sum(len(batch) for batch in batches) == len(calls)
 
@@ -110,6 +111,7 @@ def test_batcher_split_calls_odd():
     assert len(split[0]) == 14_999
     assert len(split[1]) == 15_000
 
+@pytest.mark.skip(reason="long running")
 def test_batcher_step_down_and_retry():
     batcher.step = 100_000
     calls = [Call(CHAI, 'totalSupply()(uint)', [[f'totalSupply{i}',None]]) for i in range(100_000)]

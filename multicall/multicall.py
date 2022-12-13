@@ -7,7 +7,7 @@ import requests
 from web3 import Web3
 
 from multicall import Call
-from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES,
+from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
                                  MULTICALL3_BYTECODE, MULTICALL3_ADDRESSES, w3)
 from multicall.loggers import setup_logger
 from multicall.utils import (await_awaitable, chain_id, gather,
@@ -80,7 +80,11 @@ class Multicall:
         try:
             args = await run_in_subprocess(get_args, calls, self.require_success)
             if self.require_success is True:
-                _, outputs = await self.aggregate.coroutine(args)
+                non_unpack_res = await self.aggregate.coroutine(args)
+                logger.info('ASD1')
+                logger.info(non_unpack_res)
+                logger.info('ASD2')
+                _, outputs = non_unpack_res
                 outputs = await run_in_subprocess(unpack_aggregate_outputs, outputs)
             else:
                 _, _, outputs = await self.aggregate.coroutine(args)
