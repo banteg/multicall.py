@@ -83,6 +83,6 @@ async def gather(coroutines: Iterable[Coroutine]) -> None:
     return results
 
 def state_override_supported(w3: Web3) -> bool:
-    if chain_id(w3) in [ Network.Gnosis, Network.Harmony ]:
+    if chain_id(w3) in [ Network.Gnosis, Network.Harmony, Network.Moonbeam, Network.Moonriver ]:
         return False
     return True
