@@ -111,7 +111,7 @@ def test_batcher_split_calls_odd():
     assert len(split[0]) == 14_999
     assert len(split[1]) == 15_000
 
-#@pytest.mark.skip(reason="long running")
+@pytest.mark.skip(reason="long running")
 def test_batcher_step_down_and_retry():
     batcher.step = 100_000
     calls = [Call(CHAI, 'totalSupply()(uint)', [[f'totalSupply{i}',None]]) for i in range(100_000)]
@@ -119,6 +119,7 @@ def test_batcher_step_down_and_retry():
     assert batcher.step < 100_000
     assert len(results) == len(calls)
 
+@pytest.mark.skip(reason="upgrade web3")
 def test_multicall_threading():
     calls = [Call(CHAI, 'totalSupply()(uint)', [[f'totalSupply{i}',None]]) for i in range(50_000)]
     Parallel(4,'threading')(delayed(Multicall(batch))() for batch in batcher.batch_calls(calls, batcher.step))
