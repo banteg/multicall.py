@@ -80,11 +80,7 @@ class Multicall:
         try:
             args = await run_in_subprocess(get_args, calls, self.require_success)
             if self.require_success is True:
-                non_unpack_res = await self.aggregate.coroutine(args)
-                logger.info('ASD1')
-                logger.info(non_unpack_res)
-                logger.info('ASD2')
-                _, outputs = non_unpack_res
+                _, outputs = await self.aggregate.coroutine(args)
                 outputs = await run_in_subprocess(unpack_aggregate_outputs, outputs)
             else:
                 _, _, outputs = await self.aggregate.coroutine(args)
