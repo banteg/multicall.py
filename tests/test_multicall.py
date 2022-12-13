@@ -28,7 +28,6 @@ def from_ray_require_success(success,val):
 def unpack_no_success(success: bool, output: Any) -> Tuple[bool,Any]:
     return (success, output)
 
-
 def test_multicall():
     multi = Multicall([
         Call(CHAI, 'totalSupply()(uint256)', [['supply', from_wei]]),
