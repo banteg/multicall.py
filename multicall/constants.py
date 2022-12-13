@@ -172,3 +172,5 @@ AIOHTTP_TIMEOUT = ClientTimeout(int(os.environ.get("AIOHTTP_TIMEOUT", 30)))
 user_choice = max(1, int(os.environ.get("MULTICALL_PROCESSES", 1)))
 parallelism_capacity = max(1, os.cpu_count() - 1)
 NUM_PROCESSES = min(user_choice, parallelism_capacity)
+
+NO_STATE_OVERRIDE = [ Network.Gnosis, Network.Harmony, Network.Moonbeam, Network.Moonriver, Network.Kovan ]

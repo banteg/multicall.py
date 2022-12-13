@@ -8,7 +8,7 @@ from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
-from multicall.constants import AIOHTTP_TIMEOUT, NUM_PROCESSES, Network
+from multicall.constants import AIOHTTP_TIMEOUT, NUM_PROCESSES, NO_STATE_OVERRIDE
 
 chainids: Dict[Web3,int] = {}
 
@@ -83,6 +83,6 @@ async def gather(coroutines: Iterable[Coroutine]) -> None:
     return results
 
 def state_override_supported(w3: Web3) -> bool:
-    if chain_id(w3) in [ Network.Gnosis, Network.Harmony, Network.Moonbeam, Network.Moonriver ]:
+    if chain_id(w3) in NO_STATE_OVERRIDE:
         return False
     return True
