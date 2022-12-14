@@ -17,7 +17,7 @@ async def coro():
     return
 
 def exception_coro():
-        raise oopsie
+    raise oopsie
 
 
 def test_chain_id():
@@ -48,6 +48,7 @@ def test_get_endpoint_web3py():
     web3py_w3 = Web3(get_endpoint(web3))
     assert get_endpoint(web3py_w3) == web3.provider.endpoint_uri
 
+@pytest.mark.skip(reason="no local endpoint setup")
 def test_get_endpoint_web3py_auto():
     assert get_endpoint(Web3()) == 'http://localhost:8545'
 

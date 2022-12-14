@@ -69,3 +69,10 @@ use `Multicall(...)()` to get the result of a prepared multicall.
 - MULTICALL_DEBUG: if set, sets logging level for all library loggers to logging.DEBUG
 - MULTICALL_PROCESSES: pass an integer > 1 to use multiprocessing for encoding args and decoding results. Default: 1, which executes all code in the main process.
 - AIOHTTP_TIMEOUT: sets aiohttp timeout period in seconds for async calls to node. Default: 30
+
+## test
+```bash
+export WEB3_INFURE_PROJECT_ID=<your_infura_id>
+export PYTEST_NETWORK='mainnet'
+poetry run python -m pytest
+```

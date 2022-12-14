@@ -7,8 +7,8 @@ import requests
 from web3 import Web3
 
 from multicall import Call
-from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES,
-                                 MULTICALL2_BYTECODE, MULTICALL_ADDRESSES, w3)
+from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
+                                 MULTICALL3_BYTECODE, MULTICALL3_ADDRESSES, w3)
 from multicall.loggers import setup_logger
 from multicall.utils import (await_awaitable, chain_id, gather,
                              run_in_subprocess, state_override_supported)
@@ -45,10 +45,10 @@ class Multicall:
         self.w3 = _w3
         self.chainid = chain_id(self.w3)
         if require_success is True:
-            multicall_map = MULTICALL_ADDRESSES if self.chainid in MULTICALL_ADDRESSES else MULTICALL2_ADDRESSES
+            multicall_map = MULTICALL3_ADDRESSES if self.chainid in MULTICALL3_ADDRESSES else MULTICALL2_ADDRESSES
             self.multicall_sig = 'aggregate((address,bytes)[])(uint256,bytes[])'
         else:
-            multicall_map = MULTICALL2_ADDRESSES
+            multicall_map = MULTICALL3_ADDRESSES if self.chainid in MULTICALL3_ADDRESSES else MULTICALL2_ADDRESSES
             self.multicall_sig = 'tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])'
         self.multicall_address = multicall_map[self.chainid]
 
@@ -113,7 +113,7 @@ class Multicall:
                 _w3=self.w3,
                 block_id=self.block_id,
                 gas_limit=self.gas_limit,
-                state_override_code=MULTICALL2_BYTECODE
+                state_override_code=MULTICALL3_BYTECODE
             )
         
         # If state override is not supported, we simply skip it.
