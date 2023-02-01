@@ -40,7 +40,7 @@ def get_async_w3(w3: Web3) -> Web3:
         return async_w3s[w3]
     if w3.eth.is_async and isinstance(w3.provider, AsyncBaseProvider):
         timeout = w3.provider._request_kwargs["timeout"]
-        if isinstance(w3.provider._request_kwargs["timeout"], ClientTimeout):
+        if isinstance(timeout, ClientTimeout):
             timeout = timeout.total
 
         if timeout < AIOHTTP_TIMEOUT.total:
