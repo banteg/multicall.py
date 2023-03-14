@@ -56,6 +56,7 @@ class Network(IntEnum):
     Milkomeda = 2001
     Kava = 2222
     FantomTestnet = 4002
+    Canto = 7700
     Klaytn = 8217
     EvmosTestnet = 9000
     Evmos = 9001
@@ -146,6 +147,7 @@ MULTICALL3_ADDRESSES: Dict[int,str] = {
     Network.MoonbaseAlphaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Milkomeda: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.FantomTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Canto: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Klaytn: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.EvmosTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Evmos: '0xcA11bde05977b3631167028862bE2a173976CA11',
