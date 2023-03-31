@@ -22,7 +22,7 @@ class Call:
         self, 
         target: AnyAddress, 
         function: Union[str,Iterable[Union[str,Any]]], # 'funcName(dtype)(dtype)' or ['funcName(dtype)(dtype)', input0, input1, ...]
-        returns: Optional[Iterable[Tuple[str,Callable]]] = None, 
+        returns: Optional[Iterable[Tuple[str,Optional[Callable]]]] = None,
         block_id: Optional[int] = None, 
         gas_limit: Optional[int] = None,
         state_override_code: Optional[str] = None, 
