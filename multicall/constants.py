@@ -179,4 +179,4 @@ NUM_PROCESSES = min(user_choice, parallelism_capacity)
 NO_STATE_OVERRIDE = [ Network.Gnosis, Network.Harmony, Network.Moonbeam, Network.Moonriver, Network.Kovan, Network.Fuse ]
 
 # If we gather too many calls at once, we'll have memory issues. This only impacts Calls, not Multicalls.
-ASYNC_SEMAPHORE = asyncio.Semaphore(int(os.environ.get("ASYNC_SEMAPHORE", 100_000)))
+ASYNC_SEMAPHORE = asyncio.Semaphore(int(os.environ.get("MULTICALL_CALL_SEMAPHORE", 100_000)))
