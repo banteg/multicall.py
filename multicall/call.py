@@ -7,7 +7,7 @@ from eth_utils import to_checksum_address
 from web3 import Web3
 
 from multicall import Signature
-from multicall.constants import Network, w3
+from multicall.constants import Network, w3, ASYNC_SEMAPHORE
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.loggers import setup_logger
 from multicall.utils import (chain_id, get_async_w3, run_in_subprocess,
@@ -117,8 +117,8 @@ class Call:
             self.gas_limit,
             self.state_override_code,
         )
-
-        output = await get_async_w3(_w3).eth.call(*args)
+        async with ASYNC_SEMAPHORE:
+            output = await get_async_w3(_w3).eth.call(*args)
 
         return await run_in_subprocess(Call.decode_output, output, self.signature, self.returns)
     
