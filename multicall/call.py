@@ -108,17 +108,18 @@ class Call:
         if self.state_override_code and not state_override_supported(_w3):
             raise StateOverrideNotSupported(f'State override is not supported on {Network(chain_id(_w3)).__repr__()[1:-1]}.')
         
-        args = await run_in_subprocess(
-            prep_args,
-            self.target,
-            self.signature,
-            args or self.args,
-            self.block_id,
-            self.gas_limit,
-            self.state_override_code,
-        )
         async with ASYNC_SEMAPHORE:
-            output = await get_async_w3(_w3).eth.call(*args)
+            output = await get_async_w3(_w3).eth.call(
+                *await run_in_subprocess(
+                    prep_args,
+                    self.target,
+                    self.signature,
+                    args or self.args,
+                    self.block_id,
+                    self.gas_limit,
+                    self.state_override_code,
+                )
+            )
 
         return await run_in_subprocess(Call.decode_output, output, self.signature, self.returns)
     
