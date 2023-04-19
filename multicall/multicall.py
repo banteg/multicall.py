@@ -57,6 +57,9 @@ class Multicall:
         response = await_awaitable(self.coroutine())
         logger.debug(f"Multicall took {time() - start}s")
         return response
+     
+    async def __await__(self) -> Dict[str,Any]:
+        return await self.coroutine()
 
     async def coroutine(self) -> Dict[str,Any]:
         batches = await gather([
