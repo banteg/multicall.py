@@ -1,3 +1,4 @@
+from functools import lru_cache
 from typing import Any, List, Optional, Tuple
 
 # For eth_abi versions < 2.2.0, `decode` and `encode` have not yet been added.
