@@ -11,6 +11,8 @@ from eth_typing.abi import Decodable, TypeStr
 from eth_utils import function_signature_to_4byte_selector
 
 
+get_4byte_selector = lru_cache(maxsize=None)(function_signature_to_4byte_selector)
+
 def parse_signature(signature: str) -> Tuple[str, List[TypeStr], List[TypeStr]]:
     """
     Breaks 'func(address)(uint256)' into ['func', ['address'], ['uint256']]
@@ -58,7 +60,10 @@ class Signature:
     def __init__(self, signature: str) -> None:
         self.signature = signature
         self.function, self.input_types, self.output_types = parse_signature(signature)
-        self.fourbyte = function_signature_to_4byte_selector(self.function)
+    
+    @property
+    def fourbyte(self) -> bytes:
+        return get_4byte_selector(self.function)
 
     def encode_data(self, args: Optional[Any] = None) -> bytes:
         return self.fourbyte + encode(self.input_types, args) if args else self.fourbyte
