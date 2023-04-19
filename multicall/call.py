@@ -100,6 +100,9 @@ class Call:
             self.signature,
             self.returns,
         )
+    
+    async def __await__(self) -> Any:
+        return await self.coroutine()
 
     @eth_retry.auto_retry
     async def coroutine(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
