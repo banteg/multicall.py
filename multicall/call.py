@@ -101,8 +101,8 @@ class Call:
             self.returns,
         )
     
-    async def __await__(self) -> Any:
-        return await self.coroutine()
+    def __await__(self) -> Any:
+        return self.coroutine().__await__()
 
     @eth_retry.auto_retry
     async def coroutine(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
