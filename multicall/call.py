@@ -7,7 +7,7 @@ from eth_utils import to_checksum_address
 from web3 import Web3
 
 from multicall import Signature
-from multicall.constants import Network, w3
+from multicall.constants import Network, w3, ASYNC_SEMAPHORE
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.loggers import setup_logger
 from multicall.utils import (chain_id, get_async_w3, run_in_subprocess,
@@ -100,6 +100,9 @@ class Call:
             self.signature,
             self.returns,
         )
+    
+    async def __await__(self) -> Any:
+        return await self.coroutine()
 
     @eth_retry.auto_retry
     async def coroutine(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
@@ -108,17 +111,18 @@ class Call:
         if self.state_override_code and not state_override_supported(_w3):
             raise StateOverrideNotSupported(f'State override is not supported on {Network(chain_id(_w3)).__repr__()[1:-1]}.')
         
-        args = await run_in_subprocess(
-            prep_args,
-            self.target,
-            self.signature,
-            args or self.args,
-            self.block_id,
-            self.gas_limit,
-            self.state_override_code,
-        )
-
-        output = await get_async_w3(_w3).eth.call(*args)
+        async with ASYNC_SEMAPHORE:
+            output = await get_async_w3(_w3).eth.call(
+                *await run_in_subprocess(
+                    prep_args,
+                    self.target,
+                    self.signature,
+                    args or self.args,
+                    self.block_id,
+                    self.gas_limit,
+                    self.state_override_code,
+                )
+            )
 
         return await run_in_subprocess(Call.decode_output, output, self.signature, self.returns)
     
