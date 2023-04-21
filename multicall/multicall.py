@@ -7,8 +7,9 @@ import requests
 from web3 import Web3
 
 from multicall import Call
-from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES, MULTICALL2_BYTECODE,
-                                 MULTICALL3_BYTECODE, MULTICALL3_ADDRESSES, w3)
+from multicall.constants import (ASYNC_SEMAPHORE, GAS_LIMIT,
+                                 MULTICALL2_ADDRESSES, MULTICALL3_ADDRESSES,
+                                 MULTICALL3_BYTECODE, w3)
 from multicall.loggers import setup_logger
 from multicall.utils import (await_awaitable, chain_id, gather,
                              run_in_subprocess, state_override_supported)
@@ -54,7 +55,7 @@ class Multicall:
 
     def __call__(self) -> Dict[str,Any]:
         start = time()
-        response = await_awaitable(self.coroutine())
+        response = await_awaitable(self)
         logger.debug(f"Multicall took {time() - start}s")
         return response
      
@@ -80,21 +81,22 @@ class Multicall:
         if calls is None:
             calls = self.calls
         
-        try:
-            args = await run_in_subprocess(get_args, calls, self.require_success)
-            if self.require_success is True:
-                _, outputs = await self.aggregate.coroutine(args)
-                outputs = await run_in_subprocess(unpack_aggregate_outputs, outputs)
-            else:
-                _, _, outputs = await self.aggregate.coroutine(args)
-            outputs = await gather([
-                run_in_subprocess(Call.decode_output, output, call.signature, call.returns, success)
-                for call, (success, output) in zip(calls, outputs)
-            ])
-            logger.debug(f"coroutine {id} finished")
-            return outputs
-        except Exception as e:
-            _raise_or_proceed(e, len(calls), ConnErr_retries=ConnErr_retries)
+        async with ASYNC_SEMAPHORE:
+            try:
+                args = await run_in_subprocess(get_args, calls, self.require_success)
+                if self.require_success is True:
+                    _, outputs = await self.aggregate.coroutine(args)
+                    outputs = await run_in_subprocess(unpack_aggregate_outputs, outputs)
+                else:
+                    _, _, outputs = await self.aggregate.coroutine(args)
+                outputs = await gather([
+                    run_in_subprocess(Call.decode_output, output, call.signature, call.returns, success)
+                    for call, (success, output) in zip(calls, outputs)
+                ])
+                logger.debug(f"coroutine {id} finished")
+                return outputs
+            except Exception as e:
+                _raise_or_proceed(e, len(calls), ConnErr_retries=ConnErr_retries)
         
         # Failed, we need to rebatch the calls and try again.
         batch_results = await gather([
