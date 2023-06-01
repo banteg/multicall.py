@@ -24,7 +24,7 @@ def test_chain_id():
     assert chain_id(web3) == 1
 
 def test_await_awaitable():
-    assert await_awaitable(coro()) == None
+    assert await_awaitable(coro()) is None
 
 def test_raise_if_exception():
     with pytest.raises(UST):
@@ -65,4 +65,12 @@ def test_get_async_w3_with_async():
     assert await_awaitable(w3.eth.chain_id) == 1
 
 def test_run_in_subprocess():
-    assert await_awaitable(run_in_subprocess(work)) == None
+    assert await_awaitable(run_in_subprocess(work)) is None
+
+def test_get_event_loop():
+    assert get_event_loop() == asyncio.get_event_loop()
+
+def test_get_event_loop_in_thread():
+    def task():
+        assert get_event_loop() == asyncio.get_event_loop()
+    await_awaitable(get_event_loop().run_in_executor(None, task))
