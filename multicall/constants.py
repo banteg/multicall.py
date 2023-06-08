@@ -167,8 +167,8 @@ MULTICALL3_ADDRESSES: Dict[int,str] = {
     Network.Sepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Aurora: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Harmony: '0xcA11bde05977b3631167028862bE2a173976CA11',
-    Network.PulseChain: '0xcA11bde05977b3631167028862bE2a173976CA11'
-    Network.PulseChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11'
+    Network.PulseChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PulseChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
 }
 
 # With default AsyncBaseProvider settings, some dense calls will fail
