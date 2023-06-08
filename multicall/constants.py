@@ -73,7 +73,9 @@ class Network(IntEnum):
     ArbitrumGorli = 421613
     Sepolia = 11155111
     Aurora = 1313161554
-    Harmony = 1666600000        
+    Harmony = 1666600000
+    PulseChain = 369
+    PulseChainTestnet = 943
 
 MULTICALL_ADDRESSES: Dict[int,str] = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
@@ -165,6 +167,8 @@ MULTICALL3_ADDRESSES: Dict[int,str] = {
     Network.Sepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Aurora: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Harmony: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PulseChain: '0xcA11bde05977b3631167028862bE2a173976CA11'
+    Network.PulseChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11'
 }
 
 # With default AsyncBaseProvider settings, some dense calls will fail
