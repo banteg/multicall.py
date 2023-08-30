@@ -59,6 +59,7 @@ class Network(IntEnum):
     FantomTestnet = 4002
     Canto = 7700
     Klaytn = 8217
+    Base = 8453
     EvmosTestnet = 9000
     Evmos = 9001
     Arbitrum = 42161
@@ -165,6 +166,7 @@ MULTICALL3_ADDRESSES: Dict[int,str] = {
     Network.Sepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Aurora: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Harmony: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Base: '0xcA11bde05977b3631167028862bE2a173976CA11',
 }
 
 # With default AsyncBaseProvider settings, some dense calls will fail
