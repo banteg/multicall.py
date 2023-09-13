@@ -18,6 +18,7 @@ logger = setup_logger(__name__)
 AnyAddress = Union[str,Address,ChecksumAddress,HexAddress]
 
 class Call:
+    __slots__ = "target", "returns", "block_id", "gas_limit", "state_override_code", "w3", "args", "function", "signature"
     def __init__(
         self, 
         target: AnyAddress, 
