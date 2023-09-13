@@ -31,6 +31,7 @@ def unpack_batch_results(batch_results: List[List[CallResponse]]) -> List[CallRe
 
 
 class Multicall:
+    __slots__ = "calls", "block_id", "require_success", "gas_limit", "w3", "chainid", "multicall_sig", "multicall_address"
     def __init__(
         self, 
         calls: List[Call],
@@ -138,6 +139,7 @@ class NotSoBrightBatcher:
     This class helps with processing a large volume of large multicalls.
     It's not so bright, but should quickly bring the batch size down to something reasonable for your node.
     """
+    __slots__ = "step", 
     def __init__(self) -> None:
         self.step = 10000
     
