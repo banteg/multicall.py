@@ -58,6 +58,7 @@ def parse_typestring(typestring: str) -> Optional[List[TypeStr]]:
 
 
 class Signature:
+    __slots__ = "signature", "function", "input_types", "output_types"
     def __init__(self, signature: str) -> None:
         self.signature = signature
         self.function, self.input_types, self.output_types = parse_signature(signature)
