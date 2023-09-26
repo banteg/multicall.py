@@ -7,11 +7,11 @@ from eth_utils import to_checksum_address
 from web3 import Web3
 
 from multicall import Signature
-from multicall.constants import Network, w3, ASYNC_SEMAPHORE
+from multicall.constants import Network, w3
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.loggers import setup_logger
-from multicall.utils import (chain_id, get_async_w3, run_in_subprocess,
-                             state_override_supported)
+from multicall.utils import (_get_semaphore, chain_id, get_async_w3,
+                             run_in_subprocess, state_override_supported)
 
 logger = setup_logger(__name__)
 
@@ -112,7 +112,7 @@ class Call:
         if self.state_override_code and not state_override_supported(_w3):
             raise StateOverrideNotSupported(f'State override is not supported on {Network(chain_id(_w3)).__repr__()[1:-1]}.')
         
-        async with ASYNC_SEMAPHORE:
+        async with _get_semaphore():
             output = await get_async_w3(_w3).eth.call(
                 *await run_in_subprocess(
                     prep_args,

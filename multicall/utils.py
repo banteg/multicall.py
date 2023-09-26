@@ -1,6 +1,7 @@
 
 import asyncio
 from concurrent.futures import ProcessPoolExecutor
+from functools import lru_cache
 from typing import Any, Awaitable, Callable, Coroutine, Dict, Iterable
 
 import eth_retry
@@ -9,7 +10,8 @@ from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
-from multicall.constants import AIOHTTP_TIMEOUT, NUM_PROCESSES, NO_STATE_OVERRIDE
+from multicall.constants import (AIOHTTP_TIMEOUT, NO_STATE_OVERRIDE,
+                                 NUM_PROCESSES)
 
 chainids: Dict[Web3,int] = {}
 
@@ -94,3 +96,7 @@ def state_override_supported(w3: Web3) -> bool:
     if chain_id(w3) in NO_STATE_OVERRIDE:
         return False
     return True
+
+@lru_cache(maxsize=1)
+def _get_semaphore() -> asyncio.Semaphore:
+    return asyncio.Semaphore()

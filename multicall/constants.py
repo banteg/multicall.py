@@ -186,4 +186,4 @@ NO_STATE_OVERRIDE = [ Network.Gnosis, Network.Harmony, Network.Moonbeam, Network
 
 # NOTE: If we run too many async calls at once, we'll have memory issues.
 #       Feel free to increase this with the "MULTICALL_CALL_SEMAPHORE" env var if you know what you're doing.
-ASYNC_SEMAPHORE = asyncio.Semaphore(int(os.environ.get("MULTICALL_CALL_SEMAPHORE", 1000)))
+ASYNC_SEMAPHORE = int(os.environ.get("MULTICALL_CALL_SEMAPHORE", 1000))

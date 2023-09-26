@@ -7,11 +7,10 @@ import requests
 from web3 import Web3
 
 from multicall import Call
-from multicall.constants import (ASYNC_SEMAPHORE, GAS_LIMIT,
-                                 MULTICALL2_ADDRESSES, MULTICALL3_ADDRESSES,
-                                 MULTICALL3_BYTECODE, w3)
+from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES,
+                                 MULTICALL3_ADDRESSES, MULTICALL3_BYTECODE)
 from multicall.loggers import setup_logger
-from multicall.utils import (await_awaitable, chain_id, gather,
+from multicall.utils import (_get_semaphore, await_awaitable, chain_id, gather,
                              run_in_subprocess, state_override_supported)
 
 logger = setup_logger(__name__)
@@ -82,7 +81,7 @@ class Multicall:
         if calls is None:
             calls = self.calls
         
-        async with ASYNC_SEMAPHORE:
+        async with _get_semaphore():
             try:
                 args = await run_in_subprocess(get_args, calls, self.require_success)
                 if self.require_success is True:
