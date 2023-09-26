@@ -8,7 +8,7 @@ from web3 import Web3
 
 from multicall import Call
 from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES,
-                                 MULTICALL3_ADDRESSES, MULTICALL3_BYTECODE)
+                                 MULTICALL3_ADDRESSES, MULTICALL3_BYTECODE, w3)
 from multicall.loggers import setup_logger
 from multicall.utils import (_get_semaphore, await_awaitable, chain_id, gather,
                              run_in_subprocess, state_override_supported)
