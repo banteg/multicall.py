@@ -6,10 +6,10 @@ from eth_typing.abi import Decodable
 from eth_utils import to_checksum_address
 from web3 import Web3
 
-from multicall import Signature, _get_signature
 from multicall.constants import Network, w3
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.loggers import setup_logger
+from multicall.signature import Signature, _get_signature
 from multicall.utils import (_get_semaphore, chain_id, get_async_w3,
                              run_in_subprocess, state_override_supported)
 
