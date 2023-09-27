@@ -6,7 +6,7 @@ from eth_typing.abi import Decodable
 from eth_utils import to_checksum_address
 from web3 import Web3
 
-from multicall import Signature
+from multicall import Signature, _get_signature
 from multicall.constants import Network, w3
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.loggers import setup_logger
@@ -44,7 +44,7 @@ class Call:
             self.function = function
             self.args = None
 
-        self.signature = Signature(self.function)
+        self.signature = _get_signature(self.function)
     
     def __repr__(self) -> str:
         return f'<Call {self.function} on {self.target[:8]}>'
