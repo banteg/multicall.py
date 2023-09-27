@@ -86,13 +86,13 @@ class Call:
             return decoded if len(decoded) > 1 else decoded[0]
 
     @eth_retry.auto_retry
-    def __call__(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
+    def __call__(self, args: Optional[Any] = None, _w3: Optional[Web3] = None, *, block_id: Optional[int] = None) -> Any:
         _w3 = self.w3 or _w3 or w3
         args = prep_args(
             self.target,
             self.signature,
             args or self.args,
-            self.block_id,
+            block_id or self.block_id,
             self.gas_limit,
             self.state_override_code,
         )
@@ -106,7 +106,7 @@ class Call:
         return self.coroutine().__await__()
 
     @eth_retry.auto_retry
-    async def coroutine(self, args: Optional[Any] = None, _w3: Optional[Web3] = None) -> Any:
+    async def coroutine(self, args: Optional[Any] = None, _w3: Optional[Web3] = None, *, block_id: Optional[int] = None) -> Any:
         _w3 = self.w3 or _w3 or w3
 
         if self.state_override_code and not state_override_supported(_w3):
@@ -119,7 +119,7 @@ class Call:
                     self.target,
                     self.signature,
                     args or self.args,
-                    self.block_id,
+                    block_id or self.block_id,
                     self.gas_limit,
                     self.state_override_code,
                 )
