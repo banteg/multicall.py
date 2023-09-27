@@ -56,6 +56,9 @@ def parse_typestring(typestring: str) -> Optional[List[TypeStr]]:
     parts.append(part)
     return parts
 
+@lru_cache(maxsize=None)
+def _get_signature(signature: str) -> "Signature":
+    return Signature(signature)
 
 class Signature:
     __slots__ = "signature", "function", "input_types", "output_types"
