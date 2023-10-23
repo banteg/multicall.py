@@ -62,6 +62,7 @@ class Network(IntEnum):
     Base = 8453
     EvmosTestnet = 9000
     Evmos = 9001
+    Holesky = 17000
     Arbitrum = 42161
     Celo = 42220
     Oasis = 42262
@@ -171,6 +172,7 @@ MULTICALL3_ADDRESSES: Dict[int,str] = {
     Network.PulseChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.PulseChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Base: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Holesky: '0xcA11bde05977b3631167028862bE2a173976CA11',
 }
 
 # With default AsyncBaseProvider settings, some dense calls will fail
