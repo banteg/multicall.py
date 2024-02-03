@@ -97,6 +97,11 @@ def state_override_supported(w3: Web3) -> bool:
         return False
     return True
 
-@lru_cache(maxsize=1)
 def _get_semaphore() -> asyncio.Semaphore:
+    'Returns a `Semaphore` attached to the current event loop'
+    return __get_semaphore(asyncio.get_event_loop())
+
+@lru_cache(maxsize=1)
+def __get_semaphore(loop: asyncio.BaseEventLoop) -> asyncio.Semaphore:
+    'This prevents an "attached to a different loop" edge case if the event loop is changed during your script run'
     return asyncio.Semaphore(ASYNC_SEMAPHORE)
