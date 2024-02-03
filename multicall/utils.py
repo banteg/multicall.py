@@ -10,8 +10,8 @@ from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
-from multicall.constants import (AIOHTTP_TIMEOUT, NO_STATE_OVERRIDE,
-                                 NUM_PROCESSES)
+from multicall.constants import (AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE, 
+                                 NO_STATE_OVERRIDE, NUM_PROCESSES)
 
 chainids: Dict[Web3,int] = {}
 
@@ -99,4 +99,4 @@ def state_override_supported(w3: Web3) -> bool:
 
 @lru_cache(maxsize=1)
 def _get_semaphore() -> asyncio.Semaphore:
-    return asyncio.Semaphore()
+    return asyncio.Semaphore(ASYNC_SEMAPHORE)
