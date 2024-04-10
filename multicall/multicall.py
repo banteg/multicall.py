@@ -85,10 +85,10 @@ class Multicall:
             try:
                 args = await run_in_subprocess(get_args, calls, self.require_success)
                 if self.require_success is True:
-                    _, outputs = await self.aggregate.coroutine(args)
+                    self.block_id, outputs = await self.aggregate.coroutine(args)
                     outputs = await run_in_subprocess(unpack_aggregate_outputs, outputs)
                 else:
-                    _, _, outputs = await self.aggregate.coroutine(args)
+                    self.block_id, _, outputs = await self.aggregate.coroutine(args)
                 outputs = await gather([
                     run_in_subprocess(Call.decode_output, output, call.signature, call.returns, success)
                     for call, (success, output) in zip(calls, outputs)
