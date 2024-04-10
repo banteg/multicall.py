@@ -2,7 +2,7 @@ from functools import lru_cache
 from typing import Any, List, Optional, Tuple
 
 # For eth_abi versions < 2.2.0, `decode` and `encode` have not yet been added.
-# As we require web3 ^5.27, we require eth_abi compatability with eth_abi v2.0.0b6 and greater.
+# As we require web3 >=5.27, we require eth_abi compatability with eth_abi v2.0.0b6 and greater.
 try:
     from eth_abi import decode, encode
 except ImportError: 
