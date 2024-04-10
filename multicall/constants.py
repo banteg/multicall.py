@@ -48,6 +48,7 @@ class Network(IntEnum):
     Fantom = 250
     Boba = 288
     KCC = 321
+    ZkSync = 324
     OptimismGorli = 420
     Astar = 592
     Metis = 1088
@@ -144,6 +145,7 @@ MULTICALL3_ADDRESSES: Dict[int,str] = {
     Network.Fantom: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Boba: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.KCC: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ZkSync: '0x47898B2C52C957663aE9AB46922dCec150a2272c',
     Network.OptimismGorli: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Astar: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Metis: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -184,7 +186,7 @@ user_choice = max(1, int(os.environ.get("MULTICALL_PROCESSES", 1)))
 parallelism_capacity = max(1, os.cpu_count() - 1)
 NUM_PROCESSES = min(user_choice, parallelism_capacity)
 
-NO_STATE_OVERRIDE = [ Network.Gnosis, Network.Harmony, Network.Moonbeam, Network.Moonriver, Network.Kovan, Network.Fuse ]
+NO_STATE_OVERRIDE = [ Network.Gnosis, Network.Harmony, Network.Moonbeam, Network.Moonriver, Network.Kovan, Network.Fuse, Network.ZkSync ]
 
 # NOTE: If we run too many async calls at once, we'll have memory issues.
 #       Feel free to increase this with the "MULTICALL_CALL_SEMAPHORE" env var if you know what you're doing.
