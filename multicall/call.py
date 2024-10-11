@@ -18,7 +18,7 @@ logger = setup_logger(__name__)
 AnyAddress = Union[str,Address,ChecksumAddress,HexAddress]
 
 class Call:
-    __slots__ = "target", "returns", "block_id", "gas_limit", "state_override_code", "w3", "args", "function", "signature"
+    __slots__ = "target", "returns", "block_id", "gas_limit", "state_override_code", "w3", "args", "function", "signature", "origin"
     def __init__(
         self, 
         target: AnyAddress, 
@@ -28,7 +28,8 @@ class Call:
         gas_limit: Optional[int] = None,
         state_override_code: Optional[str] = None, 
         # This needs to be None in order to use process_pool_executor
-        _w3: Web3 = None
+        _w3: Web3 = None,
+        origin: Optional[AnyAddress] = None
     ) -> None:
         self.target = to_checksum_address(target)
         self.returns = returns
@@ -36,6 +37,7 @@ class Call:
         self.gas_limit = gas_limit
         self.state_override_code = state_override_code
         self.w3 = _w3
+        self.origin = to_checksum_address(origin) if origin else None
 
         self.args: Optional[List[Any]]
         if isinstance(function, list):
@@ -93,6 +95,7 @@ class Call:
             self.signature,
             args or self.args,
             block_id or self.block_id,
+            self.origin,
             self.gas_limit,
             self.state_override_code,
         )
@@ -120,6 +123,7 @@ class Call:
                     self.signature,
                     args or self.args,
                     block_id or self.block_id,
+                    self.origin,
                     self.gas_limit,
                     self.state_override_code,
                 )
@@ -131,7 +135,8 @@ def prep_args(
     target: str, 
     signature: Signature, 
     args: Optional[Any], 
-    block_id: Optional[int], 
+    block_id: Optional[int],
+    origin: str,
     gas_limit: int, 
     state_override_code: str,
 ) -> List:
@@ -139,6 +144,9 @@ def prep_args(
     calldata = signature.encode_data(args)
 
     args = [{'to': target, 'data': calldata}, block_id]
+
+    if origin:
+        args[0]['from'] = origin
 
     if gas_limit:
         args[0]['gas'] = gas_limit

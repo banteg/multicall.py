@@ -4,6 +4,9 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 import aiohttp
 import requests
+from eth_utils import to_checksum_address
+
+from multicall.call import AnyAddress
 from web3 import Web3
 
 from multicall import Call
@@ -30,20 +33,22 @@ def unpack_batch_results(batch_results: List[List[CallResponse]]) -> List[CallRe
 
 
 class Multicall:
-    __slots__ = "calls", "block_id", "require_success", "gas_limit", "w3", "chainid", "multicall_sig", "multicall_address"
+    __slots__ = "calls", "block_id", "require_success", "gas_limit", "w3", "chainid", "multicall_sig", "multicall_address", "origin"
     def __init__(
         self, 
         calls: List[Call],
         block_id: Optional[int] = None, 
         require_success: bool = True,
         gas_limit: int = GAS_LIMIT,
-        _w3: Web3 = w3
+        _w3: Web3 = w3,
+        origin: Optional[AnyAddress] = None
     ) -> None:
         self.calls = calls
         self.block_id = block_id
         self.require_success = require_success
         self.gas_limit = gas_limit
         self.w3 = _w3
+        self.origin = to_checksum_address(origin) if origin else None
         self.chainid = chain_id(self.w3)
         if require_success is True:
             multicall_map = MULTICALL3_ADDRESSES if self.chainid in MULTICALL3_ADDRESSES else MULTICALL2_ADDRESSES
@@ -117,6 +122,7 @@ class Multicall:
                 returns=None,
                 _w3=self.w3,
                 block_id=self.block_id,
+                origin=self.origin,
                 gas_limit=self.gas_limit,
                 state_override_code=MULTICALL3_BYTECODE
             )
@@ -128,6 +134,7 @@ class Multicall:
             self.multicall_sig,
             returns=None,
             _w3=self.w3,
+            origin=self.origin,
             block_id=self.block_id,
             gas_limit=self.gas_limit,
         )
