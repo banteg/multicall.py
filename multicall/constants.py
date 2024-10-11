@@ -79,6 +79,7 @@ class Network(IntEnum):
     Harmony = 1666600000
     PulseChain = 369
     PulseChainTestnet = 943
+    Sei = 1329
 
 MULTICALL_ADDRESSES: Dict[int,str] = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
@@ -175,6 +176,7 @@ MULTICALL3_ADDRESSES: Dict[int,str] = {
     Network.PulseChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Base: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Holesky: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Sei: '0xcA11bde05977b3631167028862bE2a173976CA11',
 }
 
 # With default AsyncBaseProvider settings, some dense calls will fail
