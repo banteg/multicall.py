@@ -80,6 +80,11 @@ class Network(IntEnum):
     PulseChain = 369
     PulseChainTestnet = 943
     Sei = 1329
+    opBNB = 204
+    Mantle = 5000
+    Scroll = 534352
+    Mode = 34443
+    Blast = 81457
 
 MULTICALL_ADDRESSES: Dict[int,str] = {
     Network.Mainnet: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
@@ -177,6 +182,11 @@ MULTICALL3_ADDRESSES: Dict[int,str] = {
     Network.Base: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Holesky: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Sei: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.opBNB: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Mantle: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Scroll: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Mode: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Blast: '0xcA11bde05977b3631167028862bE2a173976CA11',
 }
 
 # With default AsyncBaseProvider settings, some dense calls will fail
