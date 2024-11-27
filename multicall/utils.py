@@ -14,9 +14,9 @@ from multicall.constants import (AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE,
                                  NO_STATE_OVERRIDE, NUM_PROCESSES)
 
 try:
-    from web3 import AsyncWeb3, WebsocketProviderV2
+    from web3 import AsyncWeb3
 except ImportError:
-    AsyncWeb3, WebsocketProviderV2 = None, None
+    AsyncWeb3 = None
 
 try:
     from web3 import WebsocketProviderV2
