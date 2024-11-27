@@ -72,7 +72,7 @@ def get_async_w3(w3: Web3) -> Web3:
     # In older web3 versions, AsyncHTTPProvider objects come
     # with incompatible synchronous middlewares by default.
     middlewares = []
-    if AsyncWeb3 and WebsocketProviderV2:
+    if AsyncWeb3:
         async_w3 = AsyncWeb3(provider=provider, middlewares=middlewares)
     else:
         async_w3 = Web3(provider=provider, middlewares=middlewares)
