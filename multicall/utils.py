@@ -6,7 +6,7 @@ from typing import Any, Awaitable, Callable, Coroutine, Dict, Iterable
 
 import eth_retry
 from aiohttp import ClientTimeout
-from web3 import AsyncHTTPProvider, Web3, WebsocketProviderV2
+from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
@@ -17,6 +17,11 @@ try:
     from web3 import AsyncWeb3
 except ImportError:
     AsyncWeb3 = None
+
+try:
+    from web3 import WebsocketProviderV2
+except ImportError:
+    WebsocketProviderV2 = None
 
 
 chainids: Dict[Web3,int] = {}
@@ -59,7 +64,7 @@ def get_async_w3(w3: Web3) -> Web3:
     
     endpoint = get_endpoint(w3)
     request_kwargs = {'timeout': AIOHTTP_TIMEOUT}
-    if endpoint.startswith(("wss:", "ws:")):
+    if WebsocketProviderV2 and endpoint.startswith(("wss:", "ws:")):
         provider = WebsocketProviderV2(endpoint, request_kwargs)
     else:
         provider=AsyncHTTPProvider(endpoint, request_kwargs)
