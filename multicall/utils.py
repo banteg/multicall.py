@@ -6,12 +6,18 @@ from typing import Any, Awaitable, Callable, Coroutine, Dict, Iterable
 
 import eth_retry
 from aiohttp import ClientTimeout
-from web3 import AsyncHTTPProvider, Web3
+from web3 import AsyncHTTPProvider, Web3, WebsocketProviderV2
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
 from multicall.constants import (AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE, 
                                  NO_STATE_OVERRIDE, NUM_PROCESSES)
+
+try:
+    from web3 import AsyncWeb3
+except ImportError:
+    AsyncWeb3 = None
+
 
 chainids: Dict[Web3,int] = {}
 
@@ -50,14 +56,23 @@ def get_async_w3(w3: Web3) -> Web3:
 
         async_w3s[w3] = w3
         return w3
+    
+    endpoint = get_endpoint(w3)
     request_kwargs = {'timeout': AIOHTTP_TIMEOUT}
-    async_w3 = Web3(
-        provider=AsyncHTTPProvider(get_endpoint(w3), request_kwargs),
-        # In older web3 versions, AsyncHTTPProvider objects come
-        # with incompatible synchronous middlewares by default.
-        middlewares=[],
-    )
-    async_w3.eth = AsyncEth(async_w3)
+    if endpoint.startswith(("wss:", "ws:")):
+        provider = WebsocketProviderV2(endpoint, request_kwargs)
+    else:
+        provider=AsyncHTTPProvider(endpoint, request_kwargs)
+
+    # In older web3 versions, AsyncHTTPProvider objects come
+    # with incompatible synchronous middlewares by default.
+    middlewares = []
+    if AsyncWeb3:
+        async_w3 = AsyncWeb3(provider=provider, middlewares=middlewares)
+    else:
+        async_w3 = Web3(provider=provider, middlewares=middlewares)
+        async_w3.eth = AsyncEth(async_w3)
+    
     async_w3s[w3] = async_w3
     return async_w3
 
