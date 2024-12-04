@@ -1,11 +1,12 @@
 [tool.poetry]
 name = "multicall"
-version = "0.9.0"
+version = "0.9.3"
 description = "aggregate results from multiple ethereum contract calls"
 authors = ["banteg"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
+cchecksum = ">=0.0.3,<1"
 # These web3.py versions have a busted async provider and cannot be used in any multithreaded applications
 web3 = ">=5.27,!=5.29.*,!=5.30.*,!=5.31.0,!=5.31.1,!=5.31.2"
 eth_retry = ">=0.1.8"
@@ -14,8 +15,12 @@ eth_retry = ">=0.1.8"
 pytest = ">=6.2.5"
 ruff = ">=0.3.5"
 joblib = ">=1.2"
-# eth-brownie = ">=1.19.3"
+eth-brownie = { "version" = ">=1.19.3", "python" = ">=3.10,<4" }
+vyper = { "version" = "*", "python" = "<3.11" }
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
