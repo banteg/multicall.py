@@ -90,7 +90,7 @@ class Multicall:
     def __call__(self) -> Dict[str, Any]:
         start = time()
         response = await_awaitable(self)
-        logger.debug(f"Multicall took {time() - start}s")
+        logger.debug("Multicall took %ss", time() - start)
         return response
 
     def __await__(self) -> Dict[str, Any]:
@@ -110,7 +110,7 @@ class Multicall:
     async def fetch_outputs(
         self, calls: List[Call], ConnErr_retries: int = 0, id: str = ""
     ) -> List[CallResponse]:
-        logger.debug(f"coroutine {id} started")
+        logger.debug("coroutine %s started", id)
 
         if calls is None:
             calls = self.calls
@@ -126,16 +126,12 @@ class Multicall:
                 outputs = await gather(
                     [
                         run_in_subprocess(
-                            Call.decode_output,
-                            output,
-                            call.signature,
-                            call.returns,
-                            success,
+                            Call.decode_output, output, call.signature, call.returns, success
                         )
                         for call, (success, output) in zip(calls, outputs)
                     ]
                 )
-                logger.debug(f"coroutine {id} finished")
+                logger.debug("coroutine %s finished", id)
                 return outputs
             except Exception as e:
                 _raise_or_proceed(e, len(calls), ConnErr_retries=ConnErr_retries)
@@ -149,7 +145,7 @@ class Multicall:
         )
 
         return_val = await run_in_subprocess(unpack_batch_results, batch_results)
-        logger.debug(f"coroutine {id} finished")
+        logger.debug("coroutine %s finished", id)
         return return_val
 
     @property
