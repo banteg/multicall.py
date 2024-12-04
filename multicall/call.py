@@ -92,8 +92,8 @@ class Call:
         else:
             decoded = [None] * (1 if not returns else len(returns))  # type: ignore
 
-        logger.debug('returns: %s', returns)
-        logger.debug('decoded: %s', decoded)
+        logger.debug("returns: %s", returns)
+        logger.debug("decoded: %s", decoded)
 
         if returns:
             return {
