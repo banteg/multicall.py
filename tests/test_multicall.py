@@ -8,6 +8,7 @@ from multicall.multicall import batcher
 from multicall.utils import await_awaitable
 
 CHAI = "0x06AF07097C9Eeb7fD685c692751D5C66dB49c215"
+WHOAMI = "0x66659E34096372C1aad8d459559432Ab0aa64569"
 DUMMY_CALL = Call(CHAI, "totalSupply()(uint)", [["totalSupply", None]])
 batcher.step = 10_000
 
@@ -46,6 +47,16 @@ def test_multicall():
     assert isinstance(result["supply"], float)
     assert isinstance(result["balance"], float)
 
+
+def test_multicall_with_origin():
+    multi = Multicall([
+        Call(WHOAMI, ['sender()(address)', CHAI, 1], [['sender', None]]),
+        Call(WHOAMI, ['origin()(address)', CHAI, 1], [['origin', None]]),
+    ], origin=CHAI)
+    result = multi()
+    print(result)
+    assert isinstance(result['sender'], str)
+    assert isinstance(result['origin'], str)
 
 def test_multicall_no_success():
     multi = Multicall(
