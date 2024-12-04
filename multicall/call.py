@@ -1,9 +1,9 @@
 from typing import Any, Callable, Iterable, List, Optional, Tuple, Union
 
 import eth_retry
+from cchecksum import to_checksum_address
 from eth_typing import Address, ChecksumAddress, HexAddress
 from eth_typing.abi import Decodable
-from eth_utils import to_checksum_address
 from web3 import Web3
 
 from multicall.constants import Network, w3
