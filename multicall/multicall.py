@@ -29,9 +29,7 @@ logger = setup_logger(__name__)
 CallResponse = Tuple[Union[None, bool], bytes]
 
 
-def get_args(
-    calls: List[Call], require_success: bool = True
-) -> List[Union[bool, List[List[Any]]]]:
+def get_args(calls: List[Call], require_success: bool = True) -> List[Union[bool, List[List[Any]]]]:
     if require_success is True:
         return [[[call.target, call.data] for call in calls]]
     return [require_success, [[call.target, call.data] for call in calls]]
@@ -84,7 +82,9 @@ class Multicall:
                 if self.chainid in MULTICALL3_ADDRESSES
                 else MULTICALL2_ADDRESSES
             )
-            self.multicall_sig = "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
+            self.multicall_sig = (
+                "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
+            )
         self.multicall_address = multicall_map[self.chainid]
 
     def __call__(self) -> Dict[str, Any]:
@@ -202,9 +202,7 @@ class NotSoBrightBatcher:
                 return batches
             start = end
 
-    def split_calls(
-        self, calls: List[Call], unused: None = None
-    ) -> Tuple[List[Call], List[Call]]:
+    def split_calls(self, calls: List[Call], unused: None = None) -> Tuple[List[Call], List[Call]]:
         """
         Split calls into 2 batches in case request is too large.
         We do this to help us find optimal `self.step` value.

@@ -56,6 +56,5 @@ def test_call_multiprocessing():
     # TODO figure out why multiprocessing fails if you don't call request_func here
     web3.provider.request_func(web3, web3.middleware_onion)
     Parallel(4, "multiprocessing")(
-        delayed(Call(CHAI, "name()(string)", [["name", None]], _w3=web3))()
-        for i in range(10)
+        delayed(Call(CHAI, "name()(string)", [["name", None]], _w3=web3))() for i in range(10)
     )

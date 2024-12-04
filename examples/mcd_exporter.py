@@ -160,9 +160,7 @@ multi = Multicall(
             ["balanceOf(address)(uint256)", MCD_JOIN_SAI],
             [["sai_locked", from_wad]],
         ),
-        Call(
-            MCD_GOV, ["balanceOf(address)(uint256)", GEM_PIT], [["gem_pit", from_wad]]
-        ),
+        Call(MCD_GOV, ["balanceOf(address)(uint256)", GEM_PIT], [["gem_pit", from_wad]]),
         Call(
             ETH,
             ["balanceOf(address)(uint256)", MCD_JOIN_ETH_A],

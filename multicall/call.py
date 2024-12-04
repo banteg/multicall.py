@@ -157,9 +157,7 @@ class Call:
                 )
             )
 
-        return await run_in_subprocess(
-            Call.decode_output, output, self.signature, self.returns
-        )
+        return await run_in_subprocess(Call.decode_output, output, self.signature, self.returns)
 
 
 def prep_args(

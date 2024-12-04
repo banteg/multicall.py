@@ -106,9 +106,7 @@ multi = Multicall(
             ["balanceOf(address)(uint256)", MCD_JOIN_SAI],
             [["sai_locked", from_wad]],
         ),
-        Call(
-            MCD_GOV, ["balanceOf(address)(uint256)", GEM_PIT], [["gem_pit", from_wad]]
-        ),
+        Call(MCD_GOV, ["balanceOf(address)(uint256)", GEM_PIT], [["gem_pit", from_wad]]),
         Call(
             ETH,
             ["balanceOf(address)(uint256)", MCD_JOIN_ETH_A],
@@ -208,17 +206,13 @@ def main():
     )
     print(f"ETH Stability Fee: {data.eth_fee:.2f}%")
     print()
-    print(
-        f"BAT Locked: {data.bat_locked:,.0f} ({data.bat_locked / data.bat_supply:.2%} supply)"
-    )
+    print(f"BAT Locked: {data.bat_locked:,.0f} ({data.bat_locked / data.bat_supply:.2%} supply)")
     print(
         f"BAT Ceiling: {data.bat_ilk.line:,.0f} Dai ({data.bat_ilk.Art * data.bat_ilk.rate / data.bat_ilk.line:.2%} util.)"
     )
     print(f"BAT Stability Fee: {data.bat_fee:.2f}%")
     print()
-    print(
-        f"Dai (ERC20) Supply: {data.dai_supply:,.0f} ({data.dai_supply / data.debt:.2%})"
-    )
+    print(f"Dai (ERC20) Supply: {data.dai_supply:,.0f} ({data.dai_supply / data.debt:.2%})")
     print(f"Dai in DSR: {data.savings_dai:,.0f} ({data.savings_dai / data.debt:.2%})")
     print(f"Pie in DSR: {data.savings_pie:,.0f}")
     print(f"Dai Savings Rate: {data.pot_fee:.2f}%")
