@@ -80,7 +80,12 @@ def get_async_w3(w3: Web3) -> Web3:
     # with incompatible synchronous middlewares by default.
     middlewares = []
     if AsyncWeb3:
-        async_w3 = AsyncWeb3(provider=provider, middleware=middlewares)
+        # AsyncWeb3 switched to middleware instead of middlewares
+        # check if AsyncWeb3 has a middleware parameter
+        if hasattr(AsyncWeb3, "middleware"):
+            async_w3 = AsyncWeb3(provider=provider, middleware=middlewares)
+        else:
+            async_w3 = AsyncWeb3(provider=provider, middlewares=middlewares)
     else:
         async_w3 = Web3(provider=provider, middlewares=middlewares)
         async_w3.eth = AsyncEth(async_w3)
