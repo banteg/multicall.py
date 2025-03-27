@@ -56,6 +56,11 @@ def get_endpoint(w3: Web3) -> str:
 
 
 def get_async_w3(w3: Web3) -> Web3:
+    """Return an async version of the given Web3 instance.
+
+    Compatible only with web3py >= v7.0.0-beta.2 (2024-03-11),
+    which renamed middlewares to middleware.
+    """
     if w3 in async_w3s:
         return async_w3s[w3]
     if w3.eth.is_async and isinstance(w3.provider, AsyncBaseProvider):
@@ -78,16 +83,11 @@ def get_async_w3(w3: Web3) -> Web3:
 
     # In older web3 versions, AsyncHTTPProvider objects come
     # with incompatible synchronous middlewares by default.
-    middlewares = []
+    middleware = []
     if AsyncWeb3:
-        # AsyncWeb3 switched to middleware instead of middlewares
-        # check if AsyncWeb3 has a middleware parameter
-        if hasattr(AsyncWeb3, "middleware"):
-            async_w3 = AsyncWeb3(provider=provider, middleware=middlewares)
-        else:
-            async_w3 = AsyncWeb3(provider=provider, middlewares=middlewares)
+        async_w3 = AsyncWeb3(provider=provider, middleware=middleware)
     else:
-        async_w3 = Web3(provider=provider, middlewares=middlewares)
+        async_w3 = Web3(provider=provider, middleware=middleware)
         async_w3.eth = AsyncEth(async_w3)
 
     async_w3s[w3] = async_w3
