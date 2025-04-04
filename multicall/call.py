@@ -2,7 +2,7 @@ from typing import Any, Callable, Iterable, List, Optional, Tuple, Union
 
 import eth_retry
 from cchecksum import to_checksum_address
-from eth_typing import Address, ChecksumAddress, HexAddress
+from eth_typing import Address, ChecksumAddress, HexAddress, HexStr
 from eth_typing.abi import Decodable
 from web3 import Web3
 
@@ -24,25 +24,22 @@ AnyAddress = Union[str, Address, ChecksumAddress, HexAddress]
 
 
 class Call:
-    __slots__ = (
-        "target",
-        "returns",
-        "block_id",
-        "gas_limit",
-        "state_override_code",
-        "w3",
-        "args",
-        "function",
-        "signature",
-        "origin",
-    )
+
+    # store default values as class vars to keep instances smaller
+    block_id: Optional[int] = None
+    args: Optional[Tuple[Any, ...]] = None
+    returns: Optional[Iterable[Tuple[str, Callable]]] = None
+    gas_limit: Optional[int] = None
+    origin: Optional[AnyAddress] = None
+    state_override_code: Optional[HexStr] = None
+
+    __slots__ = "target", "w3", "function", "signature", "__dict__"
 
     def __init__(
         self,
         target: AnyAddress,
-        function: Union[
-            str, Iterable[Union[str, Any]]
-        ],  # 'funcName(dtype)(dtype)' or ['funcName(dtype)(dtype)', input0, input1, ...]
+        # 'funcName(dtype)(dtype)' or ['funcName(dtype)(dtype)', input0, input1, ...]
+        function: Union[str, List[Union[str, Any]]],
         returns: Optional[Iterable[Tuple[str, Callable]]] = None,
         block_id: Optional[int] = None,
         gas_limit: Optional[int] = None,
@@ -52,12 +49,17 @@ class Call:
         origin: Optional[AnyAddress] = None,
     ) -> None:
         self.target = to_checksum_address(target)
-        self.returns = returns
-        self.block_id = block_id
-        self.gas_limit = gas_limit
-        self.state_override_code = state_override_code
+        if returns is not None:
+            self.returns = returns
+        if block_id is not None:
+            self.block_id = block_id
+        if gas_limit is not None:
+            self.gas_limit = gas_limit
+        if state_override_code is not None:
+            self.state_override_code = state_override_code
         self.w3 = _w3
-        self.origin = to_checksum_address(origin) if origin else None
+        if origin is not None:
+            self.origin = to_checksum_address(origin)
 
         self.args: Optional[List[Any]]
         if isinstance(function, list):
@@ -166,12 +168,12 @@ class Call:
 
 
 def prep_args(
-    target: str, 
-    signature: Signature, 
-    args: Optional[Any], 
+    target: str,
+    signature: Signature,
+    args: Optional[Any],
     block_id: Optional[int],
     origin: str,
-    gas_limit: int, 
+    gas_limit: int,
     state_override_code: str,
 ) -> List:
 
@@ -180,7 +182,7 @@ def prep_args(
     args = [{"to": target, "data": calldata}, block_id]
 
     if origin:
-        args[0]['from'] = origin
+        args[0]["from"] = origin
 
     if gas_limit:
         args[0]["gas"] = gas_limit

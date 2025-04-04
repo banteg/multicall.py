@@ -49,14 +49,18 @@ def test_multicall():
 
 
 def test_multicall_with_origin():
-    multi = Multicall([
-        Call(WHOAMI, ['sender()(address)', CHAI, 1], [['sender', None]]),
-        Call(WHOAMI, ['origin()(address)', CHAI, 1], [['origin', None]]),
-    ], origin=CHAI)
+    multi = Multicall(
+        [
+            Call(WHOAMI, ["sender()(address)", CHAI, 1], [["sender", None]]),
+            Call(WHOAMI, ["origin()(address)", CHAI, 1], [["origin", None]]),
+        ],
+        origin=CHAI,
+    )
     result = multi()
     print(result)
-    assert isinstance(result['sender'], str)
-    assert isinstance(result['origin'], str)
+    assert isinstance(result["sender"], str)
+    assert isinstance(result["origin"], str)
+
 
 def test_multicall_no_success():
     multi = Multicall(

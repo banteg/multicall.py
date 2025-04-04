@@ -56,7 +56,7 @@ class Multicall:
         "chainid",
         "multicall_sig",
         "multicall_address",
-        "origin"
+        "origin",
     )
 
     def __init__(
