@@ -26,10 +26,17 @@ def test_call_with_predefined_args():
     call = Call(CHAI, ["balanceOf(address)(uint256)", CHAI], [["balance", from_wei]])
     assert isinstance(call()["balance"], float)
 
+
 def test_call_with_origin():
     # Simulate the top holder sending 1 wei to the contract
-    call = Call(CHAI, ['transfer(address,uint256)(bool)', CHAI, 1], [['success', None]], origin='0xc9824224fC15c9c272c9c2ad730AEdEB85DCdA6f')
-    assert call()['success'] == True
+    call = Call(
+        CHAI,
+        ["transfer(address,uint256)(bool)", CHAI, 1],
+        [["success", None]],
+        origin="0xc9824224fC15c9c272c9c2ad730AEdEB85DCdA6f",
+    )
+    assert call()["success"] == True
+
 
 def test_call_async():
     call = Call(CHAI, "name()(string)", [["name", None]])
