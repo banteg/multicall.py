@@ -71,7 +71,12 @@ class Call:
         self.signature = _get_signature(self.function)
 
     def __repr__(self) -> str:
-        return f"<Call {self.function} on {self.target[:8]}>"
+        string = f"<Call {self.function} on {self.target[:8]}"
+        if self.block_id is not None:
+            string += f" block={self.block_id}"
+        if self.returns is not None:
+            string += f" returns={self.returns}"
+        return f"{string}>"
 
     @property
     def data(self) -> bytes:
