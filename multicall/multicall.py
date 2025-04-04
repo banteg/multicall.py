@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import aiohttp
 import requests
 from eth_utils import to_checksum_address
-from eth_utils.toolz import concat
+from eth_utils.toolz import concat, mapcat
 
 from multicall.call import AnyAddress
 from web3 import Web3
@@ -106,7 +106,7 @@ class Multicall:
                 for i, batch in enumerate(batcher.batch_calls(self.calls, batcher.step))
             )
         )
-        return dict(concat(map(dict.items, concat(batches))))
+        return dict(mapcat(dict.items, concat(batches)))
 
     async def fetch_outputs(
         self, calls: List[Call], ConnErr_retries: int = 0, id: str = ""
