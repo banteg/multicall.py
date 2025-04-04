@@ -93,12 +93,9 @@ class Call:
             try:
                 decoded = signature.decode_data(output)
             except:
-                success, decoded = False, [None] * (1 if not returns else len(returns))  # type: ignore
+                success, decoded = False, [None] * (len(returns) if returns else 1)  # type: ignore
         else:
-            decoded = [None] * (1 if not returns else len(returns))  # type: ignore
-
-        logger.debug("returns: %s", returns)
-        logger.debug("decoded: %s", decoded)
+            decoded = [None] * (len(returns) if returns else 1)  # type: ignore
 
         if returns:
             return {
@@ -126,11 +123,13 @@ class Call:
             self.gas_limit,
             self.state_override_code,
         )
-        return Call.decode_output(
+        result = Call.decode_output(
             _w3.eth.call(*args),
             self.signature,
             self.returns,
         )
+        logger.debug("%s returned %s", self, result)
+        return result
 
     def __await__(self) -> Any:
         return self.coroutine().__await__()
@@ -164,7 +163,9 @@ class Call:
                 )
             )
 
-        return await run_in_subprocess(Call.decode_output, output, self.signature, self.returns)
+        result = await run_in_subprocess(Call.decode_output, output, self.signature, self.returns)
+        logger.debug("%s returned %s", self, result)
+        return result
 
 
 def prep_args(
