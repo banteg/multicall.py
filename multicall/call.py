@@ -82,6 +82,7 @@ class Call:
     def data(self) -> bytes:
         return self.signature.encode_data(self.args)
 
+    @staticmethod
     def decode_output(
         output: Decodable,
         signature: Signature,
