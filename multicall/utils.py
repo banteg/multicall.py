@@ -127,7 +127,7 @@ def raise_if_exception_in(iterable: Iterable[Any]) -> None:
 async def gather(coroutines: Iterable[Awaitable[__T]]) -> List[__T]:
     results = await asyncio.gather(*coroutines, return_exceptions=True)
     raise_if_exception_in(results)
-    return results
+    return results  # type: ignore [return-value]
 
 
 def state_override_supported(w3: Web3) -> bool:

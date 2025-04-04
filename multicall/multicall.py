@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import aiohttp
 import requests
 from eth_utils import to_checksum_address
+from eth_utils.toolz import concat
 
 from multicall.call import AnyAddress
 from web3 import Web3
@@ -40,10 +41,6 @@ def get_args(calls: List[Call], require_success: bool = True) -> List[Union[bool
 
 def unpack_aggregate_outputs(outputs: Any) -> Tuple[CallResponse, ...]:
     return tuple((None, output) for output in outputs)
-
-
-def unpack_batch_results(batch_results: List[List[CallResponse]]) -> List[CallResponse]:
-    return [result for batch in batch_results for result in batch]
 
 
 class Multicall:
@@ -104,14 +101,12 @@ class Multicall:
 
     async def coroutine(self) -> Dict[str, Any]:
         batches = await gather(
-            [
+            (
                 self.fetch_outputs(batch, id=str(i))
                 for i, batch in enumerate(batcher.batch_calls(self.calls, batcher.step))
-            ]
+            )
         )
-        outputs = await run_in_subprocess(unpack_batch_results, batches)
-
-        return {name: result for output in outputs for name, result in output.items()}
+        return dict(concat(map(dict.items, concat(batches))))
 
     async def fetch_outputs(
         self, calls: List[Call], ConnErr_retries: int = 0, id: str = ""
@@ -130,12 +125,12 @@ class Multicall:
                 else:
                     self.block_id, _, outputs = await self.aggregate.coroutine(args)
                 outputs = await gather(
-                    [
+                    (
                         run_in_subprocess(
                             Call.decode_output, output, call.signature, call.returns, success
                         )
                         for call, (success, output) in zip(calls, outputs)
-                    ]
+                    )
                 )
                 logger.debug("coroutine %s finished", id)
                 return outputs
@@ -144,15 +139,14 @@ class Multicall:
 
         # Failed, we need to rebatch the calls and try again.
         batch_results = await gather(
-            [
+            (
                 self.fetch_outputs(chunk, ConnErr_retries + 1, f"{id}_{i}")
                 for i, chunk in enumerate(await batcher.rebatch(calls))
-            ]
+            )
         )
 
-        return_val = await run_in_subprocess(unpack_batch_results, batch_results)
         logger.debug("coroutine %s finished", id)
-        return return_val
+        return list(concat(batch_results))
 
     @property
     def aggregate(self) -> Call:
