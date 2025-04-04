@@ -106,11 +106,7 @@ class Multicall:
                 for i, batch in enumerate(batcher.batch_calls(self.calls, batcher.step))
             ]
         )
-        return {
-            name: result 
-            for output in concat(batches) 
-            for name, result in output.items()
-        }
+        return {name: result for output in concat(batches) for name, result in output.items()}
 
     async def fetch_outputs(
         self, calls: List[Call], ConnErr_retries: int = 0, id: str = ""
