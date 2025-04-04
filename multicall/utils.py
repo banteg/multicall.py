@@ -1,7 +1,7 @@
 import asyncio
 from concurrent.futures import ProcessPoolExecutor
 from functools import lru_cache
-from typing import Any, Awaitable, Callable, Coroutine, Dict, Iterable
+from typing import Any, Awaitable, Callable, Dict, Iterable, List, TypeVar
 
 import eth_retry
 from aiohttp import ClientTimeout
@@ -26,6 +26,8 @@ try:
 except ImportError:
     WebsocketProviderV2 = None
 
+
+__T = TypeVar("__T")
 
 chainids: Dict[Web3, int] = {}
 
@@ -122,16 +124,14 @@ def raise_if_exception_in(iterable: Iterable[Any]) -> None:
         raise_if_exception(obj)
 
 
-async def gather(coroutines: Iterable[Coroutine]) -> None:
+async def gather(coroutines: Iterable[Awaitable[__T]]) -> List[__T]:
     results = await asyncio.gather(*coroutines, return_exceptions=True)
     raise_if_exception_in(results)
     return results
 
 
 def state_override_supported(w3: Web3) -> bool:
-    if chain_id(w3) in NO_STATE_OVERRIDE:
-        return False
-    return True
+    return chain_id(w3) not in NO_STATE_OVERRIDE
 
 
 def _get_semaphore() -> asyncio.Semaphore:
