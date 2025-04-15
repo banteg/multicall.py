@@ -21,7 +21,7 @@ def parse_signature(signature: str) -> Tuple[str, List[TypeStr], List[TypeStr]]:
 
     This function expects a signature of the form:
         "functionName(inputType1,inputType2,...)(outputType1,outputType2,...)"
-    
+
     It returns a tuple with three elements:
       - The function selector which is formed by joining the function name with the first
         parenthesized group of input types. For example, for the signature "foo(address)(uint256)",
