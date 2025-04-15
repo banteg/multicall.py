@@ -17,7 +17,26 @@ get_4byte_selector = lru_cache(maxsize=None)(function_signature_to_4byte_selecto
 
 def parse_signature(signature: str) -> Tuple[str, List[TypeStr], List[TypeStr]]:
     """
-    Breaks 'func(address)(uint256)' into ['func', ['address'], ['uint256']]
+    Breaks a function signature into its selector and lists of input and output ABI types.
+
+    This function expects a signature of the form:
+        "functionName(inputType1,inputType2,...)(outputType1,outputType2,...)"
+
+    It returns a tuple with three elements:
+      - The function selector which is formed by joining the function name with the first
+        parenthesized group of input types. For example, for the signature "foo(address)(uint256)",
+        the selector is "foo(address)".
+      - A list of input type strings.
+      - A list of output type strings.
+
+    Examples:
+        >>> parse_signature("foo(address)(uint256)")
+        ('foo(address)', ['address'], ['uint256'])
+        >>> parse_signature("bar(uint256,uint256)(bool)")
+        ('bar(uint256,uint256)', ['uint256', 'uint256'], ['bool'])
+
+    See Also:
+        :func:`eth_utils.function_signature_to_4byte_selector`
     """
     parts: List[str] = []
     stack: List[str] = []
