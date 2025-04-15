@@ -1,4 +1,4 @@
-import asyncio
+from asyncio import TimeoutError
 from time import time
 from typing import Any, Dict, List, Optional, Tuple, Union
 
@@ -24,7 +24,6 @@ from multicall.utils import (
     await_awaitable,
     chain_id,
     gather,
-    run_in_subprocess,
     state_override_supported,
 )
 
@@ -118,20 +117,16 @@ class Multicall:
 
         async with _get_semaphore():
             try:
-                args = await run_in_subprocess(get_args, calls, self.require_success)
+                args = get_args(calls, self.require_success)
                 if self.require_success is True:
                     self.block_id, outputs = await self.aggregate.coroutine(args)
-                    outputs = await run_in_subprocess(unpack_aggregate_outputs, outputs)
+                    outputs = unpack_aggregate_outputs(outputs)
                 else:
                     self.block_id, _, outputs = await self.aggregate.coroutine(args)
-                outputs = await gather(
-                    (
-                        run_in_subprocess(
-                            Call.decode_output, output, call.signature, call.returns, success
-                        )
-                        for call, (success, output) in zip(calls, outputs)
-                    )
-                )
+                outputs = [
+                    Call.decode_output(output, call.signature, call.returns, success)
+                    for call, (success, output) in zip(calls, outputs)
+                ]
                 logger.debug("coroutine %s finished", id)
                 return outputs
             except Exception as e:
@@ -141,7 +136,7 @@ class Multicall:
         batch_results = await gather(
             (
                 self.fetch_outputs(chunk, ConnErr_retries + 1, f"{id}_{i}")
-                for i, chunk in enumerate(await batcher.rebatch(calls))
+                for i, chunk in enumerate(batcher.rebatch(calls))
             )
         )
 
@@ -210,10 +205,10 @@ class NotSoBrightBatcher:
         chunk_2 = calls[center:]
         return chunk_1, chunk_2
 
-    async def rebatch(self, calls):
+    def rebatch(self, calls):
         # If a separate coroutine changed `step` after calls were last batched, we will use the new `step` for rebatching.
         if self.step <= len(calls) // 2:
-            return await run_in_subprocess(self.batch_calls, calls, self.step)
+            return self.batch_calls(calls, self.step)
 
         # Otherwise we will split calls in half.
         if self.step >= len(calls):
@@ -222,7 +217,7 @@ class NotSoBrightBatcher:
                 f"Multicall batch size reduced from {self.step} to {new_step}. The failed batch had {len(calls)} calls."
             )
             self.step = new_step
-        return await run_in_subprocess(self.split_calls, calls, self.step)
+        return self.split_calls(calls, self.step)
 
 
 batcher = NotSoBrightBatcher()
@@ -253,10 +248,10 @@ def _raise_or_proceed(e: Exception, ct_calls: int, ConnErr_retries: int) -> None
             "time-out",
             "520 server error",
         )
-        if not any([string in str(e).lower() for string in strings]):
+        if not any(map(str(e).lower().__contains__, strings)):
             raise e
         logger.warning(e)
-    elif isinstance(e, asyncio.TimeoutError):
+    elif isinstance(e, TimeoutError):
         pass
     elif isinstance(e, ValueError):
         if "out of gas" not in str(e).lower():

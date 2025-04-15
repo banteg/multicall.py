@@ -14,7 +14,6 @@ from multicall.utils import (
     _get_semaphore,
     chain_id,
     get_async_w3,
-    run_in_subprocess,
     state_override_supported,
 )
 
@@ -157,8 +156,7 @@ class Call:
 
         async with _get_semaphore():
             output = await get_async_w3(_w3).eth.call(
-                *await run_in_subprocess(
-                    prep_args,
+                *prep_args(
                     self.target,
                     self.signature,
                     args or self.args,
@@ -169,7 +167,7 @@ class Call:
                 )
             )
 
-        result = await run_in_subprocess(Call.decode_output, output, self.signature, self.returns)
+        result = Call.decode_output(output, self.signature, self.returns)
         logger.debug("%s returned %s", self, result)
         return result
 

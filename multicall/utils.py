@@ -1,7 +1,8 @@
-import asyncio
-from concurrent.futures import ProcessPoolExecutor
+from asyncio import BaseEventLoop, Semaphore, new_event_loop, set_event_loop
+from asyncio import gather as _gather
+from asyncio import get_event_loop as _get_event_loop
 from functools import lru_cache
-from typing import Any, Awaitable, Callable, Dict, Iterable, List, TypeVar
+from typing import Any, Awaitable, Dict, Iterable, List, TypeVar
 
 import eth_retry
 from aiohttp import ClientTimeout
@@ -9,12 +10,7 @@ from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
-from multicall.constants import (
-    AIOHTTP_TIMEOUT,
-    ASYNC_SEMAPHORE,
-    NO_STATE_OVERRIDE,
-    NUM_PROCESSES,
-)
+from multicall.constants import AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE, NO_STATE_OVERRIDE
 
 try:
     from web3 import AsyncWeb3
@@ -45,7 +41,6 @@ def chain_id(w3: Web3) -> int:
 
 
 async_w3s: Dict[Web3, Web3] = {}
-process_pool_executor = ProcessPoolExecutor(NUM_PROCESSES)
 
 
 def get_endpoint(w3: Web3) -> str:
@@ -91,27 +86,19 @@ def get_async_w3(w3: Web3) -> Web3:
     return async_w3
 
 
-def get_event_loop() -> asyncio.BaseEventLoop:
+def get_event_loop() -> BaseEventLoop:
     try:
-        loop = asyncio.get_event_loop()
+        loop = _get_event_loop()
     except RuntimeError as e:  # Necessary for use with multi-threaded applications.
         if not str(e).startswith("There is no current event loop in thread"):
             raise e
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
+        loop = new_event_loop()
+        set_event_loop(loop)
     return loop
 
 
-def await_awaitable(awaitable: Awaitable) -> Any:
+def await_awaitable(awaitable: Awaitable[__T]) -> __T:
     return get_event_loop().run_until_complete(awaitable)
-
-
-async def run_in_subprocess(callable: Callable, *args: Any, **kwargs) -> Any:
-    if NUM_PROCESSES == 1:
-        return callable(*args, **kwargs)
-    return await asyncio.get_event_loop().run_in_executor(
-        process_pool_executor, callable, *args, **kwargs
-    )
 
 
 def raise_if_exception(obj: Any) -> None:
@@ -125,7 +112,7 @@ def raise_if_exception_in(iterable: Iterable[Any]) -> None:
 
 
 async def gather(coroutines: Iterable[Awaitable[__T]]) -> List[__T]:
-    results = await asyncio.gather(*coroutines, return_exceptions=True)
+    results = await _gather(*coroutines, return_exceptions=True)
     raise_if_exception_in(results)
     return results  # type: ignore [return-value]
 
@@ -134,12 +121,12 @@ def state_override_supported(w3: Web3) -> bool:
     return chain_id(w3) not in NO_STATE_OVERRIDE
 
 
-def _get_semaphore() -> asyncio.Semaphore:
+def _get_semaphore() -> Semaphore:
     "Returns a `Semaphore` attached to the current event loop"
-    return __get_semaphore(asyncio.get_event_loop())
+    return __get_semaphore(get_event_loop())
 
 
 @lru_cache(maxsize=1)
-def __get_semaphore(loop: asyncio.BaseEventLoop) -> asyncio.Semaphore:
+def __get_semaphore(loop: BaseEventLoop) -> Semaphore:
     'This prevents an "attached to a different loop" edge case if the event loop is changed during your script run'
-    return asyncio.Semaphore(ASYNC_SEMAPHORE)
+    return Semaphore(ASYNC_SEMAPHORE)
