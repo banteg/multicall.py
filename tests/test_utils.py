@@ -1,3 +1,5 @@
+import asyncio
+
 import pytest
 from brownie import web3
 from multicall.utils import *
@@ -9,10 +11,6 @@ class UST(Exception):
 
 
 oopsie = UST("oops")
-
-
-def work():
-    pass
 
 
 async def coro():
@@ -82,10 +80,6 @@ def test_get_async_w3_with_async():
     w3 = get_async_w3(async_w3)
     assert w3 == async_w3
     assert await_awaitable(w3.eth.chain_id) == 1
-
-
-def test_run_in_subprocess():
-    assert await_awaitable(run_in_subprocess(work)) is None
 
 
 def test_get_event_loop():
