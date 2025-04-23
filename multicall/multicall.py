@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 import aiohttp
 import requests
-from eth_utils import to_checksum_address
+from cchecksum import to_checksum_address
 from eth_utils.toolz import concat, mapcat
 
 from multicall.call import AnyAddress
