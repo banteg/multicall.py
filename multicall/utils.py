@@ -117,16 +117,31 @@ async def gather(coroutines: Iterable[Awaitable[__T]]) -> List[__T]:
     return results  # type: ignore [return-value]
 
 
+state_override_supported: Dict[Web3, bool] = {}
+
+
 def state_override_supported(w3: Web3) -> bool:
-    return chain_id(w3) not in NO_STATE_OVERRIDE
+    try:
+        return _state_override_supported[w3]
+    except KeyError:
+        is_supported = chain_id(w3) not in STATE_OVERRIDE_NOT_SUPPORTED
+        state_override_supported[w3] = is_supported
+        return is_supported
+
+
+semaphores: Dict[BaseEventLoop, Semaphore] = {}
 
 
 def _get_semaphore() -> Semaphore:
-    "Returns a `Semaphore` attached to the current event loop"
-    return __get_semaphore(get_event_loop())
+    """
+    Returns a `Semaphore` attached to the current event loop.
 
-
-@lru_cache(maxsize=1)
-def __get_semaphore(loop: BaseEventLoop) -> Semaphore:
-    'This prevents an "attached to a different loop" edge case if the event loop is changed during your script run'
-    return Semaphore(ASYNC_SEMAPHORE)
+    NOTE: This prevents an "attached to a different loop" edge case if the event loop is changed during your script run
+    """
+    loop = get_event_loop()
+    try:
+        return semaphores[loop]
+    except KeyError:
+        semaphore = Semaphore(ASYNC_SEMAPHORE)
+        semaphores[loop] = semaphore
+        return semaphore
