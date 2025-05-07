@@ -58,7 +58,7 @@ def parse_signature(signature: str) -> Tuple[str, List[TypeStr], List[TypeStr]]:
     return function, input_types, output_types
 
 
-def parse_typestring(typestring: str) -> Optional[List[TypeStr]]:
+def parse_typestring(typestring: str) -> List[TypeStr]:
     if typestring == "()":
         return []
     parts = []
