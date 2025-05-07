@@ -117,7 +117,7 @@ async def gather(coroutines: Iterable[Awaitable[__T]]) -> List[__T]:
     return results  # type: ignore [return-value]
 
 
-state_override_supported: Dict[Web3, bool] = {}
+_state_override_supported: Dict[Web3, bool] = {}
 
 
 def state_override_supported(w3: Web3) -> bool:
@@ -125,11 +125,11 @@ def state_override_supported(w3: Web3) -> bool:
         return _state_override_supported[w3]
     except KeyError:
         is_supported = chain_id(w3) not in STATE_OVERRIDE_NOT_SUPPORTED
-        state_override_supported[w3] = is_supported
+        _state_override_supported[w3] = is_supported
         return is_supported
 
 
-semaphores: Dict[BaseEventLoop, Semaphore] = {}
+_semaphores: Dict[BaseEventLoop, Semaphore] = {}
 
 
 def _get_semaphore() -> Semaphore:
@@ -140,8 +140,8 @@ def _get_semaphore() -> Semaphore:
     """
     loop = get_event_loop()
     try:
-        return semaphores[loop]
+        return _semaphores[loop]
     except KeyError:
         semaphore = Semaphore(ASYNC_SEMAPHORE)
-        semaphores[loop] = semaphore
+        _semaphores[loop] = semaphore
         return semaphore
