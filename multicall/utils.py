@@ -142,6 +142,5 @@ def _get_semaphore() -> Semaphore:
     try:
         return _semaphores[loop]
     except KeyError:
-        semaphore = Semaphore(ASYNC_SEMAPHORE)
-        _semaphores[loop] = semaphore
+        semaphore = _semaphores[loop] = Semaphore(ASYNC_SEMAPHORE)
         return semaphore
