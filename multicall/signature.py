@@ -1,5 +1,5 @@
 from functools import lru_cache
-from typing import Any, List, Optional, Tuple
+from typing import Any, Final, List, Optional, Tuple
 
 # For eth_abi versions < 2.2.0, `decode` and `encode` have not yet been added.
 # As we require web3 >=5.27, we require eth_abi compatability with eth_abi v2.0.0b6 and greater.
@@ -12,7 +12,7 @@ from eth_typing.abi import Decodable, TypeStr
 from eth_utils import function_signature_to_4byte_selector
 
 
-get_4byte_selector = lru_cache(maxsize=None)(function_signature_to_4byte_selector)
+get_4byte_selector: Final = lru_cache(maxsize=None)(function_signature_to_4byte_selector)
 
 
 def parse_signature(signature: str) -> Tuple[str, List[TypeStr], List[TypeStr]]:

@@ -1,4 +1,4 @@
-from typing import Any, Callable, Iterable, List, Optional, Tuple, Union
+from typing import Any, Callable, Final, Iterable, List, Optional, Tuple, Union, final
 
 import eth_retry
 from cchecksum import to_checksum_address
@@ -17,11 +17,12 @@ from multicall.utils import (
     state_override_supported,
 )
 
-logger = setup_logger(__name__)
+logger: Final = setup_logger(__name__)
 
 AnyAddress = Union[str, Address, ChecksumAddress, HexAddress]
 
 
+@final
 class Call:
 
     # store default values as class vars to keep instances smaller
@@ -47,7 +48,7 @@ class Call:
         _w3: Web3 = None,
         origin: Optional[AnyAddress] = None,
     ) -> None:
-        self.target = to_checksum_address(target)
+        self.target: Final = to_checksum_address(target)
         if returns is not None:
             self.returns = returns
         if block_id is not None:
@@ -67,7 +68,7 @@ class Call:
             self.function = function
             self.args = None
 
-        self.signature = _get_signature(self.function)
+        self.signature: Final = _get_signature(self.function)
 
     def __repr__(self) -> str:
         string = f"<Call {self.function} on {self.target[:8]}"
@@ -184,13 +185,14 @@ def prep_args(
 
     calldata = signature.encode_data(args)
 
-    args = [{"to": target, "data": calldata}, block_id]
+    call_dict = {"to": target, "data": calldata}
+    args = [call_dict, block_id]
 
     if origin:
-        args[0]["from"] = origin
+        call_dict["from"] = origin
 
     if gas_limit:
-        args[0]["gas"] = gas_limit
+        call_dict["gas"] = gas_limit
 
     if state_override_code:
         args.append({target: {"code": state_override_code}})

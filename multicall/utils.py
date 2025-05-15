@@ -2,7 +2,7 @@ from asyncio import BaseEventLoop, Semaphore, new_event_loop, set_event_loop
 from asyncio import gather as _gather
 from asyncio import get_event_loop as _get_event_loop
 from functools import lru_cache
-from typing import Any, Awaitable, Dict, Iterable, List, TypeVar
+from typing import Any, Awaitable, Dict, Final, Iterable, List, TypeVar
 
 import eth_retry
 from aiohttp import ClientTimeout
@@ -25,7 +25,7 @@ except ImportError:
 
 __T = TypeVar("__T")
 
-chainids: Dict[Web3, int] = {}
+chainids: Final[Dict[Web3, int]] = {}
 
 
 @eth_retry.auto_retry
@@ -40,7 +40,7 @@ def chain_id(w3: Web3) -> int:
         return chainids[w3]
 
 
-async_w3s: Dict[Web3, Web3] = {}
+async_w3s: Final[Dict[Web3, Web3]] = {}
 
 
 def get_endpoint(w3: Web3) -> str:
@@ -117,7 +117,7 @@ async def gather(coroutines: Iterable[Awaitable[__T]]) -> List[__T]:
     return results  # type: ignore [return-value]
 
 
-_state_override_supported: Dict[Web3, bool] = {}
+_state_override_supported: Final[Dict[Web3, bool]] = {}
 
 
 def state_override_supported(w3: Web3) -> bool:
@@ -129,7 +129,7 @@ def state_override_supported(w3: Web3) -> bool:
         return is_supported
 
 
-_semaphores: Dict[BaseEventLoop, Semaphore] = {}
+_semaphores: Final[Dict[BaseEventLoop, Semaphore]] = {}
 
 
 def _get_semaphore() -> Semaphore:
