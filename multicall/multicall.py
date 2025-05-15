@@ -28,6 +28,8 @@ from multicall.utils import (
 )
 
 logger: Final = setup_logger(__name__)
+log_warning: Final = logger.warning
+log_debug: Final = logger.debug
 
 CallResponse = Tuple[Union[None, bool], bytes]
 
@@ -93,7 +95,7 @@ class Multicall:
     def __call__(self) -> Dict[str, Any]:
         start = time()
         response = await_awaitable(self)
-        logger.debug("Multicall took %ss", time() - start)
+        log_debug("Multicall took %ss", time() - start)
         return response
 
     def __await__(self) -> Dict[str, Any]:
@@ -111,7 +113,7 @@ class Multicall:
     async def fetch_outputs(
         self, calls: List[Call], ConnErr_retries: int = 0, id: str = ""
     ) -> List[CallResponse]:
-        logger.debug("coroutine %s started", id)
+        log_debug("coroutine %s started", id)
 
         if calls is None:
             calls = self.calls
@@ -128,7 +130,7 @@ class Multicall:
                     Call.decode_output(output, call.signature, call.returns, success)
                     for call, (success, output) in zip(calls, outputs)
                 ]
-                logger.debug("coroutine %s finished", id)
+                log_debug("coroutine %s finished", id)
                 return outputs
             except Exception as e:
                 _raise_or_proceed(e, len(calls), ConnErr_retries=ConnErr_retries)
@@ -141,7 +143,7 @@ class Multicall:
             )
         )
 
-        logger.debug("coroutine %s finished", id)
+        log_debug("coroutine %s finished", id)
         return list(concat(batch_results))
 
     @property
@@ -215,7 +217,7 @@ class NotSoBrightBatcher:
         # Otherwise we will split calls in half.
         if self.step >= len(calls):
             new_step = round(len(calls) * 0.99) if len(calls) >= 100 else len(calls) - 1
-            logger.warning(
+            log_warning(
                 f"Multicall batch size reduced from {self.step} to {new_step}. The failed batch had {len(calls)} calls."
             )
             self.step = new_step
@@ -230,12 +232,12 @@ def _raise_or_proceed(e: Exception, ct_calls: int, ConnErr_retries: int) -> None
     if isinstance(e, aiohttp.ClientOSError):
         if "broken pipe" not in str(e).lower():
             raise e
-        logger.warning(e)
+        log_warning(e)
     elif isinstance(e, aiohttp.ClientResponseError):
         strings = ["request entity too large", "connection reset by peer"]
         if not any([string in str(e).lower() for string in strings]):
             raise e
-        logger.warning(e)
+        log_warning(e)
     elif isinstance(e, requests.ConnectionError):
         if (
             "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
@@ -252,7 +254,7 @@ def _raise_or_proceed(e: Exception, ct_calls: int, ConnErr_retries: int) -> None
         )
         if not any(map(str(e).lower().__contains__, strings)):
             raise e
-        logger.warning(e)
+        log_warning(e)
     elif isinstance(e, TimeoutError):
         pass
     elif isinstance(e, ValueError):
@@ -260,6 +262,6 @@ def _raise_or_proceed(e: Exception, ct_calls: int, ConnErr_retries: int) -> None
             raise e
         if ct_calls == 1:
             raise e
-        logger.warning(e)
+        log_warning(e)
     else:
         raise e
