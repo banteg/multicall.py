@@ -1,6 +1,6 @@
 from asyncio import TimeoutError
 from time import time
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, Final, List, Optional, Tuple, Union
 
 import aiohttp
 import requests
@@ -27,7 +27,7 @@ from multicall.utils import (
     state_override_supported,
 )
 
-logger = setup_logger(__name__)
+logger: Final = setup_logger(__name__)
 
 CallResponse = Tuple[Union[None, bool], bytes]
 
@@ -42,6 +42,7 @@ def unpack_aggregate_outputs(outputs: Any) -> Tuple[CallResponse, ...]:
     return tuple((None, output) for output in outputs)
 
 
+@final
 class Multicall:
     __slots__ = (
         "calls",
@@ -170,6 +171,7 @@ class Multicall:
         )
 
 
+@final
 class NotSoBrightBatcher:
     """
     This class helps with processing a large volume of large multicalls.
@@ -220,7 +222,7 @@ class NotSoBrightBatcher:
         return self.split_calls(calls, self.step)
 
 
-batcher = NotSoBrightBatcher()
+batcher: Final = NotSoBrightBatcher()
 
 
 def _raise_or_proceed(e: Exception, ct_calls: int, ConnErr_retries: int) -> None:
