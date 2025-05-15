@@ -18,6 +18,7 @@ from multicall.utils import (
 )
 
 logger: Final = setup_logger(__name__)
+log_debug: Final = logger.debug
 
 AnyAddress = Union[str, Address, ChecksumAddress, HexAddress]
 
@@ -134,7 +135,7 @@ class Call:
             self.signature,
             self.returns,
         )
-        logger.debug("%s returned %s", self, result)
+        log_debug("%s returned %s", self, result)
         return result
 
     def __await__(self) -> Any:
@@ -169,7 +170,7 @@ class Call:
             )
 
         result = Call.decode_output(output, self.signature, self.returns)
-        logger.debug("%s returned %s", self, result)
+        log_debug("%s returned %s", self, result)
         return result
 
 
