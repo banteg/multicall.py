@@ -1,7 +1,7 @@
 import asyncio
 import os
 from enum import IntEnum
-from typing import Dict, Final
+from typing import Dict, Final, final
 
 from aiohttp import ClientTimeout
 
