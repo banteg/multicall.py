@@ -807,13 +807,13 @@ test = ["asn1tools (>=0.146.2,<0.147)", "eth-hash[pycryptodome]", "eth-hash[pysh
 
 [[package]]
 name = "eth-retry"
-version = "0.2.2"
+version = "0.3.5"
 description = "Provides a decorator that automatically catches known transient exceptions that are common in the Ethereum/EVM ecosystem and reattempts to evaluate your decorated function"
 optional = false
-python-versions = "*"
+python-versions = "<4,>=3.8"
 files = [
-    {file = "eth_retry-0.2.2-py3-none-any.whl", hash = "sha256:32d22aac3987a7244ba1a43bbb3b14abac0f916630e54a095ec23c2b43fbdb4b"},
-    {file = "eth_retry-0.2.2.tar.gz", hash = "sha256:34326c4629b8bf5cd6221589c9e2e8c2157ff0d9fb0c0d07e5f5821665bdd42e"},
+    {file = "eth_retry-0.3.5-py3-none-any.whl", hash = "sha256:6597bf1118362a5a66101db7fb7c699deb8c1e1500a7aff9ab63a0d8f2ff53db"},
+    {file = "eth_retry-0.3.5.tar.gz", hash = "sha256:561af5c5b7679a6d3f547e36e7e6b50f1d01bed1da155f7884214aaece09f8b3"},
 ]
 
 [package.dependencies]
