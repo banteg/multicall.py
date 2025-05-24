@@ -124,7 +124,7 @@ def state_override_supported(w3: Web3) -> bool:
     try:
         return _state_override_supported[w3]
     except KeyError:
-        is_supported = chain_id(w3) not in STATE_OVERRIDE_NOT_SUPPORTED
+        is_supported = chain_id(w3) not in NO_STATE_OVERRIDE
         _state_override_supported[w3] = is_supported
         return is_supported
 
