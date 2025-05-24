@@ -1,6 +1,6 @@
 from asyncio import TimeoutError
 from time import time
-from typing import Any, Dict, Final, Generator, List, Optional, Tuple, Union
+from typing import Any, Dict, Final, Generator, List, Optional, Sequence, Tuple, Union
 
 import aiohttp
 import requests
@@ -209,7 +209,7 @@ class NotSoBrightBatcher:
         chunk_2 = calls[center:]
         return chunk_1, chunk_2
 
-    def rebatch(self, calls):
+    def rebatch(self, calls: List[Call]) -> Sequence[List[Call]]:
         # If a separate coroutine changed `step` after calls were last batched, we will use the new `step` for rebatching.
         if self.step <= len(calls) // 2:
             return self.batch_calls(calls, self.step)
