@@ -1,11 +1,11 @@
 from asyncio import TimeoutError
 from time import time
-from typing import Any, Dict, Final, List, Optional, Tuple, Union
+from typing import Any, Dict, Final, Generator, List, Optional, Tuple, Union
 
 import aiohttp
 import requests
 from cchecksum import to_checksum_address
-from eth_utils.toolz import concat, mapcat
+from eth_utils.toolz import concat, mapcat  # type: ignore [attr-defined]
 
 from multicall.call import AnyAddress
 from web3 import Web3
@@ -98,7 +98,7 @@ class Multicall:
         log_debug("Multicall took %ss", time() - start)
         return response
 
-    def __await__(self) -> Dict[str, Any]:
+    def __await__(self) -> Generator[Any, Any, Dict[str, Any]]:
         return self.coroutine().__await__()
 
     async def coroutine(self) -> Dict[str, Any]:

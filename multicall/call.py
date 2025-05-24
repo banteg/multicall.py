@@ -1,4 +1,4 @@
-from typing import Any, Callable, Final, Iterable, List, Optional, Tuple, Union, final
+from typing import Any, Callable, Final, Generator, Iterable, List, Optional, Tuple, Union, final
 
 import eth_retry
 from cchecksum import to_checksum_address
@@ -138,7 +138,7 @@ class Call:
         log_debug("%s returned %s", self, result)
         return result
 
-    def __await__(self) -> Any:
+    def __await__(self) -> Generator[Any, Any, Any]:
         return self.coroutine().__await__()
 
     @eth_retry.auto_retry
