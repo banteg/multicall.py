@@ -67,30 +67,24 @@ class Multicall:
         _w3: Web3 = w3,
         origin: Optional[AnyAddress] = None,
     ) -> None:
-        self.calls = calls
-        self.block_id = block_id
-        self.require_success = require_success
-        self.gas_limit = gas_limit
-        self.w3 = _w3
-        self.origin = to_checksum_address(origin) if origin else None
-        self.chainid = chain_id(self.w3)
-        if require_success is True:
-            multicall_map = (
-                MULTICALL3_ADDRESSES
-                if self.chainid in MULTICALL3_ADDRESSES
-                else MULTICALL2_ADDRESSES
-            )
-            self.multicall_sig = "aggregate((address,bytes)[])(uint256,bytes[])"
-        else:
-            multicall_map = (
-                MULTICALL3_ADDRESSES
-                if self.chainid in MULTICALL3_ADDRESSES
-                else MULTICALL2_ADDRESSES
-            )
-            self.multicall_sig = (
-                "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
-            )
-        self.multicall_address = multicall_map[self.chainid]
+        self.calls: Final = calls
+        self.block_id: Final = block_id
+        self.require_success: Final = require_success
+        self.gas_limit: Final = gas_limit
+        self.w3: Final = _w3
+        self.origin: Final = to_checksum_address(origin) if origin else None
+        self.chainid: Final = chain_id(self.w3)
+        self.multicall_sig: Final = (
+            "aggregate((address,bytes)[])(uint256,bytes[])"
+            if require_success
+            else "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
+        )
+        multicall_map = (
+            MULTICALL3_ADDRESSES
+            if self.chainid in MULTICALL3_ADDRESSES
+            else MULTICALL2_ADDRESSES
+        )
+        self.multicall_address: Final = multicall_map[self.chainid]
 
     def __call__(self) -> Dict[str, Any]:
         start = time()
