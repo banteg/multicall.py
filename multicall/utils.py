@@ -1,5 +1,5 @@
 # mypy: disable-error-code="attr-defined"
-from asyncio import BaseEventLoop, Semaphore, new_event_loop, set_event_loop
+from asyncio import AbstractEventLoop, Semaphore, new_event_loop, set_event_loop
 from asyncio import gather as _gather
 from asyncio import get_event_loop as _get_event_loop
 from typing import Any, Awaitable, Dict, Final, Iterable, List, TypeVar
@@ -49,7 +49,7 @@ def get_endpoint(w3: Web3) -> str:
         return provider
     if hasattr(provider, "_active_provider"):
         provider = provider._get_active_provider(False)
-    return provider.endpoint_uri
+    return provider.endpoint_uri  # type: ignore [no-any-return]
 
 
 def get_async_w3(w3: Web3) -> Web3:
@@ -86,7 +86,7 @@ def get_async_w3(w3: Web3) -> Web3:
     return async_w3
 
 
-def get_event_loop() -> BaseEventLoop:
+def get_event_loop() -> AbstractEventLoop:
     try:
         loop = _get_event_loop()
     except RuntimeError as e:  # Necessary for use with multi-threaded applications.
@@ -129,7 +129,7 @@ def state_override_supported(w3: Web3) -> bool:
         return is_supported
 
 
-_semaphores: Final[Dict[BaseEventLoop, Semaphore]] = {}
+_semaphores: Final[Dict[AbstractEventLoop, Semaphore]] = {}
 
 
 def _get_semaphore() -> Semaphore:

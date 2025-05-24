@@ -32,7 +32,7 @@ class Call:
     args: Optional[Tuple[Any, ...]] = None
     returns: Optional[Iterable[Tuple[str, Callable]]] = None
     gas_limit: Optional[int] = None
-    origin: Optional[AnyAddress] = None
+    origin: Optional[ChecksumAddress] = None
     state_override_code: Optional[HexStr] = None
 
     __slots__ = "target", "w3", "function", "signature", "__dict__"
@@ -47,7 +47,7 @@ class Call:
         gas_limit: Optional[int] = None,
         state_override_code: Optional[str] = None,
         # This needs to be None in order to use process_pool_executor
-        _w3: Web3 = None,
+        _w3: Optional[Web3] = None,
         origin: Optional[AnyAddress] = None,
     ) -> None:
         self.target: Final = to_checksum_address(target)
@@ -188,7 +188,7 @@ def prep_args(
     calldata = signature.encode_data(args)
 
     call_dict = {"to": target, "data": calldata}
-    args = [call_dict, block_id]
+    prepared_args = [call_dict, block_id]
 
     if origin:
         call_dict["from"] = origin
@@ -197,6 +197,6 @@ def prep_args(
         call_dict["gas"] = gas_limit
 
     if state_override_code:
-        args.append({target: {"code": state_override_code}})
+        prepared_args.append({target: {"code": state_override_code}})
 
-    return args
+    return prepared_args
