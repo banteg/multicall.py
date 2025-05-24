@@ -1,9 +1,19 @@
 # mypy: disable-error-code="attr-defined"
 from functools import lru_cache
-from typing import Any, Final, List, Optional, Tuple
+from typing import Any, Final, Iterable, List, Optional, Tuple
+
+from eth_typing import TypeStr
 
 # For eth_abi versions < 2.2.0, `decode` and `encode` have not yet been added.
 # As we require web3 >=5.27, we require eth_abi compatability with eth_abi v2.0.0b6 and greater.
+def encode(types: Iterable[TypeStr], args: Iterable[Any]) -> bytes:
+    # this is just a type stub to please mypy, the actual function is imported from eth_abi below
+    return b""
+
+def decode(types: Iterable[TypeStr], data: Any) -> Any:
+    # this is just a type stub to please mypy, the actual function is imported from eth_abi below
+    return
+
 try:
     from eth_abi import decode, encode
 except ImportError:
