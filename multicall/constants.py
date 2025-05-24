@@ -1,9 +1,10 @@
+# mypy: disable-error-code="dict-item"
 import os
 from enum import IntEnum
 from typing import Dict, Final, final
 
 from aiohttp import ClientTimeout
-from eth_typing import HexStr
+from eth_typing import ChecksumAddress, HexStr
 
 # If brownie is installed and connected, we will use brownie's Web3
 # Otherwise, we will use w3 from web3py.
@@ -92,7 +93,7 @@ class Network(IntEnum):
     Hoodi = 560048
 
 
-MULTICALL_ADDRESSES: Final[Dict[int, str]] = {
+MULTICALL_ADDRESSES: Final[Dict[int, ChecksumAddress]] = {
     Network.Mainnet: "0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441",
     Network.Kovan: "0x2cc8688C5f75E365aaEEb4ea8D6a480405A48D2A",
     Network.Rinkeby: "0x42Ad527de7d4e9d9d011aC45B31D8551f8Fe9821",
@@ -109,7 +110,7 @@ MULTICALL_ADDRESSES: Final[Dict[int, str]] = {
     Network.Kava: "0x7ED7bBd8C454a1B0D9EdD939c45a81A03c20131C",
 }
 
-MULTICALL2_ADDRESSES: Final[Dict[int, str]] = {
+MULTICALL2_ADDRESSES: Final[Dict[int, ChecksumAddress]] = {
     Network.Mainnet: "0x5ba1e12693dc8f9c48aad8770482f4739beed696",
     Network.Kovan: "0x5ba1e12693dc8f9c48aad8770482f4739beed696",
     Network.Rinkeby: "0x5ba1e12693dc8f9c48aad8770482f4739beed696",
@@ -130,7 +131,7 @@ MULTICALL2_ADDRESSES: Final[Dict[int, str]] = {
 }
 
 # based on https://github.com/mds1/multicall#readme
-MULTICALL3_ADDRESSES: Final[Dict[int, str]] = {
+MULTICALL3_ADDRESSES: Final[Dict[int, ChecksumAddress]] = {
     Network.Mainnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
     Network.Ropsten: "0xcA11bde05977b3631167028862bE2a173976CA11",
     Network.Rinkeby: "0xcA11bde05977b3631167028862bE2a173976CA11",
