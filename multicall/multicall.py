@@ -1,6 +1,6 @@
 from asyncio import TimeoutError
 from time import time
-from typing import Any, Dict, Final, Generator, List, Optional, Sequence, Tuple, Union
+from typing import Any, Dict, Final, Generator, List, Optional, Sequence, Tuple, Union, final
 
 import aiohttp
 import requests
@@ -199,7 +199,7 @@ class NotSoBrightBatcher:
                 return batches
             start = end
 
-    def split_calls(self, calls: List[Call], unused: None = None) -> Tuple[List[Call], List[Call]]:
+    def split_calls(self, calls: List[Call], unused: Optional[int] = None) -> Tuple[List[Call], List[Call]]:
         """
         Split calls into 2 batches in case request is too large.
         We do this to help us find optimal `self.step` value.

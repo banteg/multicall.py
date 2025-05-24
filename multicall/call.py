@@ -1,3 +1,4 @@
+# mypy: disable-error-code="attr-defined"
 from typing import Any, Callable, Final, Generator, Iterable, List, Optional, Tuple, Union, final
 
 import eth_retry
@@ -181,8 +182,8 @@ def prep_args(
     block_id: Optional[int],
     origin: str,
     gas_limit: int,
-    state_override_code: str,
-) -> List:
+    state_override_code: Optional[HexStr],
+) -> List[Any]:
 
     calldata = signature.encode_data(args)
 
