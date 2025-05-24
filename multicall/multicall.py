@@ -199,7 +199,9 @@ class NotSoBrightBatcher:
                 return batches
             start = end
 
-    def split_calls(self, calls: List[Call], unused: Optional[int] = None) -> Tuple[List[Call], List[Call]]:
+    def split_calls(
+        self, calls: List[Call], unused: Optional[int] = None
+    ) -> Tuple[List[Call], List[Call]]:
         """
         Split calls into 2 batches in case request is too large.
         We do this to help us find optimal `self.step` value.
