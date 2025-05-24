@@ -231,13 +231,14 @@ batcher: Final = NotSoBrightBatcher()
 
 def _raise_or_proceed(e: Exception, ct_calls: int, ConnErr_retries: int) -> None:
     """Depending on the exception, either raises or ignores and allows `batcher` to rebatch."""
+    strings: Tuple[str, ...]
     if isinstance(e, aiohttp.ClientOSError):
         if "broken pipe" not in str(e).lower():
             raise e
         log_warning(e)
     elif isinstance(e, aiohttp.ClientResponseError):
-        strings = ["request entity too large", "connection reset by peer"]
-        if not any([string in str(e).lower() for string in strings]):
+        strings = "request entity too large", "connection reset by peer"
+        if all(string not in str(e).lower() for string in strings):
             raise e
         log_warning(e)
     elif isinstance(e, requests.ConnectionError):

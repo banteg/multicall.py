@@ -45,7 +45,7 @@ class Call:
         returns: Optional[Iterable[Tuple[str, Callable]]] = None,
         block_id: Optional[int] = None,
         gas_limit: Optional[int] = None,
-        state_override_code: Optional[str] = None,
+        state_override_code: Optional[HexStr] = None,
         # This needs to be None in order to use process_pool_executor
         _w3: Optional[Web3] = None,
         origin: Optional[AnyAddress] = None,
@@ -65,7 +65,7 @@ class Call:
 
         self.args: Optional[List[Any]]
         if isinstance(function, list):
-            self.function, *self.args = function
+            self.function, *self.args = function  # type: ignore [assignment]
         else:
             self.function = function
             self.args = None
@@ -88,7 +88,7 @@ class Call:
     def decode_output(
         output: Decodable,
         signature: Signature,
-        returns: Optional[Iterable[Tuple[str, Callable]]] = None,
+        returns: Optional[Iterable[Tuple[str, Optional[Callable]]]] = None,
         success: Optional[bool] = None,
     ) -> Any:
 
@@ -158,7 +158,7 @@ class Call:
             )
 
         async with _get_semaphore():
-            output = await get_async_w3(_w3).eth.call(
+            output = await get_async_w3(_w3).eth.call(  # type: ignore [misc]
                 *prep_args(
                     self.target,
                     self.signature,
@@ -180,8 +180,8 @@ def prep_args(
     signature: Signature,
     args: Optional[Any],
     block_id: Optional[int],
-    origin: str,
-    gas_limit: int,
+    origin: Optional[ChecksumAddress],
+    gas_limit: Optional[int],
     state_override_code: Optional[HexStr],
 ) -> List[Any]:
 
@@ -194,9 +194,9 @@ def prep_args(
         call_dict["from"] = origin
 
     if gas_limit:
-        call_dict["gas"] = gas_limit
+        call_dict["gas"] = gas_limit  # type: ignore [assignment]
 
     if state_override_code:
-        prepared_args.append({target: {"code": state_override_code}})
+        prepared_args.append({target: {"code": state_override_code}})  # type: ignore [dict-item]
 
     return prepared_args
