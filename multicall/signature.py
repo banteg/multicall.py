@@ -1,31 +1,14 @@
 # mypy: disable-error-code="attr-defined"
 from functools import lru_cache
-from typing import Any, Final, Iterable, List, Optional, Tuple
+from typing import Any, Final, List, Optional, Tuple, final
 
-from eth_typing import TypeStr
-
-
-# For eth_abi versions < 2.2.0, `decode` and `encode` have not yet been added.
-# As we require web3 >=5.27, we require eth_abi compatability with eth_abi v2.0.0b6 and greater.
-def encode(types: Iterable[TypeStr], args: Iterable[Any]) -> bytes:
-    # this is just a type stub to please mypy, the actual function is imported from eth_abi below
-    return b""
-
-
-def decode(types: Iterable[TypeStr], data: Any) -> Any:
-    # this is just a type stub to please mypy, the actual function is imported from eth_abi below
-    return
-
-
-try:
-    from eth_abi import decode, encode
-except ImportError:
-    from eth_abi import encode_abi as encode, decode_abi as decode
-
-from eth_typing.abi import Decodable, TypeStr
+from eth_typing import Decodable, TypeStr
 from eth_utils import function_signature_to_4byte_selector
 
+from multicall.utils import decode, encode
 
+
+# TODO: handle the cache internally so it doesn't need to go thru python space
 get_4byte_selector: Final = lru_cache(maxsize=None)(function_signature_to_4byte_selector)
 
 
@@ -97,12 +80,16 @@ def _get_signature(signature: str) -> "Signature":
     return Signature(signature)
 
 
+@final
 class Signature:
     __slots__ = "signature", "function", "input_types", "output_types"
 
     def __init__(self, signature: str) -> None:
-        self.signature = signature
-        self.function, self.input_types, self.output_types = parse_signature(signature)
+        self.signature: Final = signature
+        parsed = parse_signature(signature)
+        self.function: Final = parsed[0]
+        self.input_types: Final = parsed[1]
+        self.output_types: Final = parsed[2]
 
     @property
     def fourbyte(self) -> bytes:

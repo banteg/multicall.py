@@ -6,11 +6,30 @@ from typing import Any, Awaitable, Dict, Final, Iterable, List, TypeVar
 
 import eth_retry
 from aiohttp import ClientTimeout
+from eth_typing import Decodable, TypeStr
 from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
 from multicall.constants import AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE, NO_STATE_OVERRIDE
+
+
+# For eth_abi versions < 2.2.0, `decode` and `encode` have not yet been added.
+# As we require web3 >=5.27, we require eth_abi compatability with eth_abi v2.0.0b6 and greater.
+def encode(types: Iterable[TypeStr], args: Iterable[Any]) -> bytes:
+    # this is just a type stub to please mypy, the actual function is imported from eth_abi below
+    return b""
+
+
+def decode(types: Iterable[TypeStr], data: Decodable) -> Any:
+    # this is just a type stub to please mypy, the actual function is imported from eth_abi below
+    return
+
+
+try:
+    from eth_abi import decode, encode
+except ImportError:
+    from eth_abi import encode_abi as encode, decode_abi as decode
 
 try:
     from web3 import AsyncWeb3
