@@ -1,7 +1,7 @@
+# mypy: disable-error-code="attr-defined"
 from asyncio import BaseEventLoop, Semaphore, new_event_loop, set_event_loop
 from asyncio import gather as _gather
 from asyncio import get_event_loop as _get_event_loop
-from functools import lru_cache
 from typing import Any, Awaitable, Dict, Final, Iterable, List, TypeVar
 
 import eth_retry

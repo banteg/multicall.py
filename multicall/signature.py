@@ -1,3 +1,4 @@
+# mypy: disable-error-code="attr-defined"
 from functools import lru_cache
 from typing import Any, Final, List, Optional, Tuple
 
