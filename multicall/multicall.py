@@ -82,13 +82,8 @@ class Multicall:
         self.gas_limit: Final = gas_limit
         self.w3: Final = _w3
         self.origin: Final = to_checksum_address(origin) if origin else None
-        chainid: int = chain_id(_w3)
+        chainid: int = chain_id(_w3)  # type: ignore [assignment]
         self.chainid: Final = chainid
-        self.multicall_sig: Final = (
-            "aggregate((address,bytes)[])(uint256,bytes[])"
-            if require_success
-            else "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
-        )
         multicall_map = (
             MULTICALL3_ADDRESSES if chainid in MULTICALL3_ADDRESSES else MULTICALL2_ADDRESSES
         )
@@ -102,6 +97,14 @@ class Multicall:
 
     def __await__(self) -> Generator[Any, Any, Dict[str, Any]]:
         return self.coroutine().__await__()
+
+    @property
+    def multicall_sig(self) -> str:
+        return (
+            "aggregate((address,bytes)[])(uint256,bytes[])"
+            if self.require_success
+            else "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
+        )
 
     async def coroutine(self) -> Dict[str, Any]:
         batches = await gather(
