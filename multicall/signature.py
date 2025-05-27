@@ -100,6 +100,7 @@ def _get_signature(signature: str) -> "Signature":
         return instance
 
 
+@final
 class Signature:
     __slots__ = (
         "signature",
