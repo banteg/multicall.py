@@ -26,15 +26,7 @@ AnyAddress = Union[str, Address, ChecksumAddress, HexAddress]
 
 @final
 class Call:
-
-    # store default values as class vars to keep instances smaller
-    block_id: Optional[int] = None
-    args: Optional[Tuple[Any, ...]] = None
-    returns: Optional[Iterable[Tuple[str, Callable]]] = None
-    gas_limit: Optional[int] = None
-    origin: Optional[ChecksumAddress] = None
-    state_override_code: Optional[HexStr] = None
-
+    
     __slots__ = "target", "w3", "function", "signature", "__dict__"
 
     def __init__(
@@ -51,25 +43,15 @@ class Call:
         origin: Optional[AnyAddress] = None,
     ) -> None:
         self.target: Final = to_checksum_address(target)
-        if returns is not None:
-            self.returns = returns
-        if block_id is not None:
-            self.block_id = block_id
-        if gas_limit is not None:
-            self.gas_limit = gas_limit
-        if state_override_code is not None:
-            self.state_override_code = state_override_code
-        self.w3 = _w3
-        if origin is not None:
-            self.origin = to_checksum_address(origin)
+        self.returns: Final = returns
+        self.block_id: Final = block_id
+        self.gas_limit: Final = gas_limit
+        self.state_override_code: Final = state_override_code
+        self.w3: Final = _w3
+        self.origin: Final = None if origin is None else to_checksum_address(origin)
 
-        self.args: Optional[List[Any]]
-        if isinstance(function, list):
-            self.function, *self.args = function  # type: ignore [assignment]
-        else:
-            self.function = function
-            self.args = None
-
+        self.function: Final = function[0] if isinstance(function, list) else function
+        self.args: Final = function[1:] if isinstance(function, list) else None
         self.signature: Final = _get_signature(self.function)
 
     def __repr__(self) -> str:
