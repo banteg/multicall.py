@@ -26,8 +26,19 @@ AnyAddress = Union[str, Address, ChecksumAddress, HexAddress]
 
 @final
 class Call:
-    
-    __slots__ = "target", "returns", "block_id", "gas_limit", "state_override_code", "w3", "origin", "function", "args", "signature"
+
+    __slots__ = (
+        "target",
+        "returns",
+        "block_id",
+        "gas_limit",
+        "state_override_code",
+        "w3",
+        "origin",
+        "function",
+        "args",
+        "signature",
+    )
 
     def __init__(
         self,
