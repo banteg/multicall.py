@@ -1,5 +1,5 @@
 # mypy: disable-error-code="attr-defined"
-from typing import Any, Callable, Final, Generator, Iterable, List, Optional, Tuple, Union, final
+from typing import Any, Callable, Final, Generator, Iterable, List, Literal, Optional, Tuple, Union, final, overload
 
 import eth_retry
 from cchecksum import to_checksum_address
@@ -77,11 +77,31 @@ class Call:
     def data(self) -> bytes:
         return self.signature.encode_data(self.args)
 
+    @overload
     @staticmethod
     def decode_output(
         output: Decodable,
         signature: Signature,
-        returns: Optional[Iterable[Tuple[str, Optional[Callable]]]] = None,
+        returns: Optional[Iterable[Tuple[str, Callable[[bool, Any], Any]]]],
+        success: Literal[None],
+    ) -> Any:
+        ...
+
+    @overload
+    @staticmethod
+    def decode_output(
+        output: Decodable,
+        signature: Signature,
+        returns: Optional[Iterable[Tuple[str, Callable[[Any], Any]]]],
+        success: bool,
+    ) -> Any:
+        ...
+
+    @staticmethod
+    def decode_output(
+        output: Decodable,
+        signature: Signature,
+        returns: Optional[Iterable[Tuple[str, Callable]]] = None,
         success: Optional[bool] = None,
     ) -> Any:
 
