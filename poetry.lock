@@ -382,18 +382,76 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "cchecksum"
-version = "0.2.6"
+version = "0.3.0"
 description = "A ~8x faster drop-in replacement for eth_utils.to_checksum_address. Raises the exact same Exceptions. Implemented in C."
 optional = false
 python-versions = "<4,>=3.8"
 files = [
-    {file = "cchecksum-0.2.6.tar.gz", hash = "sha256:d3f8c71ef52811496ae7e0e6209fcac15fe89985ce1933f52fc0a95949097b13"},
+    {file = "cchecksum-0.3.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:29295bf72cffb77a30853be6ff0170849fae492beeeb2c81b86a62c6cd64901f"},
+    {file = "cchecksum-0.3.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7bffe89bc61222147beec9ecf21d8429652c14d082d71a9c8ab9bb95445f204e"},
+    {file = "cchecksum-0.3.0-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:293754b3c19912bbf2de35911059a1cab2b53644762f2ae56c1ac3141be405a8"},
+    {file = "cchecksum-0.3.0-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:15fab98ac7f8a8f6e415c70458534b8564f8d1503bb758c60a2e298ab65b1063"},
+    {file = "cchecksum-0.3.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:2ad145b2fe9fbd7176528f1bc8b02db2849f43f2b5f42fb437feba9e2e85fccd"},
+    {file = "cchecksum-0.3.0-cp310-cp310-win32.whl", hash = "sha256:2e4f82e1428326dfee02ff1decb86a882c20a0a95896c61fe3779ba05bd81573"},
+    {file = "cchecksum-0.3.0-cp310-cp310-win_amd64.whl", hash = "sha256:8573a13028037fca69657baec934c8893501f598c311ad66e02080a075cc6cbc"},
+    {file = "cchecksum-0.3.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:a9d0b19697fa3c78891fb56cde55bdbb346afb70649b7a043199e32e2a9dce16"},
+    {file = "cchecksum-0.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7307088b3ef80c11ed9ae4f61d5b44e6c4f2e99605dd51d37a3ebe6073e5df56"},
+    {file = "cchecksum-0.3.0-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:947326902e5308881e850978eddebb1dc4c1e63b9b53c0c6144b5604e324c2e0"},
+    {file = "cchecksum-0.3.0-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:878141d6011154b4d6fc1b5206addbbf720d4c0246b4c69f4c002c74607153df"},
+    {file = "cchecksum-0.3.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:31b8c59eee845159bc0335529ea8c634c8b3566f842c5fbe750393984f07dd56"},
+    {file = "cchecksum-0.3.0-cp311-cp311-win32.whl", hash = "sha256:32b738746202970bff5c5192780477a42a3defe77d21b18f65b96e641ad13b60"},
+    {file = "cchecksum-0.3.0-cp311-cp311-win_amd64.whl", hash = "sha256:838cbea9991c17460aaa640c1c6ca26ad3c0b8de352e1f78bc0ff1bbada539f4"},
+    {file = "cchecksum-0.3.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:f32b66febd83cd70b85748fef064cc6df0107f30552e9005e017631ff415ee3a"},
+    {file = "cchecksum-0.3.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:aeba52c16012e94e13cc06cba11c04925aaa3c03200aaf5bbaa5e4f4b213575f"},
+    {file = "cchecksum-0.3.0-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:9cd693866506d3a225f57e2fe9971aaf416befb41638eeb15757528487fb0204"},
+    {file = "cchecksum-0.3.0-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:1faf8edfa27d24edaf644300c438339e0dff3e0624b3538314444d24ce2549d9"},
+    {file = "cchecksum-0.3.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:e4e13536572f4c2e7ee9508736061db88239fbdcaa89b65c9e05b525069baef0"},
+    {file = "cchecksum-0.3.0-cp312-cp312-win32.whl", hash = "sha256:42b8124f3282ca5f0ea01b2a09b1cbb5c54b5d7fa43efd37088dbaaaa4929983"},
+    {file = "cchecksum-0.3.0-cp312-cp312-win_amd64.whl", hash = "sha256:c77d4c921f7cd2f37d8443427a409de9880e68db77122692f00ff0fd5dc8c308"},
+    {file = "cchecksum-0.3.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:bd238d4549320b7bb198a9a26a98940d478cae72136b3f61bc8d2c36213dbf50"},
+    {file = "cchecksum-0.3.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:df48bd6162ab74af522e93ea98261c3a8b7d9480796cb7c75cb6d79f0ddb6f9f"},
+    {file = "cchecksum-0.3.0-cp313-cp313-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:caf02ea7b059232daa697120d78bf7e53e5a3bdefbd18f31143f9f3d735a97d3"},
+    {file = "cchecksum-0.3.0-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:53caba25d71ba80a0bf3528fd206ad20a808bd0d987d9e9e96048230325ec89b"},
+    {file = "cchecksum-0.3.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:2bd1f30dba76af15b7464d9c3ae2f17a862cbf959cf076396372fbf43d319525"},
+    {file = "cchecksum-0.3.0-cp313-cp313-win32.whl", hash = "sha256:4a36a08bd97d4aeed92e55fb1d554296f0d387ca6abceb6ef15f35f1e02410e4"},
+    {file = "cchecksum-0.3.0-cp313-cp313-win_amd64.whl", hash = "sha256:71308c9846b75f1c9d61a95e7c859f00bc5509a17bbf812e24d2cf8103e8892c"},
+    {file = "cchecksum-0.3.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:5be878c0de4e37c4af65473fac2ee0bbd7615b8864c48f9bca74dacd00ea428d"},
+    {file = "cchecksum-0.3.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:afaaf03f3a61c41f0dbae5dc57e747838d80b6c0a80f93a96b78b4b8ac4a544e"},
+    {file = "cchecksum-0.3.0-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:ea968bd4bbc4eb82522cbdb2888a9cea6b79e702961e6e684a33999a513f0c26"},
+    {file = "cchecksum-0.3.0-cp38-cp38-musllinux_1_2_i686.whl", hash = "sha256:ac838608ea991cd61b5c5e7916abeeaf3bd0c2ad9b0b45234d674b07601d1bf3"},
+    {file = "cchecksum-0.3.0-cp38-cp38-musllinux_1_2_x86_64.whl", hash = "sha256:5b39c5c68336faeee403e56018470c3dc3014c32518b4a0f293a3e48a4229576"},
+    {file = "cchecksum-0.3.0-cp38-cp38-win32.whl", hash = "sha256:4b420a8c2c41d82af455e2be1a480ba292af148446f299289d05bb4f74f60ea8"},
+    {file = "cchecksum-0.3.0-cp38-cp38-win_amd64.whl", hash = "sha256:b0f865d5dbbadf05bba15f312b9889c235aa25c1e3ca7d1aa20da2e3c59eeb95"},
+    {file = "cchecksum-0.3.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:00fd078630453e2b4ae101dc18c3ea8d897d3f0d23646c99eb40209d762718d5"},
+    {file = "cchecksum-0.3.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:38e0edf3e35a2147937880a4013ebf8bd26287caf1e36f803c487ec1c94a38b8"},
+    {file = "cchecksum-0.3.0-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:65451fefc01ff09c6785a339122cde11f8282044d21c8b9c3d9a058196272cd3"},
+    {file = "cchecksum-0.3.0-cp39-cp39-musllinux_1_2_i686.whl", hash = "sha256:18df774676c8a498b1550782d5cb963f90b708dc5b7ae7ed172d750533bca12e"},
+    {file = "cchecksum-0.3.0-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:d6b43a5c1c90d0f950f20d4207630672b4ca1e952d9b81a1a757422296bd6395"},
+    {file = "cchecksum-0.3.0-cp39-cp39-win32.whl", hash = "sha256:7ab1736d1e54ee6f86edcf66aa036efe365132e7e8f45cabf9c0abcedc3f5353"},
+    {file = "cchecksum-0.3.0-cp39-cp39-win_amd64.whl", hash = "sha256:a161caceb78c2e4a81e5e7de6df6478995199fd3705aafbfbfc254def701b664"},
+    {file = "cchecksum-0.3.0-pp310-pypy310_pp73-macosx_11_0_arm64.whl", hash = "sha256:7d4d402472d7c66cbd3dce0b94d3aed7e9059a9ef9218e11976128a120727e5f"},
+    {file = "cchecksum-0.3.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cee9f5e1314e44d02b3877a9f1423254680cddfb7af2ca4c3e17c31b138bfda1"},
+    {file = "cchecksum-0.3.0-pp310-pypy310_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:feb4ae9a6acf3e85221d4a8aa24c17af4acb5974bd03e433cd732d326a7adc3d"},
+    {file = "cchecksum-0.3.0-pp310-pypy310_pp73-win_amd64.whl", hash = "sha256:34f7850f27ae8eb005693c385b7e5e261a4129d7b991245e0d36cb3160cffc30"},
+    {file = "cchecksum-0.3.0-pp311-pypy311_pp73-macosx_11_0_arm64.whl", hash = "sha256:b193909988b6520740c920f1bfd6f1d396d19f15558644b95b4c48912413cc1e"},
+    {file = "cchecksum-0.3.0-pp311-pypy311_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:543e8c5269ccb5edcad40fd9b8dff73321293aa9e50f216cfd2e0b3dd5befc7c"},
+    {file = "cchecksum-0.3.0-pp311-pypy311_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b697ef5343b4cd9fd56b44e3b575f702633d549eb957584e7d9c7e608e1854c9"},
+    {file = "cchecksum-0.3.0-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:c4d1d76c471367194a060416b80f50750ef359c78a6585aad4ca36ec113c3501"},
+    {file = "cchecksum-0.3.0-pp38-pypy38_pp73-macosx_11_0_arm64.whl", hash = "sha256:adedcf67eb0bea8b139c677cbd988bdc5d8246df1718434a1e770ae297ef3636"},
+    {file = "cchecksum-0.3.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:33dd724c935cade6ad6830dcdba606a677f4b0e07dff036874257c1a28b35520"},
+    {file = "cchecksum-0.3.0-pp38-pypy38_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:9f6152e86a78deb981759ace768c568fa54c537f36bada8e62e2cee1a393fb55"},
+    {file = "cchecksum-0.3.0-pp38-pypy38_pp73-win_amd64.whl", hash = "sha256:dafd28135fbcd0419fdcaaefd08f842779a9fd14d01d53352fc3e9e3addbdf2e"},
+    {file = "cchecksum-0.3.0-pp39-pypy39_pp73-macosx_11_0_arm64.whl", hash = "sha256:c1c1345547c78d00d50c0e293d43e73a97f038fb8b0c0e6b4f6d77f5cfbcef7c"},
+    {file = "cchecksum-0.3.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a7280f6cc894f7cc22f97d3d21f4077f2792229e5dc9a562d4a16684f9bc63f8"},
+    {file = "cchecksum-0.3.0-pp39-pypy39_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:2470c6e0bcbf92e7799994639da5417cf24c337aaa47be5bde6eafc31e5cc567"},
+    {file = "cchecksum-0.3.0-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:c21fe4a636efa5ffab8f7d281809f2055064cf5c6004b41715decb018f9aa5db"},
+    {file = "cchecksum-0.3.0.tar.gz", hash = "sha256:34b4f419c1bf1e00b764579877f37cfcfaced84b6aeabd075b35a55868205ec4"},
 ]
 
 [package.dependencies]
 eth-typing = "*"
-eth-utils = "*"
 pysha3 = {version = ">=1.0.0,<2.0.0", markers = "python_version < \"3.9\""}
+safe-pysha3 = {version = ">=1.0.0", markers = "python_version >= \"3.9\""}
 
 [[package]]
 name = "certifi"
@@ -807,13 +865,13 @@ test = ["asn1tools (>=0.146.2,<0.147)", "eth-hash[pycryptodome]", "eth-hash[pysh
 
 [[package]]
 name = "eth-retry"
-version = "0.2.2"
+version = "0.3.5"
 description = "Provides a decorator that automatically catches known transient exceptions that are common in the Ethereum/EVM ecosystem and reattempts to evaluate your decorated function"
 optional = false
-python-versions = "*"
+python-versions = "<4,>=3.8"
 files = [
-    {file = "eth_retry-0.2.2-py3-none-any.whl", hash = "sha256:32d22aac3987a7244ba1a43bbb3b14abac0f916630e54a095ec23c2b43fbdb4b"},
-    {file = "eth_retry-0.2.2.tar.gz", hash = "sha256:34326c4629b8bf5cd6221589c9e2e8c2157ff0d9fb0c0d07e5f5821665bdd42e"},
+    {file = "eth_retry-0.3.5-py3-none-any.whl", hash = "sha256:6597bf1118362a5a66101db7fb7c699deb8c1e1500a7aff9ab63a0d8f2ff53db"},
+    {file = "eth_retry-0.3.5.tar.gz", hash = "sha256:561af5c5b7679a6d3f547e36e7e6b50f1d01bed1da155f7884214aaece09f8b3"},
 ]
 
 [package.dependencies]
@@ -1911,6 +1969,16 @@ files = [
     {file = "ruff-0.11.11-py3-none-win_amd64.whl", hash = "sha256:748b4bb245f11e91a04a4ff0f96e386711df0a30412b9fe0c74d5bdc0e4a531f"},
     {file = "ruff-0.11.11-py3-none-win_arm64.whl", hash = "sha256:6c51f136c0364ab1b774767aa8b86331bd8e9d414e2d107db7a2189f35ea1f7b"},
     {file = "ruff-0.11.11.tar.gz", hash = "sha256:7774173cc7c1980e6bf67569ebb7085989a78a103922fb83ef3dfe230cd0687d"},
+]
+
+[[package]]
+name = "safe-pysha3"
+version = "1.0.4"
+description = "SHA-3 (Keccak) for Python 3.9 - 3.11"
+optional = false
+python-versions = "*"
+files = [
+    {file = "safe-pysha3-1.0.4.tar.gz", hash = "sha256:e429146b1edd198b2ca934a2046a65656c5d31b0ec894bbd6055127f4deaff17"},
 ]
 
 [[package]]
