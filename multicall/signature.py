@@ -101,7 +101,15 @@ def _get_signature(signature: str) -> "Signature":
 
 
 class Signature:
-    __slots__ = "signature", "function", "input_types", "output_types", "fourbyte", "_encoder", "_decoder"
+    __slots__ = (
+        "signature",
+        "function",
+        "input_types",
+        "output_types",
+        "fourbyte",
+        "_encoder",
+        "_decoder",
+    )
 
     def __init__(self, signature: str) -> None:
         self.signature: Final = signature
@@ -112,9 +120,11 @@ class Signature:
         output_types = parsed[2]
         self.output_types: Final = output_types
         self.fourbyte: Final = get_4byte_selector(self.function)
-        self._encoder: Final = TupleEncoder(
-            encoders=[_get_encoder(type_str) for type_str in input_types]
-        ) if input_types else None
+        self._encoder: Final = (
+            TupleEncoder(encoders=[_get_encoder(type_str) for type_str in input_types])
+            if input_types
+            else None
+        )
         self._decoder: Final = TupleDecoder(
             decoders=[_get_decoder(type_str) for type_str in output_types]
         )
