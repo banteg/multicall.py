@@ -1,28 +1,34 @@
 import os
+import platform
 from pathlib import Path
 from setuptools import find_packages, setup
 
-try:
-    from mypyc.build import mypycify
-except ImportError:
+
+if os.environ.get("MULTICALL_NOCOMPILE") or platform.python_implementation() != "CPython":
+    # We only compile this library for CPython, other implementations will use it as normal interpreted python code
     ext_modules = []
 else:
-    ext_modules = [] if os.environ.get("MULTICALL_NOCOMPILE") else mypycify(
-        [
-            "multicall/call.py",
-            "multicall/constants.py",
-            "multicall/exceptions.py",
-            "multicall/loggers.py",
-            "multicall/multicall.py",
-            "multicall/signature.py",
-            # "multicall/utils.py",  # KeyError: <mypy.nodes.NameExpr object at 0x7fa1ced67f60>
-            "--pretty",
-            #"--strict",
-            "--install-types", 
-            "--non-interactive",
-            "--disable-error-code=import-not-found",
-        ]
-    )
+    try:
+        from mypyc.build import mypycify
+    except ImportError:
+        ext_modules = []
+    else:
+        ext_modules = mypycify(
+            [
+                "multicall/call.py",
+                "multicall/constants.py",
+                "multicall/exceptions.py",
+                "multicall/loggers.py",
+                "multicall/multicall.py",
+                "multicall/signature.py",
+                # "multicall/utils.py",  # KeyError: <mypy.nodes.NameExpr object at 0x7fa1ced67f60>
+                "--pretty",
+                #"--strict",
+                "--install-types", 
+                "--non-interactive",
+                "--disable-error-code=import-not-found",
+            ]
+        )
 
 
 try:
@@ -175,9 +181,6 @@ setup(
     ext_modules=ext_modules,
     zip_safe=False,
     classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Intended Audience :: Developers",
-        "Intended Audience :: Science/Research",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
