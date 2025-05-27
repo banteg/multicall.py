@@ -15,7 +15,7 @@ from multicall.constants import AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE, NO_STATE_OVERR
 try:
     from web3 import AsyncWeb3
 except ImportError:
-    AsyncWeb3 = None
+    AsyncWeb3 = None  # type: ignore [assignment, misc]
 
 try:
     from web3 import WebsocketProviderV2
@@ -28,7 +28,7 @@ __T = TypeVar("__T")
 chainids: Final[Dict[Web3, int]] = {}
 
 
-@eth_retry.auto_retry
+@eth_retry.auto_retry  # type: ignore [arg-type]
 def chain_id(w3: Web3) -> int:
     """
     Returns chain id for an instance of Web3. Helps save repeat calls to node.
@@ -75,14 +75,14 @@ def get_async_w3(w3: Web3) -> Web3:
 
     # In older web3 versions, AsyncHTTPProvider objects come
     # with incompatible synchronous middlewares by default.
-    if AsyncWeb3:
-        async_w3 = AsyncWeb3(provider=provider, middlewares=[])
+    if AsyncWeb3:  # type: ignore [truthy-function]
+        async_w3 = AsyncWeb3(provider=provider, middlewares=[])  # type: ignore [call-arg]
     else:
         async_w3 = Web3(provider=provider, middlewares=[])
         async_w3.eth = AsyncEth(async_w3)
 
-    async_w3s[w3] = async_w3
-    return async_w3
+    async_w3s[w3] = async_w3  # type: ignore [assignment]
+    return async_w3  # type: ignore [return-value]
 
 
 def get_event_loop() -> AbstractEventLoop:

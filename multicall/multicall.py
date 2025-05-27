@@ -3,14 +3,13 @@ from time import time
 from typing import Any, Dict, Final, Generator, List, Optional, Sequence, Tuple, Union, final
 
 import aiohttp
+import cchecksum
 import requests
-from cchecksum import to_checksum_address
-from eth_utils.toolz import concat, mapcat  # type: ignore [attr-defined]
-
-from multicall.call import AnyAddress
+from eth_typing import AnyAddress
+from eth_utils import toolz
 from web3 import Web3
 
-from multicall import Call
+from multicall.call import Call
 from multicall.constants import (
     GAS_LIMIT,
     MULTICALL2_ADDRESSES,
@@ -33,6 +32,11 @@ log_debug: Final = logger.debug
 
 CallResponse = Tuple[Union[None, bool], bytes]
 
+to_checksum_address: Final = cchecksum.to_checksum_address
+
+concat: Final = toolz.concat  # type: ignore [attr-defined]
+mapcat: Final = toolz.mapcat  # type: ignore [attr-defined]
+
 
 def get_args(calls: List[Call], require_success: bool = True) -> List[Union[bool, List[List[Any]]]]:
     if require_success is True:
@@ -53,7 +57,6 @@ class Multicall:
         "gas_limit",
         "w3",
         "chainid",
-        "multicall_sig",
         "multicall_address",
         "origin",
     )
@@ -67,30 +70,18 @@ class Multicall:
         _w3: Web3 = w3,
         origin: Optional[AnyAddress] = None,
     ) -> None:
-        self.calls = calls
+        self.calls: Final = calls
         self.block_id = block_id
-        self.require_success = require_success
-        self.gas_limit = gas_limit
-        self.w3 = _w3
-        self.origin = to_checksum_address(origin) if origin else None
-        self.chainid = chain_id(self.w3)
-        if require_success is True:
-            multicall_map = (
-                MULTICALL3_ADDRESSES
-                if self.chainid in MULTICALL3_ADDRESSES
-                else MULTICALL2_ADDRESSES
-            )
-            self.multicall_sig = "aggregate((address,bytes)[])(uint256,bytes[])"
-        else:
-            multicall_map = (
-                MULTICALL3_ADDRESSES
-                if self.chainid in MULTICALL3_ADDRESSES
-                else MULTICALL2_ADDRESSES
-            )
-            self.multicall_sig = (
-                "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
-            )
-        self.multicall_address = multicall_map[self.chainid]
+        self.require_success: Final = require_success
+        self.gas_limit: Final = gas_limit
+        self.w3: Final = _w3
+        self.origin: Final = to_checksum_address(origin) if origin else None
+        chainid: int = chain_id(_w3)  # type: ignore [assignment]
+        self.chainid: Final = chainid
+        multicall_map = (
+            MULTICALL3_ADDRESSES if chainid in MULTICALL3_ADDRESSES else MULTICALL2_ADDRESSES
+        )
+        self.multicall_address: Final = multicall_map[chainid]
 
     def __call__(self) -> Dict[str, Any]:
         start = time()
@@ -100,6 +91,14 @@ class Multicall:
 
     def __await__(self) -> Generator[Any, Any, Dict[str, Any]]:
         return self.coroutine().__await__()
+
+    @property
+    def multicall_sig(self) -> str:
+        return (
+            "aggregate((address,bytes)[])(uint256,bytes[])"
+            if self.require_success
+            else "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
+        )
 
     async def coroutine(self) -> Dict[str, Any]:
         batches = await gather(
@@ -144,7 +143,7 @@ class Multicall:
         )
 
         log_debug("coroutine %s finished", id)
-        return list(concat(batch_results))
+        return [result for chunk in batch_results for result in chunk]
 
     @property
     def aggregate(self) -> Call:

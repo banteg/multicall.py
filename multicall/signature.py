@@ -7,25 +7,20 @@ import eth_abi.encoding
 import eth_hash.auto
 from eth_typing import Decodable, TypeStr
 
-from multicall import utils
-
 
 _SIGNATURES: Final[Dict[str, "Signature"]] = {}
 
 TupleEncoder: Final = eth_abi.encoding.TupleEncoder
 TupleDecoder: Final = eth_abi.decoding.TupleDecoder
 
-encode: Final = utils.encode
-decode: Final = utils.decode
-keccak: Final = eth_hash.auto.keccak
-
+_keccak: Final = eth_hash.auto.keccak
 _get_encoder: Final = eth_abi.abi.default_codec._registry.get_encoder
 _get_decoder: Final = eth_abi.abi.default_codec._registry.get_decoder
 _stream_cls: Final = eth_abi.abi.default_codec.stream_class
 
 
 def get_4byte_selector(signature: str) -> bytes:
-    return keccak(signature.replace(" ", "").encode("utf-8"))[:4]
+    return _keccak(signature.replace(" ", "").encode("utf-8"))[:4]
 
 
 def parse_signature(signature: str) -> Tuple[str, List[TypeStr], List[TypeStr]]:
@@ -100,6 +95,7 @@ def _get_signature(signature: str) -> "Signature":
         return instance
 
 
+@final
 class Signature:
     __slots__ = (
         "signature",
@@ -130,7 +126,7 @@ class Signature:
         )
 
     def encode_data(self, args: Optional[Union[List[Any], Tuple[Any, ...]]] = None) -> bytes:
-        return self.fourbyte + self._encoder(args) if args else self.fourbyte
+        return self.fourbyte + self._encoder(args) if args else self.fourbyte  # type: ignore [misc]
 
     def decode_data(self, output: Decodable) -> Any:
         return self._decoder(_stream_cls(output))

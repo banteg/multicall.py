@@ -8,3 +8,9 @@ cache/
 
 # IDE
 .idea
+
+# C stuff
+*.o
+*.so
+build/ops.txt
+build/setup.py
