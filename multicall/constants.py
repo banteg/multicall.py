@@ -196,7 +196,7 @@ MULTICALL3_ADDRESSES: Final[Dict[int, ChecksumAddress]] = {
 #   due to aiohttp.TimeoutError where they would otherwise succeed.
 AIOHTTP_TIMEOUT: Final = ClientTimeout(int(os.environ.get("AIOHTTP_TIMEOUT", 30)))
 
-NO_STATE_OVERRIDE: Final = (
+NO_STATE_OVERRIDE: Final = {
     Network.Gnosis,
     Network.Harmony,
     Network.Moonbeam,
@@ -204,7 +204,7 @@ NO_STATE_OVERRIDE: Final = (
     Network.Kovan,
     Network.Fuse,
     Network.ZkSync,
-)
+}
 
 # NOTE: If we run too many async calls at once, we'll have memory issues.
 #       Feel free to increase this with the "MULTICALL_CALL_SEMAPHORE" env var if you know what you're doing.
