@@ -1,4 +1,4 @@
-# mypy: disable-error-code="dict-item"
+# mypy: disable-error-code="dict-item, no-redef"
 import os
 from enum import IntEnum
 from typing import Dict, Final, final
