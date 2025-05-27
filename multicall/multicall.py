@@ -7,7 +7,6 @@ import cchecksum
 import requests
 from eth_typing import AnyAddress
 from eth_utils import toolz
-from mypy_extensions import mypyc_attr
 from web3 import Web3
 
 from multicall.call import Call
@@ -16,7 +15,6 @@ from multicall.constants import (
     MULTICALL2_ADDRESSES,
     MULTICALL3_ADDRESSES,
     MULTICALL3_BYTECODE,
-    w3,
 )
 from multicall.loggers import setup_logger
 from multicall.utils import (
@@ -50,10 +48,6 @@ def unpack_aggregate_outputs(outputs: Any) -> Tuple[CallResponse, ...]:
 
 
 @final
-@mypyc_attr(
-    # Keeping Multicall subclassable per request from @DefiDebauchery
-    allow_interpreted_subclasses=True,
-)
 class Multicall:
     __slots__ = (
         "calls",
@@ -62,7 +56,6 @@ class Multicall:
         "gas_limit",
         "w3",
         "chainid",
-        "multicall_sig",
         "multicall_address",
         "origin",
     )
