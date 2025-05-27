@@ -15,6 +15,7 @@ from multicall.constants import (
     MULTICALL2_ADDRESSES,
     MULTICALL3_ADDRESSES,
     MULTICALL3_BYTECODE,
+    w3,
 )
 from multicall.loggers import setup_logger
 from multicall.utils import (
