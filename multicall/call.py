@@ -26,9 +26,6 @@ AnyAddress = Union[str, Address, ChecksumAddress, HexAddress]
 
 @final
 class Call:
-    
-    __slots__ = "target", "w3", "function", "signature", "__dict__"
-
     def __init__(
         self,
         target: AnyAddress,
@@ -48,7 +45,7 @@ class Call:
         self.gas_limit: Final = gas_limit
         self.state_override_code: Final = state_override_code
         self.w3: Final = _w3
-        self.origin: Final = None if origin is None else to_checksum_address(origin)
+        self.origin: Final = to_checksum_address(origin) if origin else None
 
         self.function: Final = function[0] if isinstance(function, list) else function
         self.args: Final = function[1:] if isinstance(function, list) else None

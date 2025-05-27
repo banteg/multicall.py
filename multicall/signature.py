@@ -131,7 +131,7 @@ class Signature:
         )
 
     def encode_data(self, args: Optional[Union[List[Any], Tuple[Any, ...]]] = None) -> bytes:
-        return self.fourbyte + self._encoder(args) if args else self.fourbyte
+        return self.fourbyte + self._encoder(args) if args else self.fourbyte  # type: ignore [misc]
 
     def decode_data(self, output: Decodable) -> Any:
         return self._decoder(_stream_cls(output))

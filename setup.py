@@ -9,7 +9,13 @@ except ImportError:
 else:
     ext_modules = [] if os.environ.get("MULTICALL_NOCOMPILE") else mypycify(
         [
-            "multicall",
+            "multicall/call.py",
+            "multicall/constants.py",
+            "multicall/exceptions.py",
+            "multicall/loggers.py",
+            "multicall/multicall.py",
+            "multicall/signature.py",
+            # "multicall/utils.py",  # KeyError: <mypy.nodes.NameExpr object at 0x7fa1ced67f60>
             "--pretty",
             #"--strict",
             "--install-types", 
@@ -152,7 +158,7 @@ def combine_markers(a, b):
     return f"({a}) and ({b})" if a and b else a or b
 
 
-with open("README.md", "r", encoding="utf-8") as readme:
+with open("readme.md", "r", encoding="utf-8") as readme:
     long_description = readme.read()
 
 
