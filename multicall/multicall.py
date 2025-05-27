@@ -90,9 +90,7 @@ class Multicall:
             else "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
         )
         multicall_map = (
-            MULTICALL3_ADDRESSES
-            if chainid in MULTICALL3_ADDRESSES
-            else MULTICALL2_ADDRESSES
+            MULTICALL3_ADDRESSES if chainid in MULTICALL3_ADDRESSES else MULTICALL2_ADDRESSES
         )
         self.multicall_address: Final = multicall_map[chainid]
 

@@ -23,8 +23,8 @@ else:
                 "multicall/signature.py",
                 # "multicall/utils.py",  # KeyError: <mypy.nodes.NameExpr object at 0x7fa1ced67f60>
                 "--pretty",
-                #"--strict",
-                "--install-types", 
+                # "--strict",
+                "--install-types",
                 "--non-interactive",
                 "--disable-error-code=import-not-found",
             ]
