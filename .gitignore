@@ -5,6 +5,7 @@ env/
 cache/
 .mypy_cache
 .pytest_cache
+multicall.egg-info
 
 # IDE
 .idea
@@ -13,4 +14,4 @@ cache/
 *.o
 *.so
 build/ops.txt
-build/setup.py
+build/**/*.py
