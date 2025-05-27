@@ -106,7 +106,7 @@ class Call:
         else:
             return decoded if len(decoded) > 1 else decoded[0]
 
-    @eth_retry.auto_retry
+    @eth_retry.auto_retry(min_sleep_time=1, max_sleep_time=3)
     def __call__(
         self,
         args: Optional[Any] = None,
@@ -135,7 +135,7 @@ class Call:
     def __await__(self) -> Generator[Any, Any, Any]:
         return self.coroutine().__await__()
 
-    @eth_retry.auto_retry
+    @eth_retry.auto_retry(min_sleep_time=1, max_sleep_time=3)
     async def coroutine(
         self,
         args: Optional[Any] = None,
