@@ -133,7 +133,7 @@ class Call:
 
         if self.state_override_code and not state_override_supported(_w3):
             raise StateOverrideNotSupported(
-                f"State override is not supported on {Network(chain_id(_w3)).__repr__()[1:-1]}."
+                f"State override is not supported on {Network(chain_id(_w3)).__repr__()[1:-1]}."  # type: ignore [arg-type]
             )
 
         async with _get_semaphore():

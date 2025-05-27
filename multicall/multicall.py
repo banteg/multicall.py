@@ -82,7 +82,7 @@ class Multicall:
         self.gas_limit: Final = gas_limit
         self.w3: Final = _w3
         self.origin: Final = to_checksum_address(origin) if origin else None
-        chainid = chain_id(_w3)
+        chainid: int = chain_id(_w3)
         self.chainid: Final = chainid
         self.multicall_sig: Final = (
             "aggregate((address,bytes)[])(uint256,bytes[])"
