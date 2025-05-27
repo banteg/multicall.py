@@ -19,8 +19,14 @@ eth-brownie = { "version" = ">=1.19.3", "python" = ">=3.10,<4" }
 vyper = { "version" = "*", "python" = "<3.11" }
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = [
+    "setuptools", 
+    "wheel", 
+    "mypy[mypyc]==1.15.0", 
+    "tomli>=2.0.0; python_version < '3.11'",
+    "types-requests",
+]
+build-backend = "setuptools.build_meta"
 
 [tool.black]
 line-length = 100
