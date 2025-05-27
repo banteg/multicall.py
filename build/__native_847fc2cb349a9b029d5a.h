@@ -373,13 +373,9 @@ struct export_table_847fc2cb349a9b029d5a {
     PyObject *(*CPyDef_multicall___get_args)(PyObject *cpy_r_calls, char cpy_r_require_success);
     PyObject *(*CPyDef_multicall___unpack_aggregate_outputs)(PyObject *cpy_r_outputs);
     char (*CPyDef_multicall___Multicall_____init__)(PyObject *cpy_r_self, PyObject *cpy_r_calls, PyObject *cpy_r_block_id, char cpy_r_require_success, CPyTagged cpy_r_gas_limit, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
-    char (*CPyDef_multicall___Multicall_____init___3__Multicall_glue)(PyObject *cpy_r_self, PyObject *cpy_r_calls, PyObject *cpy_r_block_id, char cpy_r_require_success, CPyTagged cpy_r_gas_limit, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
     PyObject *(*CPyDef_multicall___Multicall_____call__)(PyObject *cpy_r_self);
-    PyObject *(*CPyDef_multicall___Multicall_____call___3__Multicall_glue)(PyObject *cpy_r_self);
     PyObject *(*CPyDef_multicall___Multicall_____await__)(PyObject *cpy_r_self);
-    PyObject *(*CPyDef_multicall___Multicall_____await___3__Multicall_glue)(PyObject *cpy_r_self);
     PyObject *(*CPyDef_multicall___Multicall___multicall_sig)(PyObject *cpy_r_self);
-    PyObject *(*CPyDef_multicall___Multicall___multicall_sig__Multicall_glue)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___coroutine_Multicall_gen_____mypyc_generator_helper__)(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg);
     PyObject *(*CPyDef_multicall___coroutine_Multicall_gen_____next__)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___coroutine_Multicall_gen___send)(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_arg);
@@ -388,7 +384,6 @@ struct export_table_847fc2cb349a9b029d5a {
     PyObject *(*CPyDef_multicall___coroutine_Multicall_gen___close)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___coroutine_Multicall_gen_____await__)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___Multicall___coroutine)(PyObject *cpy_r_self);
-    PyObject *(*CPyDef_multicall___Multicall___coroutine__Multicall_glue)(PyObject *cpy_r_self);
     PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_gen_____mypyc_generator_helper__)(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg);
     PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_gen_____next__)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_gen___send)(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_arg);
@@ -397,9 +392,7 @@ struct export_table_847fc2cb349a9b029d5a {
     PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_gen___close)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_gen_____await__)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___Multicall___fetch_outputs)(PyObject *cpy_r_self, PyObject *cpy_r_calls, CPyTagged cpy_r_ConnErr_retries, PyObject *cpy_r_id);
-    PyObject *(*CPyDef_multicall___Multicall___fetch_outputs__Multicall_glue)(PyObject *cpy_r_self, PyObject *cpy_r_calls, CPyTagged cpy_r_ConnErr_retries, PyObject *cpy_r_id);
     PyObject *(*CPyDef_multicall___Multicall___aggregate)(PyObject *cpy_r_self);
-    PyObject *(*CPyDef_multicall___Multicall___aggregate__Multicall_glue)(PyObject *cpy_r___mypyc_self__);
     char (*CPyDef_multicall___NotSoBrightBatcher_____init__)(PyObject *cpy_r_self);
     PyObject *(*CPyDef_multicall___NotSoBrightBatcher___batch_calls)(PyObject *cpy_r_self, PyObject *cpy_r_calls, CPyTagged cpy_r_step);
     tuple_T2OO (*CPyDef_multicall___NotSoBrightBatcher___split_calls)(PyObject *cpy_r_self, PyObject *cpy_r_calls, PyObject *cpy_r_unused);

@@ -6,7 +6,7 @@
 
 int CPyGlobalsInit(void);
 
-extern PyObject *CPyStatics[420];
+extern PyObject *CPyStatics[411];
 extern const char * const CPyLit_Str[];
 extern const char * const CPyLit_Bytes[];
 extern const char * const CPyLit_Int[];
@@ -49,7 +49,6 @@ extern CPyModule *CPyModule_asyncio;
 extern CPyModule *CPyModule_time;
 extern CPyModule *CPyModule_requests;
 extern CPyModule *CPyModule_eth_utils;
-extern CPyModule *CPyModule_mypy_extensions;
 extern PyObject *CPyStatic_signature___globals;
 extern CPyModule *CPyModule_eth_abi___abi;
 extern CPyModule *CPyModule_eth_abi___decoding;
@@ -209,20 +208,12 @@ extern PyObject *CPyDef_multicall___unpack_aggregate_outputs(PyObject *cpy_r_out
 extern PyObject *CPyPy_multicall___unpack_aggregate_outputs(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern char CPyDef_multicall___Multicall_____init__(PyObject *cpy_r_self, PyObject *cpy_r_calls, PyObject *cpy_r_block_id, char cpy_r_require_success, CPyTagged cpy_r_gas_limit, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
 extern PyObject *CPyPy_multicall___Multicall_____init__(PyObject *self, PyObject *args, PyObject *kw);
-extern char CPyDef_multicall___Multicall_____init___3__Multicall_glue(PyObject *cpy_r_self, PyObject *cpy_r_calls, PyObject *cpy_r_block_id, char cpy_r_require_success, CPyTagged cpy_r_gas_limit, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
-extern PyObject *CPyPy_multicall___Multicall_____init___3__Multicall_glue(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___Multicall_____call__(PyObject *cpy_r_self);
 extern PyObject *CPyPy_multicall___Multicall_____call__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
-extern PyObject *CPyDef_multicall___Multicall_____call___3__Multicall_glue(PyObject *cpy_r_self);
-extern PyObject *CPyPy_multicall___Multicall_____call___3__Multicall_glue(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___Multicall_____await__(PyObject *cpy_r_self);
 extern PyObject *CPyPy_multicall___Multicall_____await__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
-extern PyObject *CPyDef_multicall___Multicall_____await___3__Multicall_glue(PyObject *cpy_r_self);
-extern PyObject *CPyPy_multicall___Multicall_____await___3__Multicall_glue(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___Multicall___multicall_sig(PyObject *cpy_r_self);
 extern PyObject *CPyPy_multicall___Multicall___multicall_sig(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
-extern PyObject *CPyDef_multicall___Multicall___multicall_sig__Multicall_glue(PyObject *cpy_r___mypyc_self__);
-extern PyObject *CPyPy_multicall___Multicall___multicall_sig__Multicall_glue(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___coroutine_Multicall_gen_____mypyc_generator_helper__(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg);
 extern PyObject *CPyPy_multicall___coroutine_Multicall_gen_____mypyc_generator_helper__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___coroutine_Multicall_gen_____next__(PyObject *cpy_r___mypyc_self__);
@@ -239,8 +230,6 @@ extern PyObject *CPyDef_multicall___coroutine_Multicall_gen_____await__(PyObject
 extern PyObject *CPyPy_multicall___coroutine_Multicall_gen_____await__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___Multicall___coroutine(PyObject *cpy_r_self);
 extern PyObject *CPyPy_multicall___Multicall___coroutine(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
-extern PyObject *CPyDef_multicall___Multicall___coroutine__Multicall_glue(PyObject *cpy_r_self);
-extern PyObject *CPyPy_multicall___Multicall___coroutine__Multicall_glue(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen_____mypyc_generator_helper__(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg);
 extern PyObject *CPyPy_multicall___fetch_outputs_Multicall_gen_____mypyc_generator_helper__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen_____next__(PyObject *cpy_r___mypyc_self__);
@@ -257,12 +246,8 @@ extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen_____await__(PyOb
 extern PyObject *CPyPy_multicall___fetch_outputs_Multicall_gen_____await__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___Multicall___fetch_outputs(PyObject *cpy_r_self, PyObject *cpy_r_calls, CPyTagged cpy_r_ConnErr_retries, PyObject *cpy_r_id);
 extern PyObject *CPyPy_multicall___Multicall___fetch_outputs(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
-extern PyObject *CPyDef_multicall___Multicall___fetch_outputs__Multicall_glue(PyObject *cpy_r_self, PyObject *cpy_r_calls, CPyTagged cpy_r_ConnErr_retries, PyObject *cpy_r_id);
-extern PyObject *CPyPy_multicall___Multicall___fetch_outputs__Multicall_glue(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___Multicall___aggregate(PyObject *cpy_r_self);
 extern PyObject *CPyPy_multicall___Multicall___aggregate(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
-extern PyObject *CPyDef_multicall___Multicall___aggregate__Multicall_glue(PyObject *cpy_r___mypyc_self__);
-extern PyObject *CPyPy_multicall___Multicall___aggregate__Multicall_glue(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern char CPyDef_multicall___NotSoBrightBatcher_____init__(PyObject *cpy_r_self);
 extern PyObject *CPyPy_multicall___NotSoBrightBatcher_____init__(PyObject *self, PyObject *args, PyObject *kw);
 extern PyObject *CPyDef_multicall___NotSoBrightBatcher___batch_calls(PyObject *cpy_r_self, PyObject *cpy_r_calls, CPyTagged cpy_r_step);
