@@ -1,5 +1,12 @@
 from multicall import Signature
-from multicall.signature import encode
+
+# For eth_abi versions < 2.2.0, `encode` has not yet been added.
+# As we require web3 >=5.27, we require eth_abi compatability with eth_abi v2.0.0b6 and greater.
+try:
+    from eth_abi import encode
+except ImportError:
+    from eth_abi import encode_abi as encode
+
 
 args = ((1, 2, 3), "0x" + "f" * 40, b"data")
 types = ["uint256[]", "address", "bytes"]
