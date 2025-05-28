@@ -1,7 +1,7 @@
 [project]
 name = "multicall"
 description = "aggregate results from multiple ethereum contract calls"
-python-requires = ">=3.8,<4"
+requires-python = ">=3.8,<4"
 authors = [{ name = "banteg" }]
 dynamic = ["version", "dependencies", "readme", "classifiers"]
 
