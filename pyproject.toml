@@ -8,7 +8,6 @@ description = "attr:description"
 requires-python = "attr:requires-python"
 dependencies = "attr:dependencies"
 readme = "attr:long_description"
-classifiers = "attr:classifiers"
 
 [tool.poetry]
 name = "multicall"
