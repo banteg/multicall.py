@@ -55,7 +55,10 @@ jobs:
 
       - name: poetry install
         if: ${{ matrix.os != 'windows-latest' }}
-        run: poetry install
+        # we need to update the lockfile for some reason but it works when we do
+        run: |
+          poetry lock
+          poetry install
         shell: bash
         
       - name: Test import after poetry install
@@ -63,6 +66,7 @@ jobs:
         run: poetry run python -c "import multicall"
 
       - name: Build Wheel and Install
+        # windows cant use the glob
         if: ${{ matrix.os != 'windows-latest' }}
         run: |
           python -m pip install --upgrade build
