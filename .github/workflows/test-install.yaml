@@ -54,7 +54,7 @@ jobs:
         run: python -c "import multicall"
 
       - name: poetry lock on python3.8
-        if: ${{ matrix.python-version == "3.8" }}
+        if: ${{ matrix.python-version == 3.8 }}
         run: poetry lock
       
       - name: poetry install
