@@ -81,14 +81,12 @@ jobs:
 
       - name: Test import after pip install with extras [dev]
         run: python -c "import multicall"
-
-      - name: Test uninstall package if already installed
-        run: python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
-
-      - name: Test install with uv (from PyPI)
+        
+      - name: Test install with uv
         run: |
+          python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
           uv venv
-          uv install .
+          uv pip install .
 
       - name: Test import after uv install
         run: uv run python -c "import multicall"
