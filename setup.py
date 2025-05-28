@@ -172,6 +172,7 @@ setup(
     name=poetry_config["name"].replace("-", "_"),
     version=poetry_config["version"],
     description=poetry_config["description"],
+    python_requires=">=3.8,<4",
     packages=find_packages(),
     package_data={"multicall": ["py.typed"]},
     include_package_data=True,
