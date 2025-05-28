@@ -164,10 +164,6 @@ def combine_markers(a, b):
     return f"({a}) and ({b})" if a and b else a or b
 
 
-with open("readme.md", "r", encoding="utf-8") as readme:
-    long_description = readme.read()
-
-
 setup(
     name=poetry_config["name"].replace("-", "_"),
     version=poetry_config["version"],
@@ -175,8 +171,6 @@ setup(
     packages=find_packages(),
     package_data={"multicall": ["py.typed"]},
     include_package_data=True,
-    long_description=long_description,
-    long_description_content_type="text/markdown",
     install_requires=poetry_dependencies_to_install_requires(poetry_config["dependencies"]),
     ext_modules=ext_modules,
     zip_safe=False,
