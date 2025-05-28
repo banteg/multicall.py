@@ -28,8 +28,10 @@ eth_retry = ">=0.1.8"
 pytest = ">=6.2.5"
 ruff = ">=0.3.5"
 joblib = ">=1.2"
-eth-brownie = { "version" = ">=1.19.3", "python" = ">=3.10,<4" }
-vyper = { "version" = "*", "python" = "<3.11" }
+eth-brownie = [
+    { "version" = ">=1.19.3", "python" = ">=3.8,<3.10" },
+    { "version" = ">=1.21.0", "python" = ">=3.10,<4" }
+]
 
 [build-system]
 requires = [
