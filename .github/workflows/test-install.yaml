@@ -55,16 +55,16 @@ jobs:
 
       - name: poetry install
         if: ${{ matrix.os != 'windows-latest' }}
-        run: |
-          poetry config virtualenvs.create false
-          poetry install
+        run: poetry install
         shell: bash
         
       - name: Test import after poetry install
         if: ${{ matrix.os != 'windows-latest' }}
-        run: python -c "import multicall"
+        run: poetry run python -c "import multicall"
 
       - name: Build Wheel and Install
+        # windows cant use the glob
+        if: ${{ matrix.os != 'windows-latest' }}
         run: |
           python -m pip install --upgrade build
           python -m build --wheel
@@ -72,6 +72,7 @@ jobs:
           python -m pip install dist/*.whl
 
       - name: Test import after wheel install
+        if: ${{ matrix.os != 'windows-latest' }}
         run: python -c "import multicall"
 
       - name: pip install with extras [dev]
@@ -81,12 +82,12 @@ jobs:
 
       - name: Test import after pip install with extras [dev]
         run: python -c "import multicall"
-
-      - name: Test uninstall package if already installed
-        run: python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
-
-      - name: Test install with uv (from PyPI)
-        run: uv install multicall
+        
+      - name: Test install with uv
+        run: |
+          python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
+          uv venv
+          uv pip install .
 
       - name: Test import after uv install
         run: uv run python -c "import multicall"
