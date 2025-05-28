@@ -24,7 +24,7 @@ log_debug: Final = logger.debug
 AnyAddress = Union[str, Address, ChecksumAddress, HexAddress]
 
 
-#@final TODO: mark this as final when mypy1.16 is released
+# @final TODO: mark this as final when mypy1.16 is released
 class Call:
 
     __slots__ = (
