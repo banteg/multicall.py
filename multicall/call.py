@@ -5,6 +5,7 @@ import eth_retry
 from cchecksum import to_checksum_address
 from eth_typing import Address, ChecksumAddress, HexAddress, HexStr
 from eth_typing.abi import Decodable
+from mypy_extensions import mypyc_attr
 from web3 import Web3
 
 from multicall.constants import Network, w3
@@ -25,6 +26,7 @@ AnyAddress = Union[str, Address, ChecksumAddress, HexAddress]
 
 
 # @final TODO: mark this as final when mypy1.16 is released
+@mypyc_attr(allow_interpreted_subclasses=True)
 class Call:
 
     __slots__ = (
