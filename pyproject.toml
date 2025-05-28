@@ -9,7 +9,7 @@ dynamic = ["version", "dependencies", "readme", "classifiers"]
 file = "readme.md"
 
 [tool.setuptools.dynamic.classifiers]
-attr = "classifiers"
+file = "attr:classifiers"
 
 [tool.poetry]
 name = "multicall"
