@@ -28,8 +28,25 @@ eth_retry = ">=0.1.8"
 pytest = ">=6.2.5"
 ruff = ">=0.3.5"
 joblib = ">=1.2"
-eth-brownie = { "version" = ">=1.19.3", "python" = ">=3.10,<4" }
-vyper = { "version" = "*", "python" = "<3.11" }
+eth-brownie = [
+    { "version" = ">=1.19.3,<1.20", "python" = "<3.10" },
+    { "version" = ">=1.21,<1.22", "python" = ">=3.10,<4" }
+]
+
+aiohttp = { "version" = "*", python = ">=3.9,<4" }
+frozenlist = { "version" = "*", python = ">=3.9,<4" }
+jsonschema-specifications = { "version" = "*", python = ">=3.9,<4" }
+importlib-resources = { "version" = "*", python = ">=3.9,<4" }
+multidict = { "version" = "*", python = ">=3.9,<4" }
+pkgutil-resolve-name = { "version" = "*", python = ">=3.9,<4" }
+pluggy = { "version" = "*", python = ">=3.9,<4" }
+protobuf = { "version" = "*", python = ">=3.9,<4" }
+pydantic = { "version" = "*", python = ">=3.9,<4" }
+referencing = { "version" = "*", python = ">=3.9,<4" }
+rpds-py = { "version" = "*", python = ">=3.9,<4" }
+urllib3 = { "version" = "*", python = ">=3.9,<4" }
+websockets = { "version" = "*", python = ">=3.9,<4" }
+yarl = { "version" = "*", python = ">=3.9,<4" }
 
 [build-system]
 requires = [
