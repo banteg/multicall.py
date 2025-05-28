@@ -53,9 +53,15 @@ jobs:
       - name: Test import after pip install -e .
         run: python -c "import multicall"
 
+      - name: poetry lock on python3.8
+        if: ${{ matrix.python-version == 3.8 }}
+        run: poetry lock
+      
       - name: poetry install
         if: ${{ matrix.os != 'windows-latest' }}
-        run: poetry install
+        run: |
+          poetry install
+          poetry run pip install -U setuptools
         shell: bash
         
       - name: Test import after poetry install
