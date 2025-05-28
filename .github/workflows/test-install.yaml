@@ -1,0 +1,93 @@
+name: Test Python Installation Methods
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+      
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-install:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Upgrade pip and install uv
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install uv
+
+      - name: Install Poetry (for poetry install test)
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: pip install poetry
+        shell: bash
+
+      - name: pip install .
+        run: |
+          python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
+          python -m pip install .
+          
+      - name: Test import after pip install .
+        run: python -c "import multicall"
+
+      - name: pip install -e .
+        run: |
+          python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
+          python -m pip install -e .
+          
+      - name: Test import after pip install -e .
+        run: python -c "import multicall"
+
+      - name: poetry install
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: |
+          poetry config virtualenvs.create false
+          poetry install
+        shell: bash
+        
+      - name: Test import after poetry install
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: python -c "import multicall"
+
+      - name: Build Wheel and Install
+        run: |
+          python -m pip install --upgrade build
+          python -m build --wheel
+          python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
+          python -m pip install dist/*.whl
+
+      - name: Test import after wheel install
+        run: python -c "import multicall"
+
+      - name: pip install with extras [dev]
+        run: |
+          python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
+          python -m pip install .[dev]
+
+      - name: Test import after pip install with extras [dev]
+        run: python -c "import multicall"
+
+      - name: Test uninstall package if already installed
+        run: python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
+
+      - name: Test install with uv (from PyPI)
+        run: uv install multicall
+
+      - name: Test import after uv install
+        run: uv run python -c "import multicall"
+        

@@ -22,7 +22,7 @@ vyper = { "version" = "*", "python" = "<3.11" }
 requires = [
     "setuptools", 
     "wheel", 
-    "mypy[mypyc]==1.15.0", 
+    "mypy[mypyc]>=1.14.1,<1.15.1", 
     "tomli>=2.0.0; python_version < '3.11'",
     "types-requests",
 ]
