@@ -5,6 +5,9 @@ requires-python = ">=3.8,<4"
 authors = [{ name = "banteg" }]
 dynamic = ["version", "dependencies", "readme", "classifiers"]
 
+[tool.setuptools.dynamic.readme]
+file = "readme.md"
+
 [tool.poetry]
 name = "multicall"
 version = "0.12.0"
