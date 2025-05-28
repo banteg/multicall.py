@@ -3,6 +3,9 @@ name = "multicall"
 authors = [{ name = "banteg" }]
 dynamic = ["version", "description", "requires-python", "dependencies", "readme", "classifiers" ]
 
+[tool.setuptools.dynamic]
+description = "attr:description"
+
 [tool.poetry]
 name = "multicall"
 version = "0.12.0"
@@ -33,5 +36,7 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.dynamic]
+description = "attr:description"
 [tool.black]
 line-length = 100
