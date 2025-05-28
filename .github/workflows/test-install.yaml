@@ -86,8 +86,8 @@ jobs:
         run: python -m pip uninstall -y multicall || echo "Ignore uninstall failure"
 
       - name: Test install with uv (from PyPI)
-        run: uv multicall
+        run: uv install multicall
 
       - name: Test import after uv install
-        run: python -c "import multicall"
+        run: uv run python -c "import multicall"
         
