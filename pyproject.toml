@@ -40,7 +40,5 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.dynamic]
-description = "attr:description"
 [tool.black]
 line-length = 100
