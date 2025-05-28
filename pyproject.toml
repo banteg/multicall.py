@@ -2,7 +2,10 @@
 name = "multicall"
 authors = [{ name = "banteg" }]
 description = "aggregate results from multiple ethereum contract calls"
-dynamic = ["version", "dependencies", "readme", "classifiers"]
+dynamic = ["version", "requires-python", "dependencies", "readme", "classifiers"]
+
+[tool.setuptools.dynamic.requires-python]
+path = "attr:python_requires"
 
 [tool.poetry]
 name = "multicall"
