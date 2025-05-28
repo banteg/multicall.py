@@ -1,10 +1,14 @@
 [project]
 name = "multicall"
 authors = [{ name = "banteg" }]
-dynamic = ["version", "description", "requires-python", "dependencies", "readme", "classifiers" ]
 
 [tool.setuptools.dynamic]
+version = "attr:version"
 description = "attr:description"
+requires-python = "attr:requires-python"
+dependencies = "attr:dependencies"
+readme = "attr:long_description"
+classifiers = "attr:classifiers"
 
 [tool.poetry]
 name = "multicall"
