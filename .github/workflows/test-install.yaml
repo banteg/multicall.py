@@ -55,10 +55,7 @@ jobs:
 
       - name: poetry install
         if: ${{ matrix.os != 'windows-latest' }}
-        # we need to update the lockfile for some reason but it works when we do
-        run: |
-          poetry lock
-          poetry install
+        run: poetry install
         shell: bash
         
       - name: Test import after poetry install
