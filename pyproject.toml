@@ -3,13 +3,21 @@ name = "multicall"
 description = "aggregate results from multiple ethereum contract calls"
 requires-python = ">=3.8,<4"
 authors = [{ name = "banteg" }]
-dynamic = ["version", "dependencies", "readme", "classifiers"]
+dynamic = ["version", "dependencies", "readme"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+]
 
 [tool.setuptools.dynamic.readme]
 file = "readme.md"
-
-[tool.setuptools.dynamic.classifiers]
-file = "attr:classifiers"
 
 [tool.poetry]
 name = "multicall"
