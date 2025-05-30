@@ -56,6 +56,12 @@ jobs:
       - name: Install Poetry
         if: steps.cached-poetry.outputs.cache-hit != 'true' && matrix.pyversion != '3.8'
         uses: snok/install-poetry@v1
+          
+      - name: Install Poetry (Python3.8)
+        if: steps.cached-poetry.outputs.cache-hit != 'true' &&  matrix.pyversion == '3.8'
+        uses: snok/install-poetry@v1
+        with:
+          version: "1.8.5" 
 
       - name: Install Dependencies
         run: poetry install
