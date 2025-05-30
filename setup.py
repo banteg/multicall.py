@@ -26,6 +26,7 @@ else:
                 # "--strict",
                 "--install-types",
                 "--non-interactive",
+                "--allow-redefinition-new",
                 "--disable-error-code=import-not-found",
             ]
         )
