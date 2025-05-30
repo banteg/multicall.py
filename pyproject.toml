@@ -52,7 +52,7 @@ yarl = { "version" = "*", python = ">=3.9,<4" }
 requires = [
     "setuptools", 
     "wheel", 
-    "mypy[mypyc]>=1.14.1,<1.15.1", 
+    "mypy[mypyc]>=1.14.1,<1.16.1", 
     "tomli>=2.0.0; python_version < '3.11'",
     "types-requests",
 ]
