@@ -69,6 +69,9 @@ jobs:
         
       - name: Install Dependencies
         run: poetry install
+        
+      - name: Install Setuptools for `pkg_resources` so web3.py works
+        run: poetry run pip install -U setuptools
       
       - name: Setup brownie networks
         run: |
