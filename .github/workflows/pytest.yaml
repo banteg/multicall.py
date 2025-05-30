@@ -82,4 +82,5 @@ jobs:
         env:
           PYTEST_NETWORK: mainnet
           ETHERSCAN_TOKEN: ${{ secrets.ETHERSCAN_TOKEN  }}
+          GAS_LIMIT: 5000000
         run: poetry run pytest
