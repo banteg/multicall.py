@@ -63,6 +63,10 @@ jobs:
         with:
           version: "1.8.5" 
 
+      - name: Update Lockfile (Python3.8)
+        if: matrix.pyversion == '3.8'
+        run: poetry lock
+        
       - name: Install Dependencies
         run: poetry install
       
