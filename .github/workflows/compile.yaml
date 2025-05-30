@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Mypyc (3.12)
-        run: pip install mypy[mypyc]==1.15.0 types-requests .
+        run: pip install mypy[mypyc]==1.16.0 types-requests .
       - name: Run Mypyc (3.12)
         run: make compile
 
