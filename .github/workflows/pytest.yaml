@@ -60,7 +60,7 @@ jobs:
       - name: Install Dependencies
         run: poetry install
 
-      - name: Install DAO Treasury
+      - name: Install Multicall
         run: poetry run python -m pip install .
 
       - name: Run test suite
