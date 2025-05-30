@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install Mypyc (3.12)
+      - name: Install Mypyc (3.12) and Dependencies
         run: pip install mypy[mypyc]==1.16.0 types-requests .
       - name: Run Mypyc (3.12)
         run: make compile
