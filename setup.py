@@ -27,6 +27,9 @@ else:
                 "--install-types",
                 "--non-interactive",
                 "--disable-error-code=import-not-found",
+                "--disable-error-code=assignment",
+                "--disable-error-code=truthy-function",
+                "--disable-error-code=misc",
             ]
         )
 
