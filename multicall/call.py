@@ -1,5 +1,17 @@
 # mypy: disable-error-code="attr-defined"
-from typing import Any, Callable, Final, Generator, Iterable, Iterator, List, Optional, Tuple, Union, final
+from typing import (
+    Any,
+    Callable,
+    Final,
+    Generator,
+    Iterable,
+    Iterator,
+    List,
+    Optional,
+    Tuple,
+    Union,
+    final,
+)
 
 import eth_retry
 from cchecksum import to_checksum_address
@@ -178,7 +190,7 @@ def prep_args(
     state_override_code: Optional[HexStr],
 ) -> Iterator[Union[dict, Optional[BlockNumber]]]:
     call_dict = {
-        "to": target, 
+        "to": target,
         "data": signature.encode_data(args),
     }
 
@@ -187,7 +199,7 @@ def prep_args(
 
     if gas_limit:
         call_dict["gas"] = gas_limit  # type: ignore [assignment]
-    
+
     yield call_dict
     yield block_id  # type: ignore [misc]
 
