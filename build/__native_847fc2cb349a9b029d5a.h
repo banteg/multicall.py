@@ -80,16 +80,11 @@ typedef struct {
 typedef struct {
     PyObject_HEAD
     CPyVTableItem *vtable;
-    PyObject *___mypyc_self__;
     PyObject *_self;
     PyObject *_args;
     PyObject *__w3;
     PyObject *_block_id;
-    PyObject *_type;
-    PyObject *_value;
-    PyObject *_traceback;
-    PyObject *_arg;
-    CPyTagged ___mypyc_next_label__;
+    int32_t ___mypyc_next_label__;
     PyObject *___mypyc_temp__0;
     PyObject *___mypyc_temp__1;
     char ___mypyc_temp__2;
@@ -104,12 +99,6 @@ typedef struct {
     PyObject *___mypyc_temp__10;
     tuple_T3OOO ___mypyc_temp__11;
     PyObject *_result;
-} multicall___call___coroutine_Call_envObject;
-
-typedef struct {
-    PyObject_HEAD
-    CPyVTableItem *vtable;
-    PyObject *___mypyc_env__;
 } multicall___call___coroutine_Call_genObject;
 
 typedef struct {
@@ -140,13 +129,8 @@ typedef struct {
 typedef struct {
     PyObject_HEAD
     CPyVTableItem *vtable;
-    PyObject *___mypyc_self__;
     PyObject *_self;
-    PyObject *_type;
-    PyObject *_value;
-    PyObject *_traceback;
-    PyObject *_arg;
-    CPyTagged ___mypyc_next_label__;
+    int32_t ___mypyc_next_label__;
     PyObject *___mypyc_temp__0;
     CPyTagged ___mypyc_temp__1;
     CPyTagged _i;
@@ -156,27 +140,16 @@ typedef struct {
     PyObject *___mypyc_temp__4;
     tuple_T3OOO ___mypyc_temp__5;
     PyObject *_batches;
-} multicall___multicall___coroutine_Multicall_envObject;
-
-typedef struct {
-    PyObject_HEAD
-    CPyVTableItem *vtable;
-    PyObject *___mypyc_env__;
 } multicall___multicall___coroutine_Multicall_genObject;
 
 typedef struct {
     PyObject_HEAD
     CPyVTableItem *vtable;
-    PyObject *___mypyc_self__;
     PyObject *_self;
     PyObject *_calls;
     CPyTagged _ConnErr_retries;
     PyObject *_id;
-    PyObject *_type;
-    PyObject *_value;
-    PyObject *_traceback;
-    PyObject *_arg;
-    CPyTagged ___mypyc_next_label__;
+    int32_t ___mypyc_next_label__;
     PyObject *___mypyc_temp__6;
     PyObject *___mypyc_temp__7;
     char ___mypyc_temp__8;
@@ -220,12 +193,6 @@ typedef struct {
     PyObject *___mypyc_temp__36;
     CPyTagged ___mypyc_temp__37;
     tuple_T2OO _result;
-} multicall___multicall___fetch_outputs_Multicall_envObject;
-
-typedef struct {
-    PyObject_HEAD
-    CPyVTableItem *vtable;
-    PyObject *___mypyc_env__;
 } multicall___multicall___fetch_outputs_Multicall_genObject;
 
 typedef struct {
@@ -252,8 +219,6 @@ struct export_table_847fc2cb349a9b029d5a {
     PyObject *(*CPyDef_call_____mypyc_lambda__0_decode_output_Call_obj)(void);
     PyTypeObject **CPyType_call_____mypyc_lambda__1_decode_output_Call_obj;
     PyObject *(*CPyDef_call_____mypyc_lambda__1_decode_output_Call_obj)(void);
-    PyTypeObject **CPyType_call___coroutine_Call_env;
-    PyObject *(*CPyDef_call___coroutine_Call_env)(void);
     PyTypeObject **CPyType_call___coroutine_Call_gen;
     PyObject *(*CPyDef_call___coroutine_Call_gen)(void);
     char (*CPyDef_call___Call_____init__)(PyObject *cpy_r_self, PyObject *cpy_r_target, PyObject *cpy_r_function, PyObject *cpy_r_returns, PyObject *cpy_r_block_id, PyObject *cpy_r_gas_limit, PyObject *cpy_r_state_override_code, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
@@ -362,12 +327,8 @@ struct export_table_847fc2cb349a9b029d5a {
     PyObject *(*CPyDef_multicall___Multicall)(PyObject *cpy_r_calls, PyObject *cpy_r_block_id, char cpy_r_require_success, CPyTagged cpy_r_gas_limit, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
     PyTypeObject **CPyType_multicall___NotSoBrightBatcher;
     PyObject *(*CPyDef_multicall___NotSoBrightBatcher)(void);
-    PyTypeObject **CPyType_multicall___coroutine_Multicall_env;
-    PyObject *(*CPyDef_multicall___coroutine_Multicall_env)(void);
     PyTypeObject **CPyType_multicall___coroutine_Multicall_gen;
     PyObject *(*CPyDef_multicall___coroutine_Multicall_gen)(void);
-    PyTypeObject **CPyType_multicall___fetch_outputs_Multicall_env;
-    PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_env)(void);
     PyTypeObject **CPyType_multicall___fetch_outputs_Multicall_gen;
     PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_gen)(void);
     PyObject *(*CPyDef_multicall___get_args)(PyObject *cpy_r_calls, char cpy_r_require_success);
