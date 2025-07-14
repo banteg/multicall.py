@@ -6,7 +6,7 @@
 
 int CPyGlobalsInit(void);
 
-extern PyObject *CPyStatics[410];
+extern PyObject *CPyStatics[428];
 extern const char * const CPyLit_Str[];
 extern const char * const CPyLit_Bytes[];
 extern const char * const CPyLit_Int[];
@@ -222,6 +222,28 @@ extern PyObject *CPyDef_multicall___coroutine_Multicall_gen_____await__(PyObject
 extern PyObject *CPyPy_multicall___coroutine_Multicall_gen_____await__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___Multicall___coroutine(PyObject *cpy_r_self);
 extern PyObject *CPyPy_multicall___Multicall___coroutine(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall____contract_method(PyObject *cpy_r_self, PyObject *cpy_r_request_signature, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall____contract_method(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_base_fee(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_base_fee(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_block_hash(PyObject *cpy_r_self, CPyTagged cpy_r_block_number, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_block_hash(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_block_number(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_block_number(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_chain_id(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_chain_id(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_block_coinbase(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_block_coinbase(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_block_difficulty(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_block_difficulty(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_block_gas_limit(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_block_gas_limit(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_block_timestamp(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_block_timestamp(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_eth_balance(PyObject *cpy_r_self, PyObject *cpy_r_address, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_eth_balance(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
+extern char CPyDef_multicall___Multicall___add_last_block_hash(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+extern PyObject *CPyPy_multicall___Multicall___add_last_block_hash(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen_____mypyc_generator_helper__(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg);
 extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen_____next__(PyObject *cpy_r___mypyc_self__);
 extern PyObject *CPyPy_multicall___fetch_outputs_Multicall_gen_____next__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);

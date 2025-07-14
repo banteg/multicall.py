@@ -160,6 +160,7 @@ def test_batcher_split_calls_odd():
     assert len(split[0]) == 14_999
     assert len(split[1]) == 15_000
 
+
 def test_multicalll_contract_methods():
     calls = [Call(CHAI, ["totalSupply()(uint)", CHAI, 1], [["totalSupply", None]])]
     multi = Multicall(calls)
@@ -171,7 +172,7 @@ def test_multicalll_contract_methods():
     multi.add_block_difficulty()
     multi.add_block_gas_limit()
     multi.add_block_timestamp()
-    multi.add_eth_balance(CHAI, ('custom_balance', None))
+    multi.add_eth_balance(CHAI, ("custom_balance", None))
     multi.add_last_block_hash()
 
     result = multi()

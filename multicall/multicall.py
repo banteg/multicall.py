@@ -111,47 +111,51 @@ class Multicall:
 
     def _contract_method(self, request_signature: list, return_signature: tuple) -> None:
         self.calls.append(Call(self.multicall_address, request_signature, [return_signature]))
-        
-    def add_base_fee(self, return_signature: tuple = ('base_fee', None)) -> None:
-        signature = ['getBasefee()(uint256)']
+
+    def add_base_fee(self, return_signature: tuple = ("base_fee", None)) -> None:
+        signature = ["getBasefee()(uint256)"]
         self._contract_method(signature, return_signature)
 
-    def add_block_hash(self, block_number: int, return_signature: tuple = ('block_hash', None)) -> None:
-        signature = ['getBlockHash(uint256)(bytes32)', block_number]
+    def add_block_hash(
+        self, block_number: int, return_signature: tuple = ("block_hash", None)
+    ) -> None:
+        signature = ["getBlockHash(uint256)(bytes32)", block_number]
         self._contract_method(signature, return_signature)
 
-    def add_block_number(self, return_signature: tuple = ('block_number', None)) -> None:
-        signature = ['getBlockNumber()(uint256)']
+    def add_block_number(self, return_signature: tuple = ("block_number", None)) -> None:
+        signature = ["getBlockNumber()(uint256)"]
         self._contract_method(signature, return_signature)
 
-    def add_chain_id(self, return_signature: tuple = ('chain_id', None)) -> None:
-        signature = ['getChainId()(uint256)']
+    def add_chain_id(self, return_signature: tuple = ("chain_id", None)) -> None:
+        signature = ["getChainId()(uint256)"]
         self._contract_method(signature, return_signature)
 
-    def add_block_coinbase(self, return_signature: tuple = ('coinbase', None)) -> None:
-        signature = ['getCurrentBlockCoinbase()(address)']
+    def add_block_coinbase(self, return_signature: tuple = ("coinbase", None)) -> None:
+        signature = ["getCurrentBlockCoinbase()(address)"]
         self._contract_method(signature, return_signature)
 
-    def add_block_difficulty(self, return_signature: tuple = ('difficulty', None)) -> None:
-        signature = ['getCurrentBlockDifficulty()(address)']
+    def add_block_difficulty(self, return_signature: tuple = ("difficulty", None)) -> None:
+        signature = ["getCurrentBlockDifficulty()(address)"]
         self._contract_method(signature, return_signature)
 
-    def add_block_gas_limit(self, return_signature: tuple = ('gas_limit', None)) -> None:
-        signature = ['getCurrentBlockGasLimit()(uint256)']
+    def add_block_gas_limit(self, return_signature: tuple = ("gas_limit", None)) -> None:
+        signature = ["getCurrentBlockGasLimit()(uint256)"]
         self._contract_method(signature, return_signature)
 
-    def add_block_timestamp(self, return_signature: tuple = ('timestamp', None)) -> None:
-        signature = ['getCurrentBlockTimestamp()(uint256)']
+    def add_block_timestamp(self, return_signature: tuple = ("timestamp", None)) -> None:
+        signature = ["getCurrentBlockTimestamp()(uint256)"]
         self._contract_method(signature, return_signature)
 
-    def add_eth_balance(self, address: AnyAddress, return_signature: tuple = ('eth_balance', None)) -> None:
-        signature = ['getEthBalance(address)(uint256)', address]
+    def add_eth_balance(
+        self, address: AnyAddress, return_signature: tuple = ("eth_balance", None)
+    ) -> None:
+        signature = ["getEthBalance(address)(uint256)", address]
         self._contract_method(signature, return_signature)
 
-    def add_last_block_hash(self, return_signature: tuple = ('last_block_hash', None)) -> None:
-        signature = ['getLastBlockHash()(bytes32)']
+    def add_last_block_hash(self, return_signature: tuple = ("last_block_hash", None)) -> None:
+        signature = ["getLastBlockHash()(bytes32)"]
         self._contract_method(signature, return_signature)
-    
+
     async def fetch_outputs(
         self, calls: List[Call], ConnErr_retries: int = 0, id: str = ""
     ) -> List[CallResponse]:

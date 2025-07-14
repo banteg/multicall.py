@@ -13,7 +13,7 @@ file = "attr:classifiers"
 
 [tool.poetry]
 name = "multicall"
-version = "0.12.3"
+version = "0.13.0"
 description = "aggregate results from multiple ethereum contract calls"
 authors = ["banteg"]
 
