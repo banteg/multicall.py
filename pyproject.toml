@@ -22,7 +22,7 @@ python = ">=3.8,<4"
 cchecksum = ">=0.0.3,<1"
 # These web3.py versions have a busted async provider and cannot be used in any multithreaded applications
 web3 = ">=5.27,!=5.29.*,!=5.30.*,!=5.31.0,!=5.31.1,!=5.31.2"
-eth_retry = ">=0.1.8"
+eth_retry = ">=0.3.5"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=6.2.5"
