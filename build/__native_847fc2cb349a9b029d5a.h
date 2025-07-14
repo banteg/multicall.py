@@ -37,6 +37,14 @@ typedef struct tuple_T2CO {
 } tuple_T2CO;
 #endif
 
+#ifndef MYPYC_DECLARED_tuple_T2OC
+#define MYPYC_DECLARED_tuple_T2OC
+typedef struct tuple_T2OC {
+    PyObject *f0;
+    char f1;
+} tuple_T2OC;
+#endif
+
 typedef struct {
     PyObject_HEAD
     CPyVTableItem *vtable;
@@ -345,6 +353,17 @@ struct export_table_847fc2cb349a9b029d5a {
     PyObject *(*CPyDef_multicall___coroutine_Multicall_gen___close)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___coroutine_Multicall_gen_____await__)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___Multicall___coroutine)(PyObject *cpy_r_self);
+    char (*CPyDef_multicall___Multicall____contract_method)(PyObject *cpy_r_self, PyObject *cpy_r_request_signature, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_base_fee)(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_block_hash)(PyObject *cpy_r_self, CPyTagged cpy_r_block_number, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_block_number)(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_chain_id)(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_block_coinbase)(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_block_difficulty)(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_block_gas_limit)(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_block_timestamp)(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_eth_balance)(PyObject *cpy_r_self, PyObject *cpy_r_address, PyObject *cpy_r_return_signature);
+    char (*CPyDef_multicall___Multicall___add_last_block_hash)(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
     PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_gen_____mypyc_generator_helper__)(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg);
     PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_gen_____next__)(PyObject *cpy_r___mypyc_self__);
     PyObject *(*CPyDef_multicall___fetch_outputs_Multicall_gen___send)(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_arg);
