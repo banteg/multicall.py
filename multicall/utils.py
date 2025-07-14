@@ -28,7 +28,7 @@ __T = TypeVar("__T")
 chainids: Final[Dict[Web3, int]] = {}
 
 
-@eth_retry.auto_retry  # type: ignore [arg-type]
+@eth_retry.auto_retry(min_sleep_time=1, max_sleep_time=2)
 def chain_id(w3: Web3) -> int:
     """
     Returns chain id for an instance of Web3. Helps save repeat calls to node.
