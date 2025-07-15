@@ -30,7 +30,7 @@ jobs:
 
       - name: Install build deps
         run: |
-          python -m pip install --upgrade pip setuptools wheel cibuildwheel mypy[mypyc]
+          python -m pip install --upgrade pip setuptools wheel cibuildwheel mypy[mypyc] types-requests
 
       - name: Build wheels
         env:
@@ -61,7 +61,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install --upgrade setuptools wheel twine mypy[mypyc]
+          pip install --upgrade setuptools wheel twine mypy[mypyc] types-requests
   
       - name: Build sdist
         run: |
