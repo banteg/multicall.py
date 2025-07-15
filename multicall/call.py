@@ -1,9 +1,21 @@
 # mypy: disable-error-code="attr-defined"
-from typing import Any, Callable, Final, Generator, Iterable, List, Optional, Tuple, Union, final
+from typing import (
+    Any,
+    Callable,
+    Final,
+    Generator,
+    Iterable,
+    Iterator,
+    List,
+    Optional,
+    Tuple,
+    Union,
+    final,
+)
 
 import eth_retry
 from cchecksum import to_checksum_address
-from eth_typing import Address, ChecksumAddress, HexAddress, HexStr
+from eth_typing import Address, BlockNumber, ChecksumAddress, HexAddress, HexStr
 from eth_typing.abi import Decodable
 from web3 import Web3
 
@@ -176,12 +188,11 @@ def prep_args(
     origin: Optional[ChecksumAddress],
     gas_limit: Optional[int],
     state_override_code: Optional[HexStr],
-) -> List[Any]:
-
-    calldata = signature.encode_data(args)
-
-    call_dict = {"to": target, "data": calldata}
-    prepared_args = [call_dict, block_id]
+) -> Iterator[Union[dict, Optional[BlockNumber]]]:
+    call_dict = {
+        "to": target,
+        "data": signature.encode_data(args),
+    }
 
     if origin:
         call_dict["from"] = origin
@@ -189,7 +200,8 @@ def prep_args(
     if gas_limit:
         call_dict["gas"] = gas_limit  # type: ignore [assignment]
 
-    if state_override_code:
-        prepared_args.append({target: {"code": state_override_code}})  # type: ignore [dict-item]
+    yield call_dict
+    yield block_id  # type: ignore [misc]
 
-    return prepared_args
+    if state_override_code:
+        yield {target: {"code": state_override_code}}
