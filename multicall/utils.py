@@ -77,7 +77,7 @@ def get_async_w3(w3: Web3) -> Web3:
     # Older versions of web3.py (v6 and below) use 'middlewares' instead of 'middleware'.
     major_version = int(web3.__version__.split('.')[0])
     key = "middleware" if major_version >= 7 else "middlewares"
-    kwargs = {key: []}
+    kwargs = {key: []}  # type: ignore [dict-item]
 
     w3_class = AsyncWeb3 if AsyncWeb3 else Web3  # type: ignore [truthy-function]
     async_w3 = w3_class(provider=provider, **kwargs)  # type: ignore [call-arg]
