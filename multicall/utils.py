@@ -6,6 +6,7 @@ from typing import Any, Awaitable, Dict, Final, Iterable, List, TypeVar
 
 import eth_retry
 from aiohttp import ClientTimeout
+import web3
 from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
@@ -73,12 +74,15 @@ def get_async_w3(w3: Web3) -> Web3:
     else:
         provider = AsyncHTTPProvider(endpoint, request_kwargs)
 
-    # In older web3 versions, AsyncHTTPProvider objects come
-    # with incompatible synchronous middlewares by default.
-    if AsyncWeb3:  # type: ignore [truthy-function]
-        async_w3 = AsyncWeb3(provider=provider, middlewares=[])  # type: ignore [call-arg]
-    else:
-        async_w3 = Web3(provider=provider, middlewares=[])
+    # Older versions of web3.py (v6 and below) use 'middlewares' instead of 'middleware'.
+    major_version = int(web3.__version__.split('.')[0])
+    key = "middleware" if major_version >= 7 else "middlewares"
+    kwargs = {key: []}
+
+    w3_class = AsyncWeb3 if AsyncWeb3 else Web3  # type: ignore [truthy-function]
+    async_w3 = w3_class(provider=provider, **kwargs)  # type: ignore [call-arg]
+
+    if not AsyncWeb3:  # type: ignore [truthy-function]
         async_w3.eth = AsyncEth(async_w3)
 
     async_w3s[w3] = async_w3  # type: ignore [assignment]
