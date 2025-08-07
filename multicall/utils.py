@@ -74,15 +74,19 @@ def get_async_w3(w3: Web3) -> Web3:
     else:
         provider = AsyncHTTPProvider(endpoint, request_kwargs)
 
+    kwargs = {provider: provider}
+    
     # Older versions of web3.py (v6 and below) use 'middlewares' instead of 'middleware'.
     major_version = int(web3.__version__.split('.')[0])
-    key = "middleware" if major_version >= 7 else "middlewares"
-    kwargs = {key: []}  # type: ignore [dict-item]
+    if major_version >= 7:
+        kwargs["middleware"] = []
+    else:
+        kwargs["middlewares"] = []
 
-    w3_class = AsyncWeb3 if AsyncWeb3 else Web3  # type: ignore [truthy-function]
-    async_w3 = w3_class(provider=provider, **kwargs)  # type: ignore [call-arg]
+    w3_class = Web3 if AsyncWeb3 is None else AsyncWeb3
+    async_w3 = w3_class(**kwargs)
 
-    if not AsyncWeb3:  # type: ignore [truthy-function]
+    if w3_class is Web3:
         async_w3.eth = AsyncEth(async_w3)
 
     async_w3s[w3] = async_w3  # type: ignore [assignment]
