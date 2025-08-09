@@ -22801,13 +22801,13 @@ PyObject *CPyDef_signature___get_4byte_selector(PyObject *cpy_r_signature) {
     cpy_r_r1 = CPyStatics[242]; /* '' */
     cpy_r_r2 = PyUnicode_Replace(cpy_r_signature, cpy_r_r0, cpy_r_r1, -1);
     if (unlikely(cpy_r_r2 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 23, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 22, CPyStatic_signature___globals);
         goto CPyL9;
     }
     cpy_r_r3 = PyUnicode_AsUTF8String(cpy_r_r2);
     CPy_DECREF(cpy_r_r2);
     if (unlikely(cpy_r_r3 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 23, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 22, CPyStatic_signature___globals);
         goto CPyL9;
     }
     cpy_r_r4 = CPyStatic_signature____keccak;
@@ -22819,7 +22819,7 @@ CPyL3: ;
     PyErr_SetString(PyExc_NameError, "value for final name \"_keccak\" was not set");
     cpy_r_r5 = 0;
     if (unlikely(!cpy_r_r5)) {
-        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 23, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 22, CPyStatic_signature___globals);
         goto CPyL9;
     }
     CPy_Unreachable();
@@ -22828,20 +22828,20 @@ CPyL5: ;
     cpy_r_r7 = (PyObject **)&cpy_r_r6;
     cpy_r_r8 = PyObject_Vectorcall(cpy_r_r4, cpy_r_r7, 1, 0);
     if (unlikely(cpy_r_r8 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 23, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 22, CPyStatic_signature___globals);
         goto CPyL11;
     }
     CPy_DECREF(cpy_r_r3);
     if (likely(PyBytes_Check(cpy_r_r8) || PyByteArray_Check(cpy_r_r8)))
         cpy_r_r9 = cpy_r_r8;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "get_4byte_selector", 23, CPyStatic_signature___globals, "bytes", cpy_r_r8);
+        CPy_TypeErrorTraceback("multicall/signature.py", "get_4byte_selector", 22, CPyStatic_signature___globals, "bytes", cpy_r_r8);
         goto CPyL9;
     }
     cpy_r_r10 = CPyBytes_GetSlice(cpy_r_r9, 0, 8);
     CPy_DECREF(cpy_r_r9);
     if (unlikely(cpy_r_r10 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 23, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 22, CPyStatic_signature___globals);
         goto CPyL9;
     }
     return cpy_r_r10;
@@ -22873,7 +22873,7 @@ PyObject *CPyPy_signature___get_4byte_selector(PyObject *self, PyObject *const *
     PyObject *retval = CPyDef_signature___get_4byte_selector(arg_signature);
     return retval;
 fail: ;
-    CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 22, CPyStatic_signature___globals);
+    CPy_AddTraceback("multicall/signature.py", "get_4byte_selector", 21, CPyStatic_signature___globals);
     return NULL;
 }
 
@@ -22941,12 +22941,12 @@ tuple_T3OOO CPyDef_signature___parse_signature(PyObject *cpy_r_signature) {
     tuple_T3OOO cpy_r_r58;
     cpy_r_r0 = PyList_New(0);
     if (unlikely(cpy_r_r0 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 49, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 48, CPyStatic_signature___globals);
         goto CPyL38;
     }
     cpy_r_r1 = PyList_New(0);
     if (unlikely(cpy_r_r1 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 50, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 49, CPyStatic_signature___globals);
         goto CPyL39;
     }
     cpy_r_start = 0;
@@ -22956,7 +22956,7 @@ CPyL3: ;
     cpy_r_r4 = CPyStr_Size_size_t(cpy_r_signature);
     cpy_r_r5 = cpy_r_r4 >= 0;
     if (unlikely(!cpy_r_r5)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 52, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 51, CPyStatic_signature___globals);
         goto CPyL40;
     }
     cpy_r_r6 = cpy_r_r4 << 1;
@@ -22965,7 +22965,7 @@ CPyL3: ;
     cpy_r_end = cpy_r_r2;
     cpy_r_r8 = CPyStr_GetItem(cpy_r_signature, cpy_r_r3);
     if (unlikely(cpy_r_r8 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 52, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 51, CPyStatic_signature___globals);
         goto CPyL42;
     }
     cpy_r_r9 = CPyStatics[287]; /* '(' */
@@ -22977,7 +22977,7 @@ CPyL3: ;
     if (!cpy_r_r13) goto CPyL9;
     cpy_r_r14 = CPy_KeepPropagating();
     if (unlikely(!cpy_r_r14)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 53, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 52, CPyStatic_signature___globals);
         goto CPyL43;
     }
 CPyL9: ;
@@ -22986,7 +22986,7 @@ CPyL9: ;
     cpy_r_r16 = PyList_Append(cpy_r_r1, cpy_r_r8);
     cpy_r_r17 = cpy_r_r16 >= 0;
     if (unlikely(!cpy_r_r17)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 54, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 53, CPyStatic_signature___globals);
         goto CPyL43;
     }
     cpy_r_r18 = (CPyPtr)&((PyVarObject *)cpy_r_r0)->ob_size;
@@ -22997,20 +22997,20 @@ CPyL9: ;
     cpy_r_r22 = CPyStr_GetSlice(cpy_r_signature, cpy_r_start, cpy_r_end);
     CPyTagged_DECREF(cpy_r_start);
     if (unlikely(cpy_r_r22 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 56, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 55, CPyStatic_signature___globals);
         goto CPyL44;
     }
     if (likely(PyUnicode_Check(cpy_r_r22)))
         cpy_r_r23 = cpy_r_r22;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 56, CPyStatic_signature___globals, "str", cpy_r_r22);
+        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 55, CPyStatic_signature___globals, "str", cpy_r_r22);
         goto CPyL44;
     }
     cpy_r_r24 = PyList_Append(cpy_r_r0, cpy_r_r23);
     CPy_DECREF(cpy_r_r23);
     cpy_r_r25 = cpy_r_r24 >= 0;
     if (unlikely(!cpy_r_r25)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 56, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 55, CPyStatic_signature___globals);
         goto CPyL44;
     }
     CPyTagged_INCREF(cpy_r_end);
@@ -23026,7 +23026,7 @@ CPyL16: ;
     if (!cpy_r_r30) goto CPyL19;
     cpy_r_r31 = CPy_KeepPropagating();
     if (unlikely(!cpy_r_r31)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 58, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 57, CPyStatic_signature___globals);
         goto CPyL42;
     }
 CPyL19: ;
@@ -23034,7 +23034,7 @@ CPyL19: ;
     if (!cpy_r_r32) goto CPyL45;
     cpy_r_r33 = CPyList_PopLast(cpy_r_r1);
     if (unlikely(cpy_r_r33 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 59, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 58, CPyStatic_signature___globals);
         goto CPyL42;
     }
     if (likely(PyUnicode_Check(cpy_r_r33)))
@@ -23044,7 +23044,7 @@ CPyL19: ;
         cpy_r_r34 = NULL;
     }
     if (unlikely(cpy_r_r34 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 59, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 58, CPyStatic_signature___globals);
         goto CPyL42;
     } else
         goto CPyL46;
@@ -23059,20 +23059,20 @@ CPyL22: ;
     CPyTagged_DECREF(cpy_r_start);
     CPyTagged_DECREF(cpy_r_r39);
     if (unlikely(cpy_r_r40 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 61, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 60, CPyStatic_signature___globals);
         goto CPyL47;
     }
     if (likely(PyUnicode_Check(cpy_r_r40)))
         cpy_r_r41 = cpy_r_r40;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 61, CPyStatic_signature___globals, "str", cpy_r_r40);
+        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 60, CPyStatic_signature___globals, "str", cpy_r_r40);
         goto CPyL47;
     }
     cpy_r_r42 = PyList_Append(cpy_r_r0, cpy_r_r41);
     CPy_DECREF(cpy_r_r41);
     cpy_r_r43 = cpy_r_r42 >= 0;
     if (unlikely(!cpy_r_r43)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 61, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 60, CPyStatic_signature___globals);
         goto CPyL47;
     }
     cpy_r_r44 = CPyTagged_Add(cpy_r_end, 2);
@@ -23088,54 +23088,54 @@ CPyL28: ;
     cpy_r_r47 = CPyStatics[242]; /* '' */
     cpy_r_r48 = CPyList_GetSlice(cpy_r_r0, 0, 4);
     if (unlikely(cpy_r_r48 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 63, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 62, CPyStatic_signature___globals);
         goto CPyL39;
     }
     if (likely(PyList_Check(cpy_r_r48)))
         cpy_r_r49 = cpy_r_r48;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 63, CPyStatic_signature___globals, "list", cpy_r_r48);
+        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 62, CPyStatic_signature___globals, "list", cpy_r_r48);
         goto CPyL39;
     }
     cpy_r_r50 = PyUnicode_Join(cpy_r_r47, cpy_r_r49);
     CPy_DECREF_NO_IMM(cpy_r_r49);
     if (unlikely(cpy_r_r50 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 63, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 62, CPyStatic_signature___globals);
         goto CPyL39;
     }
     cpy_r_r51 = CPyList_GetItemShort(cpy_r_r0, 2);
     if (unlikely(cpy_r_r51 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 64, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 63, CPyStatic_signature___globals);
         goto CPyL48;
     }
     if (likely(PyUnicode_Check(cpy_r_r51)))
         cpy_r_r52 = cpy_r_r51;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 64, CPyStatic_signature___globals, "str", cpy_r_r51);
+        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 63, CPyStatic_signature___globals, "str", cpy_r_r51);
         goto CPyL48;
     }
     cpy_r_r53 = CPyDef_signature___parse_typestring(cpy_r_r52);
     CPy_DECREF(cpy_r_r52);
     if (unlikely(cpy_r_r53 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 64, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 63, CPyStatic_signature___globals);
         goto CPyL48;
     }
     cpy_r_r54 = CPyList_GetItemShort(cpy_r_r0, 4);
     CPy_DECREF_NO_IMM(cpy_r_r0);
     if (unlikely(cpy_r_r54 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 65, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 64, CPyStatic_signature___globals);
         goto CPyL49;
     }
     if (likely(PyUnicode_Check(cpy_r_r54)))
         cpy_r_r55 = cpy_r_r54;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 65, CPyStatic_signature___globals, "str", cpy_r_r54);
+        CPy_TypeErrorTraceback("multicall/signature.py", "parse_signature", 64, CPyStatic_signature___globals, "str", cpy_r_r54);
         goto CPyL49;
     }
     cpy_r_r56 = CPyDef_signature___parse_typestring(cpy_r_r55);
     CPy_DECREF(cpy_r_r55);
     if (unlikely(cpy_r_r56 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_signature", 65, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_signature", 64, CPyStatic_signature___globals);
         goto CPyL49;
     }
     cpy_r_r57.f0 = cpy_r_r50;
@@ -23227,7 +23227,7 @@ PyObject *CPyPy_signature___parse_signature(PyObject *self, PyObject *const *arg
     PyTuple_SET_ITEM(retbox, 2, __tmp136);
     return retbox;
 fail: ;
-    CPy_AddTraceback("multicall/signature.py", "parse_signature", 26, CPyStatic_signature___globals);
+    CPy_AddTraceback("multicall/signature.py", "parse_signature", 25, CPyStatic_signature___globals);
     return NULL;
 }
 
@@ -23293,7 +23293,7 @@ PyObject *CPyDef_signature___parse_typestring(PyObject *cpy_r_typestring) {
     if (!cpy_r_r4) goto CPyL3;
     cpy_r_r5 = CPy_KeepPropagating();
     if (unlikely(!cpy_r_r5)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 70, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 69, CPyStatic_signature___globals);
         goto CPyL35;
     }
 CPyL3: ;
@@ -23301,14 +23301,14 @@ CPyL3: ;
     if (!cpy_r_r6) goto CPyL6;
     cpy_r_r7 = PyList_New(0);
     if (unlikely(cpy_r_r7 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 71, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 70, CPyStatic_signature___globals);
         goto CPyL35;
     }
     return cpy_r_r7;
 CPyL6: ;
     cpy_r_r8 = PyList_New(0);
     if (unlikely(cpy_r_r8 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 72, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 71, CPyStatic_signature___globals);
         goto CPyL35;
     }
     cpy_r_r9 = CPyStatics[242]; /* '' */
@@ -23317,13 +23317,13 @@ CPyL6: ;
     cpy_r_inside_tuples = 0;
     cpy_r_r10 = CPyStr_GetSlice(cpy_r_typestring, 2, -2);
     if (unlikely(cpy_r_r10 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 75, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 74, CPyStatic_signature___globals);
         goto CPyL36;
     }
     if (likely(PyUnicode_Check(cpy_r_r10)))
         cpy_r_r11 = cpy_r_r10;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "parse_typestring", 75, CPyStatic_signature___globals, "str", cpy_r_r10);
+        CPy_TypeErrorTraceback("multicall/signature.py", "parse_typestring", 74, CPyStatic_signature___globals, "str", cpy_r_r10);
         goto CPyL36;
     }
     cpy_r_r12 = 0;
@@ -23331,7 +23331,7 @@ CPyL10: ;
     cpy_r_r13 = CPyStr_Size_size_t(cpy_r_r11);
     cpy_r_r14 = cpy_r_r13 >= 0;
     if (unlikely(!cpy_r_r14)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 75, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 74, CPyStatic_signature___globals);
         goto CPyL37;
     }
     cpy_r_r15 = cpy_r_r13 << 1;
@@ -23339,7 +23339,7 @@ CPyL10: ;
     if (!cpy_r_r16) goto CPyL38;
     cpy_r_r17 = CPyStr_GetItem(cpy_r_r11, cpy_r_r12);
     if (unlikely(cpy_r_r17 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 75, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 74, CPyStatic_signature___globals);
         goto CPyL37;
     }
     cpy_r_r18 = CPyStatics[287]; /* '(' */
@@ -23351,7 +23351,7 @@ CPyL10: ;
     if (!cpy_r_r22) goto CPyL16;
     cpy_r_r23 = CPy_KeepPropagating();
     if (unlikely(!cpy_r_r23)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 76, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 75, CPyStatic_signature___globals);
         goto CPyL39;
     }
 CPyL16: ;
@@ -23371,7 +23371,7 @@ CPyL18: ;
     if (!cpy_r_r30) goto CPyL21;
     cpy_r_r31 = CPy_KeepPropagating();
     if (unlikely(!cpy_r_r31)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 78, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 77, CPyStatic_signature___globals);
         goto CPyL39;
     }
 CPyL21: ;
@@ -23391,7 +23391,7 @@ CPyL23: ;
     if (!cpy_r_r38) goto CPyL26;
     cpy_r_r39 = CPy_KeepPropagating();
     if (unlikely(!cpy_r_r39)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 80, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 79, CPyStatic_signature___globals);
         goto CPyL39;
     }
 CPyL26: ;
@@ -23407,7 +23407,7 @@ CPyL28: ;
     CPy_DECREF(cpy_r_part);
     cpy_r_r43 = cpy_r_r42 >= 0;
     if (unlikely(!cpy_r_r43)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 81, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 80, CPyStatic_signature___globals);
         goto CPyL41;
     }
     cpy_r_r44 = CPyStatics[242]; /* '' */
@@ -23418,7 +23418,7 @@ CPyL30: ;
     cpy_r_r45 = CPyStr_Append(cpy_r_part, cpy_r_r17);
     CPy_DECREF(cpy_r_r17);
     if (unlikely(cpy_r_r45 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 84, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 83, CPyStatic_signature___globals);
         goto CPyL41;
     }
     cpy_r_part = cpy_r_r45;
@@ -23431,7 +23431,7 @@ CPyL33: ;
     CPy_DECREF(cpy_r_part);
     cpy_r_r48 = cpy_r_r47 >= 0;
     if (unlikely(!cpy_r_r48)) {
-        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 85, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "parse_typestring", 84, CPyStatic_signature___globals);
         goto CPyL42;
     }
     return cpy_r_r8;
@@ -23490,7 +23490,7 @@ PyObject *CPyPy_signature___parse_typestring(PyObject *self, PyObject *const *ar
     PyObject *retval = CPyDef_signature___parse_typestring(arg_typestring);
     return retval;
 fail: ;
-    CPy_AddTraceback("multicall/signature.py", "parse_typestring", 69, CPyStatic_signature___globals);
+    CPy_AddTraceback("multicall/signature.py", "parse_typestring", 68, CPyStatic_signature___globals);
     return NULL;
 }
 
@@ -23516,20 +23516,20 @@ PyObject *CPyDef_signature____get_signature(PyObject *cpy_r_signature) {
     PyErr_SetString(PyExc_NameError, "value for final name \"_SIGNATURES\" was not set");
     cpy_r_r1 = 0;
     if (unlikely(!cpy_r_r1)) {
-        CPy_AddTraceback("multicall/signature.py", "_get_signature", 91, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "_get_signature", 90, CPyStatic_signature___globals);
         goto CPyL7;
     }
     CPy_Unreachable();
 CPyL4: ;
     cpy_r_r2 = CPyDict_GetItem(cpy_r_r0, cpy_r_signature);
     if (unlikely(cpy_r_r2 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "_get_signature", 91, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "_get_signature", 90, CPyStatic_signature___globals);
         goto CPyL7;
     }
     if (likely(Py_TYPE(cpy_r_r2) == CPyType_signature___Signature))
         cpy_r_r3 = cpy_r_r2;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "_get_signature", 91, CPyStatic_signature___globals, "multicall.signature.Signature", cpy_r_r2);
+        CPy_TypeErrorTraceback("multicall/signature.py", "_get_signature", 90, CPyStatic_signature___globals, "multicall.signature.Signature", cpy_r_r2);
         goto CPyL7;
     }
     return cpy_r_r3;
@@ -23539,7 +23539,7 @@ CPyL7: ;
     cpy_r_r6 = CPyStatics[291]; /* 'KeyError' */
     cpy_r_r7 = CPyObject_GetAttr(cpy_r_r5, cpy_r_r6);
     if (unlikely(cpy_r_r7 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "_get_signature", 92, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "_get_signature", 91, CPyStatic_signature___globals);
         goto CPyL17;
     }
     cpy_r_r8 = CPy_ExceptionMatches(cpy_r_r7);
@@ -23547,7 +23547,7 @@ CPyL7: ;
     if (!cpy_r_r8) goto CPyL15;
     cpy_r_r9 = CPyDef_signature___Signature(cpy_r_signature);
     if (unlikely(cpy_r_r9 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "_get_signature", 93, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "_get_signature", 92, CPyStatic_signature___globals);
         goto CPyL17;
     }
     cpy_r_r10 = CPyStatic_signature____SIGNATURES;
@@ -23559,7 +23559,7 @@ CPyL11: ;
     PyErr_SetString(PyExc_NameError, "value for final name \"_SIGNATURES\" was not set");
     cpy_r_r11 = 0;
     if (unlikely(!cpy_r_r11)) {
-        CPy_AddTraceback("multicall/signature.py", "_get_signature", 94, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "_get_signature", 93, CPyStatic_signature___globals);
         goto CPyL17;
     } else
         goto CPyL21;
@@ -23569,7 +23569,7 @@ CPyL13: ;
     cpy_r_r12 = CPyDict_SetItem(cpy_r_r10, cpy_r_signature, cpy_r_r9);
     cpy_r_r13 = cpy_r_r12 >= 0;
     if (unlikely(!cpy_r_r13)) {
-        CPy_AddTraceback("multicall/signature.py", "_get_signature", 94, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "_get_signature", 93, CPyStatic_signature___globals);
         goto CPyL22;
     }
     CPy_RestoreExcInfo(cpy_r_r4);
@@ -23631,7 +23631,7 @@ PyObject *CPyPy_signature____get_signature(PyObject *self, PyObject *const *args
     PyObject *retval = CPyDef_signature____get_signature(arg_signature);
     return retval;
 fail: ;
-    CPy_AddTraceback("multicall/signature.py", "_get_signature", 89, CPyStatic_signature___globals);
+    CPy_AddTraceback("multicall/signature.py", "_get_signature", 88, CPyStatic_signature___globals);
     return NULL;
 }
 
@@ -23705,7 +23705,7 @@ char CPyDef_signature___Signature_____init__(PyObject *cpy_r_self, PyObject *cpy
     ((multicall___signature___SignatureObject *)cpy_r_self)->_signature = cpy_r_signature;
     cpy_r_r0 = CPyDef_signature___parse_signature(cpy_r_signature);
     if (unlikely(cpy_r_r0.f0 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 112, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 111, CPyStatic_signature___globals);
         goto CPyL34;
     }
     cpy_r_r1 = cpy_r_r0.f0;
@@ -23727,7 +23727,7 @@ char CPyDef_signature___Signature_____init__(PyObject *cpy_r_self, PyObject *cpy
     cpy_r_r5 = CPyDef_signature___get_4byte_selector(cpy_r_r4);
     CPy_DECREF(cpy_r_r4);
     if (unlikely(cpy_r_r5 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 118, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 117, CPyStatic_signature___globals);
         goto CPyL35;
     }
     ((multicall___signature___SignatureObject *)cpy_r_self)->_fourbyte = cpy_r_r5;
@@ -23738,9 +23738,9 @@ char CPyDef_signature___Signature_____init__(PyObject *cpy_r_self, PyObject *cpy
     if (!cpy_r_r9) goto CPyL36;
     cpy_r_r10 = (CPyPtr)&((PyVarObject *)cpy_r_r2)->ob_size;
     cpy_r_r11 = *(int64_t *)cpy_r_r10;
-    cpy_r_r12 = PyList_New(cpy_r_r11);
+    cpy_r_r12 = PyTuple_New(cpy_r_r11);
     if (unlikely(cpy_r_r12 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 120, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 119, CPyStatic_signature___globals);
         goto CPyL35;
     }
     cpy_r_r13 = 0;
@@ -23760,7 +23760,7 @@ CPyL5: ;
     if (likely(PyUnicode_Check(cpy_r_r23)))
         cpy_r_r24 = cpy_r_r23;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "__init__", 120, CPyStatic_signature___globals, "str", cpy_r_r23);
+        CPy_TypeErrorTraceback("multicall/signature.py", "__init__", 119, CPyStatic_signature___globals, "str", cpy_r_r23);
         goto CPyL38;
     }
     cpy_r_r25 = CPyStatic_signature____get_encoder;
@@ -23772,7 +23772,7 @@ CPyL8: ;
     PyErr_SetString(PyExc_NameError, "value for final name \"_get_encoder\" was not set");
     cpy_r_r26 = 0;
     if (unlikely(!cpy_r_r26)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 120, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 119, CPyStatic_signature___globals);
         goto CPyL34;
     }
     CPy_Unreachable();
@@ -23781,13 +23781,13 @@ CPyL10: ;
     cpy_r_r28 = (PyObject **)&cpy_r_r27;
     cpy_r_r29 = PyObject_Vectorcall(cpy_r_r25, cpy_r_r28, 1, 0);
     if (unlikely(cpy_r_r29 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 120, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 119, CPyStatic_signature___globals);
         goto CPyL40;
     }
     CPy_DECREF(cpy_r_r24);
-    cpy_r_r30 = CPyList_SetItemUnsafe(cpy_r_r12, cpy_r_r13, cpy_r_r29);
+    cpy_r_r30 = CPySequenceTuple_SetItemUnsafe(cpy_r_r12, cpy_r_r13, cpy_r_r29);
     if (unlikely(!cpy_r_r30)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 120, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 119, CPyStatic_signature___globals);
         goto CPyL38;
     }
     cpy_r_r31 = cpy_r_r13 + 2;
@@ -23803,7 +23803,7 @@ CPyL14: ;
     PyErr_SetString(PyExc_NameError, "value for final name \"TupleEncoder\" was not set");
     cpy_r_r33 = 0;
     if (unlikely(!cpy_r_r33)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 120, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 119, CPyStatic_signature___globals);
         goto CPyL34;
     }
     CPy_Unreachable();
@@ -23813,10 +23813,10 @@ CPyL16: ;
     cpy_r_r36 = CPyStatics[419]; /* ('encoders',) */
     cpy_r_r37 = PyObject_Vectorcall(cpy_r_r32, cpy_r_r35, 0, cpy_r_r36);
     if (unlikely(cpy_r_r37 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 120, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 119, CPyStatic_signature___globals);
         goto CPyL42;
     }
-    CPy_DECREF_NO_IMM(cpy_r_r12);
+    CPy_DECREF(cpy_r_r12);
     cpy_r_r38 = cpy_r_r37;
     goto CPyL19;
 CPyL18: ;
@@ -23826,9 +23826,9 @@ CPyL19: ;
     ((multicall___signature___SignatureObject *)cpy_r_self)->__encoder = cpy_r_r38;
     cpy_r_r40 = (CPyPtr)&((PyVarObject *)cpy_r_r3)->ob_size;
     cpy_r_r41 = *(int64_t *)cpy_r_r40;
-    cpy_r_r42 = PyList_New(cpy_r_r41);
+    cpy_r_r42 = PyTuple_New(cpy_r_r41);
     if (unlikely(cpy_r_r42 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 125, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 124, CPyStatic_signature___globals);
         goto CPyL43;
     }
     cpy_r_r43 = 0;
@@ -23848,7 +23848,7 @@ CPyL21: ;
     if (likely(PyUnicode_Check(cpy_r_r53)))
         cpy_r_r54 = cpy_r_r53;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "__init__", 125, CPyStatic_signature___globals, "str", cpy_r_r53);
+        CPy_TypeErrorTraceback("multicall/signature.py", "__init__", 124, CPyStatic_signature___globals, "str", cpy_r_r53);
         goto CPyL45;
     }
     cpy_r_r55 = CPyStatic_signature____get_decoder;
@@ -23860,7 +23860,7 @@ CPyL24: ;
     PyErr_SetString(PyExc_NameError, "value for final name \"_get_decoder\" was not set");
     cpy_r_r56 = 0;
     if (unlikely(!cpy_r_r56)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 125, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 124, CPyStatic_signature___globals);
         goto CPyL34;
     }
     CPy_Unreachable();
@@ -23869,13 +23869,13 @@ CPyL26: ;
     cpy_r_r58 = (PyObject **)&cpy_r_r57;
     cpy_r_r59 = PyObject_Vectorcall(cpy_r_r55, cpy_r_r58, 1, 0);
     if (unlikely(cpy_r_r59 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 125, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 124, CPyStatic_signature___globals);
         goto CPyL47;
     }
     CPy_DECREF(cpy_r_r54);
-    cpy_r_r60 = CPyList_SetItemUnsafe(cpy_r_r42, cpy_r_r43, cpy_r_r59);
+    cpy_r_r60 = CPySequenceTuple_SetItemUnsafe(cpy_r_r42, cpy_r_r43, cpy_r_r59);
     if (unlikely(!cpy_r_r60)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 125, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 124, CPyStatic_signature___globals);
         goto CPyL45;
     }
     cpy_r_r61 = cpy_r_r43 + 2;
@@ -23891,7 +23891,7 @@ CPyL30: ;
     PyErr_SetString(PyExc_NameError, "value for final name \"TupleDecoder\" was not set");
     cpy_r_r63 = 0;
     if (unlikely(!cpy_r_r63)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 124, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 123, CPyStatic_signature___globals);
         goto CPyL34;
     }
     CPy_Unreachable();
@@ -23901,10 +23901,10 @@ CPyL32: ;
     cpy_r_r66 = CPyStatics[420]; /* ('decoders',) */
     cpy_r_r67 = PyObject_Vectorcall(cpy_r_r62, cpy_r_r65, 0, cpy_r_r66);
     if (unlikely(cpy_r_r67 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "__init__", 124, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "__init__", 123, CPyStatic_signature___globals);
         goto CPyL49;
     }
-    CPy_DECREF_NO_IMM(cpy_r_r42);
+    CPy_DECREF(cpy_r_r42);
     ((multicall___signature___SignatureObject *)cpy_r_self)->__decoder = cpy_r_r67;
     return 1;
 CPyL34: ;
@@ -24002,7 +24002,7 @@ PyObject *CPyPy_signature___Signature_____init__(PyObject *self, PyObject *args,
     CPy_INCREF(retbox);
     return retbox;
 fail: ;
-    CPy_AddTraceback("multicall/signature.py", "__init__", 110, CPyStatic_signature___globals);
+    CPy_AddTraceback("multicall/signature.py", "__init__", 109, CPyStatic_signature___globals);
     return NULL;
 }
 
@@ -24028,7 +24028,7 @@ CPyL2: ;
     cpy_r_r1 = PyObject_IsTrue(cpy_r_args);
     cpy_r_r2 = cpy_r_r1 >= 0;
     if (unlikely(!cpy_r_r2)) {
-        CPy_AddTraceback("multicall/signature.py", "encode_data", 128, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "encode_data", 127, CPyStatic_signature___globals);
         goto CPyL13;
     }
     cpy_r_r3 = cpy_r_r1;
@@ -24047,7 +24047,7 @@ CPyL2: ;
         cpy_r_r5 = NULL;
     }
     if (cpy_r_r5 != NULL) goto __LL137;
-    CPy_TypeErrorTraceback("multicall/signature.py", "encode_data", 129, CPyStatic_signature___globals, "union[list, tuple]", cpy_r_args);
+    CPy_TypeErrorTraceback("multicall/signature.py", "encode_data", 128, CPyStatic_signature___globals, "union[list, tuple]", cpy_r_args);
     goto CPyL15;
 __LL137: ;
     cpy_r_r6 = ((multicall___signature___SignatureObject *)cpy_r_self)->__encoder;
@@ -24057,7 +24057,7 @@ __LL137: ;
     cpy_r_r9 = PyObject_Vectorcall(cpy_r_r6, cpy_r_r8, 1, 0);
     CPy_DECREF(cpy_r_r6);
     if (unlikely(cpy_r_r9 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "encode_data", 129, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "encode_data", 128, CPyStatic_signature___globals);
         goto CPyL16;
     }
     CPy_DECREF(cpy_r_r5);
@@ -24065,7 +24065,7 @@ __LL137: ;
     CPy_DECREF(cpy_r_r4);
     CPy_DECREF(cpy_r_r9);
     if (unlikely(cpy_r_r10 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "encode_data", 129, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "encode_data", 128, CPyStatic_signature___globals);
         goto CPyL11;
     }
     cpy_r_r11 = cpy_r_r10;
@@ -24078,7 +24078,7 @@ CPyL9: ;
     if (likely(PyBytes_Check(cpy_r_r11) || PyByteArray_Check(cpy_r_r11)))
         cpy_r_r13 = cpy_r_r11;
     else {
-        CPy_TypeErrorTraceback("multicall/signature.py", "encode_data", 129, CPyStatic_signature___globals, "bytes", cpy_r_r11);
+        CPy_TypeErrorTraceback("multicall/signature.py", "encode_data", 128, CPyStatic_signature___globals, "bytes", cpy_r_r11);
         goto CPyL11;
     }
     return cpy_r_r13;
@@ -24147,7 +24147,7 @@ __LL138: ;
     PyObject *retval = CPyDef_signature___Signature___encode_data(arg_self, arg_args);
     return retval;
 fail: ;
-    CPy_AddTraceback("multicall/signature.py", "encode_data", 128, CPyStatic_signature___globals);
+    CPy_AddTraceback("multicall/signature.py", "encode_data", 127, CPyStatic_signature___globals);
     return NULL;
 }
 
@@ -24165,7 +24165,7 @@ PyObject *CPyDef_signature___Signature___decode_data(PyObject *cpy_r_self, PyObj
     PyErr_SetString(PyExc_NameError, "value for final name \"_stream_cls\" was not set");
     cpy_r_r1 = 0;
     if (unlikely(!cpy_r_r1)) {
-        CPy_AddTraceback("multicall/signature.py", "decode_data", 132, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "decode_data", 131, CPyStatic_signature___globals);
         goto CPyL6;
     }
     CPy_Unreachable();
@@ -24174,7 +24174,7 @@ CPyL3: ;
     cpy_r_r3 = (PyObject **)&cpy_r_r2;
     cpy_r_r4 = PyObject_Vectorcall(cpy_r_r0, cpy_r_r3, 1, 0);
     if (unlikely(cpy_r_r4 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "decode_data", 132, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "decode_data", 131, CPyStatic_signature___globals);
         goto CPyL6;
     }
     cpy_r_r5 = ((multicall___signature___SignatureObject *)cpy_r_self)->__decoder;
@@ -24184,7 +24184,7 @@ CPyL3: ;
     cpy_r_r8 = PyObject_Vectorcall(cpy_r_r5, cpy_r_r7, 1, 0);
     CPy_DECREF(cpy_r_r5);
     if (unlikely(cpy_r_r8 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "decode_data", 132, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "decode_data", 131, CPyStatic_signature___globals);
         goto CPyL7;
     }
     CPy_DECREF(cpy_r_r4);
@@ -24227,7 +24227,7 @@ __LL139: ;
     PyObject *retval = CPyDef_signature___Signature___decode_data(arg_self, arg_output);
     return retval;
 fail: ;
-    CPy_AddTraceback("multicall/signature.py", "decode_data", 131, CPyStatic_signature___globals);
+    CPy_AddTraceback("multicall/signature.py", "decode_data", 130, CPyStatic_signature___globals);
     return NULL;
 }
 
@@ -24354,23 +24354,26 @@ CPyL3: ;
     cpy_r_r7 = CPyStatic_signature___globals;
     cpy_r_r8 = CPyImport_ImportFromMany(cpy_r_r6, cpy_r_r5, cpy_r_r5, cpy_r_r7);
     if (unlikely(cpy_r_r8 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 2, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 1, CPyStatic_signature___globals);
         goto CPyL31;
     }
     CPyModule_typing = cpy_r_r8;
     CPy_INCREF(CPyModule_typing);
     CPy_DECREF(cpy_r_r8);
-    cpy_r_r9 = (PyObject **)&CPyModule_eth_abi___abi;
-    cpy_r_r10 = (PyObject **)&CPyModule_eth_abi___decoding;
-    cpy_r_r11 = (PyObject **)&CPyModule_eth_abi___encoding;
+    cpy_r_r9 = (PyObject **)&CPyModule_faster_eth_abi___abi;
+    cpy_r_r10 = (PyObject **)&CPyModule_faster_eth_abi___decoding;
+    cpy_r_r11 = (PyObject **)&CPyModule_faster_eth_abi___encoding;
     cpy_r_r12 = (PyObject **)&CPyModule_eth_hash___auto;
     PyObject **cpy_r_r13[4] = {cpy_r_r9, cpy_r_r10, cpy_r_r11, cpy_r_r12};
     cpy_r_r14 = (void *)&cpy_r_r13;
-    int64_t cpy_r_r15[4] = {4, 5, 6, 7};
+    int64_t cpy_r_r15[4] = {3, 4, 5, 6};
     cpy_r_r16 = (void *)&cpy_r_r15;
-    cpy_r_r17 = CPyStatics[426]; /* (('eth_abi.abi', 'eth_abi', 'eth_abi'),
-                                    ('eth_abi.decoding', 'eth_abi', 'eth_abi'),
-                                    ('eth_abi.encoding', 'eth_abi', 'eth_abi'),
+    cpy_r_r17 = CPyStatics[426]; /* (('faster_eth_abi.abi', 'faster_eth_abi',
+                                     'faster_eth_abi'),
+                                    ('faster_eth_abi.decoding', 'faster_eth_abi',
+                                     'faster_eth_abi'),
+                                    ('faster_eth_abi.encoding', 'faster_eth_abi',
+                                     'faster_eth_abi'),
                                     ('eth_hash.auto', 'eth_hash', 'eth_hash')) */
     cpy_r_r18 = CPyStatic_signature___globals;
     cpy_r_r19 = CPyStatics[300]; /* 'multicall/signature.py' */
@@ -24382,7 +24385,7 @@ CPyL3: ;
     cpy_r_r24 = CPyStatic_signature___globals;
     cpy_r_r25 = CPyImport_ImportFromMany(cpy_r_r23, cpy_r_r22, cpy_r_r22, cpy_r_r24);
     if (unlikely(cpy_r_r25 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 8, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 7, CPyStatic_signature___globals);
         goto CPyL31;
     }
     CPyModule_eth_typing = cpy_r_r25;
@@ -24390,7 +24393,7 @@ CPyL3: ;
     CPy_DECREF(cpy_r_r25);
     cpy_r_r26 = PyDict_New();
     if (unlikely(cpy_r_r26 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 11, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 10, CPyStatic_signature___globals);
         goto CPyL31;
     }
     CPyStatic_signature____SIGNATURES = cpy_r_r26;
@@ -24401,14 +24404,14 @@ CPyL3: ;
     CPy_DECREF(cpy_r_r26);
     cpy_r_r30 = cpy_r_r29 >= 0;
     if (unlikely(!cpy_r_r30)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 11, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 10, CPyStatic_signature___globals);
         goto CPyL31;
     }
-    cpy_r_r31 = CPyModule_eth_abi___encoding;
+    cpy_r_r31 = CPyModule_faster_eth_abi___encoding;
     cpy_r_r32 = CPyStatics[303]; /* 'TupleEncoder' */
     cpy_r_r33 = CPyObject_GetAttr(cpy_r_r31, cpy_r_r32);
     if (unlikely(cpy_r_r33 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 13, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 12, CPyStatic_signature___globals);
         goto CPyL31;
     }
     CPyStatic_signature___TupleEncoder = cpy_r_r33;
@@ -24419,14 +24422,14 @@ CPyL3: ;
     CPy_DECREF(cpy_r_r33);
     cpy_r_r37 = cpy_r_r36 >= 0;
     if (unlikely(!cpy_r_r37)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 13, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 12, CPyStatic_signature___globals);
         goto CPyL31;
     }
-    cpy_r_r38 = CPyModule_eth_abi___decoding;
+    cpy_r_r38 = CPyModule_faster_eth_abi___decoding;
     cpy_r_r39 = CPyStatics[304]; /* 'TupleDecoder' */
     cpy_r_r40 = CPyObject_GetAttr(cpy_r_r38, cpy_r_r39);
     if (unlikely(cpy_r_r40 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 14, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 13, CPyStatic_signature___globals);
         goto CPyL31;
     }
     CPyStatic_signature___TupleDecoder = cpy_r_r40;
@@ -24437,14 +24440,14 @@ CPyL3: ;
     CPy_DECREF(cpy_r_r40);
     cpy_r_r44 = cpy_r_r43 >= 0;
     if (unlikely(!cpy_r_r44)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 14, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 13, CPyStatic_signature___globals);
         goto CPyL31;
     }
     cpy_r_r45 = CPyModule_eth_hash___auto;
     cpy_r_r46 = CPyStatics[305]; /* 'keccak' */
     cpy_r_r47 = CPyObject_GetAttr(cpy_r_r45, cpy_r_r46);
     if (unlikely(cpy_r_r47 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 16, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 15, CPyStatic_signature___globals);
         goto CPyL31;
     }
     CPyStatic_signature____keccak = cpy_r_r47;
@@ -24455,28 +24458,28 @@ CPyL3: ;
     CPy_DECREF(cpy_r_r47);
     cpy_r_r51 = cpy_r_r50 >= 0;
     if (unlikely(!cpy_r_r51)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 16, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 15, CPyStatic_signature___globals);
         goto CPyL31;
     }
-    cpy_r_r52 = CPyModule_eth_abi___abi;
+    cpy_r_r52 = CPyModule_faster_eth_abi___abi;
     cpy_r_r53 = CPyStatics[307]; /* 'default_codec' */
     cpy_r_r54 = CPyObject_GetAttr(cpy_r_r52, cpy_r_r53);
     if (unlikely(cpy_r_r54 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 17, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 16, CPyStatic_signature___globals);
         goto CPyL31;
     }
     cpy_r_r55 = CPyStatics[308]; /* '_registry' */
     cpy_r_r56 = CPyObject_GetAttr(cpy_r_r54, cpy_r_r55);
     CPy_DECREF(cpy_r_r54);
     if (unlikely(cpy_r_r56 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 17, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 16, CPyStatic_signature___globals);
         goto CPyL31;
     }
     cpy_r_r57 = CPyStatics[309]; /* 'get_encoder' */
     cpy_r_r58 = CPyObject_GetAttr(cpy_r_r56, cpy_r_r57);
     CPy_DECREF(cpy_r_r56);
     if (unlikely(cpy_r_r58 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 17, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 16, CPyStatic_signature___globals);
         goto CPyL31;
     }
     CPyStatic_signature____get_encoder = cpy_r_r58;
@@ -24487,28 +24490,28 @@ CPyL3: ;
     CPy_DECREF(cpy_r_r58);
     cpy_r_r62 = cpy_r_r61 >= 0;
     if (unlikely(!cpy_r_r62)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 17, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 16, CPyStatic_signature___globals);
         goto CPyL31;
     }
-    cpy_r_r63 = CPyModule_eth_abi___abi;
+    cpy_r_r63 = CPyModule_faster_eth_abi___abi;
     cpy_r_r64 = CPyStatics[307]; /* 'default_codec' */
     cpy_r_r65 = CPyObject_GetAttr(cpy_r_r63, cpy_r_r64);
     if (unlikely(cpy_r_r65 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 18, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 17, CPyStatic_signature___globals);
         goto CPyL31;
     }
     cpy_r_r66 = CPyStatics[308]; /* '_registry' */
     cpy_r_r67 = CPyObject_GetAttr(cpy_r_r65, cpy_r_r66);
     CPy_DECREF(cpy_r_r65);
     if (unlikely(cpy_r_r67 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 18, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 17, CPyStatic_signature___globals);
         goto CPyL31;
     }
     cpy_r_r68 = CPyStatics[311]; /* 'get_decoder' */
     cpy_r_r69 = CPyObject_GetAttr(cpy_r_r67, cpy_r_r68);
     CPy_DECREF(cpy_r_r67);
     if (unlikely(cpy_r_r69 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 18, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 17, CPyStatic_signature___globals);
         goto CPyL31;
     }
     CPyStatic_signature____get_decoder = cpy_r_r69;
@@ -24519,21 +24522,21 @@ CPyL3: ;
     CPy_DECREF(cpy_r_r69);
     cpy_r_r73 = cpy_r_r72 >= 0;
     if (unlikely(!cpy_r_r73)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 18, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 17, CPyStatic_signature___globals);
         goto CPyL31;
     }
-    cpy_r_r74 = CPyModule_eth_abi___abi;
+    cpy_r_r74 = CPyModule_faster_eth_abi___abi;
     cpy_r_r75 = CPyStatics[307]; /* 'default_codec' */
     cpy_r_r76 = CPyObject_GetAttr(cpy_r_r74, cpy_r_r75);
     if (unlikely(cpy_r_r76 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 19, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 18, CPyStatic_signature___globals);
         goto CPyL31;
     }
     cpy_r_r77 = CPyStatics[313]; /* 'stream_class' */
     cpy_r_r78 = CPyObject_GetAttr(cpy_r_r76, cpy_r_r77);
     CPy_DECREF(cpy_r_r76);
     if (unlikely(cpy_r_r78 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 19, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 18, CPyStatic_signature___globals);
         goto CPyL31;
     }
     CPyStatic_signature____stream_cls = cpy_r_r78;
@@ -24544,7 +24547,7 @@ CPyL3: ;
     CPy_DECREF(cpy_r_r78);
     cpy_r_r82 = cpy_r_r81 >= 0;
     if (unlikely(!cpy_r_r82)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 19, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 18, CPyStatic_signature___globals);
         goto CPyL31;
     }
     cpy_r_r83 = NULL;
@@ -24552,7 +24555,7 @@ CPyL3: ;
     cpy_r_r85 = (PyObject *)CPyType_signature___Signature_template;
     cpy_r_r86 = CPyType_FromTemplate(cpy_r_r85, cpy_r_r83, cpy_r_r84);
     if (unlikely(cpy_r_r86 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 99, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 98, CPyStatic_signature___globals);
         goto CPyL31;
     }
     cpy_r_r87 = CPyDef_signature___Signature_trait_vtable_setup();
@@ -24570,14 +24573,14 @@ CPyL3: ;
     cpy_r_r95 = CPyStatics[319]; /* '_decoder' */
     cpy_r_r96 = PyTuple_Pack(7, cpy_r_r89, cpy_r_r90, cpy_r_r91, cpy_r_r92, cpy_r_r93, cpy_r_r94, cpy_r_r95);
     if (unlikely(cpy_r_r96 == NULL)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 99, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 98, CPyStatic_signature___globals);
         goto CPyL32;
     }
     cpy_r_r97 = PyObject_SetAttr(cpy_r_r86, cpy_r_r88, cpy_r_r96);
     CPy_DECREF(cpy_r_r96);
     cpy_r_r98 = cpy_r_r97 >= 0;
     if (unlikely(!cpy_r_r98)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 99, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 98, CPyStatic_signature___globals);
         goto CPyL32;
     }
     CPyType_signature___Signature = (PyTypeObject *)cpy_r_r86;
@@ -24588,7 +24591,7 @@ CPyL3: ;
     CPy_DECREF(cpy_r_r86);
     cpy_r_r102 = cpy_r_r101 >= 0;
     if (unlikely(!cpy_r_r102)) {
-        CPy_AddTraceback("multicall/signature.py", "<module>", 99, CPyStatic_signature___globals);
+        CPy_AddTraceback("multicall/signature.py", "<module>", 98, CPyStatic_signature___globals);
         goto CPyL31;
     }
     return 1;
@@ -24653,9 +24656,9 @@ int CPyGlobalsInit(void)
     CPyModule_multicall___signature = Py_None;
     CPyModule_builtins = Py_None;
     CPyModule_typing = Py_None;
-    CPyModule_eth_abi___abi = Py_None;
-    CPyModule_eth_abi___decoding = Py_None;
-    CPyModule_eth_abi___encoding = Py_None;
+    CPyModule_faster_eth_abi___abi = Py_None;
+    CPyModule_faster_eth_abi___decoding = Py_None;
+    CPyModule_faster_eth_abi___encoding = Py_None;
     CPyModule_eth_hash___auto = Py_None;
     CPyModule_eth_typing = Py_None;
     if (CPyStatics_Initialize(CPyStatics, CPyLit_Str, CPyLit_Bytes, CPyLit_Int, CPyLit_Float, CPyLit_Complex, CPyLit_Tuple, CPyLit_FrozenSet) < 0) {
@@ -24749,12 +24752,12 @@ const char * const CPyLit_Str[] = {
     "\005\026multicall/multicall.py\005toolz\teth_utils\awarning\vlog_warning",
     "\006\fCallResponse\006concat\006mapcat\023multicall.multicall\005calls\017require_success",
     "\a\achainid\021multicall_address\tMulticall\004step\022NotSoBrightBatcher\abatcher\001 ",
-    "\t\001(\001)\002()\001,\bKeyError\bencoders\bdecoders\veth_abi.abi\aeth_abi",
-    "\004\020eth_abi.decoding\020eth_abi.encoding\reth_hash.auto\beth_hash",
-    "\005\026multicall/signature.py\aTypeStr\v_SIGNATURES\fTupleEncoder\fTupleDecoder",
-    "\006\006keccak\a_keccak\rdefault_codec\t_registry\vget_encoder\f_get_encoder",
-    "\005\vget_decoder\f_get_decoder\fstream_class\v_stream_cls\vinput_types",
-    "\004\foutput_types\bfourbyte\b_encoder\b_decoder",
+    "\t\001(\001)\002()\001,\bKeyError\bencoders\bdecoders\022faster_eth_abi.abi\016faster_eth_abi",
+    "\003\027faster_eth_abi.decoding\027faster_eth_abi.encoding\reth_hash.auto",
+    "\005\beth_hash\026multicall/signature.py\aTypeStr\v_SIGNATURES\fTupleEncoder",
+    "\006\fTupleDecoder\006keccak\a_keccak\rdefault_codec\t_registry\vget_encoder",
+    "\005\f_get_encoder\vget_decoder\f_get_decoder\fstream_class\v_stream_cls",
+    "\005\vinput_types\foutput_types\bfourbyte\b_encoder\b_decoder",
     "",
 };
 const char * const CPyLit_Bytes[] = {
@@ -24818,9 +24821,9 @@ CPyModule *CPyModule_time;
 CPyModule *CPyModule_requests;
 CPyModule *CPyModule_eth_utils;
 PyObject *CPyStatic_signature___globals;
-CPyModule *CPyModule_eth_abi___abi;
-CPyModule *CPyModule_eth_abi___decoding;
-CPyModule *CPyModule_eth_abi___encoding;
+CPyModule *CPyModule_faster_eth_abi___abi;
+CPyModule *CPyModule_faster_eth_abi___decoding;
+CPyModule *CPyModule_faster_eth_abi___encoding;
 CPyModule *CPyModule_eth_hash___auto;
 PyObject *CPyStatic_call___logger = NULL;
 PyObject *CPyStatic_call___log_debug = NULL;
