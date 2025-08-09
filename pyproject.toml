@@ -18,7 +18,7 @@ description = "aggregate results from multiple ethereum contract calls"
 authors = ["banteg"]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4"
+python = ">=3.10,<4"
 cchecksum = ">=0.0.3,<1"
 # These web3.py versions have a busted async provider and cannot be used in any multithreaded applications
 web3 = ">=5.27,!=5.29.*,!=5.30.*,!=5.31.0,!=5.31.1,!=5.31.2"
