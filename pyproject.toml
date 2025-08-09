@@ -20,6 +20,7 @@ authors = ["banteg"]
 [tool.poetry.dependencies]
 python = ">=3.10,<4"
 cchecksum = ">=0.0.3,<1"
+faster-eth-abi = ">=5.2.1,<6"
 # These web3.py versions have a busted async provider and cannot be used in any multithreaded applications
 web3 = ">=5.27,!=5.29.*,!=5.30.*,!=5.31.0,!=5.31.1,!=5.31.2"
 eth_retry = ">=0.3.5"
@@ -28,25 +29,22 @@ eth_retry = ">=0.3.5"
 pytest = ">=6.2.5"
 ruff = ">=0.3.5"
 joblib = ">=1.2"
-eth-brownie = [
-    { "version" = ">=1.19.3,<1.20", "python" = "<3.10" },
-    { "version" = ">=1.21,<1.22", "python" = ">=3.10,<4" }
-]
+eth-brownie = ">=1.21,<1.22"
 
-aiohttp = { "version" = "*", python = ">=3.9,<4" }
-frozenlist = { "version" = "*", python = ">=3.9,<4" }
-jsonschema-specifications = { "version" = "*", python = ">=3.9,<4" }
-importlib-resources = { "version" = "*", python = ">=3.9,<4" }
-multidict = { "version" = "*", python = ">=3.9,<4" }
-pkgutil-resolve-name = { "version" = "*", python = ">=3.9,<4" }
-pluggy = { "version" = "*", python = ">=3.9,<4" }
-protobuf = { "version" = "*", python = ">=3.9,<4" }
-pydantic = { "version" = "*", python = ">=3.9,<4" }
-referencing = { "version" = "*", python = ">=3.9,<4" }
-rpds-py = { "version" = "*", python = ">=3.9,<4" }
-urllib3 = { "version" = "*", python = ">=3.9,<4" }
-websockets = { "version" = "*", python = ">=3.9,<4" }
-yarl = { "version" = "*", python = ">=3.9,<4" }
+aiohttp = { "version" = "*", python = ">=3.10,<4" }
+frozenlist = { "version" = "*", python = ">=3.10,<4" }
+jsonschema-specifications = { "version" = "*", python = ">=3.10,<4" }
+importlib-resources = { "version" = "*", python = ">=3.10,<4" }
+multidict = { "version" = "*", python = ">=3.10,<4" }
+pkgutil-resolve-name = { "version" = "*", python = ">=3.10,<4" }
+pluggy = { "version" = "*", python = ">=3.10,<4" }
+protobuf = { "version" = "*", python = ">=3.10,<4" }
+pydantic = { "version" = "*", python = ">=3.10,<4" }
+referencing = { "version" = "*", python = ">=3.10,<4" }
+rpds-py = { "version" = "*", python = ">=3.10,<4" }
+urllib3 = { "version" = "*", python = ">=3.10,<4" }
+websockets = { "version" = "*", python = ">=3.10,<4" }
+yarl = { "version" = "*", python = ">=3.10,<4" }
 
 [build-system]
 requires = [
@@ -55,6 +53,7 @@ requires = [
     "mypy[mypyc]>=1.14.1,<1.17.1", 
     "tomli>=2.0.0; python_version < '3.11'",
     "types-requests",
+    "faster-eth-abi>=5.2.1,<6",
 ]
 build-backend = "setuptools.build_meta"
 
