@@ -81,7 +81,7 @@ class Call:
     def decode_output(
         output: Decodable,
         signature: Signature,
-        returns: Optional[Sequence[Tuple[Any, Callable]]] = None,
+        returns: Optional[Sequence[Tuple[Any, Optional[Callable]]]] = None,
         success: Optional[bool] = None,
     ) -> Any:
 
