@@ -6,7 +6,7 @@
 
 int CPyGlobalsInit(void);
 
-extern PyObject *CPyStatics[428];
+extern PyObject *CPyStatics[429];
 extern const char * const CPyLit_Str[];
 extern const char * const CPyLit_Bytes[];
 extern const char * const CPyLit_Int[];
@@ -166,6 +166,7 @@ extern PyObject *CPyStatic_constants___Network___PulseChain;
 extern PyObject *CPyStatic_constants___Network___PulseChainTestnet;
 extern PyObject *CPyStatic_constants___Network___Sei;
 extern PyObject *CPyStatic_constants___Network___Hoodi;
+extern PyObject *CPyStatic_constants___Network___HyperEVM;
 extern PyObject *CPyStatic_constants___MULTICALL_ADDRESSES;
 extern PyObject *CPyStatic_constants___MULTICALL2_ADDRESSES;
 extern PyObject *CPyStatic_constants___MULTICALL3_ADDRESSES;

@@ -311,6 +311,7 @@ struct export_table_847fc2cb349a9b029d5a {
     PyObject **CPyStatic_constants___Network___PulseChainTestnet;
     PyObject **CPyStatic_constants___Network___Sei;
     PyObject **CPyStatic_constants___Network___Hoodi;
+    PyObject **CPyStatic_constants___Network___HyperEVM;
     PyObject **CPyStatic_constants___MULTICALL_ADDRESSES;
     PyObject **CPyStatic_constants___MULTICALL2_ADDRESSES;
     PyObject **CPyStatic_constants___MULTICALL3_ADDRESSES;
