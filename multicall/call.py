@@ -1,5 +1,5 @@
 # mypy: disable-error-code="attr-defined"
-from typing import Any, Callable, Final, Generator, Iterable, List, Optional, Tuple, Union, final
+from typing import Any, Callable, Final, Generator, List, Optional, Sequence, Tuple, Union, final
 
 import eth_retry
 from cchecksum import to_checksum_address
@@ -45,7 +45,7 @@ class Call:
         target: AnyAddress,
         # 'funcName(dtype)(dtype)' or ['funcName(dtype)(dtype)', input0, input1, ...]
         function: Union[str, List[Union[str, Any]]],
-        returns: Optional[Iterable[Tuple[Any, Callable]]] = None,
+        returns: Optional[Sequence[Tuple[Any, Callable]]] = None,
         block_id: Optional[int] = None,
         gas_limit: Optional[int] = None,
         state_override_code: Optional[HexStr] = None,
@@ -81,7 +81,7 @@ class Call:
     def decode_output(
         output: Decodable,
         signature: Signature,
-        returns: Optional[Iterable[Tuple[Any, Callable]]] = None,
+        returns: Optional[Sequence[Tuple[Any, Callable]]] = None,
         success: Optional[bool] = None,
     ) -> Any:
 
