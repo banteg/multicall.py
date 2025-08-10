@@ -173,7 +173,7 @@ with open("readme.md", "r", encoding="utf-8") as readme:
 
 setup(
     name=poetry_config["name"].replace("-", "_"),
-    version=poetry_config["version"],
+    version="0.14.1",
     description=poetry_config["description"],
     python_requires=">=3.10,<4",
     packages=find_packages(),
