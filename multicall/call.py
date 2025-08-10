@@ -81,7 +81,7 @@ class Call:
     def decode_output(
         output: Decodable,
         signature: Signature,
-        returns: Optional[Iterable[Tuple[str, Optional[Callable]]]] = None,
+        returns: Optional[Iterable[Tuple[Any, Callable]]] = None,
         success: Optional[bool] = None,
     ) -> Any:
 
@@ -94,14 +94,14 @@ class Call:
             try:
                 decoded = signature.decode_data(output)
             except:
-                success, decoded = False, [None] * (len(returns) if returns else 1)  # type: ignore
+                success, decoded = False, [None] * (len(returns) if returns else 1)
         else:
-            decoded = [None] * (len(returns) if returns else 1)  # type: ignore
+            decoded = [None] * (len(returns) if returns else 1)
 
         if returns:
             return {
-                name: apply_handler(handler, value) if handler else value
-                for (name, handler), value in zip(returns, decoded)
+                ident: apply_handler(handler, value) if handler else value
+                for (ident, handler), value in zip(returns, decoded)
             }
         else:
             return decoded if len(decoded) > 1 else decoded[0]
