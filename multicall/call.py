@@ -45,7 +45,7 @@ class Call:
         target: AnyAddress,
         # 'funcName(dtype)(dtype)' or ['funcName(dtype)(dtype)', input0, input1, ...]
         function: Union[str, List[Union[str, Any]]],
-        returns: Optional[Iterable[Tuple[str, Callable]]] = None,
+        returns: Optional[Iterable[Tuple[Any, Callable]]] = None,
         block_id: Optional[int] = None,
         gas_limit: Optional[int] = None,
         state_override_code: Optional[HexStr] = None,
