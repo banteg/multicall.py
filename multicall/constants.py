@@ -91,6 +91,7 @@ class Network(IntEnum):
     PulseChainTestnet = 943
     Sei = 1329
     Hoodi = 560048
+    Linea = 59144
 
 
 MULTICALL_ADDRESSES: Final[Dict[int, ChecksumAddress]] = {
@@ -190,6 +191,7 @@ MULTICALL3_ADDRESSES: Final[Dict[int, ChecksumAddress]] = {
     Network.Holesky: "0xcA11bde05977b3631167028862bE2a173976CA11",
     Network.Sei: "0xcA11bde05977b3631167028862bE2a173976CA11",
     Network.Hoodi: "0xca11bde05977b3631167028862be2a173976ca11",
+    Network.Linea: "0xca11bde05977b3631167028862be2a173976ca11",
 }
 
 # With default AsyncBaseProvider settings, some dense calls will fail
