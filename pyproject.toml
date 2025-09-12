@@ -50,7 +50,7 @@ yarl = { "version" = "*", python = ">=3.10,<4" }
 requires = [
     "setuptools", 
     "wheel", 
-    "mypy[mypyc]>=1.14.1,<1.17.1", 
+    "mypy[mypyc]>=1.14.1,<1.18.2", 
     "tomli>=2.0.0; python_version < '3.11'",
     "types-requests",
     "faster-eth-abi>=5.2.1,<6",
