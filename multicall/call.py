@@ -199,5 +199,7 @@ def _apply_handler_to_value(handler: Callable[[Any], Any], value: Any) -> Any:
     return handler(value)
 
 
-def _apply_handler_to_success_and_value(handler: Callable[[bool, Any], Any], value: Any, success: bool) -> Any:
+def _apply_handler_to_success_and_value(
+    handler: Callable[[bool, Any], Any], value: Any, success: bool
+) -> Any:
     return handler(success, value)
