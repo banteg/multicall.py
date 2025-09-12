@@ -86,9 +86,9 @@ class Call:
     ) -> Any:
 
         if success is None:
-            apply_handler = lambda handler, value: handler(value)
+            apply_handler = _apply_handler_to_value
         else:
-            apply_handler = lambda handler, value: handler(success, value)
+            apply_handler = _apply_handler_to_success_and_value
 
         if success is None or success:
             try:
@@ -193,3 +193,11 @@ def prep_args(
         prepared_args.append({target: {"code": state_override_code}})  # type: ignore [dict-item]
 
     return prepared_args
+
+
+def _apply_handler_to_value(handler: Callable[[Any], Any], value: Any) -> Any:
+    return handler(value)
+
+
+def _apply_handler_to_success_and_value(handler: Callable[[bool, Any], Any], value: Any, success: bool) -> Any:
+    return handler(success, value)
