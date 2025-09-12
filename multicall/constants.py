@@ -92,6 +92,7 @@ class Network(IntEnum):
     Sei = 1329
     Hoodi = 560048
     HyperEVM = 999
+    Berachain = 80094
 
 
 MULTICALL_ADDRESSES: Final[Dict[int, ChecksumAddress]] = {
