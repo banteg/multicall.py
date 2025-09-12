@@ -85,6 +85,7 @@ class Call:
         success: Optional[bool] = None,
     ) -> Any:
 
+        apply_handler: Callable[[Any], Any] | Callable[[bool, Any], Any]
         if success is None:
             apply_handler = _apply_handler_to_value
         else:
