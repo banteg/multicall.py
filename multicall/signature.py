@@ -119,7 +119,9 @@ class Signature(Generic[T]):
 
     @classmethod
     # TODO: overload this for common output types
-    def from_parts(cls, function: str, input_types: Iterable[TypeStr], output_types: Iterable[TypeStr]) -> "Signature[Any]":
+    def from_parts(
+        cls, function: str, input_types: Iterable[TypeStr], output_types: Iterable[TypeStr]
+    ) -> "Signature[Any]":
         # This classmethod exists to help you generate type-aware Signature objects from Literal type strs
         return Signature(f"{function}({','.join(input_types)})({','.join(output_types)})")
 
