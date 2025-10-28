@@ -117,6 +117,12 @@ class Signature(Generic[T]):
             _get_tuple_decoder(output_types) if output_types else None
         )
 
+    @classmethod
+    # TODO: overload this for common output types
+    def from_parts(cls, function: str, input_types: Iterable[TypeStr], output_types: Iterable[TypeStr]) -> "Signature[Any]":
+        # This classmethod exists to help you generate type-aware Signature objects from Literal type strs
+        return Signature(f"{function}({','.join(input_types)})({','.join(output_types)})")
+
     def encode_data(self, args: Optional[Union[List[Any], Tuple[Any, ...]]] = None) -> bytes:
         return self.fourbyte + self._encoder(args) if args else self.fourbyte
 
