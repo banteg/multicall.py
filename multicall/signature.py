@@ -5,16 +5,15 @@ import faster_eth_abi.decoding
 import faster_eth_abi.encoding
 import eth_hash.auto
 from eth_typing import Decodable, TypeStr
+from faster_eth_abi.decoding import TupleDecoder
+from faster_eth_abi.encoding import TupleEncoder
 
 
 _SIGNATURES: Final[Dict[str, "Signature"]] = {}
 
-TupleEncoder: Final = faster_eth_abi.encoding.TupleEncoder
-TupleDecoder: Final = faster_eth_abi.decoding.TupleDecoder
-
 _keccak: Final = eth_hash.auto.keccak
-_get_encoder: Final = faster_eth_abi.abi.default_codec._registry.get_encoder
-_get_decoder: Final = faster_eth_abi.abi.default_codec._registry.get_decoder
+_get_tuple_encoder: Final = faster_eth_abi.abi.default_codec._registry.get_tuple_encoder
+_get_tuple_decoder: Final = faster_eth_abi.abi.default_codec._registry.get_tuple_decoder
 _stream_cls: Final = faster_eth_abi.abi.default_codec.stream_class
 
 
@@ -95,7 +94,7 @@ def _get_signature(signature: str) -> "Signature":
 
 
 @final
-class Signature:
+class Signature(Generic[T]):
     __slots__ = (
         "signature",
         "function",
@@ -108,24 +107,26 @@ class Signature:
 
     def __init__(self, signature: str) -> None:
         self.signature: Final = signature
-        parsed = parse_signature(signature)
-        self.function: Final = parsed[0]
-        input_types = parsed[1]
+        function, input_types, output_types = parse_signature(signature)
+        self.function: Final = function
         self.input_types: Final = input_types
-        output_types = parsed[2]
         self.output_types: Final = output_types
         self.fourbyte: Final = get_4byte_selector(self.function)
-        self._encoder: Final = (
-            TupleEncoder(encoders=tuple(_get_encoder(type_str) for type_str in input_types))
-            if input_types
-            else None
+        self._encoder: Final = _get_tuple_encoder(input_types) if input_types else None
+        self._decoder: Final[TupleDecoder[T]] = (
+            _get_tuple_decoder(output_types) if output_types else None
         )
-        self._decoder: Final = TupleDecoder(
-            decoders=tuple(_get_decoder(type_str) for type_str in output_types)
-        )
+
+    @classmethod
+    # TODO: overload this for common output types
+    def from_parts(
+        cls, function: str, input_types: Iterable[TypeStr], output_types: Iterable[TypeStr]
+    ) -> "Signature[Any]":
+        # This classmethod exists to help you generate type-aware Signature objects from Literal type strs
+        return Signature(f"{function}({','.join(input_types)})({','.join(output_types)})")
 
     def encode_data(self, args: Optional[Union[List[Any], Tuple[Any, ...]]] = None) -> bytes:
-        return self.fourbyte + self._encoder(args) if args else self.fourbyte  # type: ignore [misc]
+        return self.fourbyte + self._encoder(args) if args else self.fourbyte
 
-    def decode_data(self, output: Decodable) -> Any:
+    def decode_data(self, output: Decodable) -> Tuple[T, ...]:
         return self._decoder(_stream_cls(output))
