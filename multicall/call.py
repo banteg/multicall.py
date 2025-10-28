@@ -77,11 +77,20 @@ class Call:
     def data(self) -> bytes:
         return self.signature.encode_data(self.args)
 
+    @overload
     @staticmethod
     def decode_output(
         output: Decodable,
         signature: Signature,
-        returns: Optional[Sequence[Tuple[Any, Optional[Callable]]]] = None,
+        returns: Sequence[Tuple[TIdent, Optional[Callable[[Any], TReturn]]]],
+        success: Optional[bool] = None,
+    ) -> Dict[TIdent, TReturn]: ...
+
+    @staticmethod
+    def decode_output(
+        output: Decodable,
+        signature: Signature,
+        returns: Optional[Sequence[Tuple[Any, Optional[Callable[[Any], Any]]]]] = None,
         success: Optional[bool] = None,
     ) -> Any:
 
@@ -94,9 +103,10 @@ class Call:
             try:
                 decoded = signature.decode_data(output)
             except:
-                success, decoded = False, [None] * (len(returns) if returns else 1)
+                success = False
+                decoded = tuple(None for i in len(returns)) if returns else (None,)
         else:
-            decoded = [None] * (len(returns) if returns else 1)
+            decoded = tuple(None for i in len(returns)) if returns else (None,)
 
         if returns:
             return {
