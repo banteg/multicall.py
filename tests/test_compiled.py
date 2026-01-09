@@ -15,6 +15,6 @@ def test_compiled_extensions_loaded():
     }
     for name, module in modules.items():
         module_path = Path(module.__file__)
-        assert module_path.suffix in extension_suffixes, (
-            f"{name} should be loaded from a compiled extension, got {module_path}"
-        )
+        assert (
+            module_path.suffix in extension_suffixes
+        ), f"{name} should be loaded from a compiled extension, got {module_path}"
