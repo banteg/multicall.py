@@ -82,7 +82,7 @@ def get_async_w3(w3: Web3) -> Web3:
         if major_version >= 7:
             async_w3 = AsyncWeb3(provider, middleware=[])
         else:
-            async_w3 = AsyncWeb3(provider, middlewares=[])
+            async_w3 = AsyncWeb3(provider, middlewares=[])  # type: ignore [call-arg]
     else:
         async_w3 = Web3(provider=provider, middlewares=[])
         async_w3.eth = AsyncEth(async_w3)
