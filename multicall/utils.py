@@ -1,18 +1,20 @@
 # mypy: disable-error-code="attr-defined"
-from asyncio import AbstractEventLoop, Semaphore, new_event_loop, set_event_loop
+from asyncio import AbstractEventLoop, Semaphore
 from asyncio import gather as _gather
 from asyncio import get_event_loop as _get_event_loop
+from asyncio import new_event_loop, set_event_loop
 from collections.abc import Awaitable, Iterable
 from typing import Any, Final, TypeVar
 
 import eth_retry
-from aiohttp import ClientTimeout
 import web3
+from aiohttp import ClientTimeout
 from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
-from multicall.constants import AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE, NO_STATE_OVERRIDE
+from multicall.constants import (AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE,
+                                 NO_STATE_OVERRIDE)
 
 try:
     from web3 import AsyncWeb3
