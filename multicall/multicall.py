@@ -11,11 +11,21 @@ from eth_utils import toolz
 from web3 import Web3
 
 from multicall.call import Call
-from multicall.constants import (GAS_LIMIT, MULTICALL2_ADDRESSES,
-                                 MULTICALL3_ADDRESSES, MULTICALL3_BYTECODE, w3)
+from multicall.constants import (
+    GAS_LIMIT,
+    MULTICALL2_ADDRESSES,
+    MULTICALL3_ADDRESSES,
+    MULTICALL3_BYTECODE,
+    w3,
+)
 from multicall.loggers import setup_logger
-from multicall.utils import (_get_semaphore, await_awaitable, chain_id, gather,
-                             state_override_supported)
+from multicall.utils import (
+    _get_semaphore,
+    await_awaitable,
+    chain_id,
+    gather,
+    state_override_supported,
+)
 
 logger: Final = setup_logger(__name__)
 log_warning: Final = logger.warning
