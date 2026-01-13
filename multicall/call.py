@@ -1,5 +1,5 @@
 # mypy: disable-error-code="attr-defined"
-from typing import Any, Final, List, Optional, Tuple, Union, final
+from typing import Any, Final, Union, final
 from collections.abc import Callable, Generator, Sequence
 
 import eth_retry

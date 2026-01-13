@@ -1,4 +1,4 @@
-from typing import Any, Dict, Final, List, Optional, Tuple, Union, final
+from typing import Any, Final, final
 
 import faster_eth_abi.abi
 import faster_eth_abi.decoding

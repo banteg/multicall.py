@@ -2,7 +2,7 @@
 from asyncio import AbstractEventLoop, Semaphore, new_event_loop, set_event_loop
 from asyncio import gather as _gather
 from asyncio import get_event_loop as _get_event_loop
-from typing import Any, Dict, Final, List, TypeVar
+from typing import Any, Final, TypeVar
 from collections.abc import Awaitable, Iterable
 
 import eth_retry

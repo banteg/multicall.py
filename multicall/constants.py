@@ -1,7 +1,7 @@
 # mypy: disable-error-code="dict-item, no-redef"
 import os
 from enum import IntEnum
-from typing import Dict, Final, final
+from typing import Final, final
 
 from aiohttp import ClientTimeout
 from eth_typing import ChecksumAddress, HexStr
@@ -14,9 +14,9 @@ try:
     if network.is_connected():
         w3 = web3
     else:
-        from web3.auto import w3
+        pass
 except ImportError:
-    from web3.auto import w3
+    pass
 
 
 GAS_LIMIT: Final = int(os.environ.get("GAS_LIMIT", 50_000_000))

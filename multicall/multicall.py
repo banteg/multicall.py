@@ -1,6 +1,6 @@
 from asyncio import TimeoutError
 from time import time
-from typing import Any, Dict, Final, List, Optional, Tuple, Union, final
+from typing import Any, Final, Union, final
 from collections.abc import Generator, Sequence
 
 import aiohttp
