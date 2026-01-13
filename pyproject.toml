@@ -8,6 +8,9 @@ dynamic = ["version", "dependencies", "readme", "classifiers"]
 [tool.setuptools.dynamic.readme]
 file = "readme.md"
 
+[tool.setuptools.dynamic.version]
+attr = "multicall.__version__"
+
 [tool.setuptools.dynamic.classifiers]
 file = "attr:classifiers"
 
