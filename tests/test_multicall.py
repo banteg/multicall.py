@@ -32,7 +32,7 @@ def from_ray_require_success(success, val):
     return val / 1e27
 
 
-def unpack_no_success(success: bool, output: Any) -> Tuple[bool, Any]:
+def unpack_no_success(success: bool, output: Any) -> tuple[bool, Any]:
     return (success, output)
 
 

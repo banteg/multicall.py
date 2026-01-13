@@ -1,6 +1,7 @@
 from asyncio import TimeoutError
 from time import time
-from typing import Any, Dict, Final, Generator, List, Optional, Sequence, Tuple, Union, final
+from typing import Any, Dict, Final, List, Optional, Tuple, Union, final
+from collections.abc import Generator, Sequence
 
 import aiohttp
 import cchecksum
@@ -30,7 +31,7 @@ logger: Final = setup_logger(__name__)
 log_warning: Final = logger.warning
 log_debug: Final = logger.debug
 
-CallResponse = Tuple[Union[None, bool], bytes]
+CallResponse = tuple[Union[None, bool], bytes]
 
 to_checksum_address: Final = cchecksum.to_checksum_address
 
@@ -38,13 +39,13 @@ concat: Final = toolz.concat  # type: ignore [attr-defined]
 mapcat: Final = toolz.mapcat  # type: ignore [attr-defined]
 
 
-def get_args(calls: List[Call], require_success: bool = True) -> List[Union[bool, List[List[Any]]]]:
+def get_args(calls: list[Call], require_success: bool = True) -> list[bool | list[list[Any]]]:
     if require_success is True:
         return [[[call.target, call.data] for call in calls]]
     return [require_success, [[call.target, call.data] for call in calls]]
 
 
-def unpack_aggregate_outputs(outputs: Any) -> Tuple[CallResponse, ...]:
+def unpack_aggregate_outputs(outputs: Any) -> tuple[CallResponse, ...]:
     return tuple((None, output) for output in outputs)
 
 
@@ -63,12 +64,12 @@ class Multicall:
 
     def __init__(
         self,
-        calls: List[Call],
-        block_id: Optional[int] = None,
+        calls: list[Call],
+        block_id: int | None = None,
         require_success: bool = True,
         gas_limit: int = GAS_LIMIT,
         _w3: Web3 = w3,
-        origin: Optional[AnyAddress] = None,
+        origin: AnyAddress | None = None,
     ) -> None:
         self.calls: Final = calls
         self.block_id = block_id
@@ -83,13 +84,13 @@ class Multicall:
         )
         self.multicall_address: Final = multicall_map[chainid]
 
-    def __call__(self) -> Dict[str, Any]:
+    def __call__(self) -> dict[str, Any]:
         start = time()
         response = await_awaitable(self)
         log_debug("Multicall took %ss", time() - start)
         return response
 
-    def __await__(self) -> Generator[Any, Any, Dict[str, Any]]:
+    def __await__(self) -> Generator[Any, Any, dict[str, Any]]:
         return self.coroutine().__await__()
 
     @property
@@ -100,7 +101,7 @@ class Multicall:
             else "tryBlockAndAggregate(bool,(address,bytes)[])(uint256,uint256,(bool,bytes)[])"
         )
 
-    async def coroutine(self) -> Dict[str, Any]:
+    async def coroutine(self) -> dict[str, Any]:
         batches = await gather(
             (
                 self.fetch_outputs(batch, id=str(i))
@@ -157,8 +158,8 @@ class Multicall:
         self._contract_method(signature, return_signature)
 
     async def fetch_outputs(
-        self, calls: List[Call], ConnErr_retries: int = 0, id: str = ""
-    ) -> List[CallResponse]:
+        self, calls: list[Call], ConnErr_retries: int = 0, id: str = ""
+    ) -> list[CallResponse]:
         log_debug("coroutine %s started", id)
 
         if calls is None:
@@ -231,7 +232,7 @@ class NotSoBrightBatcher:
     def __init__(self) -> None:
         self.step = 10000
 
-    def batch_calls(self, calls: List[Call], step: int) -> List[List[Call]]:
+    def batch_calls(self, calls: list[Call], step: int) -> list[list[Call]]:
         """
         Batch calls into chunks of size `self.step`.
         """
@@ -246,8 +247,8 @@ class NotSoBrightBatcher:
             start = end
 
     def split_calls(
-        self, calls: List[Call], unused: Optional[int] = None
-    ) -> Tuple[List[Call], List[Call]]:
+        self, calls: list[Call], unused: int | None = None
+    ) -> tuple[list[Call], list[Call]]:
         """
         Split calls into 2 batches in case request is too large.
         We do this to help us find optimal `self.step` value.
@@ -257,7 +258,7 @@ class NotSoBrightBatcher:
         chunk_2 = calls[center:]
         return chunk_1, chunk_2
 
-    def rebatch(self, calls: List[Call]) -> Sequence[List[Call]]:
+    def rebatch(self, calls: list[Call]) -> Sequence[list[Call]]:
         # If a separate coroutine changed `step` after calls were last batched, we will use the new `step` for rebatching.
         if self.step <= len(calls) // 2:
             return self.batch_calls(calls, self.step)
@@ -277,7 +278,7 @@ batcher: Final = NotSoBrightBatcher()
 
 def _raise_or_proceed(e: Exception, ct_calls: int, ConnErr_retries: int) -> None:
     """Depending on the exception, either raises or ignores and allows `batcher` to rebatch."""
-    strings: Tuple[str, ...]
+    strings: tuple[str, ...]
     if isinstance(e, aiohttp.ClientOSError):
         if "broken pipe" not in str(e).lower():
             raise e
