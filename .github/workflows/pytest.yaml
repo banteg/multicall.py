@@ -56,7 +56,7 @@ jobs:
       - name: Install Poetry
         if: steps.cached-poetry.outputs.cache-hit != 'true' && matrix.pyversion != '3.8'
         uses: snok/install-poetry@v1
-          
+
       - name: Install Poetry (Python3.8)
         if: steps.cached-poetry.outputs.cache-hit != 'true' &&  matrix.pyversion == '3.8'
         uses: snok/install-poetry@v1
@@ -66,20 +66,25 @@ jobs:
       - name: Update Lockfile (Python3.8)
         if: matrix.pyversion == '3.8'
         run: poetry lock
+        shell: bash
         
       - name: Install Dependencies
         run: poetry install
+        shell: bash
         
       - name: Install Setuptools for `pkg_resources` so web3.py works
         run: poetry run pip install -U setuptools
+        shell: bash
       
       - name: Setup brownie networks
         run: |
           poetry run brownie networks modify mainnet host=${{ secrets.WEB3_PROVIDER }}
+        shell: bash
         continue-on-error: true
 
       - name: Install Multicall
         run: poetry run python -m pip install .
+        shell: bash
 
       - name: Run test suite
         env:
@@ -87,3 +92,4 @@ jobs:
           ETHERSCAN_TOKEN: ${{ secrets.ETHERSCAN_TOKEN  }}
           GAS_LIMIT: 5000000
         run: poetry run pytest
+        shell: bash
