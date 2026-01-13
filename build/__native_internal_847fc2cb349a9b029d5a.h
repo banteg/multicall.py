@@ -1,5 +1,5 @@
-#ifndef MYPYC_NATIVE_INTERNAL_847fc2cb349a9b029d5a_H
-#define MYPYC_NATIVE_INTERNAL_847fc2cb349a9b029d5a_H
+#ifndef MYPYC_LIBRT_INTERNAL_847fc2cb349a9b029d5a_H
+#define MYPYC_LIBRT_INTERNAL_847fc2cb349a9b029d5a_H
 #include <Python.h>
 #include <CPy.h>
 #include "__native_847fc2cb349a9b029d5a.h"
@@ -67,6 +67,9 @@ extern CPyThreadLocal multicall___call_____mypyc_lambda__0_decode_output_Call_ob
 extern PyTypeObject *CPyType_call_____mypyc_lambda__1_decode_output_Call_obj;
 extern PyObject *CPyDef_call_____mypyc_lambda__1_decode_output_Call_obj(void);
 extern CPyThreadLocal multicall___call_____mypyc_lambda__1_decode_output_Call_objObject *call_____mypyc_lambda__1_decode_output_Call_obj_free_instance;
+extern PyTypeObject *CPyType_call___coroutine_Call_env;
+extern PyObject *CPyDef_call___coroutine_Call_env(void);
+extern CPyThreadLocal multicall___call___coroutine_Call_envObject *call___coroutine_Call_env_free_instance;
 extern PyTypeObject *CPyType_call___coroutine_Call_gen;
 extern PyObject *CPyDef_call___coroutine_Call_gen(void);
 extern CPyThreadLocal multicall___call___coroutine_Call_genObject *call___coroutine_Call_gen_free_instance;

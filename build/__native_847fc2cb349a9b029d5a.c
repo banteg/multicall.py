@@ -83,6 +83,7 @@ call___Call_dealloc(multicall___call___CallObject *self)
     call___Call_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem call___Call_vtable[7];
@@ -183,6 +184,7 @@ static PyGetSetDef call___Call_getseters[] = {
 };
 
 static PyMethodDef call___Call_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_call_____mypyc__Call_setup, METH_O, NULL},
     {"__init__",
      (PyCFunction)CPyPy_call___Call_____init__,
      METH_FASTCALL | METH_KEYWORDS, PyDoc_STR("__init__($self, target, function, returns=None, block_id=None, gas_limit=None, state_override_code=None, _w3=None, origin=None)\n--\n\n")},
@@ -753,6 +755,7 @@ call___decode_output_Call_env_dealloc(multicall___call___decode_output_Call_envO
     call___decode_output_Call_env_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem call___decode_output_Call_env_vtable[1];
@@ -767,6 +770,7 @@ CPyDef_call___decode_output_Call_env_trait_vtable_setup(void)
 }
 
 static PyMethodDef call___decode_output_Call_env_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_call_____mypyc__decode_output_Call_env_setup, METH_O, NULL},
     {"__setstate__", (PyCFunction)CPyPickle_SetState, METH_O, NULL},
     {"__getstate__", (PyCFunction)CPyPickle_GetState, METH_NOARGS, NULL},
     {NULL}  /* Sentinel */
@@ -862,6 +866,7 @@ call_____mypyc_lambda__0_decode_output_Call_obj_dealloc(multicall___call_____myp
     call_____mypyc_lambda__0_decode_output_Call_obj_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem call_____mypyc_lambda__0_decode_output_Call_obj_vtable[2];
@@ -890,6 +895,7 @@ static PyGetSetDef call_____mypyc_lambda__0_decode_output_Call_obj_getseters[] =
 };
 
 static PyMethodDef call_____mypyc_lambda__0_decode_output_Call_obj_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_call_____mypyc___3__mypyc_lambda__0_decode_output_Call_obj_setup, METH_O, NULL},
     {"__call__",
      (PyCFunction)CPyPy_call_____mypyc_lambda__0_decode_output_Call_obj_____call__,
      METH_FASTCALL | METH_KEYWORDS, PyDoc_STR("__call__($handler, value)\n--\n\n")},
@@ -1033,6 +1039,7 @@ call_____mypyc_lambda__1_decode_output_Call_obj_dealloc(multicall___call_____myp
     call_____mypyc_lambda__1_decode_output_Call_obj_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem call_____mypyc_lambda__1_decode_output_Call_obj_vtable[2];
@@ -1061,6 +1068,7 @@ static PyGetSetDef call_____mypyc_lambda__1_decode_output_Call_obj_getseters[] =
 };
 
 static PyMethodDef call_____mypyc_lambda__1_decode_output_Call_obj_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_call_____mypyc___3__mypyc_lambda__1_decode_output_Call_obj_setup, METH_O, NULL},
     {"__call__",
      (PyCFunction)CPyPy_call_____mypyc_lambda__1_decode_output_Call_obj_____call__,
      METH_FASTCALL | METH_KEYWORDS, PyDoc_STR("__call__($handler, value)\n--\n\n")},
@@ -1155,32 +1163,34 @@ call_____mypyc_lambda__1_decode_output_Call_obj_set___3_mypyc_env__(multicall___
     return 0;
 }
 
-static PyAsyncMethods call___coroutine_Call_gen_as_async = {
-    .am_await = CPyDef_call___coroutine_Call_gen_____await__,
-};
-PyObject *CPyDef_call_____mypyc__coroutine_Call_gen_setup(PyObject *cpy_r_type);
-PyObject *CPyDef_call___coroutine_Call_gen(void);
+PyObject *CPyDef_call_____mypyc__coroutine_Call_env_setup(PyObject *cpy_r_type);
+PyObject *CPyDef_call___coroutine_Call_env(void);
 
 static PyObject *
-call___coroutine_Call_gen_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+call___coroutine_Call_env_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 {
-    if (type != CPyType_call___coroutine_Call_gen) {
+    if (type != CPyType_call___coroutine_Call_env) {
         PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
         return NULL;
     }
-    PyObject *self = CPyDef_call_____mypyc__coroutine_Call_gen_setup((PyObject*)type);
+    PyObject *self = CPyDef_call_____mypyc__coroutine_Call_env_setup((PyObject*)type);
     if (self == NULL)
         return NULL;
     return self;
 }
 
 static int
-call___coroutine_Call_gen_traverse(multicall___call___coroutine_Call_genObject *self, visitproc visit, void *arg)
+call___coroutine_Call_env_traverse(multicall___call___coroutine_Call_envObject *self, visitproc visit, void *arg)
 {
+    Py_VISIT(self->___mypyc_self__);
     Py_VISIT(self->___mypyc_generator_attribute__self);
     Py_VISIT(self->___mypyc_generator_attribute__args);
     Py_VISIT(self->___mypyc_generator_attribute___w3);
     Py_VISIT(self->___mypyc_generator_attribute__block_id);
+    Py_VISIT(self->_type);
+    Py_VISIT(self->_value);
+    Py_VISIT(self->_traceback);
+    Py_VISIT(self->_arg);
     Py_VISIT(self->___mypyc_temp__0);
     Py_VISIT(self->___mypyc_temp__1);
     Py_VISIT(self->___mypyc_temp__3);
@@ -1208,12 +1218,17 @@ call___coroutine_Call_gen_traverse(multicall___call___coroutine_Call_genObject *
 }
 
 static int
-call___coroutine_Call_gen_clear(multicall___call___coroutine_Call_genObject *self)
+call___coroutine_Call_env_clear(multicall___call___coroutine_Call_envObject *self)
 {
+    Py_CLEAR(self->___mypyc_self__);
     Py_CLEAR(self->___mypyc_generator_attribute__self);
     Py_CLEAR(self->___mypyc_generator_attribute__args);
     Py_CLEAR(self->___mypyc_generator_attribute___w3);
     Py_CLEAR(self->___mypyc_generator_attribute__block_id);
+    Py_CLEAR(self->_type);
+    Py_CLEAR(self->_value);
+    Py_CLEAR(self->_traceback);
+    Py_CLEAR(self->_arg);
     Py_CLEAR(self->___mypyc_temp__0);
     Py_CLEAR(self->___mypyc_temp__1);
     Py_CLEAR(self->___mypyc_temp__3);
@@ -1241,15 +1256,21 @@ call___coroutine_Call_gen_clear(multicall___call___coroutine_Call_genObject *sel
 }
 
 static void
-call___coroutine_Call_gen_dealloc(multicall___call___coroutine_Call_genObject *self)
+call___coroutine_Call_env_dealloc(multicall___call___coroutine_Call_envObject *self)
 {
     PyObject_GC_UnTrack(self);
-    if (call___coroutine_Call_gen_free_instance == NULL) {
-        call___coroutine_Call_gen_free_instance = self;
+    if (call___coroutine_Call_env_free_instance == NULL) {
+        call___coroutine_Call_env_free_instance = self;
+        Py_CLEAR(self->___mypyc_self__);
         Py_CLEAR(self->___mypyc_generator_attribute__self);
         Py_CLEAR(self->___mypyc_generator_attribute__args);
         Py_CLEAR(self->___mypyc_generator_attribute___w3);
         Py_CLEAR(self->___mypyc_generator_attribute__block_id);
+        Py_CLEAR(self->_type);
+        Py_CLEAR(self->_value);
+        Py_CLEAR(self->_traceback);
+        Py_CLEAR(self->_arg);
+        self->_stop_iter_ptr = NULL;
         self->___mypyc_next_label__ = -113;
         Py_CLEAR(self->___mypyc_temp__0);
         Py_CLEAR(self->___mypyc_temp__1);
@@ -1277,10 +1298,126 @@ call___coroutine_Call_gen_dealloc(multicall___call___coroutine_Call_genObject *s
         Py_CLEAR(self->___mypyc_generator_attribute__result);
         return;
     }
+    CPy_TRASHCAN_BEGIN(self, call___coroutine_Call_env_dealloc)
+    call___coroutine_Call_env_clear(self);
+    Py_TYPE(self)->tp_free((PyObject *)self);
+    CPy_TRASHCAN_END(self)
+    done: ;
+}
+
+static CPyVTableItem call___coroutine_Call_env_vtable[1];
+static bool
+CPyDef_call___coroutine_Call_env_trait_vtable_setup(void)
+{
+    CPyVTableItem call___coroutine_Call_env_vtable_scratch[] = {
+        NULL
+    };
+    memcpy(call___coroutine_Call_env_vtable, call___coroutine_Call_env_vtable_scratch, sizeof(call___coroutine_Call_env_vtable));
+    return 1;
+}
+
+static PyMethodDef call___coroutine_Call_env_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_call_____mypyc__coroutine_Call_env_setup, METH_O, NULL},
+    {"__setstate__", (PyCFunction)CPyPickle_SetState, METH_O, NULL},
+    {"__getstate__", (PyCFunction)CPyPickle_GetState, METH_NOARGS, NULL},
+    {NULL}  /* Sentinel */
+};
+
+static PyTypeObject CPyType_call___coroutine_Call_env_template_ = {
+    PyVarObject_HEAD_INIT(NULL, 0)
+    .tp_name = "coroutine_Call_env",
+    .tp_new = call___coroutine_Call_env_new,
+    .tp_dealloc = (destructor)call___coroutine_Call_env_dealloc,
+    .tp_traverse = (traverseproc)call___coroutine_Call_env_traverse,
+    .tp_clear = (inquiry)call___coroutine_Call_env_clear,
+    .tp_methods = call___coroutine_Call_env_methods,
+    .tp_basicsize = sizeof(multicall___call___coroutine_Call_envObject),
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HEAPTYPE | Py_TPFLAGS_BASETYPE | Py_TPFLAGS_HAVE_GC,
+    .tp_doc = PyDoc_STR("coroutine_Call_env()\n--\n\n"),
+};
+static PyTypeObject *CPyType_call___coroutine_Call_env_template = &CPyType_call___coroutine_Call_env_template_;
+
+PyObject *CPyDef_call_____mypyc__coroutine_Call_env_setup(PyObject *cpy_r_type)
+{
+    PyTypeObject *type = (PyTypeObject*)cpy_r_type;
+    multicall___call___coroutine_Call_envObject *self;
+    if (call___coroutine_Call_env_free_instance != NULL) {
+        self = call___coroutine_Call_env_free_instance;
+        call___coroutine_Call_env_free_instance = NULL;
+        Py_SET_REFCNT(self, 1);
+        PyObject_GC_Track(self);
+        return (PyObject *)self;
+    }
+    self = (multicall___call___coroutine_Call_envObject *)type->tp_alloc(type, 0);
+    if (self == NULL)
+        return NULL;
+    self->vtable = call___coroutine_Call_env_vtable;
+    self->___mypyc_next_label__ = -113;
+    self->___mypyc_temp__2 = 2;
+    self->___mypyc_temp__4 = (tuple_T3OOO) { NULL, NULL, NULL };
+    self->___mypyc_temp__6 = (tuple_T3OOO) { NULL, NULL, NULL };
+    self->___mypyc_temp__7 = (tuple_T3OOO) { NULL, NULL, NULL };
+    self->___mypyc_temp__9 = (tuple_T3OOO) { NULL, NULL, NULL };
+    self->___mypyc_temp__11 = (tuple_T3OOO) { NULL, NULL, NULL };
+    return (PyObject *)self;
+}
+
+PyObject *CPyDef_call___coroutine_Call_env(void)
+{
+    PyObject *self = CPyDef_call_____mypyc__coroutine_Call_env_setup((PyObject *)CPyType_call___coroutine_Call_env);
+    if (self == NULL)
+        return NULL;
+    return self;
+}
+
+
+static PyAsyncMethods call___coroutine_Call_gen_as_async = {
+    .am_await = CPyDef_call___coroutine_Call_gen_____await__,
+};
+PyObject *CPyDef_call_____mypyc__coroutine_Call_gen_setup(PyObject *cpy_r_type);
+PyObject *CPyDef_call___coroutine_Call_gen(void);
+
+static PyObject *
+call___coroutine_Call_gen_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+{
+    if (type != CPyType_call___coroutine_Call_gen) {
+        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+        return NULL;
+    }
+    PyObject *self = CPyDef_call_____mypyc__coroutine_Call_gen_setup((PyObject*)type);
+    if (self == NULL)
+        return NULL;
+    return self;
+}
+
+static int
+call___coroutine_Call_gen_traverse(multicall___call___coroutine_Call_genObject *self, visitproc visit, void *arg)
+{
+    Py_VISIT(self->___mypyc_env__);
+    return 0;
+}
+
+static int
+call___coroutine_Call_gen_clear(multicall___call___coroutine_Call_genObject *self)
+{
+    Py_CLEAR(self->___mypyc_env__);
+    return 0;
+}
+
+static void
+call___coroutine_Call_gen_dealloc(multicall___call___coroutine_Call_genObject *self)
+{
+    PyObject_GC_UnTrack(self);
+    if (call___coroutine_Call_gen_free_instance == NULL) {
+        call___coroutine_Call_gen_free_instance = self;
+        Py_CLEAR(self->___mypyc_env__);
+        return;
+    }
     CPy_TRASHCAN_BEGIN(self, call___coroutine_Call_gen_dealloc)
     call___coroutine_Call_gen_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem call___coroutine_Call_gen_vtable[7];
@@ -1301,6 +1438,7 @@ CPyDef_call___coroutine_Call_gen_trait_vtable_setup(void)
 }
 
 static PyMethodDef call___coroutine_Call_gen_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_call_____mypyc__coroutine_Call_gen_setup, METH_O, NULL},
     {"__next__",
      (PyCFunction)CPyPy_call___coroutine_Call_gen_____next__,
      METH_FASTCALL | METH_KEYWORDS, PyDoc_STR("__next__()\n--\n\n")},
@@ -1356,13 +1494,6 @@ PyObject *CPyDef_call_____mypyc__coroutine_Call_gen_setup(PyObject *cpy_r_type)
     if (self == NULL)
         return NULL;
     self->vtable = call___coroutine_Call_gen_vtable;
-    self->___mypyc_next_label__ = -113;
-    self->___mypyc_temp__2 = 2;
-    self->___mypyc_temp__4 = (tuple_T3OOO) { NULL, NULL, NULL };
-    self->___mypyc_temp__6 = (tuple_T3OOO) { NULL, NULL, NULL };
-    self->___mypyc_temp__7 = (tuple_T3OOO) { NULL, NULL, NULL };
-    self->___mypyc_temp__9 = (tuple_T3OOO) { NULL, NULL, NULL };
-    self->___mypyc_temp__11 = (tuple_T3OOO) { NULL, NULL, NULL };
     return (PyObject *)self;
 }
 
@@ -1389,15 +1520,23 @@ int CPyExec_multicall___call(PyObject *module)
     CPyType_call___decode_output_Call_env = (PyTypeObject *)CPyType_FromTemplate((PyObject *)CPyType_call___decode_output_Call_env_template, NULL, modname);
     if (unlikely(!CPyType_call___decode_output_Call_env))
         goto fail;
+    CPyDef_call___decode_output_Call_env_trait_vtable_setup();
     CPyType_call_____mypyc_lambda__0_decode_output_Call_obj = (PyTypeObject *)CPyType_FromTemplate((PyObject *)CPyType_call_____mypyc_lambda__0_decode_output_Call_obj_template, NULL, modname);
     if (unlikely(!CPyType_call_____mypyc_lambda__0_decode_output_Call_obj))
         goto fail;
+    CPyDef_call_____mypyc_lambda__0_decode_output_Call_obj_trait_vtable_setup();
     CPyType_call_____mypyc_lambda__1_decode_output_Call_obj = (PyTypeObject *)CPyType_FromTemplate((PyObject *)CPyType_call_____mypyc_lambda__1_decode_output_Call_obj_template, NULL, modname);
     if (unlikely(!CPyType_call_____mypyc_lambda__1_decode_output_Call_obj))
         goto fail;
+    CPyDef_call_____mypyc_lambda__1_decode_output_Call_obj_trait_vtable_setup();
+    CPyType_call___coroutine_Call_env = (PyTypeObject *)CPyType_FromTemplate((PyObject *)CPyType_call___coroutine_Call_env_template, NULL, modname);
+    if (unlikely(!CPyType_call___coroutine_Call_env))
+        goto fail;
+    CPyDef_call___coroutine_Call_env_trait_vtable_setup();
     CPyType_call___coroutine_Call_gen = (PyTypeObject *)CPyType_FromTemplate((PyObject *)CPyType_call___coroutine_Call_gen_template, NULL, modname);
     if (unlikely(!CPyType_call___coroutine_Call_gen))
         goto fail;
+    CPyDef_call___coroutine_Call_gen_trait_vtable_setup();
     if (CPyGlobalsInit() < 0)
         goto fail;
     char result = CPyDef_call_____top_level__();
@@ -1416,6 +1555,7 @@ int CPyExec_multicall___call(PyObject *module)
     Py_CLEAR(CPyType_call___decode_output_Call_env);
     Py_CLEAR(CPyType_call_____mypyc_lambda__0_decode_output_Call_obj);
     Py_CLEAR(CPyType_call_____mypyc_lambda__1_decode_output_Call_obj);
+    Py_CLEAR(CPyType_call___coroutine_Call_env);
     Py_CLEAR(CPyType_call___coroutine_Call_gen);
     return -1;
 }
@@ -3438,65 +3578,65 @@ PyObject *CPyDef_call___coroutine_Call_gen_____mypyc_generator_helper__(PyObject
     PyObject *cpy_r_r7;
     tuple_T3OOO cpy_r_r8;
     tuple_T3OOO cpy_r_r9;
-    int32_t cpy_r_r10;
-    PyObject *cpy_r_r11;
-    char cpy_r_r12;
-    PyObject *cpy_r_r13;
+    PyObject *cpy_r_r10;
+    int32_t cpy_r_r11;
+    PyObject *cpy_r_r12;
+    char cpy_r_r13;
     PyObject *cpy_r_r14;
     PyObject *cpy_r_r15;
-    char cpy_r_r16;
-    PyObject *cpy_r_r17;
-    int32_t cpy_r_r18;
-    char cpy_r_r19;
+    PyObject *cpy_r_r16;
+    char cpy_r_r17;
+    PyObject *cpy_r_r18;
+    int32_t cpy_r_r19;
     char cpy_r_r20;
-    PyObject *cpy_r_r21;
+    char cpy_r_r21;
     PyObject *cpy_r_r22;
     PyObject *cpy_r_r23;
-    char cpy_r_r24;
-    PyObject *cpy_r_r25;
-    int32_t cpy_r_r26;
-    char cpy_r_r27;
+    PyObject *cpy_r_r24;
+    char cpy_r_r25;
+    PyObject *cpy_r_r26;
+    int32_t cpy_r_r27;
     char cpy_r_r28;
-    PyObject *cpy_r_r29;
+    char cpy_r_r29;
     PyObject *cpy_r_r30;
     PyObject *cpy_r_r31;
     PyObject *cpy_r_r32;
-    char cpy_r_r33;
-    PyObject *cpy_r_r34;
+    PyObject *cpy_r_r33;
+    char cpy_r_r34;
     PyObject *cpy_r_r35;
     PyObject *cpy_r_r36;
-    char cpy_r_r37;
-    PyObject *cpy_r_r38;
-    char cpy_r_r39;
-    PyObject *cpy_r_r40;
+    PyObject *cpy_r_r37;
+    char cpy_r_r38;
+    PyObject *cpy_r_r39;
+    char cpy_r_r40;
     PyObject *cpy_r_r41;
     PyObject *cpy_r_r42;
     PyObject *cpy_r_r43;
-    PyObject **cpy_r_r45;
-    PyObject *cpy_r_r46;
-    char cpy_r_r47;
-    PyObject *cpy_r_r48;
+    PyObject *cpy_r_r44;
+    PyObject **cpy_r_r46;
+    PyObject *cpy_r_r47;
+    char cpy_r_r48;
     PyObject *cpy_r_r49;
     PyObject *cpy_r_r50;
     PyObject *cpy_r_r51;
     PyObject *cpy_r_r52;
-    PyObject **cpy_r_r54;
-    PyObject *cpy_r_r55;
+    PyObject *cpy_r_r53;
+    PyObject **cpy_r_r55;
     PyObject *cpy_r_r56;
-    PyObject **cpy_r_r58;
-    PyObject *cpy_r_r59;
+    PyObject *cpy_r_r57;
+    PyObject **cpy_r_r59;
     PyObject *cpy_r_r60;
     PyObject *cpy_r_r61;
-    PyObject **cpy_r_r63;
-    PyObject *cpy_r_r64;
+    PyObject *cpy_r_r62;
+    PyObject **cpy_r_r64;
     PyObject *cpy_r_r65;
     PyObject *cpy_r_r66;
     PyObject *cpy_r_r67;
     PyObject *cpy_r_r68;
     PyObject *cpy_r_r69;
     PyObject *cpy_r_r70;
-    PyObject **cpy_r_r72;
-    PyObject *cpy_r_r73;
+    PyObject *cpy_r_r71;
+    PyObject **cpy_r_r73;
     PyObject *cpy_r_r74;
     PyObject *cpy_r_r75;
     PyObject *cpy_r_r76;
@@ -3505,43 +3645,43 @@ PyObject *CPyDef_call___coroutine_Call_gen_____mypyc_generator_helper__(PyObject
     PyObject *cpy_r_r79;
     PyObject *cpy_r_r80;
     PyObject *cpy_r_r81;
-    char cpy_r_r82;
-    PyObject *cpy_r_r83;
+    PyObject *cpy_r_r82;
+    char cpy_r_r83;
     PyObject *cpy_r_r84;
-    PyObject **cpy_r_r86;
-    PyObject *cpy_r_r87;
-    char cpy_r_r88;
+    PyObject *cpy_r_r85;
+    PyObject **cpy_r_r87;
+    PyObject *cpy_r_r88;
     char cpy_r_r89;
-    PyObject *cpy_r_r90;
-    char cpy_r_r91;
-    PyObject *cpy_r_r92;
+    char cpy_r_r90;
+    PyObject *cpy_r_r91;
+    char cpy_r_r92;
     PyObject *cpy_r_r93;
     PyObject *cpy_r_r94;
     PyObject *cpy_r_r95;
     PyObject *cpy_r_r96;
-    char cpy_r_r97;
-    PyObject *cpy_r_r98;
-    char cpy_r_r99;
-    PyObject *cpy_r_r100;
-    char cpy_r_r101;
-    tuple_T3OOO cpy_r_r102;
-    char cpy_r_r103;
-    PyObject **cpy_r_r104;
-    PyObject *cpy_r_r105;
-    char cpy_r_r106;
-    tuple_T3OOO cpy_r_r107;
+    PyObject *cpy_r_r97;
+    char cpy_r_r98;
+    PyObject *cpy_r_r99;
+    char cpy_r_r100;
+    PyObject *cpy_r_r101;
+    char cpy_r_r102;
+    tuple_T3OOO cpy_r_r103;
+    char cpy_r_r104;
+    PyObject **cpy_r_r105;
+    PyObject *cpy_r_r106;
+    char cpy_r_r107;
     tuple_T3OOO cpy_r_r108;
     tuple_T3OOO cpy_r_r109;
-    char cpy_r_r110;
-    PyObject *cpy_r_r111;
+    tuple_T3OOO cpy_r_r110;
+    char cpy_r_r111;
     PyObject *cpy_r_r112;
     PyObject *cpy_r_r113;
     PyObject *cpy_r_r114;
     PyObject *cpy_r_r115;
     PyObject *cpy_r_r116;
     PyObject *cpy_r_r117;
-    PyObject **cpy_r_r119;
-    PyObject *cpy_r_r120;
+    PyObject *cpy_r_r118;
+    PyObject **cpy_r_r120;
     PyObject *cpy_r_r121;
     PyObject *cpy_r_r122;
     PyObject *cpy_r_r123;
@@ -3550,20 +3690,20 @@ PyObject *CPyDef_call___coroutine_Call_gen_____mypyc_generator_helper__(PyObject
     PyObject *cpy_r_r126;
     PyObject *cpy_r_r127;
     PyObject *cpy_r_r128;
-    char cpy_r_r129;
-    PyObject *cpy_r_r130;
-    int32_t cpy_r_r131;
-    char cpy_r_r132;
+    PyObject *cpy_r_r129;
+    char cpy_r_r130;
+    PyObject *cpy_r_r131;
+    int32_t cpy_r_r132;
     char cpy_r_r133;
-    PyObject *cpy_r_r134;
+    char cpy_r_r134;
     PyObject *cpy_r_r135;
     PyObject *cpy_r_r136;
     PyObject *cpy_r_r137;
     PyObject *cpy_r_r138;
-    char cpy_r_r139;
-    CPyTagged cpy_r_r140;
-    char cpy_r_r141;
-    PyObject *cpy_r_r142;
+    PyObject *cpy_r_r139;
+    char cpy_r_r140;
+    CPyTagged cpy_r_r141;
+    char cpy_r_r142;
     PyObject *cpy_r_r143;
     PyObject *cpy_r_r144;
     PyObject *cpy_r_r145;
@@ -3578,128 +3718,129 @@ PyObject *CPyDef_call___coroutine_Call_gen_____mypyc_generator_helper__(PyObject
     PyObject *cpy_r_r154;
     PyObject *cpy_r_r155;
     PyObject *cpy_r_r156;
-    char cpy_r_r157;
-    PyObject *cpy_r_r158;
+    PyObject *cpy_r_r157;
+    char cpy_r_r158;
     PyObject *cpy_r_r159;
     PyObject *cpy_r_r160;
     PyObject *cpy_r_r161;
     PyObject *cpy_r_r162;
-    char cpy_r_r163;
-    PyObject *cpy_r_r164;
-    char cpy_r_r165;
-    PyObject *cpy_r_r166;
-    char cpy_r_r167;
-    tuple_T3OOO cpy_r_r168;
-    char cpy_r_r169;
-    PyObject **cpy_r_r170;
-    PyObject *cpy_r_r171;
-    char cpy_r_r172;
-    tuple_T3OOO cpy_r_r173;
+    PyObject *cpy_r_r163;
+    char cpy_r_r164;
+    PyObject *cpy_r_r165;
+    char cpy_r_r166;
+    PyObject *cpy_r_r167;
+    char cpy_r_r168;
+    tuple_T3OOO cpy_r_r169;
+    char cpy_r_r170;
+    PyObject **cpy_r_r171;
+    PyObject *cpy_r_r172;
+    char cpy_r_r173;
     tuple_T3OOO cpy_r_r174;
     tuple_T3OOO cpy_r_r175;
-    char cpy_r_r176;
-    PyObject *cpy_r_r177;
+    tuple_T3OOO cpy_r_r176;
+    char cpy_r_r177;
     PyObject *cpy_r_r178;
     PyObject *cpy_r_r179;
-    char cpy_r_r180;
-    tuple_T3OOO cpy_r_r181;
-    char cpy_r_r182;
+    PyObject *cpy_r_r180;
+    char cpy_r_r181;
+    tuple_T3OOO cpy_r_r182;
     char cpy_r_r183;
-    tuple_T3OOO cpy_r_r184;
-    PyObject *cpy_r_r185;
+    char cpy_r_r184;
+    tuple_T3OOO cpy_r_r185;
     PyObject *cpy_r_r186;
     PyObject *cpy_r_r187;
     PyObject *cpy_r_r188;
     PyObject *cpy_r_r189;
-    PyObject **cpy_r_r191;
-    PyObject *cpy_r_r192;
+    PyObject *cpy_r_r190;
+    PyObject **cpy_r_r192;
     PyObject *cpy_r_r193;
-    char cpy_r_r194;
-    PyObject *cpy_r_r195;
+    PyObject *cpy_r_r194;
+    char cpy_r_r195;
     PyObject *cpy_r_r196;
     PyObject *cpy_r_r197;
     PyObject *cpy_r_r198;
     PyObject *cpy_r_r199;
-    char cpy_r_r200;
-    PyObject *cpy_r_r201;
-    char cpy_r_r202;
-    PyObject *cpy_r_r203;
-    char cpy_r_r204;
-    tuple_T3OOO cpy_r_r205;
-    char cpy_r_r206;
-    PyObject **cpy_r_r207;
-    PyObject *cpy_r_r208;
-    char cpy_r_r209;
-    tuple_T3OOO cpy_r_r210;
+    PyObject *cpy_r_r200;
+    char cpy_r_r201;
+    PyObject *cpy_r_r202;
+    char cpy_r_r203;
+    PyObject *cpy_r_r204;
+    char cpy_r_r205;
+    tuple_T3OOO cpy_r_r206;
+    char cpy_r_r207;
+    PyObject **cpy_r_r208;
+    PyObject *cpy_r_r209;
+    char cpy_r_r210;
     tuple_T3OOO cpy_r_r211;
     tuple_T3OOO cpy_r_r212;
-    char cpy_r_r213;
-    PyObject *cpy_r_r214;
+    tuple_T3OOO cpy_r_r213;
+    char cpy_r_r214;
     PyObject *cpy_r_r215;
     PyObject *cpy_r_r216;
-    int32_t cpy_r_r217;
-    char cpy_r_r218;
+    PyObject *cpy_r_r217;
+    int32_t cpy_r_r218;
     char cpy_r_r219;
-    tuple_T3OOO cpy_r_r220;
+    char cpy_r_r220;
     tuple_T3OOO cpy_r_r221;
-    char cpy_r_r222;
-    tuple_T3OOO cpy_r_r223;
+    tuple_T3OOO cpy_r_r222;
+    char cpy_r_r223;
     tuple_T3OOO cpy_r_r224;
-    char cpy_r_r225;
-    PyObject *cpy_r_r226;
+    tuple_T3OOO cpy_r_r225;
+    char cpy_r_r226;
     PyObject *cpy_r_r227;
     PyObject *cpy_r_r228;
-    PyObject **cpy_r_r230;
-    PyObject *cpy_r_r231;
+    PyObject *cpy_r_r229;
+    PyObject **cpy_r_r231;
     PyObject *cpy_r_r232;
-    char cpy_r_r233;
-    PyObject *cpy_r_r234;
+    PyObject *cpy_r_r233;
+    char cpy_r_r234;
     PyObject *cpy_r_r235;
     PyObject *cpy_r_r236;
     PyObject *cpy_r_r237;
     PyObject *cpy_r_r238;
-    char cpy_r_r239;
-    PyObject *cpy_r_r240;
-    char cpy_r_r241;
-    PyObject *cpy_r_r242;
-    char cpy_r_r243;
-    tuple_T3OOO cpy_r_r244;
-    char cpy_r_r245;
-    PyObject **cpy_r_r246;
-    PyObject *cpy_r_r247;
-    char cpy_r_r248;
-    tuple_T3OOO cpy_r_r249;
+    PyObject *cpy_r_r239;
+    char cpy_r_r240;
+    PyObject *cpy_r_r241;
+    char cpy_r_r242;
+    PyObject *cpy_r_r243;
+    char cpy_r_r244;
+    tuple_T3OOO cpy_r_r245;
+    char cpy_r_r246;
+    PyObject **cpy_r_r247;
+    PyObject *cpy_r_r248;
+    char cpy_r_r249;
     tuple_T3OOO cpy_r_r250;
     tuple_T3OOO cpy_r_r251;
-    char cpy_r_r252;
-    PyObject *cpy_r_r253;
+    tuple_T3OOO cpy_r_r252;
+    char cpy_r_r253;
     PyObject *cpy_r_r254;
     PyObject *cpy_r_r255;
-    char cpy_r_r256;
-    PyObject *cpy_r_r257;
+    PyObject *cpy_r_r256;
+    char cpy_r_r257;
     PyObject *cpy_r_r258;
     PyObject *cpy_r_r259;
     PyObject *cpy_r_r260;
     PyObject *cpy_r_r261;
     PyObject *cpy_r_r262;
     PyObject *cpy_r_r263;
-    char cpy_r_r264;
-    PyObject *cpy_r_r265;
+    PyObject *cpy_r_r264;
+    char cpy_r_r265;
     PyObject *cpy_r_r266;
     PyObject *cpy_r_r267;
     PyObject *cpy_r_r268;
-    char cpy_r_r269;
-    PyObject **cpy_r_r271;
-    PyObject *cpy_r_r272;
+    PyObject *cpy_r_r269;
+    char cpy_r_r270;
+    PyObject **cpy_r_r272;
     PyObject *cpy_r_r273;
-    char cpy_r_r274;
+    PyObject *cpy_r_r274;
     char cpy_r_r275;
     char cpy_r_r276;
     char cpy_r_r277;
     char cpy_r_r278;
     char cpy_r_r279;
     char cpy_r_r280;
-    PyObject *cpy_r_r281;
+    char cpy_r_r281;
+    PyObject *cpy_r_r282;
     cpy_r_r0 = NULL;
     cpy_r_r1 = cpy_r_r0;
     cpy_r_r2 = NULL;
@@ -3711,1745 +3852,1849 @@ PyObject *CPyDef_call___coroutine_Call_gen_____mypyc_generator_helper__(PyObject
     tuple_T3OOO __tmp32 = { NULL, NULL, NULL };
     cpy_r_r8 = __tmp32;
     cpy_r_r9 = cpy_r_r8;
-    cpy_r_r10 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_next_label__;
-    goto CPyL237;
+    cpy_r_r10 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_env__;
+    if (unlikely(cpy_r_r10 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_env__", 139, CPyStatic_call___globals);
+        goto CPyL246;
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r10);
 CPyL1: ;
-    cpy_r_r11 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r12 = cpy_r_type != cpy_r_r11;
-    if (!cpy_r_r12) goto CPyL4;
+    cpy_r_r11 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_next_label__;
+    goto CPyL238;
+CPyL2: ;
+    cpy_r_r12 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r13 = cpy_r_type != cpy_r_r12;
+    if (cpy_r_r13) {
+        goto CPyL247;
+    } else
+        goto CPyL5;
+CPyL3: ;
     CPyErr_SetObjectAndTraceback(cpy_r_type, cpy_r_value, cpy_r_traceback);
     if (unlikely(!0)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
-        goto CPyL244;
+        goto CPyL245;
     }
     CPy_Unreachable();
-CPyL4: ;
-    cpy_r_r13 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r13 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 146, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    CPy_INCREF_NO_IMM(cpy_r_r13);
 CPyL5: ;
-    cpy_r_r14 = ((multicall___call___CallObject *)cpy_r_r13)->_w3;
-    CPy_INCREF(cpy_r_r14);
-    CPy_DECREF_NO_IMM(cpy_r_r13);
-    cpy_r_r15 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r16 = cpy_r_r14 != cpy_r_r15;
-    if (!cpy_r_r16) goto CPyL245;
-    CPy_INCREF(cpy_r_r14);
-    cpy_r_r17 = cpy_r_r14;
-    cpy_r_r18 = PyObject_IsTrue(cpy_r_r17);
-    CPy_DECREF(cpy_r_r17);
-    cpy_r_r19 = cpy_r_r18 >= 0;
-    if (unlikely(!cpy_r_r19)) {
+    cpy_r_r14 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r14 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 146, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r14);
+CPyL6: ;
+    cpy_r_r15 = ((multicall___call___CallObject *)cpy_r_r14)->_w3;
+    CPy_INCREF(cpy_r_r15);
+    CPy_DECREF_NO_IMM(cpy_r_r14);
+    cpy_r_r16 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r17 = cpy_r_r15 != cpy_r_r16;
+    if (!cpy_r_r17) goto CPyL249;
+    CPy_INCREF(cpy_r_r15);
+    cpy_r_r18 = cpy_r_r15;
+    cpy_r_r19 = PyObject_IsTrue(cpy_r_r18);
+    CPy_DECREF(cpy_r_r18);
+    cpy_r_r20 = cpy_r_r19 >= 0;
+    if (unlikely(!cpy_r_r20)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 146, CPyStatic_call___globals);
-        goto CPyL246;
+        goto CPyL250;
     }
-    cpy_r_r20 = cpy_r_r18;
-    if (!cpy_r_r20) goto CPyL245;
-    cpy_r_r21 = cpy_r_r14;
-    goto CPyL19;
-CPyL10: ;
-    cpy_r_r22 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute___w3;
-    if (unlikely(cpy_r_r22 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "_w3", 146, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    CPy_INCREF(cpy_r_r22);
+    cpy_r_r21 = cpy_r_r19;
+    if (!cpy_r_r21) goto CPyL249;
+    cpy_r_r22 = cpy_r_r15;
+    goto CPyL20;
 CPyL11: ;
-    cpy_r_r23 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r24 = cpy_r_r22 != cpy_r_r23;
-    if (!cpy_r_r24) goto CPyL247;
-    CPy_INCREF(cpy_r_r22);
-    cpy_r_r25 = cpy_r_r22;
-    cpy_r_r26 = PyObject_IsTrue(cpy_r_r25);
-    CPy_DECREF(cpy_r_r25);
-    cpy_r_r27 = cpy_r_r26 >= 0;
-    if (unlikely(!cpy_r_r27)) {
+    cpy_r_r23 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute___w3;
+    if (unlikely(cpy_r_r23 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "_w3", 146, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    CPy_INCREF(cpy_r_r23);
+CPyL12: ;
+    cpy_r_r24 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r25 = cpy_r_r23 != cpy_r_r24;
+    if (!cpy_r_r25) goto CPyL251;
+    CPy_INCREF(cpy_r_r23);
+    cpy_r_r26 = cpy_r_r23;
+    cpy_r_r27 = PyObject_IsTrue(cpy_r_r26);
+    CPy_DECREF(cpy_r_r26);
+    cpy_r_r28 = cpy_r_r27 >= 0;
+    if (unlikely(!cpy_r_r28)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 146, CPyStatic_call___globals);
+        goto CPyL252;
+    }
+    cpy_r_r29 = cpy_r_r27;
+    if (!cpy_r_r29) goto CPyL251;
+    cpy_r_r30 = cpy_r_r23;
+    goto CPyL19;
+CPyL17: ;
+    cpy_r_r31 = CPyStatic_call___globals;
+    cpy_r_r32 = CPyStatics[9]; /* 'w3' */
+    cpy_r_r33 = CPyDict_GetItem(cpy_r_r31, cpy_r_r32);
+    if (unlikely(cpy_r_r33 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 146, CPyStatic_call___globals);
         goto CPyL248;
     }
-    cpy_r_r28 = cpy_r_r26;
-    if (!cpy_r_r28) goto CPyL247;
-    cpy_r_r29 = cpy_r_r22;
-    goto CPyL18;
-CPyL16: ;
-    cpy_r_r30 = CPyStatic_call___globals;
-    cpy_r_r31 = CPyStatics[9]; /* 'w3' */
-    cpy_r_r32 = CPyDict_GetItem(cpy_r_r30, cpy_r_r31);
-    if (unlikely(cpy_r_r32 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 146, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    cpy_r_r29 = cpy_r_r32;
-CPyL18: ;
-    cpy_r_r21 = cpy_r_r29;
+    cpy_r_r30 = cpy_r_r33;
 CPyL19: ;
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute___w3 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute___w3);
+    cpy_r_r22 = cpy_r_r30;
+CPyL20: ;
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute___w3 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute___w3);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute___w3 = cpy_r_r21;
-    cpy_r_r33 = 1;
-    if (unlikely(!cpy_r_r33)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute___w3 = cpy_r_r22;
+    cpy_r_r34 = 1;
+    if (unlikely(!cpy_r_r34)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 146, CPyStatic_call___globals);
-        goto CPyL244;
+        goto CPyL248;
     }
-    cpy_r_r34 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r34 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 148, CPyStatic_call___globals);
-        goto CPyL244;
+    cpy_r_r35 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r35 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 148, CPyStatic_call___globals);
+        goto CPyL248;
     }
-    CPy_INCREF_NO_IMM(cpy_r_r34);
-CPyL21: ;
-    cpy_r_r35 = ((multicall___call___CallObject *)cpy_r_r34)->_state_override_code;
-    CPy_INCREF(cpy_r_r35);
-    CPy_DECREF_NO_IMM(cpy_r_r34);
-    cpy_r_r36 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r37 = cpy_r_r35 != cpy_r_r36;
-    if (!cpy_r_r37) goto CPyL249;
-    if (likely(cpy_r_r35 != Py_None))
-        cpy_r_r38 = cpy_r_r35;
+    CPy_INCREF_NO_IMM(cpy_r_r35);
+CPyL22: ;
+    cpy_r_r36 = ((multicall___call___CallObject *)cpy_r_r35)->_state_override_code;
+    CPy_INCREF(cpy_r_r36);
+    CPy_DECREF_NO_IMM(cpy_r_r35);
+    cpy_r_r37 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r38 = cpy_r_r36 != cpy_r_r37;
+    if (!cpy_r_r38) goto CPyL253;
+    if (likely(cpy_r_r36 != Py_None))
+        cpy_r_r39 = cpy_r_r36;
     else {
-        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 148, CPyStatic_call___globals, "str", cpy_r_r35);
-        goto CPyL244;
+        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 148, CPyStatic_call___globals, "str", cpy_r_r36);
+        goto CPyL248;
     }
-    cpy_r_r39 = CPyStr_IsTrue(cpy_r_r38);
-    CPy_DECREF(cpy_r_r38);
-    if (!cpy_r_r39) goto CPyL43;
-    cpy_r_r40 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute___w3;
-    if (unlikely(cpy_r_r40 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "_w3", 148, CPyStatic_call___globals);
-        goto CPyL244;
+    cpy_r_r40 = CPyStr_IsTrue(cpy_r_r39);
+    CPy_DECREF(cpy_r_r39);
+    if (!cpy_r_r40) goto CPyL44;
+    cpy_r_r41 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute___w3;
+    if (unlikely(cpy_r_r41 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "_w3", 148, CPyStatic_call___globals);
+        goto CPyL248;
     }
-    CPy_INCREF(cpy_r_r40);
-CPyL25: ;
-    cpy_r_r41 = CPyStatic_call___globals;
-    cpy_r_r42 = CPyStatics[15]; /* 'state_override_supported' */
-    cpy_r_r43 = CPyDict_GetItem(cpy_r_r41, cpy_r_r42);
-    if (unlikely(cpy_r_r43 == NULL)) {
+    CPy_INCREF(cpy_r_r41);
+CPyL26: ;
+    cpy_r_r42 = CPyStatic_call___globals;
+    cpy_r_r43 = CPyStatics[15]; /* 'state_override_supported' */
+    cpy_r_r44 = CPyDict_GetItem(cpy_r_r42, cpy_r_r43);
+    if (unlikely(cpy_r_r44 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 148, CPyStatic_call___globals);
-        goto CPyL250;
-    }
-    PyObject *cpy_r_r44[1] = {cpy_r_r40};
-    cpy_r_r45 = (PyObject **)&cpy_r_r44;
-    cpy_r_r46 = PyObject_Vectorcall(cpy_r_r43, cpy_r_r45, 1, 0);
-    CPy_DECREF(cpy_r_r43);
-    if (unlikely(cpy_r_r46 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 148, CPyStatic_call___globals);
-        goto CPyL250;
-    }
-    CPy_DECREF(cpy_r_r40);
-    if (unlikely(!PyBool_Check(cpy_r_r46))) {
-        CPy_TypeError("bool", cpy_r_r46); cpy_r_r47 = 2;
-    } else
-        cpy_r_r47 = cpy_r_r46 == Py_True;
-    CPy_DECREF(cpy_r_r46);
-    if (unlikely(cpy_r_r47 == 2)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 148, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    if (cpy_r_r47) goto CPyL43;
-    cpy_r_r48 = CPyStatics[16]; /* 'State override is not supported on ' */
-    cpy_r_r49 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute___w3;
-    if (unlikely(cpy_r_r49 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "_w3", 150, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    CPy_INCREF(cpy_r_r49);
-CPyL30: ;
-    cpy_r_r50 = CPyStatic_call___globals;
-    cpy_r_r51 = CPyStatics[17]; /* 'chain_id' */
-    cpy_r_r52 = CPyDict_GetItem(cpy_r_r50, cpy_r_r51);
-    if (unlikely(cpy_r_r52 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
-        goto CPyL251;
-    }
-    PyObject *cpy_r_r53[1] = {cpy_r_r49};
-    cpy_r_r54 = (PyObject **)&cpy_r_r53;
-    cpy_r_r55 = PyObject_Vectorcall(cpy_r_r52, cpy_r_r54, 1, 0);
-    CPy_DECREF(cpy_r_r52);
-    if (unlikely(cpy_r_r55 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
-        goto CPyL251;
-    }
-    CPy_DECREF(cpy_r_r49);
-    cpy_r_r56 = (PyObject *)CPyType_constants___Network;
-    PyObject *cpy_r_r57[1] = {cpy_r_r55};
-    cpy_r_r58 = (PyObject **)&cpy_r_r57;
-    cpy_r_r59 = PyObject_Vectorcall(cpy_r_r56, cpy_r_r58, 1, 0);
-    if (unlikely(cpy_r_r59 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
-        goto CPyL252;
-    }
-    CPy_DECREF(cpy_r_r55);
-    if (likely(Py_TYPE(cpy_r_r59) == CPyType_constants___Network))
-        cpy_r_r60 = cpy_r_r59;
-    else {
-        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals, "multicall.constants.Network", cpy_r_r59);
-        goto CPyL244;
-    }
-    cpy_r_r61 = CPyStatics[18]; /* '__repr__' */
-    PyObject *cpy_r_r62[1] = {cpy_r_r60};
-    cpy_r_r63 = (PyObject **)&cpy_r_r62;
-    cpy_r_r64 = PyObject_VectorcallMethod(cpy_r_r61, cpy_r_r63, 9223372036854775809ULL, 0);
-    if (unlikely(cpy_r_r64 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
-        goto CPyL253;
-    }
-    CPy_DECREF_NO_IMM(cpy_r_r60);
-    if (likely(PyUnicode_Check(cpy_r_r64)))
-        cpy_r_r65 = cpy_r_r64;
-    else {
-        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals, "str", cpy_r_r64);
-        goto CPyL244;
-    }
-    cpy_r_r66 = CPyStr_GetSlice(cpy_r_r65, 2, -2);
-    CPy_DECREF(cpy_r_r65);
-    if (unlikely(cpy_r_r66 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    if (likely(PyUnicode_Check(cpy_r_r66)))
-        cpy_r_r67 = cpy_r_r66;
-    else {
-        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals, "str", cpy_r_r66);
-        goto CPyL244;
-    }
-    cpy_r_r68 = CPyStatics[19]; /* '.' */
-    cpy_r_r69 = CPyStr_Build(3, cpy_r_r48, cpy_r_r67, cpy_r_r68);
-    CPy_DECREF(cpy_r_r67);
-    if (unlikely(cpy_r_r69 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    cpy_r_r70 = (PyObject *)CPyType_exceptions___StateOverrideNotSupported;
-    PyObject *cpy_r_r71[1] = {cpy_r_r69};
-    cpy_r_r72 = (PyObject **)&cpy_r_r71;
-    cpy_r_r73 = PyObject_Vectorcall(cpy_r_r70, cpy_r_r72, 1, 0);
-    if (unlikely(cpy_r_r73 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 149, CPyStatic_call___globals);
         goto CPyL254;
     }
-    CPy_DECREF(cpy_r_r69);
-    if (likely(Py_TYPE(cpy_r_r73) == CPyType_exceptions___StateOverrideNotSupported))
-        cpy_r_r74 = cpy_r_r73;
+    PyObject *cpy_r_r45[1] = {cpy_r_r41};
+    cpy_r_r46 = (PyObject **)&cpy_r_r45;
+    cpy_r_r47 = PyObject_Vectorcall(cpy_r_r44, cpy_r_r46, 1, 0);
+    CPy_DECREF(cpy_r_r44);
+    if (unlikely(cpy_r_r47 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 148, CPyStatic_call___globals);
+        goto CPyL254;
+    }
+    CPy_DECREF(cpy_r_r41);
+    if (unlikely(!PyBool_Check(cpy_r_r47))) {
+        CPy_TypeError("bool", cpy_r_r47); cpy_r_r48 = 2;
+    } else
+        cpy_r_r48 = cpy_r_r47 == Py_True;
+    CPy_DECREF(cpy_r_r47);
+    if (unlikely(cpy_r_r48 == 2)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 148, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    if (cpy_r_r48) goto CPyL44;
+    cpy_r_r49 = CPyStatics[16]; /* 'State override is not supported on ' */
+    cpy_r_r50 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute___w3;
+    if (unlikely(cpy_r_r50 == NULL)) {
+        PyErr_SetString(PyExc_AttributeError, "attribute '_w3' of 'coroutine_Call_env' undefined");
+    } else {
+        CPy_INCREF(cpy_r_r50);
+    }
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    if (unlikely(cpy_r_r50 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
+        goto CPyL245;
+    }
+CPyL31: ;
+    cpy_r_r51 = CPyStatic_call___globals;
+    cpy_r_r52 = CPyStatics[17]; /* 'chain_id' */
+    cpy_r_r53 = CPyDict_GetItem(cpy_r_r51, cpy_r_r52);
+    if (unlikely(cpy_r_r53 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
+        goto CPyL255;
+    }
+    PyObject *cpy_r_r54[1] = {cpy_r_r50};
+    cpy_r_r55 = (PyObject **)&cpy_r_r54;
+    cpy_r_r56 = PyObject_Vectorcall(cpy_r_r53, cpy_r_r55, 1, 0);
+    CPy_DECREF(cpy_r_r53);
+    if (unlikely(cpy_r_r56 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
+        goto CPyL255;
+    }
+    CPy_DECREF(cpy_r_r50);
+    cpy_r_r57 = (PyObject *)CPyType_constants___Network;
+    PyObject *cpy_r_r58[1] = {cpy_r_r56};
+    cpy_r_r59 = (PyObject **)&cpy_r_r58;
+    cpy_r_r60 = PyObject_Vectorcall(cpy_r_r57, cpy_r_r59, 1, 0);
+    if (unlikely(cpy_r_r60 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
+        goto CPyL256;
+    }
+    CPy_DECREF(cpy_r_r56);
+    if (likely(Py_TYPE(cpy_r_r60) == CPyType_constants___Network))
+        cpy_r_r61 = cpy_r_r60;
     else {
-        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 149, CPyStatic_call___globals, "multicall.exceptions.StateOverrideNotSupported", cpy_r_r73);
-        goto CPyL244;
+        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals, "multicall.constants.Network", cpy_r_r60);
+        goto CPyL245;
     }
-    CPy_Raise(cpy_r_r74);
-    CPy_DECREF_NO_IMM(cpy_r_r74);
-    if (unlikely(!0)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 149, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    CPy_Unreachable();
-CPyL43: ;
-    cpy_r_r75 = CPyStatic_call___globals;
-    cpy_r_r76 = CPyStatics[20]; /* '_get_semaphore' */
-    cpy_r_r77 = CPyDict_GetItem(cpy_r_r75, cpy_r_r76);
-    if (unlikely(cpy_r_r77 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    cpy_r_r78 = PyObject_Vectorcall(cpy_r_r77, 0, 0, 0);
-    CPy_DECREF(cpy_r_r77);
-    if (unlikely(cpy_r_r78 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    cpy_r_r79 = CPy_TYPE(cpy_r_r78);
-    cpy_r_r80 = CPyStatics[21]; /* '__aexit__' */
-    cpy_r_r81 = CPyObject_GetAttr(cpy_r_r79, cpy_r_r80);
-    if (unlikely(cpy_r_r81 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL255;
-    }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__0 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__0);
-    }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__0 = cpy_r_r81;
-    cpy_r_r82 = 1;
-    if (unlikely(!cpy_r_r82)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL255;
-    }
-    cpy_r_r83 = CPyStatics[22]; /* '__aenter__' */
-    cpy_r_r84 = CPyObject_GetAttr(cpy_r_r79, cpy_r_r83);
-    CPy_DECREF(cpy_r_r79);
-    if (unlikely(cpy_r_r84 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL256;
-    }
-    PyObject *cpy_r_r85[1] = {cpy_r_r78};
-    cpy_r_r86 = (PyObject **)&cpy_r_r85;
-    cpy_r_r87 = PyObject_Vectorcall(cpy_r_r84, cpy_r_r86, 1, 0);
-    CPy_DECREF(cpy_r_r84);
-    if (unlikely(cpy_r_r87 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL256;
-    }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__1 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__1);
-    }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__1 = cpy_r_r78;
-    cpy_r_r88 = 1;
-    if (unlikely(!cpy_r_r88)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
+    cpy_r_r62 = CPyStatics[18]; /* '__repr__' */
+    PyObject *cpy_r_r63[1] = {cpy_r_r61};
+    cpy_r_r64 = (PyObject **)&cpy_r_r63;
+    cpy_r_r65 = PyObject_VectorcallMethod(cpy_r_r62, cpy_r_r64, 9223372036854775809ULL, 0);
+    if (unlikely(cpy_r_r65 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
         goto CPyL257;
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__2 = 1;
+    CPy_DECREF_NO_IMM(cpy_r_r61);
+    if (likely(PyUnicode_Check(cpy_r_r65)))
+        cpy_r_r66 = cpy_r_r65;
+    else {
+        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals, "str", cpy_r_r65);
+        goto CPyL245;
+    }
+    cpy_r_r67 = CPyStr_GetSlice(cpy_r_r66, 2, -2);
+    CPy_DECREF(cpy_r_r66);
+    if (unlikely(cpy_r_r67 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
+        goto CPyL245;
+    }
+    if (likely(PyUnicode_Check(cpy_r_r67)))
+        cpy_r_r68 = cpy_r_r67;
+    else {
+        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals, "str", cpy_r_r67);
+        goto CPyL245;
+    }
+    cpy_r_r69 = CPyStatics[19]; /* '.' */
+    cpy_r_r70 = CPyStr_Build(3, cpy_r_r49, cpy_r_r68, cpy_r_r69);
+    CPy_DECREF(cpy_r_r68);
+    if (unlikely(cpy_r_r70 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 150, CPyStatic_call___globals);
+        goto CPyL245;
+    }
+    cpy_r_r71 = (PyObject *)CPyType_exceptions___StateOverrideNotSupported;
+    PyObject *cpy_r_r72[1] = {cpy_r_r70};
+    cpy_r_r73 = (PyObject **)&cpy_r_r72;
+    cpy_r_r74 = PyObject_Vectorcall(cpy_r_r71, cpy_r_r73, 1, 0);
+    if (unlikely(cpy_r_r74 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 149, CPyStatic_call___globals);
+        goto CPyL258;
+    }
+    CPy_DECREF(cpy_r_r70);
+    if (likely(Py_TYPE(cpy_r_r74) == CPyType_exceptions___StateOverrideNotSupported))
+        cpy_r_r75 = cpy_r_r74;
+    else {
+        CPy_TypeErrorTraceback("multicall/call.py", "coroutine", 149, CPyStatic_call___globals, "multicall.exceptions.StateOverrideNotSupported", cpy_r_r74);
+        goto CPyL245;
+    }
+    CPy_Raise(cpy_r_r75);
+    CPy_DECREF_NO_IMM(cpy_r_r75);
+    if (unlikely(!0)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 149, CPyStatic_call___globals);
+        goto CPyL245;
+    }
+    CPy_Unreachable();
+CPyL44: ;
+    cpy_r_r76 = CPyStatic_call___globals;
+    cpy_r_r77 = CPyStatics[20]; /* '_get_semaphore' */
+    cpy_r_r78 = CPyDict_GetItem(cpy_r_r76, cpy_r_r77);
+    if (unlikely(cpy_r_r78 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    cpy_r_r79 = PyObject_Vectorcall(cpy_r_r78, 0, 0, 0);
+    CPy_DECREF(cpy_r_r78);
+    if (unlikely(cpy_r_r79 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    cpy_r_r80 = CPy_TYPE(cpy_r_r79);
+    cpy_r_r81 = CPyStatics[21]; /* '__aexit__' */
+    cpy_r_r82 = CPyObject_GetAttr(cpy_r_r80, cpy_r_r81);
+    if (unlikely(cpy_r_r82 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL259;
+    }
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__0 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__0);
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__0 = cpy_r_r82;
+    cpy_r_r83 = 1;
+    if (unlikely(!cpy_r_r83)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
+        goto CPyL259;
+    }
+    cpy_r_r84 = CPyStatics[22]; /* '__aenter__' */
+    cpy_r_r85 = CPyObject_GetAttr(cpy_r_r80, cpy_r_r84);
+    CPy_DECREF(cpy_r_r80);
+    if (unlikely(cpy_r_r85 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL260;
+    }
+    PyObject *cpy_r_r86[1] = {cpy_r_r79};
+    cpy_r_r87 = (PyObject **)&cpy_r_r86;
+    cpy_r_r88 = PyObject_Vectorcall(cpy_r_r85, cpy_r_r87, 1, 0);
+    CPy_DECREF(cpy_r_r85);
+    if (unlikely(cpy_r_r88 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL260;
+    }
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__1 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__1);
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__1 = cpy_r_r79;
     cpy_r_r89 = 1;
     if (unlikely(!cpy_r_r89)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL257;
+        goto CPyL261;
     }
-    cpy_r_r90 = CPy_GetCoro(cpy_r_r87);
-    CPy_DECREF(cpy_r_r87);
-    if (unlikely(cpy_r_r90 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__3 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__3);
-    }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__3 = cpy_r_r90;
-    cpy_r_r91 = 1;
-    if (unlikely(!cpy_r_r91)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__2 = 1;
+    cpy_r_r90 = 1;
+    if (unlikely(!cpy_r_r90)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL244;
+        goto CPyL261;
     }
-    cpy_r_r92 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__3;
-    if (unlikely(cpy_r_r92 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__3", -1, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    CPy_INCREF(cpy_r_r92);
-CPyL54: ;
-    cpy_r_r93 = CPyIter_Next(cpy_r_r92);
-    CPy_DECREF(cpy_r_r92);
-    if (cpy_r_r93 != NULL) goto CPyL57;
-    cpy_r_r94 = CPy_FetchStopIterationValue();
-    if (unlikely(cpy_r_r94 == NULL)) {
+    cpy_r_r91 = CPy_GetCoro(cpy_r_r88);
+    CPy_DECREF(cpy_r_r88);
+    if (unlikely(cpy_r_r91 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL244;
+        goto CPyL248;
     }
-    cpy_r_r95 = cpy_r_r94;
-    CPy_DECREF(cpy_r_r95);
-    cpy_r_r96 = NULL;
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__3 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__3);
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__3 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__3);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__3 = cpy_r_r96;
-    cpy_r_r97 = 1;
-    if (unlikely(!cpy_r_r97)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__3 = cpy_r_r91;
+    cpy_r_r92 = 1;
+    if (unlikely(!cpy_r_r92)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    cpy_r_r93 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__3;
+    if (unlikely(cpy_r_r93 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__3", -1, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    CPy_INCREF(cpy_r_r93);
+CPyL55: ;
+    cpy_r_r94 = CPyIter_Next(cpy_r_r93);
+    CPy_DECREF(cpy_r_r93);
+    if (cpy_r_r94 != NULL) goto CPyL58;
+    cpy_r_r95 = CPy_FetchStopIterationValue();
+    if (unlikely(cpy_r_r95 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL244;
+        goto CPyL248;
+    }
+    cpy_r_r96 = cpy_r_r95;
+    CPy_DECREF(cpy_r_r96);
+    cpy_r_r97 = NULL;
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__3 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__3);
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__3 = cpy_r_r97;
+    cpy_r_r98 = 1;
+    if (unlikely(!cpy_r_r98)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL248;
     } else
-        goto CPyL79;
-CPyL57: ;
-    cpy_r_r98 = cpy_r_r93;
+        goto CPyL80;
 CPyL58: ;
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_next_label__ = 1;
-    return cpy_r_r98;
+    cpy_r_r99 = cpy_r_r94;
 CPyL59: ;
-    cpy_r_r100 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r101 = cpy_r_type != cpy_r_r100;
-    if (!cpy_r_r101) goto CPyL258;
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_next_label__ = 1;
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    return cpy_r_r99;
+CPyL60: ;
+    cpy_r_r101 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r102 = cpy_r_type != cpy_r_r101;
+    if (!cpy_r_r102) goto CPyL262;
     CPyErr_SetObjectAndTraceback(cpy_r_type, cpy_r_value, cpy_r_traceback);
     if (unlikely(!0)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL63;
+        goto CPyL64;
     } else
-        goto CPyL259;
-CPyL61: ;
-    CPy_Unreachable();
+        goto CPyL263;
 CPyL62: ;
-    CPy_INCREF(cpy_r_arg);
-    goto CPyL74;
+    CPy_Unreachable();
 CPyL63: ;
-    cpy_r_r102 = CPy_CatchError();
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__4.f0 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__4.f0);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__4.f1);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__4.f2);
+    CPy_INCREF(cpy_r_arg);
+    goto CPyL75;
+CPyL64: ;
+    cpy_r_r103 = CPy_CatchError();
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__4.f0 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__4.f0);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__4.f1);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__4.f2);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__4 = cpy_r_r102;
-    cpy_r_r103 = 1;
-    if (unlikely(!cpy_r_r103)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__4 = cpy_r_r103;
+    cpy_r_r104 = 1;
+    if (unlikely(!cpy_r_r104)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL260;
+        goto CPyL264;
     }
-    cpy_r_r104 = (PyObject **)&cpy_r_r1;
-    cpy_r_r105 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__3;
-    if (unlikely(cpy_r_r105 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__3", -1, CPyStatic_call___globals);
-        goto CPyL260;
+    cpy_r_r105 = (PyObject **)&cpy_r_r1;
+    cpy_r_r106 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__3;
+    if (unlikely(cpy_r_r106 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__3", -1, CPyStatic_call___globals);
+        goto CPyL264;
     }
-    CPy_INCREF(cpy_r_r105);
-CPyL65: ;
-    cpy_r_r106 = CPy_YieldFromErrorHandle(cpy_r_r105, cpy_r_r104);
-    CPy_DecRef(cpy_r_r105);
-    if (unlikely(cpy_r_r106 == 2)) {
+    CPy_INCREF(cpy_r_r106);
+CPyL66: ;
+    cpy_r_r107 = CPy_YieldFromErrorHandle(cpy_r_r106, cpy_r_r105);
+    CPy_DecRef(cpy_r_r106);
+    if (unlikely(cpy_r_r107 == 2)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL260;
+        goto CPyL264;
     }
-    if (cpy_r_r106) goto CPyL69;
-    cpy_r_r98 = cpy_r_r1;
-    cpy_r_r107 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__4;
-    if (unlikely(cpy_r_r107.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__4", -1, CPyStatic_call___globals);
-        goto CPyL261;
-    }
-    CPy_INCREF(cpy_r_r107.f0);
-    CPy_INCREF(cpy_r_r107.f1);
-    CPy_INCREF(cpy_r_r107.f2);
-CPyL68: ;
-    CPy_RestoreExcInfo(cpy_r_r107);
-    CPy_DecRef(cpy_r_r107.f0);
-    CPy_DecRef(cpy_r_r107.f1);
-    CPy_DecRef(cpy_r_r107.f2);
-    goto CPyL58;
-CPyL69: ;
-    cpy_r_r95 = cpy_r_r1;
-    CPy_DecRef(cpy_r_r95);
-    cpy_r_r108 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__4;
+    if (cpy_r_r107) goto CPyL70;
+    cpy_r_r99 = cpy_r_r1;
+    cpy_r_r108 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__4;
     if (unlikely(cpy_r_r108.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__4", -1, CPyStatic_call___globals);
-        goto CPyL71;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__4", -1, CPyStatic_call___globals);
+        goto CPyL265;
     }
     CPy_INCREF(cpy_r_r108.f0);
     CPy_INCREF(cpy_r_r108.f1);
     CPy_INCREF(cpy_r_r108.f2);
-CPyL70: ;
+CPyL69: ;
     CPy_RestoreExcInfo(cpy_r_r108);
     CPy_DecRef(cpy_r_r108.f0);
     CPy_DecRef(cpy_r_r108.f1);
     CPy_DecRef(cpy_r_r108.f2);
-    goto CPyL79;
-CPyL71: ;
-    cpy_r_r109 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__4;
+    goto CPyL59;
+CPyL70: ;
+    cpy_r_r96 = cpy_r_r1;
+    CPy_DecRef(cpy_r_r96);
+    cpy_r_r109 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__4;
     if (unlikely(cpy_r_r109.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__4", -1, CPyStatic_call___globals);
-        goto CPyL244;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__4", -1, CPyStatic_call___globals);
+        goto CPyL72;
     }
     CPy_INCREF(cpy_r_r109.f0);
     CPy_INCREF(cpy_r_r109.f1);
     CPy_INCREF(cpy_r_r109.f2);
-CPyL72: ;
+CPyL71: ;
     CPy_RestoreExcInfo(cpy_r_r109);
     CPy_DecRef(cpy_r_r109.f0);
     CPy_DecRef(cpy_r_r109.f1);
     CPy_DecRef(cpy_r_r109.f2);
-    cpy_r_r110 = CPy_KeepPropagating();
-    if (!cpy_r_r110) goto CPyL244;
+    goto CPyL80;
+CPyL72: ;
+    cpy_r_r110 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__4;
+    if (unlikely(cpy_r_r110.f0 == NULL)) {
+        PyErr_SetString(PyExc_AttributeError, "attribute '__mypyc_temp__4' of 'coroutine_Call_env' undefined");
+    } else {
+        CPy_INCREF(cpy_r_r110.f0);
+        CPy_INCREF(cpy_r_r110.f1);
+        CPy_INCREF(cpy_r_r110.f2);
+    }
+    CPy_DecRef(cpy_r_r10);
+    if (unlikely(cpy_r_r110.f0 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
+        goto CPyL245;
+    }
+CPyL73: ;
+    CPy_RestoreExcInfo(cpy_r_r110);
+    CPy_DecRef(cpy_r_r110.f0);
+    CPy_DecRef(cpy_r_r110.f1);
+    CPy_DecRef(cpy_r_r110.f2);
+    cpy_r_r111 = CPy_KeepPropagating();
+    if (!cpy_r_r111) goto CPyL245;
     CPy_Unreachable();
-CPyL74: ;
-    cpy_r_r111 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__3;
-    if (unlikely(cpy_r_r111 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__3", -1, CPyStatic_call___globals);
-        goto CPyL262;
-    }
-    CPy_INCREF(cpy_r_r111);
 CPyL75: ;
-    cpy_r_r112 = CPyIter_Send(cpy_r_r111, cpy_r_arg);
-    CPy_DECREF(cpy_r_r111);
-    CPy_DECREF(cpy_r_arg);
-    if (cpy_r_r112 == NULL) goto CPyL77;
-    cpy_r_r98 = cpy_r_r112;
-    goto CPyL58;
-CPyL77: ;
-    cpy_r_r113 = CPy_FetchStopIterationValue();
-    if (unlikely(cpy_r_r113 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    cpy_r_r95 = cpy_r_r113;
-    CPy_DECREF(cpy_r_r95);
-CPyL79: ;
-    cpy_r_r114 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute___w3;
-    if (unlikely(cpy_r_r114 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "_w3", 154, CPyStatic_call___globals);
-        goto CPyL136;
-    }
-    CPy_INCREF(cpy_r_r114);
-CPyL80: ;
-    cpy_r_r115 = CPyStatic_call___globals;
-    cpy_r_r116 = CPyStatics[23]; /* 'get_async_w3' */
-    cpy_r_r117 = CPyDict_GetItem(cpy_r_r115, cpy_r_r116);
-    if (unlikely(cpy_r_r117 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL263;
-    }
-    PyObject *cpy_r_r118[1] = {cpy_r_r114};
-    cpy_r_r119 = (PyObject **)&cpy_r_r118;
-    cpy_r_r120 = PyObject_Vectorcall(cpy_r_r117, cpy_r_r119, 1, 0);
-    CPy_DECREF(cpy_r_r117);
-    if (unlikely(cpy_r_r120 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL263;
-    }
-    CPy_DECREF(cpy_r_r114);
-    cpy_r_r121 = CPyStatics[10]; /* 'eth' */
-    cpy_r_r122 = CPyObject_GetAttr(cpy_r_r120, cpy_r_r121);
-    CPy_DECREF(cpy_r_r120);
-    if (unlikely(cpy_r_r122 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL136;
-    }
-    cpy_r_r123 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r123 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 156, CPyStatic_call___globals);
-        goto CPyL264;
-    }
-    CPy_INCREF_NO_IMM(cpy_r_r123);
-CPyL84: ;
-    cpy_r_r124 = ((multicall___call___CallObject *)cpy_r_r123)->_target;
-    CPy_INCREF(cpy_r_r124);
-    CPy_DECREF_NO_IMM(cpy_r_r123);
-    cpy_r_r125 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r125 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 157, CPyStatic_call___globals);
-        goto CPyL265;
-    }
-    CPy_INCREF_NO_IMM(cpy_r_r125);
-CPyL85: ;
-    cpy_r_r126 = ((multicall___call___CallObject *)cpy_r_r125)->_signature;
-    CPy_INCREF_NO_IMM(cpy_r_r126);
-    CPy_DECREF_NO_IMM(cpy_r_r125);
-    cpy_r_r127 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__args;
-    if (unlikely(cpy_r_r127 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "args", 158, CPyStatic_call___globals);
+    cpy_r_r112 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__3;
+    if (unlikely(cpy_r_r112 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__3", -1, CPyStatic_call___globals);
         goto CPyL266;
     }
-    CPy_INCREF(cpy_r_r127);
-CPyL86: ;
-    cpy_r_r128 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r129 = cpy_r_r127 != cpy_r_r128;
-    if (!cpy_r_r129) goto CPyL267;
-    CPy_INCREF(cpy_r_r127);
-    cpy_r_r130 = cpy_r_r127;
-    cpy_r_r131 = PyObject_IsTrue(cpy_r_r130);
-    CPy_DECREF(cpy_r_r130);
-    cpy_r_r132 = cpy_r_r131 >= 0;
-    if (unlikely(!cpy_r_r132)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 158, CPyStatic_call___globals);
+    CPy_INCREF(cpy_r_r112);
+CPyL76: ;
+    cpy_r_r113 = CPyIter_Send(cpy_r_r112, cpy_r_arg);
+    CPy_DECREF(cpy_r_r112);
+    CPy_DECREF(cpy_r_arg);
+    if (cpy_r_r113 == NULL) goto CPyL78;
+    cpy_r_r99 = cpy_r_r113;
+    goto CPyL59;
+CPyL78: ;
+    cpy_r_r114 = CPy_FetchStopIterationValue();
+    if (unlikely(cpy_r_r114 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    cpy_r_r96 = cpy_r_r114;
+    CPy_DECREF(cpy_r_r96);
+CPyL80: ;
+    cpy_r_r115 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute___w3;
+    if (unlikely(cpy_r_r115 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "_w3", 154, CPyStatic_call___globals);
+        goto CPyL137;
+    }
+    CPy_INCREF(cpy_r_r115);
+CPyL81: ;
+    cpy_r_r116 = CPyStatic_call___globals;
+    cpy_r_r117 = CPyStatics[23]; /* 'get_async_w3' */
+    cpy_r_r118 = CPyDict_GetItem(cpy_r_r116, cpy_r_r117);
+    if (unlikely(cpy_r_r118 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
+        goto CPyL267;
+    }
+    PyObject *cpy_r_r119[1] = {cpy_r_r115};
+    cpy_r_r120 = (PyObject **)&cpy_r_r119;
+    cpy_r_r121 = PyObject_Vectorcall(cpy_r_r118, cpy_r_r120, 1, 0);
+    CPy_DECREF(cpy_r_r118);
+    if (unlikely(cpy_r_r121 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
+        goto CPyL267;
+    }
+    CPy_DECREF(cpy_r_r115);
+    cpy_r_r122 = CPyStatics[10]; /* 'eth' */
+    cpy_r_r123 = CPyObject_GetAttr(cpy_r_r121, cpy_r_r122);
+    CPy_DECREF(cpy_r_r121);
+    if (unlikely(cpy_r_r123 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
+        goto CPyL137;
+    }
+    cpy_r_r124 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r124 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 156, CPyStatic_call___globals);
         goto CPyL268;
     }
-    cpy_r_r133 = cpy_r_r131;
-    if (!cpy_r_r133) goto CPyL267;
-    cpy_r_r134 = cpy_r_r127;
-    goto CPyL93;
-CPyL91: ;
-    cpy_r_r135 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r135 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 158, CPyStatic_call___globals);
-        goto CPyL266;
-    }
-    CPy_INCREF_NO_IMM(cpy_r_r135);
-CPyL92: ;
-    cpy_r_r136 = ((multicall___call___CallObject *)cpy_r_r135)->_args;
-    CPy_INCREF(cpy_r_r136);
-    CPy_DECREF_NO_IMM(cpy_r_r135);
-    cpy_r_r134 = cpy_r_r136;
-CPyL93: ;
-    cpy_r_r137 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__block_id;
-    if (unlikely(cpy_r_r137 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "block_id", 159, CPyStatic_call___globals);
+    CPy_INCREF_NO_IMM(cpy_r_r124);
+CPyL85: ;
+    cpy_r_r125 = ((multicall___call___CallObject *)cpy_r_r124)->_target;
+    CPy_INCREF(cpy_r_r125);
+    CPy_DECREF_NO_IMM(cpy_r_r124);
+    cpy_r_r126 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r126 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 157, CPyStatic_call___globals);
         goto CPyL269;
     }
-    CPy_INCREF(cpy_r_r137);
-CPyL94: ;
-    cpy_r_r138 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r139 = cpy_r_r137 != cpy_r_r138;
-    if (!cpy_r_r139) goto CPyL270;
-    if (likely(PyLong_Check(cpy_r_r137)))
-        cpy_r_r140 = CPyTagged_FromObject(cpy_r_r137);
-    else {
-        CPy_TypeError("int", cpy_r_r137); cpy_r_r140 = CPY_INT_TAG;
+    CPy_INCREF_NO_IMM(cpy_r_r126);
+CPyL86: ;
+    cpy_r_r127 = ((multicall___call___CallObject *)cpy_r_r126)->_signature;
+    CPy_INCREF_NO_IMM(cpy_r_r127);
+    CPy_DECREF_NO_IMM(cpy_r_r126);
+    cpy_r_r128 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__args;
+    if (unlikely(cpy_r_r128 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "args", 158, CPyStatic_call___globals);
+        goto CPyL270;
     }
-    if (unlikely(cpy_r_r140 == CPY_INT_TAG)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 159, CPyStatic_call___globals);
-        goto CPyL271;
-    }
-    cpy_r_r141 = cpy_r_r140 != 0;
-    CPyTagged_DECREF(cpy_r_r140);
-    if (!cpy_r_r141) goto CPyL270;
-    cpy_r_r142 = cpy_r_r137;
-    goto CPyL100;
-CPyL98: ;
-    cpy_r_r143 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r143 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 159, CPyStatic_call___globals);
-        goto CPyL269;
-    }
-    CPy_INCREF_NO_IMM(cpy_r_r143);
-CPyL99: ;
-    cpy_r_r144 = ((multicall___call___CallObject *)cpy_r_r143)->_block_id;
-    CPy_INCREF(cpy_r_r144);
-    CPy_DECREF_NO_IMM(cpy_r_r143);
-    cpy_r_r142 = cpy_r_r144;
-CPyL100: ;
-    cpy_r_r145 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r145 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 160, CPyStatic_call___globals);
+    CPy_INCREF(cpy_r_r128);
+CPyL87: ;
+    cpy_r_r129 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r130 = cpy_r_r128 != cpy_r_r129;
+    if (!cpy_r_r130) goto CPyL271;
+    CPy_INCREF(cpy_r_r128);
+    cpy_r_r131 = cpy_r_r128;
+    cpy_r_r132 = PyObject_IsTrue(cpy_r_r131);
+    CPy_DECREF(cpy_r_r131);
+    cpy_r_r133 = cpy_r_r132 >= 0;
+    if (unlikely(!cpy_r_r133)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 158, CPyStatic_call___globals);
         goto CPyL272;
     }
-    CPy_INCREF_NO_IMM(cpy_r_r145);
-CPyL101: ;
-    cpy_r_r146 = ((multicall___call___CallObject *)cpy_r_r145)->_origin;
-    CPy_INCREF(cpy_r_r146);
-    CPy_DECREF_NO_IMM(cpy_r_r145);
-    cpy_r_r147 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r147 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 161, CPyStatic_call___globals);
+    cpy_r_r134 = cpy_r_r132;
+    if (!cpy_r_r134) goto CPyL271;
+    cpy_r_r135 = cpy_r_r128;
+    goto CPyL94;
+CPyL92: ;
+    cpy_r_r136 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r136 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 158, CPyStatic_call___globals);
+        goto CPyL270;
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r136);
+CPyL93: ;
+    cpy_r_r137 = ((multicall___call___CallObject *)cpy_r_r136)->_args;
+    CPy_INCREF(cpy_r_r137);
+    CPy_DECREF_NO_IMM(cpy_r_r136);
+    cpy_r_r135 = cpy_r_r137;
+CPyL94: ;
+    cpy_r_r138 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__block_id;
+    if (unlikely(cpy_r_r138 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "block_id", 159, CPyStatic_call___globals);
         goto CPyL273;
     }
-    CPy_INCREF_NO_IMM(cpy_r_r147);
-CPyL102: ;
-    cpy_r_r148 = ((multicall___call___CallObject *)cpy_r_r147)->_gas_limit;
-    CPy_INCREF(cpy_r_r148);
-    CPy_DECREF_NO_IMM(cpy_r_r147);
-    cpy_r_r149 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r149 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 162, CPyStatic_call___globals);
-        goto CPyL274;
+    CPy_INCREF(cpy_r_r138);
+CPyL95: ;
+    cpy_r_r139 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r140 = cpy_r_r138 != cpy_r_r139;
+    if (!cpy_r_r140) goto CPyL274;
+    if (likely(PyLong_Check(cpy_r_r138)))
+        cpy_r_r141 = CPyTagged_FromObject(cpy_r_r138);
+    else {
+        CPy_TypeError("int", cpy_r_r138); cpy_r_r141 = CPY_INT_TAG;
     }
-    CPy_INCREF_NO_IMM(cpy_r_r149);
-CPyL103: ;
-    cpy_r_r150 = ((multicall___call___CallObject *)cpy_r_r149)->_state_override_code;
-    CPy_INCREF(cpy_r_r150);
-    CPy_DECREF_NO_IMM(cpy_r_r149);
-    cpy_r_r151 = CPyDef_call___prep_args(cpy_r_r124, cpy_r_r126, cpy_r_r134, cpy_r_r142, cpy_r_r146, cpy_r_r148, cpy_r_r150);
-    CPy_DECREF(cpy_r_r124);
-    CPy_DECREF_NO_IMM(cpy_r_r126);
-    CPy_DECREF(cpy_r_r134);
-    CPy_DECREF(cpy_r_r142);
-    CPy_DECREF(cpy_r_r146);
-    CPy_DECREF(cpy_r_r148);
-    CPy_DECREF(cpy_r_r150);
-    if (unlikely(cpy_r_r151 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 155, CPyStatic_call___globals);
-        goto CPyL264;
-    }
-    cpy_r_r152 = CPyStatics[11]; /* 'call' */
-    cpy_r_r153 = CPyObject_GetAttr(cpy_r_r122, cpy_r_r152);
-    CPy_DECREF(cpy_r_r122);
-    if (unlikely(cpy_r_r153 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
+    if (unlikely(cpy_r_r141 == CPY_INT_TAG)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 159, CPyStatic_call___globals);
         goto CPyL275;
     }
-    cpy_r_r154 = PyList_AsTuple(cpy_r_r151);
-    CPy_DECREF_NO_IMM(cpy_r_r151);
-    if (unlikely(cpy_r_r154 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
+    cpy_r_r142 = cpy_r_r141 != 0;
+    CPyTagged_DECREF(cpy_r_r141);
+    if (!cpy_r_r142) goto CPyL274;
+    cpy_r_r143 = cpy_r_r138;
+    goto CPyL101;
+CPyL99: ;
+    cpy_r_r144 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r144 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 159, CPyStatic_call___globals);
+        goto CPyL273;
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r144);
+CPyL100: ;
+    cpy_r_r145 = ((multicall___call___CallObject *)cpy_r_r144)->_block_id;
+    CPy_INCREF(cpy_r_r145);
+    CPy_DECREF_NO_IMM(cpy_r_r144);
+    cpy_r_r143 = cpy_r_r145;
+CPyL101: ;
+    cpy_r_r146 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r146 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 160, CPyStatic_call___globals);
         goto CPyL276;
     }
-    cpy_r_r155 = PyObject_CallObject(cpy_r_r153, cpy_r_r154);
-    CPy_DECREF(cpy_r_r153);
-    CPy_DECREF(cpy_r_r154);
+    CPy_INCREF_NO_IMM(cpy_r_r146);
+CPyL102: ;
+    cpy_r_r147 = ((multicall___call___CallObject *)cpy_r_r146)->_origin;
+    CPy_INCREF(cpy_r_r147);
+    CPy_DECREF_NO_IMM(cpy_r_r146);
+    cpy_r_r148 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r148 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 161, CPyStatic_call___globals);
+        goto CPyL277;
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r148);
+CPyL103: ;
+    cpy_r_r149 = ((multicall___call___CallObject *)cpy_r_r148)->_gas_limit;
+    CPy_INCREF(cpy_r_r149);
+    CPy_DECREF_NO_IMM(cpy_r_r148);
+    cpy_r_r150 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r150 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 162, CPyStatic_call___globals);
+        goto CPyL278;
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r150);
+CPyL104: ;
+    cpy_r_r151 = ((multicall___call___CallObject *)cpy_r_r150)->_state_override_code;
+    CPy_INCREF(cpy_r_r151);
+    CPy_DECREF_NO_IMM(cpy_r_r150);
+    cpy_r_r152 = CPyDef_call___prep_args(cpy_r_r125, cpy_r_r127, cpy_r_r135, cpy_r_r143, cpy_r_r147, cpy_r_r149, cpy_r_r151);
+    CPy_DECREF(cpy_r_r125);
+    CPy_DECREF_NO_IMM(cpy_r_r127);
+    CPy_DECREF(cpy_r_r135);
+    CPy_DECREF(cpy_r_r143);
+    CPy_DECREF(cpy_r_r147);
+    CPy_DECREF(cpy_r_r149);
+    CPy_DECREF(cpy_r_r151);
+    if (unlikely(cpy_r_r152 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 155, CPyStatic_call___globals);
+        goto CPyL268;
+    }
+    cpy_r_r153 = CPyStatics[11]; /* 'call' */
+    cpy_r_r154 = CPyObject_GetAttr(cpy_r_r123, cpy_r_r153);
+    CPy_DECREF(cpy_r_r123);
+    if (unlikely(cpy_r_r154 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
+        goto CPyL279;
+    }
+    cpy_r_r155 = PyList_AsTuple(cpy_r_r152);
+    CPy_DECREF_NO_IMM(cpy_r_r152);
     if (unlikely(cpy_r_r155 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL136;
+        goto CPyL280;
     }
-    cpy_r_r156 = CPy_GetCoro(cpy_r_r155);
+    cpy_r_r156 = PyObject_CallObject(cpy_r_r154, cpy_r_r155);
+    CPy_DECREF(cpy_r_r154);
     CPy_DECREF(cpy_r_r155);
     if (unlikely(cpy_r_r156 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL136;
+        goto CPyL137;
     }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__5 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__5);
+    cpy_r_r157 = CPy_GetCoro(cpy_r_r156);
+    CPy_DECREF(cpy_r_r156);
+    if (unlikely(cpy_r_r157 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
+        goto CPyL137;
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__5 = cpy_r_r156;
-    cpy_r_r157 = 1;
-    if (unlikely(!cpy_r_r157)) {
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__5 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__5);
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__5 = cpy_r_r157;
+    cpy_r_r158 = 1;
+    if (unlikely(!cpy_r_r158)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL136;
+        goto CPyL137;
     }
-    cpy_r_r158 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__5;
-    if (unlikely(cpy_r_r158 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__5", -1, CPyStatic_call___globals);
-        goto CPyL136;
+    cpy_r_r159 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__5;
+    if (unlikely(cpy_r_r159 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__5", -1, CPyStatic_call___globals);
+        goto CPyL137;
     }
-    CPy_INCREF(cpy_r_r158);
-CPyL110: ;
-    cpy_r_r159 = CPyIter_Next(cpy_r_r158);
-    CPy_DECREF(cpy_r_r158);
-    if (cpy_r_r159 != NULL) goto CPyL113;
-    cpy_r_r160 = CPy_FetchStopIterationValue();
-    if (unlikely(cpy_r_r160 == NULL)) {
+    CPy_INCREF(cpy_r_r159);
+CPyL111: ;
+    cpy_r_r160 = CPyIter_Next(cpy_r_r159);
+    CPy_DECREF(cpy_r_r159);
+    if (cpy_r_r160 != NULL) goto CPyL114;
+    cpy_r_r161 = CPy_FetchStopIterationValue();
+    if (unlikely(cpy_r_r161 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL136;
+        goto CPyL137;
     }
-    cpy_r_r161 = cpy_r_r160;
-    cpy_r_r162 = NULL;
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__5 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__5);
+    cpy_r_r162 = cpy_r_r161;
+    cpy_r_r163 = NULL;
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__5 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__5);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__5 = cpy_r_r162;
-    cpy_r_r163 = 1;
-    if (unlikely(!cpy_r_r163)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__5 = cpy_r_r163;
+    cpy_r_r164 = 1;
+    if (unlikely(!cpy_r_r164)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL277;
+        goto CPyL281;
     } else
-        goto CPyL135;
-CPyL113: ;
-    cpy_r_r164 = cpy_r_r159;
+        goto CPyL136;
 CPyL114: ;
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_next_label__ = 2;
-    return cpy_r_r164;
+    cpy_r_r165 = cpy_r_r160;
 CPyL115: ;
-    cpy_r_r166 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r167 = cpy_r_type != cpy_r_r166;
-    if (!cpy_r_r167) goto CPyL278;
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_next_label__ = 2;
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    return cpy_r_r165;
+CPyL116: ;
+    cpy_r_r167 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r168 = cpy_r_type != cpy_r_r167;
+    if (!cpy_r_r168) goto CPyL282;
     CPyErr_SetObjectAndTraceback(cpy_r_type, cpy_r_value, cpy_r_traceback);
     if (unlikely(!0)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL119;
+        goto CPyL120;
     } else
-        goto CPyL279;
-CPyL117: ;
-    CPy_Unreachable();
+        goto CPyL283;
 CPyL118: ;
-    CPy_INCREF(cpy_r_arg);
-    goto CPyL130;
+    CPy_Unreachable();
 CPyL119: ;
-    cpy_r_r168 = CPy_CatchError();
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__6.f0 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__6.f0);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__6.f1);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__6.f2);
+    CPy_INCREF(cpy_r_arg);
+    goto CPyL131;
+CPyL120: ;
+    cpy_r_r169 = CPy_CatchError();
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__6.f0 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__6.f0);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__6.f1);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__6.f2);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__6 = cpy_r_r168;
-    cpy_r_r169 = 1;
-    if (unlikely(!cpy_r_r169)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__6 = cpy_r_r169;
+    cpy_r_r170 = 1;
+    if (unlikely(!cpy_r_r170)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL280;
+        goto CPyL284;
     }
-    cpy_r_r170 = (PyObject **)&cpy_r_r3;
-    cpy_r_r171 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__5;
-    if (unlikely(cpy_r_r171 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__5", -1, CPyStatic_call___globals);
-        goto CPyL280;
+    cpy_r_r171 = (PyObject **)&cpy_r_r3;
+    cpy_r_r172 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__5;
+    if (unlikely(cpy_r_r172 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__5", -1, CPyStatic_call___globals);
+        goto CPyL284;
     }
-    CPy_INCREF(cpy_r_r171);
-CPyL121: ;
-    cpy_r_r172 = CPy_YieldFromErrorHandle(cpy_r_r171, cpy_r_r170);
-    CPy_DecRef(cpy_r_r171);
-    if (unlikely(cpy_r_r172 == 2)) {
+    CPy_INCREF(cpy_r_r172);
+CPyL122: ;
+    cpy_r_r173 = CPy_YieldFromErrorHandle(cpy_r_r172, cpy_r_r171);
+    CPy_DecRef(cpy_r_r172);
+    if (unlikely(cpy_r_r173 == 2)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL280;
+        goto CPyL284;
     }
-    if (cpy_r_r172) goto CPyL125;
-    cpy_r_r164 = cpy_r_r3;
-    cpy_r_r173 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__6;
-    if (unlikely(cpy_r_r173.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__6", -1, CPyStatic_call___globals);
-        goto CPyL281;
-    }
-    CPy_INCREF(cpy_r_r173.f0);
-    CPy_INCREF(cpy_r_r173.f1);
-    CPy_INCREF(cpy_r_r173.f2);
-CPyL124: ;
-    CPy_RestoreExcInfo(cpy_r_r173);
-    CPy_DecRef(cpy_r_r173.f0);
-    CPy_DecRef(cpy_r_r173.f1);
-    CPy_DecRef(cpy_r_r173.f2);
-    goto CPyL114;
-CPyL125: ;
-    cpy_r_r161 = cpy_r_r3;
-    cpy_r_r174 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__6;
+    if (cpy_r_r173) goto CPyL126;
+    cpy_r_r165 = cpy_r_r3;
+    cpy_r_r174 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__6;
     if (unlikely(cpy_r_r174.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__6", -1, CPyStatic_call___globals);
-        goto CPyL282;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__6", -1, CPyStatic_call___globals);
+        goto CPyL285;
     }
     CPy_INCREF(cpy_r_r174.f0);
     CPy_INCREF(cpy_r_r174.f1);
     CPy_INCREF(cpy_r_r174.f2);
-CPyL126: ;
+CPyL125: ;
     CPy_RestoreExcInfo(cpy_r_r174);
     CPy_DecRef(cpy_r_r174.f0);
     CPy_DecRef(cpy_r_r174.f1);
     CPy_DecRef(cpy_r_r174.f2);
-    goto CPyL135;
-CPyL127: ;
-    cpy_r_r175 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__6;
+    goto CPyL115;
+CPyL126: ;
+    cpy_r_r162 = cpy_r_r3;
+    cpy_r_r175 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__6;
     if (unlikely(cpy_r_r175.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__6", -1, CPyStatic_call___globals);
-        goto CPyL136;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__6", -1, CPyStatic_call___globals);
+        goto CPyL286;
     }
     CPy_INCREF(cpy_r_r175.f0);
     CPy_INCREF(cpy_r_r175.f1);
     CPy_INCREF(cpy_r_r175.f2);
-CPyL128: ;
+CPyL127: ;
     CPy_RestoreExcInfo(cpy_r_r175);
     CPy_DecRef(cpy_r_r175.f0);
     CPy_DecRef(cpy_r_r175.f1);
     CPy_DecRef(cpy_r_r175.f2);
-    cpy_r_r176 = CPy_KeepPropagating();
-    if (!cpy_r_r176) goto CPyL136;
-    CPy_Unreachable();
+    goto CPyL136;
+CPyL128: ;
+    cpy_r_r176 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__6;
+    if (unlikely(cpy_r_r176.f0 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__6", -1, CPyStatic_call___globals);
+        goto CPyL137;
+    }
+    CPy_INCREF(cpy_r_r176.f0);
+    CPy_INCREF(cpy_r_r176.f1);
+    CPy_INCREF(cpy_r_r176.f2);
+CPyL129: ;
+    CPy_RestoreExcInfo(cpy_r_r176);
+    CPy_DecRef(cpy_r_r176.f0);
+    CPy_DecRef(cpy_r_r176.f1);
+    CPy_DecRef(cpy_r_r176.f2);
+    cpy_r_r177 = CPy_KeepPropagating();
+    if (!cpy_r_r177) {
+        goto CPyL137;
+    } else
+        goto CPyL287;
 CPyL130: ;
-    cpy_r_r177 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__5;
-    if (unlikely(cpy_r_r177 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__5", -1, CPyStatic_call___globals);
-        goto CPyL283;
-    }
-    CPy_INCREF(cpy_r_r177);
+    CPy_Unreachable();
 CPyL131: ;
-    cpy_r_r178 = CPyIter_Send(cpy_r_r177, cpy_r_arg);
-    CPy_DECREF(cpy_r_r177);
+    cpy_r_r178 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__5;
+    if (unlikely(cpy_r_r178 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__5", -1, CPyStatic_call___globals);
+        goto CPyL288;
+    }
+    CPy_INCREF(cpy_r_r178);
+CPyL132: ;
+    cpy_r_r179 = CPyIter_Send(cpy_r_r178, cpy_r_arg);
+    CPy_DECREF(cpy_r_r178);
     CPy_DECREF(cpy_r_arg);
-    if (cpy_r_r178 == NULL) goto CPyL133;
-    cpy_r_r164 = cpy_r_r178;
-    goto CPyL114;
-CPyL133: ;
-    cpy_r_r179 = CPy_FetchStopIterationValue();
-    if (unlikely(cpy_r_r179 == NULL)) {
+    if (cpy_r_r179 == NULL) goto CPyL134;
+    cpy_r_r165 = cpy_r_r179;
+    goto CPyL115;
+CPyL134: ;
+    cpy_r_r180 = CPy_FetchStopIterationValue();
+    if (unlikely(cpy_r_r180 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
-        goto CPyL136;
+        goto CPyL137;
     }
-    cpy_r_r161 = cpy_r_r179;
-CPyL135: ;
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__output != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__output);
+    cpy_r_r162 = cpy_r_r180;
+CPyL136: ;
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__output != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__output);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__output = cpy_r_r161;
-    cpy_r_r180 = 1;
-    if (unlikely(!cpy_r_r180)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__output = cpy_r_r162;
+    cpy_r_r181 = 1;
+    if (unlikely(!cpy_r_r181)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 154, CPyStatic_call___globals);
     } else
-        goto CPyL178;
-CPyL136: ;
-    cpy_r_r181 = CPy_CatchError();
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__7.f0 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__7.f0);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__7.f1);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__7.f2);
+        goto CPyL179;
+CPyL137: ;
+    cpy_r_r182 = CPy_CatchError();
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__7.f0 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__7.f0);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__7.f1);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__7.f2);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__7 = cpy_r_r181;
-    cpy_r_r182 = 1;
-    if (unlikely(!cpy_r_r182)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL175;
-    }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__2 = 0;
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__7 = cpy_r_r182;
     cpy_r_r183 = 1;
     if (unlikely(!cpy_r_r183)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
+        goto CPyL176;
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__2 = 0;
+    cpy_r_r184 = 1;
+    if (unlikely(!cpy_r_r184)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL175;
+        goto CPyL176;
     }
-    cpy_r_r184 = CPy_GetExcInfo();
-    cpy_r_r185 = cpy_r_r184.f0;
-    CPy_INCREF(cpy_r_r185);
-    cpy_r_r186 = cpy_r_r184.f1;
+    cpy_r_r185 = CPy_GetExcInfo();
+    cpy_r_r186 = cpy_r_r185.f0;
     CPy_INCREF(cpy_r_r186);
-    cpy_r_r187 = cpy_r_r184.f2;
+    cpy_r_r187 = cpy_r_r185.f1;
     CPy_INCREF(cpy_r_r187);
-    CPy_DecRef(cpy_r_r184.f0);
-    CPy_DecRef(cpy_r_r184.f1);
-    CPy_DecRef(cpy_r_r184.f2);
-    cpy_r_r188 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__0;
-    if (unlikely(cpy_r_r188 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__0", -1, CPyStatic_call___globals);
-        goto CPyL284;
-    }
+    cpy_r_r188 = cpy_r_r185.f2;
     CPy_INCREF(cpy_r_r188);
-CPyL139: ;
-    cpy_r_r189 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__1;
+    CPy_DecRef(cpy_r_r185.f0);
+    CPy_DecRef(cpy_r_r185.f1);
+    CPy_DecRef(cpy_r_r185.f2);
+    cpy_r_r189 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__0;
     if (unlikely(cpy_r_r189 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__1", -1, CPyStatic_call___globals);
-        goto CPyL285;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__0", -1, CPyStatic_call___globals);
+        goto CPyL289;
     }
     CPy_INCREF(cpy_r_r189);
 CPyL140: ;
-    PyObject *cpy_r_r190[4] = {cpy_r_r189, cpy_r_r185, cpy_r_r186, cpy_r_r187};
-    cpy_r_r191 = (PyObject **)&cpy_r_r190;
-    cpy_r_r192 = PyObject_Vectorcall(cpy_r_r188, cpy_r_r191, 4, 0);
-    CPy_DecRef(cpy_r_r188);
-    if (unlikely(cpy_r_r192 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL286;
+    cpy_r_r190 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__1;
+    if (unlikely(cpy_r_r190 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__1", -1, CPyStatic_call___globals);
+        goto CPyL290;
     }
+    CPy_INCREF(cpy_r_r190);
+CPyL141: ;
+    PyObject *cpy_r_r191[4] = {cpy_r_r190, cpy_r_r186, cpy_r_r187, cpy_r_r188};
+    cpy_r_r192 = (PyObject **)&cpy_r_r191;
+    cpy_r_r193 = PyObject_Vectorcall(cpy_r_r189, cpy_r_r192, 4, 0);
     CPy_DecRef(cpy_r_r189);
-    CPy_DecRef(cpy_r_r185);
-    CPy_DecRef(cpy_r_r186);
-    CPy_DecRef(cpy_r_r187);
-    cpy_r_r193 = CPy_GetCoro(cpy_r_r192);
-    CPy_DecRef(cpy_r_r192);
     if (unlikely(cpy_r_r193 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL175;
+        goto CPyL291;
     }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__8 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__8);
+    CPy_DecRef(cpy_r_r190);
+    CPy_DecRef(cpy_r_r186);
+    CPy_DecRef(cpy_r_r187);
+    CPy_DecRef(cpy_r_r188);
+    cpy_r_r194 = CPy_GetCoro(cpy_r_r193);
+    CPy_DecRef(cpy_r_r193);
+    if (unlikely(cpy_r_r194 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL176;
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__8 = cpy_r_r193;
-    cpy_r_r194 = 1;
-    if (unlikely(!cpy_r_r194)) {
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__8 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__8);
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__8 = cpy_r_r194;
+    cpy_r_r195 = 1;
+    if (unlikely(!cpy_r_r195)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL175;
+        goto CPyL176;
     }
-    cpy_r_r195 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__8;
-    if (unlikely(cpy_r_r195 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__8", -1, CPyStatic_call___globals);
-        goto CPyL175;
+    cpy_r_r196 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__8;
+    if (unlikely(cpy_r_r196 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__8", -1, CPyStatic_call___globals);
+        goto CPyL176;
     }
-    CPy_INCREF(cpy_r_r195);
-CPyL144: ;
-    cpy_r_r196 = CPyIter_Next(cpy_r_r195);
-    CPy_DecRef(cpy_r_r195);
-    if (cpy_r_r196 != NULL) goto CPyL147;
-    cpy_r_r197 = CPy_FetchStopIterationValue();
-    if (unlikely(cpy_r_r197 == NULL)) {
+    CPy_INCREF(cpy_r_r196);
+CPyL145: ;
+    cpy_r_r197 = CPyIter_Next(cpy_r_r196);
+    CPy_DecRef(cpy_r_r196);
+    if (cpy_r_r197 != NULL) goto CPyL148;
+    cpy_r_r198 = CPy_FetchStopIterationValue();
+    if (unlikely(cpy_r_r198 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL175;
+        goto CPyL176;
     }
-    cpy_r_r198 = cpy_r_r197;
-    cpy_r_r199 = NULL;
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__8 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__8);
+    cpy_r_r199 = cpy_r_r198;
+    cpy_r_r200 = NULL;
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__8 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__8);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__8 = cpy_r_r199;
-    cpy_r_r200 = 1;
-    if (unlikely(!cpy_r_r200)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__8 = cpy_r_r200;
+    cpy_r_r201 = 1;
+    if (unlikely(!cpy_r_r201)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL287;
+        goto CPyL292;
     } else
-        goto CPyL169;
-CPyL147: ;
-    cpy_r_r201 = cpy_r_r196;
+        goto CPyL170;
 CPyL148: ;
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_next_label__ = 3;
-    return cpy_r_r201;
+    cpy_r_r202 = cpy_r_r197;
 CPyL149: ;
-    cpy_r_r203 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r204 = cpy_r_type != cpy_r_r203;
-    if (!cpy_r_r204) goto CPyL288;
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_next_label__ = 3;
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    return cpy_r_r202;
+CPyL150: ;
+    cpy_r_r204 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r205 = cpy_r_type != cpy_r_r204;
+    if (!cpy_r_r205) goto CPyL293;
     CPyErr_SetObjectAndTraceback(cpy_r_type, cpy_r_value, cpy_r_traceback);
     if (unlikely(!0)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL153;
+        goto CPyL154;
     } else
-        goto CPyL289;
-CPyL151: ;
-    CPy_Unreachable();
+        goto CPyL294;
 CPyL152: ;
-    CPy_INCREF(cpy_r_arg);
-    goto CPyL164;
+    CPy_Unreachable();
 CPyL153: ;
-    cpy_r_r205 = CPy_CatchError();
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__9.f0 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__9.f0);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__9.f1);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__9.f2);
+    CPy_INCREF(cpy_r_arg);
+    goto CPyL165;
+CPyL154: ;
+    cpy_r_r206 = CPy_CatchError();
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__9.f0 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__9.f0);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__9.f1);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__9.f2);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__9 = cpy_r_r205;
-    cpy_r_r206 = 1;
-    if (unlikely(!cpy_r_r206)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__9 = cpy_r_r206;
+    cpy_r_r207 = 1;
+    if (unlikely(!cpy_r_r207)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL290;
+        goto CPyL295;
     }
-    cpy_r_r207 = (PyObject **)&cpy_r_r5;
-    cpy_r_r208 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__8;
-    if (unlikely(cpy_r_r208 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__8", -1, CPyStatic_call___globals);
-        goto CPyL290;
+    cpy_r_r208 = (PyObject **)&cpy_r_r5;
+    cpy_r_r209 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__8;
+    if (unlikely(cpy_r_r209 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__8", -1, CPyStatic_call___globals);
+        goto CPyL295;
     }
-    CPy_INCREF(cpy_r_r208);
-CPyL155: ;
-    cpy_r_r209 = CPy_YieldFromErrorHandle(cpy_r_r208, cpy_r_r207);
-    CPy_DecRef(cpy_r_r208);
-    if (unlikely(cpy_r_r209 == 2)) {
+    CPy_INCREF(cpy_r_r209);
+CPyL156: ;
+    cpy_r_r210 = CPy_YieldFromErrorHandle(cpy_r_r209, cpy_r_r208);
+    CPy_DecRef(cpy_r_r209);
+    if (unlikely(cpy_r_r210 == 2)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL290;
+        goto CPyL295;
     }
-    if (cpy_r_r209) goto CPyL159;
-    cpy_r_r201 = cpy_r_r5;
-    cpy_r_r210 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__9;
-    if (unlikely(cpy_r_r210.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__9", -1, CPyStatic_call___globals);
-        goto CPyL291;
-    }
-    CPy_INCREF(cpy_r_r210.f0);
-    CPy_INCREF(cpy_r_r210.f1);
-    CPy_INCREF(cpy_r_r210.f2);
-CPyL158: ;
-    CPy_RestoreExcInfo(cpy_r_r210);
-    CPy_DecRef(cpy_r_r210.f0);
-    CPy_DecRef(cpy_r_r210.f1);
-    CPy_DecRef(cpy_r_r210.f2);
-    goto CPyL148;
-CPyL159: ;
-    cpy_r_r198 = cpy_r_r5;
-    cpy_r_r211 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__9;
+    if (cpy_r_r210) goto CPyL160;
+    cpy_r_r202 = cpy_r_r5;
+    cpy_r_r211 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__9;
     if (unlikely(cpy_r_r211.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__9", -1, CPyStatic_call___globals);
-        goto CPyL292;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__9", -1, CPyStatic_call___globals);
+        goto CPyL296;
     }
     CPy_INCREF(cpy_r_r211.f0);
     CPy_INCREF(cpy_r_r211.f1);
     CPy_INCREF(cpy_r_r211.f2);
-CPyL160: ;
+CPyL159: ;
     CPy_RestoreExcInfo(cpy_r_r211);
     CPy_DecRef(cpy_r_r211.f0);
     CPy_DecRef(cpy_r_r211.f1);
     CPy_DecRef(cpy_r_r211.f2);
-    goto CPyL169;
-CPyL161: ;
-    cpy_r_r212 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__9;
+    goto CPyL149;
+CPyL160: ;
+    cpy_r_r199 = cpy_r_r5;
+    cpy_r_r212 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__9;
     if (unlikely(cpy_r_r212.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__9", -1, CPyStatic_call___globals);
-        goto CPyL175;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__9", -1, CPyStatic_call___globals);
+        goto CPyL297;
     }
     CPy_INCREF(cpy_r_r212.f0);
     CPy_INCREF(cpy_r_r212.f1);
     CPy_INCREF(cpy_r_r212.f2);
-CPyL162: ;
+CPyL161: ;
     CPy_RestoreExcInfo(cpy_r_r212);
     CPy_DecRef(cpy_r_r212.f0);
     CPy_DecRef(cpy_r_r212.f1);
     CPy_DecRef(cpy_r_r212.f2);
-    cpy_r_r213 = CPy_KeepPropagating();
-    if (!cpy_r_r213) goto CPyL175;
-    CPy_Unreachable();
+    goto CPyL170;
+CPyL162: ;
+    cpy_r_r213 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__9;
+    if (unlikely(cpy_r_r213.f0 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__9", -1, CPyStatic_call___globals);
+        goto CPyL176;
+    }
+    CPy_INCREF(cpy_r_r213.f0);
+    CPy_INCREF(cpy_r_r213.f1);
+    CPy_INCREF(cpy_r_r213.f2);
+CPyL163: ;
+    CPy_RestoreExcInfo(cpy_r_r213);
+    CPy_DecRef(cpy_r_r213.f0);
+    CPy_DecRef(cpy_r_r213.f1);
+    CPy_DecRef(cpy_r_r213.f2);
+    cpy_r_r214 = CPy_KeepPropagating();
+    if (!cpy_r_r214) {
+        goto CPyL176;
+    } else
+        goto CPyL298;
 CPyL164: ;
-    cpy_r_r214 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__8;
-    if (unlikely(cpy_r_r214 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__8", -1, CPyStatic_call___globals);
-        goto CPyL293;
-    }
-    CPy_INCREF(cpy_r_r214);
-CPyL165: ;
-    cpy_r_r215 = CPyIter_Send(cpy_r_r214, cpy_r_arg);
-    CPy_DECREF(cpy_r_r214);
-    CPy_DECREF(cpy_r_arg);
-    if (cpy_r_r215 == NULL) goto CPyL167;
-    cpy_r_r201 = cpy_r_r215;
-    goto CPyL148;
-CPyL167: ;
-    cpy_r_r216 = CPy_FetchStopIterationValue();
-    if (unlikely(cpy_r_r216 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL175;
-    }
-    cpy_r_r198 = cpy_r_r216;
-CPyL169: ;
-    cpy_r_r217 = PyObject_IsTrue(cpy_r_r198);
-    CPy_DECREF(cpy_r_r198);
-    cpy_r_r218 = cpy_r_r217 >= 0;
-    if (unlikely(!cpy_r_r218)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL175;
-    }
-    cpy_r_r219 = cpy_r_r217;
-    if (cpy_r_r219) goto CPyL173;
-    CPy_Reraise();
-    if (!0) goto CPyL175;
     CPy_Unreachable();
-CPyL173: ;
-    cpy_r_r220 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__7;
-    if (unlikely(cpy_r_r220.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__7", -1, CPyStatic_call___globals);
-        goto CPyL179;
+CPyL165: ;
+    cpy_r_r215 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__8;
+    if (unlikely(cpy_r_r215 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__8", -1, CPyStatic_call___globals);
+        goto CPyL299;
     }
-    CPy_INCREF(cpy_r_r220.f0);
-    CPy_INCREF(cpy_r_r220.f1);
-    CPy_INCREF(cpy_r_r220.f2);
+    CPy_INCREF(cpy_r_r215);
+CPyL166: ;
+    cpy_r_r216 = CPyIter_Send(cpy_r_r215, cpy_r_arg);
+    CPy_DECREF(cpy_r_r215);
+    CPy_DECREF(cpy_r_arg);
+    if (cpy_r_r216 == NULL) goto CPyL168;
+    cpy_r_r202 = cpy_r_r216;
+    goto CPyL149;
+CPyL168: ;
+    cpy_r_r217 = CPy_FetchStopIterationValue();
+    if (unlikely(cpy_r_r217 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL176;
+    }
+    cpy_r_r199 = cpy_r_r217;
+CPyL170: ;
+    cpy_r_r218 = PyObject_IsTrue(cpy_r_r199);
+    CPy_DECREF(cpy_r_r199);
+    cpy_r_r219 = cpy_r_r218 >= 0;
+    if (unlikely(!cpy_r_r219)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
+        goto CPyL176;
+    }
+    cpy_r_r220 = cpy_r_r218;
+    if (cpy_r_r220) goto CPyL174;
+    CPy_Reraise();
+    if (!0) {
+        goto CPyL176;
+    } else
+        goto CPyL300;
+CPyL173: ;
+    CPy_Unreachable();
 CPyL174: ;
-    CPy_RestoreExcInfo(cpy_r_r220);
-    CPy_DECREF(cpy_r_r220.f0);
-    CPy_DECREF(cpy_r_r220.f1);
-    CPy_DECREF(cpy_r_r220.f2);
-    goto CPyL178;
-CPyL175: ;
-    cpy_r_r221 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__7;
+    cpy_r_r221 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__7;
     if (unlikely(cpy_r_r221.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__7", -1, CPyStatic_call___globals);
-        goto CPyL179;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__7", -1, CPyStatic_call___globals);
+        goto CPyL180;
     }
     CPy_INCREF(cpy_r_r221.f0);
     CPy_INCREF(cpy_r_r221.f1);
     CPy_INCREF(cpy_r_r221.f2);
-CPyL176: ;
+CPyL175: ;
     CPy_RestoreExcInfo(cpy_r_r221);
     CPy_DECREF(cpy_r_r221.f0);
     CPy_DECREF(cpy_r_r221.f1);
     CPy_DECREF(cpy_r_r221.f2);
-    cpy_r_r222 = CPy_KeepPropagating();
-    if (!cpy_r_r222) goto CPyL179;
-    CPy_Unreachable();
+    goto CPyL179;
+CPyL176: ;
+    cpy_r_r222 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__7;
+    if (unlikely(cpy_r_r222.f0 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__7", -1, CPyStatic_call___globals);
+        goto CPyL180;
+    }
+    CPy_INCREF(cpy_r_r222.f0);
+    CPy_INCREF(cpy_r_r222.f1);
+    CPy_INCREF(cpy_r_r222.f2);
+CPyL177: ;
+    CPy_RestoreExcInfo(cpy_r_r222);
+    CPy_DECREF(cpy_r_r222.f0);
+    CPy_DECREF(cpy_r_r222.f1);
+    CPy_DECREF(cpy_r_r222.f2);
+    cpy_r_r223 = CPy_KeepPropagating();
+    if (!cpy_r_r223) {
+        goto CPyL180;
+    } else
+        goto CPyL301;
 CPyL178: ;
-    tuple_T3OOO __tmp33 = { NULL, NULL, NULL };
-    cpy_r_r223 = __tmp33;
-    cpy_r_r9 = cpy_r_r223;
-    goto CPyL180;
+    CPy_Unreachable();
 CPyL179: ;
-    cpy_r_r224 = CPy_CatchError();
+    tuple_T3OOO __tmp33 = { NULL, NULL, NULL };
+    cpy_r_r224 = __tmp33;
     cpy_r_r9 = cpy_r_r224;
+    goto CPyL181;
 CPyL180: ;
-    cpy_r_r225 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__2;
-    if (unlikely(cpy_r_r225 == 2)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__2", -1, CPyStatic_call___globals);
-        goto CPyL216;
-    }
+    cpy_r_r225 = CPy_CatchError();
+    cpy_r_r9 = cpy_r_r225;
 CPyL181: ;
-    if (!cpy_r_r225) goto CPyL213;
-CPyL182: ;
-    cpy_r_r226 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r227 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__0;
-    if (unlikely(cpy_r_r227 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__0", -1, CPyStatic_call___globals);
-        goto CPyL216;
+    cpy_r_r226 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__2;
+    if (unlikely(cpy_r_r226 == 2)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__2", -1, CPyStatic_call___globals);
+        goto CPyL302;
     }
-    CPy_INCREF(cpy_r_r227);
+CPyL182: ;
+    if (!cpy_r_r226) goto CPyL214;
 CPyL183: ;
-    cpy_r_r228 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__1;
+    cpy_r_r227 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r228 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__0;
     if (unlikely(cpy_r_r228 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__1", -1, CPyStatic_call___globals);
-        goto CPyL294;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__0", -1, CPyStatic_call___globals);
+        goto CPyL302;
     }
     CPy_INCREF(cpy_r_r228);
 CPyL184: ;
-    PyObject *cpy_r_r229[4] = {cpy_r_r228, cpy_r_r226, cpy_r_r226, cpy_r_r226};
-    cpy_r_r230 = (PyObject **)&cpy_r_r229;
-    cpy_r_r231 = PyObject_Vectorcall(cpy_r_r227, cpy_r_r230, 4, 0);
-    CPy_DECREF(cpy_r_r227);
-    if (unlikely(cpy_r_r231 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL295;
+    cpy_r_r229 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__1;
+    if (unlikely(cpy_r_r229 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__1", -1, CPyStatic_call___globals);
+        goto CPyL303;
     }
+    CPy_INCREF(cpy_r_r229);
+CPyL185: ;
+    PyObject *cpy_r_r230[4] = {cpy_r_r229, cpy_r_r227, cpy_r_r227, cpy_r_r227};
+    cpy_r_r231 = (PyObject **)&cpy_r_r230;
+    cpy_r_r232 = PyObject_Vectorcall(cpy_r_r228, cpy_r_r231, 4, 0);
     CPy_DECREF(cpy_r_r228);
-    cpy_r_r232 = CPy_GetCoro(cpy_r_r231);
-    CPy_DECREF(cpy_r_r231);
     if (unlikely(cpy_r_r232 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL216;
+        goto CPyL304;
     }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__10 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__10);
+    CPy_DECREF(cpy_r_r229);
+    cpy_r_r233 = CPy_GetCoro(cpy_r_r232);
+    CPy_DECREF(cpy_r_r232);
+    if (unlikely(cpy_r_r233 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL302;
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__10 = cpy_r_r232;
-    cpy_r_r233 = 1;
-    if (unlikely(!cpy_r_r233)) {
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__10 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__10);
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__10 = cpy_r_r233;
+    cpy_r_r234 = 1;
+    if (unlikely(!cpy_r_r234)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL216;
+        goto CPyL302;
     }
-    cpy_r_r234 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__10;
-    if (unlikely(cpy_r_r234 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__10", -1, CPyStatic_call___globals);
-        goto CPyL216;
+    cpy_r_r235 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__10;
+    if (unlikely(cpy_r_r235 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__10", -1, CPyStatic_call___globals);
+        goto CPyL302;
     }
-    CPy_INCREF(cpy_r_r234);
-CPyL188: ;
-    cpy_r_r235 = CPyIter_Next(cpy_r_r234);
-    CPy_DECREF(cpy_r_r234);
-    if (cpy_r_r235 != NULL) goto CPyL296;
-    cpy_r_r236 = CPy_FetchStopIterationValue();
-    if (unlikely(cpy_r_r236 == NULL)) {
+    CPy_INCREF(cpy_r_r235);
+CPyL189: ;
+    cpy_r_r236 = CPyIter_Next(cpy_r_r235);
+    CPy_DECREF(cpy_r_r235);
+    if (cpy_r_r236 != NULL) goto CPyL305;
+    cpy_r_r237 = CPy_FetchStopIterationValue();
+    if (unlikely(cpy_r_r237 == NULL)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL216;
+        goto CPyL302;
     }
-    cpy_r_r237 = cpy_r_r236;
-    CPy_DECREF(cpy_r_r237);
-    cpy_r_r238 = NULL;
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__10 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__10);
+    cpy_r_r238 = cpy_r_r237;
+    CPy_DECREF(cpy_r_r238);
+    cpy_r_r239 = NULL;
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__10 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__10);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__10 = cpy_r_r238;
-    cpy_r_r239 = 1;
-    if (unlikely(!cpy_r_r239)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__10 = cpy_r_r239;
+    cpy_r_r240 = 1;
+    if (unlikely(!cpy_r_r240)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL216;
+        goto CPyL302;
     } else
-        goto CPyL213;
-CPyL191: ;
-    cpy_r_r240 = cpy_r_r235;
+        goto CPyL214;
 CPyL192: ;
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_next_label__ = 4;
-    return cpy_r_r240;
+    cpy_r_r241 = cpy_r_r236;
 CPyL193: ;
-    cpy_r_r242 = (PyObject *)&_Py_NoneStruct;
-    cpy_r_r243 = cpy_r_type != cpy_r_r242;
-    if (!cpy_r_r243) goto CPyL297;
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_next_label__ = 4;
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    return cpy_r_r241;
+CPyL194: ;
+    cpy_r_r243 = (PyObject *)&_Py_NoneStruct;
+    cpy_r_r244 = cpy_r_type != cpy_r_r243;
+    if (!cpy_r_r244) goto CPyL306;
     CPyErr_SetObjectAndTraceback(cpy_r_type, cpy_r_value, cpy_r_traceback);
     if (unlikely(!0)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL197;
+        goto CPyL198;
     } else
-        goto CPyL298;
-CPyL195: ;
-    CPy_Unreachable();
+        goto CPyL307;
 CPyL196: ;
-    CPy_INCREF(cpy_r_arg);
-    goto CPyL208;
+    CPy_Unreachable();
 CPyL197: ;
-    cpy_r_r244 = CPy_CatchError();
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__11.f0 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__11.f0);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__11.f1);
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__11.f2);
+    CPy_INCREF(cpy_r_arg);
+    goto CPyL209;
+CPyL198: ;
+    cpy_r_r245 = CPy_CatchError();
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__11.f0 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__11.f0);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__11.f1);
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__11.f2);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__11 = cpy_r_r244;
-    cpy_r_r245 = 1;
-    if (unlikely(!cpy_r_r245)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__11 = cpy_r_r245;
+    cpy_r_r246 = 1;
+    if (unlikely(!cpy_r_r246)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
-        goto CPyL299;
+        goto CPyL308;
     }
-    cpy_r_r246 = (PyObject **)&cpy_r_r7;
-    cpy_r_r247 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__10;
-    if (unlikely(cpy_r_r247 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__10", -1, CPyStatic_call___globals);
-        goto CPyL299;
+    cpy_r_r247 = (PyObject **)&cpy_r_r7;
+    cpy_r_r248 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__10;
+    if (unlikely(cpy_r_r248 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__10", -1, CPyStatic_call___globals);
+        goto CPyL308;
     }
-    CPy_INCREF(cpy_r_r247);
-CPyL199: ;
-    cpy_r_r248 = CPy_YieldFromErrorHandle(cpy_r_r247, cpy_r_r246);
-    CPy_DecRef(cpy_r_r247);
-    if (unlikely(cpy_r_r248 == 2)) {
+    CPy_INCREF(cpy_r_r248);
+CPyL200: ;
+    cpy_r_r249 = CPy_YieldFromErrorHandle(cpy_r_r248, cpy_r_r247);
+    CPy_DecRef(cpy_r_r248);
+    if (unlikely(cpy_r_r249 == 2)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL299;
+        goto CPyL308;
     }
-    if (cpy_r_r248) goto CPyL203;
-    cpy_r_r240 = cpy_r_r7;
-    cpy_r_r249 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__11;
-    if (unlikely(cpy_r_r249.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__11", -1, CPyStatic_call___globals);
-        goto CPyL300;
-    }
-    CPy_INCREF(cpy_r_r249.f0);
-    CPy_INCREF(cpy_r_r249.f1);
-    CPy_INCREF(cpy_r_r249.f2);
-    goto CPyL301;
-CPyL202: ;
-    CPy_RestoreExcInfo(cpy_r_r249);
-    CPy_DecRef(cpy_r_r249.f0);
-    CPy_DecRef(cpy_r_r249.f1);
-    CPy_DecRef(cpy_r_r249.f2);
-    goto CPyL192;
-CPyL203: ;
-    cpy_r_r237 = cpy_r_r7;
-    CPy_DecRef(cpy_r_r237);
-    cpy_r_r250 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__11;
+    if (cpy_r_r249) goto CPyL204;
+    cpy_r_r241 = cpy_r_r7;
+    cpy_r_r250 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__11;
     if (unlikely(cpy_r_r250.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__11", -1, CPyStatic_call___globals);
-        goto CPyL205;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__11", -1, CPyStatic_call___globals);
+        goto CPyL309;
     }
     CPy_INCREF(cpy_r_r250.f0);
     CPy_INCREF(cpy_r_r250.f1);
     CPy_INCREF(cpy_r_r250.f2);
-CPyL204: ;
+    goto CPyL310;
+CPyL203: ;
     CPy_RestoreExcInfo(cpy_r_r250);
     CPy_DecRef(cpy_r_r250.f0);
     CPy_DecRef(cpy_r_r250.f1);
     CPy_DecRef(cpy_r_r250.f2);
-    goto CPyL213;
-CPyL205: ;
-    cpy_r_r251 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__11;
+    goto CPyL193;
+CPyL204: ;
+    cpy_r_r238 = cpy_r_r7;
+    CPy_DecRef(cpy_r_r238);
+    cpy_r_r251 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__11;
     if (unlikely(cpy_r_r251.f0 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__11", -1, CPyStatic_call___globals);
-        goto CPyL216;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__11", -1, CPyStatic_call___globals);
+        goto CPyL206;
     }
     CPy_INCREF(cpy_r_r251.f0);
     CPy_INCREF(cpy_r_r251.f1);
     CPy_INCREF(cpy_r_r251.f2);
-CPyL206: ;
+CPyL205: ;
     CPy_RestoreExcInfo(cpy_r_r251);
     CPy_DecRef(cpy_r_r251.f0);
     CPy_DecRef(cpy_r_r251.f1);
     CPy_DecRef(cpy_r_r251.f2);
-    cpy_r_r252 = CPy_KeepPropagating();
-    if (!cpy_r_r252) {
-        goto CPyL216;
-    } else
-        goto CPyL302;
+    goto CPyL214;
+CPyL206: ;
+    cpy_r_r252 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__11;
+    if (unlikely(cpy_r_r252.f0 == NULL)) {
+        PyErr_SetString(PyExc_AttributeError, "attribute '__mypyc_temp__11' of 'coroutine_Call_env' undefined");
+    } else {
+        CPy_INCREF(cpy_r_r252.f0);
+        CPy_INCREF(cpy_r_r252.f1);
+        CPy_INCREF(cpy_r_r252.f2);
+    }
+    CPy_DecRef(cpy_r_r10);
+    if (unlikely(cpy_r_r252.f0 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", -1, CPyStatic_call___globals);
+        goto CPyL217;
+    }
 CPyL207: ;
-    CPy_Unreachable();
-CPyL208: ;
-    cpy_r_r253 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_temp__10;
-    if (unlikely(cpy_r_r253 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "__mypyc_temp__10", -1, CPyStatic_call___globals);
-        goto CPyL303;
-    }
-    CPy_INCREF(cpy_r_r253);
-CPyL209: ;
-    cpy_r_r254 = CPyIter_Send(cpy_r_r253, cpy_r_arg);
-    CPy_DECREF(cpy_r_r253);
-    CPy_DECREF(cpy_r_arg);
-    if (cpy_r_r254 == NULL) {
-        goto CPyL211;
+    CPy_RestoreExcInfo(cpy_r_r252);
+    CPy_DecRef(cpy_r_r252.f0);
+    CPy_DecRef(cpy_r_r252.f1);
+    CPy_DecRef(cpy_r_r252.f2);
+    cpy_r_r253 = CPy_KeepPropagating();
+    if (!cpy_r_r253) {
+        goto CPyL217;
     } else
-        goto CPyL304;
-CPyL210: ;
-    cpy_r_r240 = cpy_r_r254;
-    goto CPyL192;
-CPyL211: ;
-    cpy_r_r255 = CPy_FetchStopIterationValue();
-    if (unlikely(cpy_r_r255 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
-        goto CPyL216;
+        goto CPyL311;
+CPyL208: ;
+    CPy_Unreachable();
+CPyL209: ;
+    cpy_r_r254 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_temp__10;
+    if (unlikely(cpy_r_r254 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "__mypyc_temp__10", -1, CPyStatic_call___globals);
+        goto CPyL312;
     }
-    cpy_r_r237 = cpy_r_r255;
-    CPy_DECREF(cpy_r_r237);
-CPyL213: ;
-    if (cpy_r_r9.f0 == NULL) goto CPyL220;
+    CPy_INCREF(cpy_r_r254);
+CPyL210: ;
+    cpy_r_r255 = CPyIter_Send(cpy_r_r254, cpy_r_arg);
+    CPy_DECREF(cpy_r_r254);
+    CPy_DECREF(cpy_r_arg);
+    if (cpy_r_r255 == NULL) {
+        goto CPyL212;
+    } else
+        goto CPyL313;
+CPyL211: ;
+    cpy_r_r241 = cpy_r_r255;
+    goto CPyL193;
+CPyL212: ;
+    cpy_r_r256 = CPy_FetchStopIterationValue();
+    if (unlikely(cpy_r_r256 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 153, CPyStatic_call___globals);
+        goto CPyL302;
+    }
+    cpy_r_r238 = cpy_r_r256;
+    CPy_DECREF(cpy_r_r238);
+CPyL214: ;
+    if (cpy_r_r9.f0 == NULL) {
+        goto CPyL221;
+    } else
+        goto CPyL314;
+CPyL215: ;
     CPy_Reraise();
     if (!0) {
-        goto CPyL216;
+        goto CPyL217;
     } else
-        goto CPyL305;
-CPyL215: ;
-    CPy_Unreachable();
+        goto CPyL315;
 CPyL216: ;
-    if (cpy_r_r9.f0 == NULL) goto CPyL218;
+    CPy_Unreachable();
+CPyL217: ;
+    if (cpy_r_r9.f0 == NULL) goto CPyL219;
     CPy_RestoreExcInfo(cpy_r_r9);
     CPy_XDECREF(cpy_r_r9.f0);
     CPy_XDECREF(cpy_r_r9.f1);
     CPy_XDECREF(cpy_r_r9.f2);
-CPyL218: ;
-    cpy_r_r256 = CPy_KeepPropagating();
-    if (!cpy_r_r256) goto CPyL244;
+CPyL219: ;
+    cpy_r_r257 = CPy_KeepPropagating();
+    if (!cpy_r_r257) goto CPyL245;
     CPy_Unreachable();
-CPyL220: ;
-    cpy_r_r257 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__output;
-    if (unlikely(cpy_r_r257 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "output", 166, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    CPy_INCREF(cpy_r_r257);
 CPyL221: ;
-    cpy_r_r258 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
+    cpy_r_r258 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__output;
     if (unlikely(cpy_r_r258 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 166, CPyStatic_call___globals);
-        goto CPyL306;
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "output", 166, CPyStatic_call___globals);
+        goto CPyL248;
     }
-    CPy_INCREF_NO_IMM(cpy_r_r258);
+    CPy_INCREF(cpy_r_r258);
 CPyL222: ;
-    cpy_r_r259 = ((multicall___call___CallObject *)cpy_r_r258)->_signature;
-    CPy_INCREF_NO_IMM(cpy_r_r259);
-    CPy_DECREF_NO_IMM(cpy_r_r258);
-    cpy_r_r260 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r260 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 166, CPyStatic_call___globals);
-        goto CPyL307;
-    }
-    CPy_INCREF_NO_IMM(cpy_r_r260);
-CPyL223: ;
-    cpy_r_r261 = ((multicall___call___CallObject *)cpy_r_r260)->_returns;
-    CPy_INCREF(cpy_r_r261);
-    CPy_DECREF_NO_IMM(cpy_r_r260);
-    cpy_r_r262 = NULL;
-    cpy_r_r263 = CPyDef_call___Call___decode_output(cpy_r_r257, cpy_r_r259, cpy_r_r261, cpy_r_r262);
-    CPy_DECREF(cpy_r_r257);
-    CPy_DECREF_NO_IMM(cpy_r_r259);
-    CPy_DECREF(cpy_r_r261);
-    if (unlikely(cpy_r_r263 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 166, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__result != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__result);
-    }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__result = cpy_r_r263;
-    cpy_r_r264 = 1;
-    if (unlikely(!cpy_r_r264)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 166, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    cpy_r_r265 = CPyStatics[12]; /* '%s returned %s' */
-    cpy_r_r266 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__self;
-    if (unlikely(cpy_r_r266 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "self", 167, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    CPy_INCREF_NO_IMM(cpy_r_r266);
-CPyL226: ;
-    cpy_r_r267 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__result;
-    if (unlikely(cpy_r_r267 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "result", 167, CPyStatic_call___globals);
-        goto CPyL308;
-    }
-    CPy_INCREF(cpy_r_r267);
-CPyL227: ;
-    cpy_r_r268 = CPyStatic_call___log_debug;
-    if (unlikely(cpy_r_r268 == NULL)) {
-        goto CPyL309;
-    } else
-        goto CPyL230;
-CPyL228: ;
-    PyErr_SetString(PyExc_NameError, "value for final name \"log_debug\" was not set");
-    cpy_r_r269 = 0;
-    if (unlikely(!cpy_r_r269)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 167, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    CPy_Unreachable();
-CPyL230: ;
-    PyObject *cpy_r_r270[3] = {cpy_r_r265, cpy_r_r266, cpy_r_r267};
-    cpy_r_r271 = (PyObject **)&cpy_r_r270;
-    cpy_r_r272 = PyObject_Vectorcall(cpy_r_r268, cpy_r_r271, 3, 0);
-    if (unlikely(cpy_r_r272 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 167, CPyStatic_call___globals);
-        goto CPyL310;
-    } else
-        goto CPyL311;
-CPyL231: ;
-    CPy_DECREF_NO_IMM(cpy_r_r266);
-    CPy_DECREF(cpy_r_r267);
-    cpy_r_r273 = ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_generator_attribute__result;
-    if (unlikely(cpy_r_r273 == NULL)) {
-        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_gen", "result", 168, CPyStatic_call___globals);
-        goto CPyL244;
-    }
-    CPy_INCREF(cpy_r_r273);
-CPyL232: ;
-    ((multicall___call___coroutine_Call_genObject *)cpy_r___mypyc_self__)->___mypyc_next_label__ = -1;
-    if (cpy_r_stop_iter_ptr != NULL) goto CPyL236;
-    CPyGen_SetStopIterationValue(cpy_r_r273);
-    CPy_DECREF(cpy_r_r273);
-    if (!0) goto CPyL244;
-    CPy_Unreachable();
-CPyL236: ;
-    *(PyObject * *)cpy_r_stop_iter_ptr = cpy_r_r273;
-    return 0;
-CPyL237: ;
-    cpy_r_r275 = cpy_r_r10 == 0;
-    if (cpy_r_r275) goto CPyL312;
-    cpy_r_r276 = cpy_r_r10 == 1;
-    if (cpy_r_r276) {
-        goto CPyL313;
-    } else
-        goto CPyL314;
-CPyL239: ;
-    cpy_r_r277 = cpy_r_r10 == 2;
-    if (cpy_r_r277) {
-        goto CPyL315;
-    } else
+    cpy_r_r259 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r259 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 166, CPyStatic_call___globals);
         goto CPyL316;
-CPyL240: ;
-    cpy_r_r278 = cpy_r_r10 == 3;
-    if (cpy_r_r278) {
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r259);
+CPyL223: ;
+    cpy_r_r260 = ((multicall___call___CallObject *)cpy_r_r259)->_signature;
+    CPy_INCREF_NO_IMM(cpy_r_r260);
+    CPy_DECREF_NO_IMM(cpy_r_r259);
+    cpy_r_r261 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r261 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 166, CPyStatic_call___globals);
         goto CPyL317;
-    } else
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r261);
+CPyL224: ;
+    cpy_r_r262 = ((multicall___call___CallObject *)cpy_r_r261)->_returns;
+    CPy_INCREF(cpy_r_r262);
+    CPy_DECREF_NO_IMM(cpy_r_r261);
+    cpy_r_r263 = NULL;
+    cpy_r_r264 = CPyDef_call___Call___decode_output(cpy_r_r258, cpy_r_r260, cpy_r_r262, cpy_r_r263);
+    CPy_DECREF(cpy_r_r258);
+    CPy_DECREF_NO_IMM(cpy_r_r260);
+    CPy_DECREF(cpy_r_r262);
+    if (unlikely(cpy_r_r264 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 166, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__result != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__result);
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__result = cpy_r_r264;
+    cpy_r_r265 = 1;
+    if (unlikely(!cpy_r_r265)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 166, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    cpy_r_r266 = CPyStatics[12]; /* '%s returned %s' */
+    cpy_r_r267 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__self;
+    if (unlikely(cpy_r_r267 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "self", 167, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r267);
+CPyL227: ;
+    cpy_r_r268 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__result;
+    if (unlikely(cpy_r_r268 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "result", 167, CPyStatic_call___globals);
         goto CPyL318;
-CPyL241: ;
-    cpy_r_r279 = cpy_r_r10 == 4;
-    if (cpy_r_r279) {
-        goto CPyL193;
-    } else
+    }
+    CPy_INCREF(cpy_r_r268);
+CPyL228: ;
+    cpy_r_r269 = CPyStatic_call___log_debug;
+    if (unlikely(cpy_r_r269 == NULL)) {
         goto CPyL319;
-CPyL242: ;
-    PyErr_SetNone(PyExc_StopIteration);
-    cpy_r_r280 = 0;
-    if (unlikely(!cpy_r_r280)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
-        goto CPyL244;
+    } else
+        goto CPyL231;
+CPyL229: ;
+    PyErr_SetString(PyExc_NameError, "value for final name \"log_debug\" was not set");
+    cpy_r_r270 = 0;
+    if (unlikely(!cpy_r_r270)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 167, CPyStatic_call___globals);
+        goto CPyL245;
     }
     CPy_Unreachable();
-CPyL244: ;
-    cpy_r_r281 = NULL;
-    return cpy_r_r281;
+CPyL231: ;
+    PyObject *cpy_r_r271[3] = {cpy_r_r266, cpy_r_r267, cpy_r_r268};
+    cpy_r_r272 = (PyObject **)&cpy_r_r271;
+    cpy_r_r273 = PyObject_Vectorcall(cpy_r_r269, cpy_r_r272, 3, 0);
+    if (unlikely(cpy_r_r273 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 167, CPyStatic_call___globals);
+        goto CPyL320;
+    } else
+        goto CPyL321;
+CPyL232: ;
+    CPy_DECREF_NO_IMM(cpy_r_r267);
+    CPy_DECREF(cpy_r_r268);
+    cpy_r_r274 = ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_generator_attribute__result;
+    if (unlikely(cpy_r_r274 == NULL)) {
+        CPy_AttributeError("multicall/call.py", "coroutine", "coroutine_Call_env", "result", 168, CPyStatic_call___globals);
+        goto CPyL248;
+    }
+    CPy_INCREF(cpy_r_r274);
+CPyL233: ;
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r10)->___mypyc_next_label__ = -1;
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    if (cpy_r_stop_iter_ptr != NULL) goto CPyL237;
+    CPyGen_SetStopIterationValue(cpy_r_r274);
+    CPy_DECREF(cpy_r_r274);
+    if (!0) goto CPyL245;
+    CPy_Unreachable();
+CPyL237: ;
+    *(PyObject * *)cpy_r_stop_iter_ptr = cpy_r_r274;
+    return 0;
+CPyL238: ;
+    cpy_r_r276 = cpy_r_r11 == 0;
+    if (cpy_r_r276) goto CPyL322;
+    cpy_r_r277 = cpy_r_r11 == 1;
+    if (cpy_r_r277) {
+        goto CPyL323;
+    } else
+        goto CPyL324;
+CPyL240: ;
+    cpy_r_r278 = cpy_r_r11 == 2;
+    if (cpy_r_r278) {
+        goto CPyL325;
+    } else
+        goto CPyL326;
+CPyL241: ;
+    cpy_r_r279 = cpy_r_r11 == 3;
+    if (cpy_r_r279) {
+        goto CPyL327;
+    } else
+        goto CPyL328;
+CPyL242: ;
+    cpy_r_r280 = cpy_r_r11 == 4;
+    if (cpy_r_r280) {
+        goto CPyL194;
+    } else
+        goto CPyL329;
+CPyL243: ;
+    PyErr_SetNone(PyExc_StopIteration);
+    cpy_r_r281 = 0;
+    if (unlikely(!cpy_r_r281)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
+        goto CPyL245;
+    }
+    CPy_Unreachable();
 CPyL245: ;
-    CPy_DECREF(cpy_r_r14);
-    goto CPyL10;
+    cpy_r_r282 = NULL;
+    return cpy_r_r282;
 CPyL246: ;
-    CPy_DecRef(cpy_r_r14);
-    goto CPyL244;
-CPyL247: ;
-    CPy_DECREF(cpy_r_r22);
-    goto CPyL16;
-CPyL248: ;
-    CPy_DecRef(cpy_r_r22);
-    goto CPyL244;
-CPyL249: ;
-    CPy_DECREF(cpy_r_r35);
-    goto CPyL43;
-CPyL250: ;
-    CPy_DecRef(cpy_r_r40);
-    goto CPyL244;
-CPyL251: ;
-    CPy_DecRef(cpy_r_r49);
-    goto CPyL244;
-CPyL252: ;
-    CPy_DecRef(cpy_r_r55);
-    goto CPyL244;
-CPyL253: ;
-    CPy_DecRef(cpy_r_r60);
-    goto CPyL244;
-CPyL254: ;
-    CPy_DecRef(cpy_r_r69);
-    goto CPyL244;
-CPyL255: ;
-    CPy_DecRef(cpy_r_r78);
-    CPy_DecRef(cpy_r_r79);
-    goto CPyL244;
-CPyL256: ;
-    CPy_DecRef(cpy_r_r78);
-    goto CPyL244;
-CPyL257: ;
-    CPy_DecRef(cpy_r_r87);
-    goto CPyL244;
-CPyL258: ;
-    CPy_XDECREF(cpy_r_r1);
-    goto CPyL62;
-CPyL259: ;
-    CPy_XDECREF(cpy_r_r1);
-    goto CPyL61;
-CPyL260: ;
     CPy_XDecRef(cpy_r_r1);
-    goto CPyL71;
-CPyL261: ;
-    CPy_DecRef(cpy_r_r98);
-    goto CPyL71;
-CPyL262: ;
-    CPy_DecRef(cpy_r_arg);
-    goto CPyL244;
-CPyL263: ;
-    CPy_DecRef(cpy_r_r114);
-    goto CPyL136;
-CPyL264: ;
-    CPy_DecRef(cpy_r_r122);
-    goto CPyL136;
-CPyL265: ;
-    CPy_DecRef(cpy_r_r122);
-    CPy_DecRef(cpy_r_r124);
-    goto CPyL136;
-CPyL266: ;
-    CPy_DecRef(cpy_r_r122);
-    CPy_DecRef(cpy_r_r124);
-    CPy_DecRef(cpy_r_r126);
-    goto CPyL136;
-CPyL267: ;
-    CPy_DECREF(cpy_r_r127);
-    goto CPyL91;
-CPyL268: ;
-    CPy_DecRef(cpy_r_r122);
-    CPy_DecRef(cpy_r_r124);
-    CPy_DecRef(cpy_r_r126);
-    CPy_DecRef(cpy_r_r127);
-    goto CPyL136;
-CPyL269: ;
-    CPy_DecRef(cpy_r_r122);
-    CPy_DecRef(cpy_r_r124);
-    CPy_DecRef(cpy_r_r126);
-    CPy_DecRef(cpy_r_r134);
-    goto CPyL136;
-CPyL270: ;
-    CPy_DECREF(cpy_r_r137);
-    goto CPyL98;
-CPyL271: ;
-    CPy_DecRef(cpy_r_r122);
-    CPy_DecRef(cpy_r_r124);
-    CPy_DecRef(cpy_r_r126);
-    CPy_DecRef(cpy_r_r134);
-    CPy_DecRef(cpy_r_r137);
-    goto CPyL136;
-CPyL272: ;
-    CPy_DecRef(cpy_r_r122);
-    CPy_DecRef(cpy_r_r124);
-    CPy_DecRef(cpy_r_r126);
-    CPy_DecRef(cpy_r_r134);
-    CPy_DecRef(cpy_r_r142);
-    goto CPyL136;
-CPyL273: ;
-    CPy_DecRef(cpy_r_r122);
-    CPy_DecRef(cpy_r_r124);
-    CPy_DecRef(cpy_r_r126);
-    CPy_DecRef(cpy_r_r134);
-    CPy_DecRef(cpy_r_r142);
-    CPy_DecRef(cpy_r_r146);
-    goto CPyL136;
-CPyL274: ;
-    CPy_DecRef(cpy_r_r122);
-    CPy_DecRef(cpy_r_r124);
-    CPy_DecRef(cpy_r_r126);
-    CPy_DecRef(cpy_r_r134);
-    CPy_DecRef(cpy_r_r142);
-    CPy_DecRef(cpy_r_r146);
-    CPy_DecRef(cpy_r_r148);
-    goto CPyL136;
-CPyL275: ;
-    CPy_DecRef(cpy_r_r151);
-    goto CPyL136;
-CPyL276: ;
-    CPy_DecRef(cpy_r_r153);
-    goto CPyL136;
-CPyL277: ;
-    CPy_DecRef(cpy_r_r161);
-    goto CPyL136;
-CPyL278: ;
-    CPy_XDECREF(cpy_r_r3);
-    goto CPyL118;
-CPyL279: ;
-    CPy_XDECREF(cpy_r_r3);
-    goto CPyL117;
-CPyL280: ;
     CPy_XDecRef(cpy_r_r3);
-    goto CPyL127;
-CPyL281: ;
-    CPy_DecRef(cpy_r_r164);
-    goto CPyL127;
-CPyL282: ;
-    CPy_DecRef(cpy_r_r161);
-    goto CPyL127;
-CPyL283: ;
+    CPy_XDecRef(cpy_r_r5);
+    CPy_XDecRef(cpy_r_r7);
+    CPy_XDecRef(cpy_r_r9.f0);
+    CPy_XDecRef(cpy_r_r9.f1);
+    CPy_XDecRef(cpy_r_r9.f2);
+    goto CPyL245;
+CPyL247: ;
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    goto CPyL3;
+CPyL248: ;
+    CPy_DecRef(cpy_r_r10);
+    goto CPyL245;
+CPyL249: ;
+    CPy_DECREF(cpy_r_r15);
+    goto CPyL11;
+CPyL250: ;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r15);
+    goto CPyL245;
+CPyL251: ;
+    CPy_DECREF(cpy_r_r23);
+    goto CPyL17;
+CPyL252: ;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r23);
+    goto CPyL245;
+CPyL253: ;
+    CPy_DECREF(cpy_r_r36);
+    goto CPyL44;
+CPyL254: ;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r41);
+    goto CPyL245;
+CPyL255: ;
+    CPy_DecRef(cpy_r_r50);
+    goto CPyL245;
+CPyL256: ;
+    CPy_DecRef(cpy_r_r56);
+    goto CPyL245;
+CPyL257: ;
+    CPy_DecRef(cpy_r_r61);
+    goto CPyL245;
+CPyL258: ;
+    CPy_DecRef(cpy_r_r70);
+    goto CPyL245;
+CPyL259: ;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r79);
+    CPy_DecRef(cpy_r_r80);
+    goto CPyL245;
+CPyL260: ;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r79);
+    goto CPyL245;
+CPyL261: ;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r88);
+    goto CPyL245;
+CPyL262: ;
+    CPy_XDECREF(cpy_r_r1);
+    goto CPyL63;
+CPyL263: ;
+    CPy_XDECREF(cpy_r_r1);
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    goto CPyL62;
+CPyL264: ;
+    CPy_XDecRef(cpy_r_r1);
+    goto CPyL72;
+CPyL265: ;
+    CPy_DecRef(cpy_r_r99);
+    goto CPyL72;
+CPyL266: ;
+    CPy_DecRef(cpy_r_r10);
     CPy_DecRef(cpy_r_arg);
-    goto CPyL136;
+    goto CPyL245;
+CPyL267: ;
+    CPy_DecRef(cpy_r_r115);
+    goto CPyL137;
+CPyL268: ;
+    CPy_DecRef(cpy_r_r123);
+    goto CPyL137;
+CPyL269: ;
+    CPy_DecRef(cpy_r_r123);
+    CPy_DecRef(cpy_r_r125);
+    goto CPyL137;
+CPyL270: ;
+    CPy_DecRef(cpy_r_r123);
+    CPy_DecRef(cpy_r_r125);
+    CPy_DecRef(cpy_r_r127);
+    goto CPyL137;
+CPyL271: ;
+    CPy_DECREF(cpy_r_r128);
+    goto CPyL92;
+CPyL272: ;
+    CPy_DecRef(cpy_r_r123);
+    CPy_DecRef(cpy_r_r125);
+    CPy_DecRef(cpy_r_r127);
+    CPy_DecRef(cpy_r_r128);
+    goto CPyL137;
+CPyL273: ;
+    CPy_DecRef(cpy_r_r123);
+    CPy_DecRef(cpy_r_r125);
+    CPy_DecRef(cpy_r_r127);
+    CPy_DecRef(cpy_r_r135);
+    goto CPyL137;
+CPyL274: ;
+    CPy_DECREF(cpy_r_r138);
+    goto CPyL99;
+CPyL275: ;
+    CPy_DecRef(cpy_r_r123);
+    CPy_DecRef(cpy_r_r125);
+    CPy_DecRef(cpy_r_r127);
+    CPy_DecRef(cpy_r_r135);
+    CPy_DecRef(cpy_r_r138);
+    goto CPyL137;
+CPyL276: ;
+    CPy_DecRef(cpy_r_r123);
+    CPy_DecRef(cpy_r_r125);
+    CPy_DecRef(cpy_r_r127);
+    CPy_DecRef(cpy_r_r135);
+    CPy_DecRef(cpy_r_r143);
+    goto CPyL137;
+CPyL277: ;
+    CPy_DecRef(cpy_r_r123);
+    CPy_DecRef(cpy_r_r125);
+    CPy_DecRef(cpy_r_r127);
+    CPy_DecRef(cpy_r_r135);
+    CPy_DecRef(cpy_r_r143);
+    CPy_DecRef(cpy_r_r147);
+    goto CPyL137;
+CPyL278: ;
+    CPy_DecRef(cpy_r_r123);
+    CPy_DecRef(cpy_r_r125);
+    CPy_DecRef(cpy_r_r127);
+    CPy_DecRef(cpy_r_r135);
+    CPy_DecRef(cpy_r_r143);
+    CPy_DecRef(cpy_r_r147);
+    CPy_DecRef(cpy_r_r149);
+    goto CPyL137;
+CPyL279: ;
+    CPy_DecRef(cpy_r_r152);
+    goto CPyL137;
+CPyL280: ;
+    CPy_DecRef(cpy_r_r154);
+    goto CPyL137;
+CPyL281: ;
+    CPy_DecRef(cpy_r_r162);
+    goto CPyL137;
+CPyL282: ;
+    CPy_XDECREF(cpy_r_r3);
+    goto CPyL119;
+CPyL283: ;
+    CPy_XDECREF(cpy_r_r3);
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    goto CPyL118;
 CPyL284: ;
-    CPy_DecRef(cpy_r_r185);
-    CPy_DecRef(cpy_r_r186);
-    CPy_DecRef(cpy_r_r187);
-    goto CPyL175;
+    CPy_XDecRef(cpy_r_r3);
+    goto CPyL128;
 CPyL285: ;
-    CPy_DecRef(cpy_r_r185);
+    CPy_DecRef(cpy_r_r165);
+    goto CPyL128;
+CPyL286: ;
+    CPy_DecRef(cpy_r_r162);
+    goto CPyL128;
+CPyL287: ;
+    CPy_DecRef(cpy_r_r10);
+    goto CPyL130;
+CPyL288: ;
+    CPy_DecRef(cpy_r_arg);
+    goto CPyL137;
+CPyL289: ;
     CPy_DecRef(cpy_r_r186);
     CPy_DecRef(cpy_r_r187);
     CPy_DecRef(cpy_r_r188);
-    goto CPyL175;
-CPyL286: ;
-    CPy_DecRef(cpy_r_r185);
+    goto CPyL176;
+CPyL290: ;
     CPy_DecRef(cpy_r_r186);
     CPy_DecRef(cpy_r_r187);
+    CPy_DecRef(cpy_r_r188);
     CPy_DecRef(cpy_r_r189);
-    goto CPyL175;
-CPyL287: ;
-    CPy_DecRef(cpy_r_r198);
-    goto CPyL175;
-CPyL288: ;
-    CPy_XDECREF(cpy_r_r5);
-    goto CPyL152;
-CPyL289: ;
-    CPy_XDECREF(cpy_r_r5);
-    goto CPyL151;
-CPyL290: ;
-    CPy_XDecRef(cpy_r_r5);
-    goto CPyL161;
+    goto CPyL176;
 CPyL291: ;
-    CPy_DecRef(cpy_r_r201);
-    goto CPyL161;
+    CPy_DecRef(cpy_r_r186);
+    CPy_DecRef(cpy_r_r187);
+    CPy_DecRef(cpy_r_r188);
+    CPy_DecRef(cpy_r_r190);
+    goto CPyL176;
 CPyL292: ;
-    CPy_DecRef(cpy_r_r198);
-    goto CPyL161;
+    CPy_DecRef(cpy_r_r199);
+    goto CPyL176;
 CPyL293: ;
-    CPy_DecRef(cpy_r_arg);
-    goto CPyL175;
+    CPy_XDECREF(cpy_r_r5);
+    goto CPyL153;
 CPyL294: ;
-    CPy_DecRef(cpy_r_r227);
-    goto CPyL216;
+    CPy_XDECREF(cpy_r_r5);
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    goto CPyL152;
 CPyL295: ;
-    CPy_DecRef(cpy_r_r228);
-    goto CPyL216;
+    CPy_XDecRef(cpy_r_r5);
+    goto CPyL162;
 CPyL296: ;
-    CPy_XDECREF(cpy_r_r9.f0);
-    CPy_XDECREF(cpy_r_r9.f1);
-    CPy_XDECREF(cpy_r_r9.f2);
-    goto CPyL191;
+    CPy_DecRef(cpy_r_r202);
+    goto CPyL162;
 CPyL297: ;
-    CPy_XDECREF(cpy_r_r7);
-    goto CPyL196;
+    CPy_DecRef(cpy_r_r199);
+    goto CPyL162;
 CPyL298: ;
-    CPy_XDECREF(cpy_r_r7);
-    CPy_XDECREF(cpy_r_r9.f0);
-    CPy_XDECREF(cpy_r_r9.f1);
-    CPy_XDECREF(cpy_r_r9.f2);
-    goto CPyL195;
+    CPy_DecRef(cpy_r_r10);
+    goto CPyL164;
 CPyL299: ;
-    CPy_XDecRef(cpy_r_r7);
-    goto CPyL205;
-CPyL300: ;
-    CPy_DecRef(cpy_r_r240);
-    goto CPyL205;
-CPyL301: ;
-    CPy_XDecRef(cpy_r_r9.f0);
-    CPy_XDecRef(cpy_r_r9.f1);
-    CPy_XDecRef(cpy_r_r9.f2);
-    goto CPyL202;
-CPyL302: ;
-    CPy_XDecRef(cpy_r_r9.f0);
-    CPy_XDecRef(cpy_r_r9.f1);
-    CPy_XDecRef(cpy_r_r9.f2);
-    goto CPyL207;
-CPyL303: ;
     CPy_DecRef(cpy_r_arg);
-    goto CPyL216;
+    goto CPyL176;
+CPyL300: ;
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    goto CPyL173;
+CPyL301: ;
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    goto CPyL178;
+CPyL302: ;
+    CPy_DecRef(cpy_r_r10);
+    goto CPyL217;
+CPyL303: ;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r228);
+    goto CPyL217;
 CPyL304: ;
-    CPy_XDECREF(cpy_r_r9.f0);
-    CPy_XDECREF(cpy_r_r9.f1);
-    CPy_XDECREF(cpy_r_r9.f2);
-    goto CPyL210;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r229);
+    goto CPyL217;
 CPyL305: ;
     CPy_XDECREF(cpy_r_r9.f0);
     CPy_XDECREF(cpy_r_r9.f1);
     CPy_XDECREF(cpy_r_r9.f2);
-    goto CPyL215;
+    goto CPyL192;
 CPyL306: ;
-    CPy_DecRef(cpy_r_r257);
-    goto CPyL244;
+    CPy_XDECREF(cpy_r_r7);
+    goto CPyL197;
 CPyL307: ;
-    CPy_DecRef(cpy_r_r257);
-    CPy_DecRef(cpy_r_r259);
-    goto CPyL244;
+    CPy_XDECREF(cpy_r_r7);
+    CPy_XDECREF(cpy_r_r9.f0);
+    CPy_XDECREF(cpy_r_r9.f1);
+    CPy_XDECREF(cpy_r_r9.f2);
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    goto CPyL196;
 CPyL308: ;
-    CPy_DecRef(cpy_r_r266);
-    goto CPyL244;
+    CPy_XDecRef(cpy_r_r7);
+    goto CPyL206;
 CPyL309: ;
-    CPy_DecRef(cpy_r_r266);
-    CPy_DecRef(cpy_r_r267);
-    goto CPyL228;
+    CPy_DecRef(cpy_r_r241);
+    goto CPyL206;
 CPyL310: ;
-    CPy_DecRef(cpy_r_r266);
-    CPy_DecRef(cpy_r_r267);
-    goto CPyL244;
+    CPy_XDecRef(cpy_r_r9.f0);
+    CPy_XDecRef(cpy_r_r9.f1);
+    CPy_XDecRef(cpy_r_r9.f2);
+    goto CPyL203;
 CPyL311: ;
-    CPy_DECREF(cpy_r_r272);
-    goto CPyL231;
+    CPy_XDecRef(cpy_r_r9.f0);
+    CPy_XDecRef(cpy_r_r9.f1);
+    CPy_XDecRef(cpy_r_r9.f2);
+    goto CPyL208;
 CPyL312: ;
-    CPy_XDECREF(cpy_r_r1);
-    CPy_XDECREF(cpy_r_r3);
-    CPy_XDECREF(cpy_r_r5);
-    CPy_XDECREF(cpy_r_r7);
-    CPy_XDECREF(cpy_r_r9.f0);
-    CPy_XDECREF(cpy_r_r9.f1);
-    CPy_XDECREF(cpy_r_r9.f2);
-    goto CPyL1;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_arg);
+    goto CPyL217;
 CPyL313: ;
-    CPy_XDECREF(cpy_r_r3);
-    CPy_XDECREF(cpy_r_r5);
-    CPy_XDECREF(cpy_r_r7);
     CPy_XDECREF(cpy_r_r9.f0);
     CPy_XDECREF(cpy_r_r9.f1);
     CPy_XDECREF(cpy_r_r9.f2);
-    goto CPyL59;
+    goto CPyL211;
 CPyL314: ;
-    CPy_XDECREF(cpy_r_r1);
-    goto CPyL239;
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    goto CPyL215;
 CPyL315: ;
-    CPy_XDECREF(cpy_r_r5);
-    CPy_XDECREF(cpy_r_r7);
     CPy_XDECREF(cpy_r_r9.f0);
     CPy_XDECREF(cpy_r_r9.f1);
     CPy_XDECREF(cpy_r_r9.f2);
-    goto CPyL115;
+    goto CPyL216;
 CPyL316: ;
-    CPy_XDECREF(cpy_r_r3);
-    goto CPyL240;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r258);
+    goto CPyL245;
 CPyL317: ;
-    CPy_XDECREF(cpy_r_r7);
-    CPy_XDECREF(cpy_r_r9.f0);
-    CPy_XDECREF(cpy_r_r9.f1);
-    CPy_XDECREF(cpy_r_r9.f2);
-    goto CPyL149;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r258);
+    CPy_DecRef(cpy_r_r260);
+    goto CPyL245;
 CPyL318: ;
-    CPy_XDECREF(cpy_r_r5);
-    goto CPyL241;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r267);
+    goto CPyL245;
 CPyL319: ;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r267);
+    CPy_DecRef(cpy_r_r268);
+    goto CPyL229;
+CPyL320: ;
+    CPy_DecRef(cpy_r_r10);
+    CPy_DecRef(cpy_r_r267);
+    CPy_DecRef(cpy_r_r268);
+    goto CPyL245;
+CPyL321: ;
+    CPy_DECREF(cpy_r_r273);
+    goto CPyL232;
+CPyL322: ;
+    CPy_XDECREF(cpy_r_r1);
+    CPy_XDECREF(cpy_r_r3);
+    CPy_XDECREF(cpy_r_r5);
     CPy_XDECREF(cpy_r_r7);
     CPy_XDECREF(cpy_r_r9.f0);
     CPy_XDECREF(cpy_r_r9.f1);
     CPy_XDECREF(cpy_r_r9.f2);
+    goto CPyL2;
+CPyL323: ;
+    CPy_XDECREF(cpy_r_r3);
+    CPy_XDECREF(cpy_r_r5);
+    CPy_XDECREF(cpy_r_r7);
+    CPy_XDECREF(cpy_r_r9.f0);
+    CPy_XDECREF(cpy_r_r9.f1);
+    CPy_XDECREF(cpy_r_r9.f2);
+    goto CPyL60;
+CPyL324: ;
+    CPy_XDECREF(cpy_r_r1);
+    goto CPyL240;
+CPyL325: ;
+    CPy_XDECREF(cpy_r_r5);
+    CPy_XDECREF(cpy_r_r7);
+    CPy_XDECREF(cpy_r_r9.f0);
+    CPy_XDECREF(cpy_r_r9.f1);
+    CPy_XDECREF(cpy_r_r9.f2);
+    goto CPyL116;
+CPyL326: ;
+    CPy_XDECREF(cpy_r_r3);
+    goto CPyL241;
+CPyL327: ;
+    CPy_XDECREF(cpy_r_r7);
+    CPy_XDECREF(cpy_r_r9.f0);
+    CPy_XDECREF(cpy_r_r9.f1);
+    CPy_XDECREF(cpy_r_r9.f2);
+    goto CPyL150;
+CPyL328: ;
+    CPy_XDECREF(cpy_r_r5);
     goto CPyL242;
+CPyL329: ;
+    CPy_XDECREF(cpy_r_r7);
+    CPy_XDECREF(cpy_r_r9.f0);
+    CPy_XDECREF(cpy_r_r9.f1);
+    CPy_XDECREF(cpy_r_r9.f2);
+    CPy_DECREF_NO_IMM(cpy_r_r10);
+    goto CPyL243;
 }
 
 PyObject *CPyDef_call___coroutine_Call_gen_____next__(PyObject *cpy_r___mypyc_self__) {
@@ -5749,99 +5994,121 @@ PyObject *CPyDef_call___Call___coroutine(PyObject *cpy_r_self, PyObject *cpy_r_a
     char cpy_r_r5;
     char cpy_r_r6;
     char cpy_r_r7;
-    char cpy_r_r8;
-    PyObject *cpy_r_r9;
-    if (cpy_r_args != NULL) goto CPyL13;
+    PyObject *cpy_r_r8;
+    char cpy_r_r9;
+    char cpy_r_r10;
+    PyObject *cpy_r_r11;
+    if (cpy_r_args != NULL) goto CPyL15;
     cpy_r_r0 = Py_None;
     cpy_r_args = cpy_r_r0;
 CPyL2: ;
-    if (cpy_r__w3 != NULL) goto CPyL14;
+    if (cpy_r__w3 != NULL) goto CPyL16;
     cpy_r_r1 = Py_None;
     cpy_r__w3 = cpy_r_r1;
 CPyL4: ;
-    if (cpy_r_block_id != NULL) goto CPyL15;
+    if (cpy_r_block_id != NULL) goto CPyL17;
     cpy_r_r2 = Py_None;
     cpy_r_block_id = cpy_r_r2;
 CPyL6: ;
-    cpy_r_r3 = CPyDef_call___coroutine_Call_gen();
+    cpy_r_r3 = CPyDef_call___coroutine_Call_env();
     if (unlikely(cpy_r_r3 == NULL)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
-        goto CPyL16;
-    }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_next_label__ = 0;
-    CPy_INCREF_NO_IMM(cpy_r_self);
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute__self != NULL) {
-        CPy_DECREF_NO_IMM(((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute__self);
-    }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute__self = cpy_r_self;
-    cpy_r_r5 = 1;
-    if (unlikely(!cpy_r_r5)) {
-        CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
-        goto CPyL17;
-    }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute__args != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute__args);
-    }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute__args = cpy_r_args;
-    cpy_r_r6 = 1;
-    if (unlikely(!cpy_r_r6)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
         goto CPyL18;
     }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute___w3 != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute___w3);
+    CPy_INCREF_NO_IMM(cpy_r_self);
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute__self != NULL) {
+        CPy_DECREF_NO_IMM(((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute__self);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute___w3 = cpy_r__w3;
-    cpy_r_r7 = 1;
-    if (unlikely(!cpy_r_r7)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute__self = cpy_r_self;
+    cpy_r_r4 = 1;
+    if (unlikely(!cpy_r_r4)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
         goto CPyL19;
     }
-    if (((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute__block_id != NULL) {
-        CPy_DECREF(((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute__block_id);
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute__args != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute__args);
     }
-    ((multicall___call___coroutine_Call_genObject *)cpy_r_r3)->___mypyc_generator_attribute__block_id = cpy_r_block_id;
-    cpy_r_r8 = 1;
-    if (unlikely(!cpy_r_r8)) {
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute__args = cpy_r_args;
+    cpy_r_r5 = 1;
+    if (unlikely(!cpy_r_r5)) {
         CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
         goto CPyL20;
     }
-    return cpy_r_r3;
-CPyL12: ;
-    cpy_r_r9 = NULL;
-    return cpy_r_r9;
-CPyL13: ;
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute___w3 != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute___w3);
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute___w3 = cpy_r__w3;
+    cpy_r_r6 = 1;
+    if (unlikely(!cpy_r_r6)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
+        goto CPyL21;
+    }
+    if (((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute__block_id != NULL) {
+        CPy_DECREF(((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute__block_id);
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_generator_attribute__block_id = cpy_r_block_id;
+    cpy_r_r7 = 1;
+    if (unlikely(!cpy_r_r7)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
+        goto CPyL22;
+    }
+    cpy_r_r8 = CPyDef_call___coroutine_Call_gen();
+    if (unlikely(cpy_r_r8 == NULL)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
+        goto CPyL22;
+    }
+    CPy_INCREF_NO_IMM(cpy_r_r3);
+    if (((multicall___call___coroutine_Call_genObject *)cpy_r_r8)->___mypyc_env__ != NULL) {
+        CPy_DECREF_NO_IMM(((multicall___call___coroutine_Call_genObject *)cpy_r_r8)->___mypyc_env__);
+    }
+    ((multicall___call___coroutine_Call_genObject *)cpy_r_r8)->___mypyc_env__ = cpy_r_r3;
+    cpy_r_r9 = 1;
+    if (unlikely(!cpy_r_r9)) {
+        CPy_AddTraceback("multicall/call.py", "coroutine", 139, CPyStatic_call___globals);
+        goto CPyL23;
+    }
+    ((multicall___call___coroutine_Call_envObject *)cpy_r_r3)->___mypyc_next_label__ = 0;
+    CPy_DECREF_NO_IMM(cpy_r_r3);
+    return cpy_r_r8;
+CPyL14: ;
+    cpy_r_r11 = NULL;
+    return cpy_r_r11;
+CPyL15: ;
     CPy_INCREF(cpy_r_args);
     goto CPyL2;
-CPyL14: ;
+CPyL16: ;
     CPy_INCREF(cpy_r__w3);
     goto CPyL4;
-CPyL15: ;
+CPyL17: ;
     CPy_INCREF(cpy_r_block_id);
     goto CPyL6;
-CPyL16: ;
-    CPy_DecRef(cpy_r_args);
-    CPy_DecRef(cpy_r__w3);
-    CPy_DecRef(cpy_r_block_id);
-    goto CPyL12;
-CPyL17: ;
-    CPy_DecRef(cpy_r_args);
-    CPy_DecRef(cpy_r__w3);
-    CPy_DecRef(cpy_r_block_id);
-    CPy_DecRef(cpy_r_r3);
-    goto CPyL12;
 CPyL18: ;
+    CPy_DecRef(cpy_r_args);
+    CPy_DecRef(cpy_r__w3);
+    CPy_DecRef(cpy_r_block_id);
+    goto CPyL14;
+CPyL19: ;
+    CPy_DecRef(cpy_r_args);
     CPy_DecRef(cpy_r__w3);
     CPy_DecRef(cpy_r_block_id);
     CPy_DecRef(cpy_r_r3);
-    goto CPyL12;
-CPyL19: ;
+    goto CPyL14;
+CPyL20: ;
+    CPy_DecRef(cpy_r__w3);
     CPy_DecRef(cpy_r_block_id);
     CPy_DecRef(cpy_r_r3);
-    goto CPyL12;
-CPyL20: ;
+    goto CPyL14;
+CPyL21: ;
+    CPy_DecRef(cpy_r_block_id);
     CPy_DecRef(cpy_r_r3);
-    goto CPyL12;
+    goto CPyL14;
+CPyL22: ;
+    CPy_DecRef(cpy_r_r3);
+    goto CPyL14;
+CPyL23: ;
+    CPy_DecRef(cpy_r_r3);
+    CPy_DecRef(cpy_r_r8);
+    goto CPyL14;
 }
 
 PyObject *CPyPy_call___Call___coroutine(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames) {
@@ -11879,6 +12146,7 @@ multicall___Multicall_dealloc(multicall___multicall___MulticallObject *self)
     multicall___Multicall_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem multicall___Multicall_vtable[18];
@@ -11981,6 +12249,7 @@ static PyGetSetDef multicall___Multicall_getseters[] = {
 };
 
 static PyMethodDef multicall___Multicall_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_multicall_____mypyc__Multicall_setup, METH_O, NULL},
     {"__init__",
      (PyCFunction)CPyPy_multicall___Multicall_____init__,
      METH_FASTCALL | METH_KEYWORDS, PyDoc_STR(NULL)},
@@ -12440,6 +12709,7 @@ multicall___NotSoBrightBatcher_dealloc(multicall___multicall___NotSoBrightBatche
     multicall___NotSoBrightBatcher_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem multicall___NotSoBrightBatcher_vtable[4];
@@ -12469,6 +12739,7 @@ static PyGetSetDef multicall___NotSoBrightBatcher_getseters[] = {
 };
 
 static PyMethodDef multicall___NotSoBrightBatcher_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_multicall_____mypyc__NotSoBrightBatcher_setup, METH_O, NULL},
     {"__init__",
      (PyCFunction)CPyPy_multicall___NotSoBrightBatcher_____init__,
      METH_FASTCALL | METH_KEYWORDS, PyDoc_STR("__init__($self)\n--\n\n")},
@@ -12650,6 +12921,7 @@ multicall___coroutine_Multicall_gen_dealloc(multicall___multicall___coroutine_Mu
     multicall___coroutine_Multicall_gen_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem multicall___coroutine_Multicall_gen_vtable[7];
@@ -12670,6 +12942,7 @@ CPyDef_multicall___coroutine_Multicall_gen_trait_vtable_setup(void)
 }
 
 static PyMethodDef multicall___coroutine_Multicall_gen_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_multicall_____mypyc__coroutine_Multicall_gen_setup, METH_O, NULL},
     {"__next__",
      (PyCFunction)CPyPy_multicall___coroutine_Multicall_gen_____next__,
      METH_FASTCALL | METH_KEYWORDS, PyDoc_STR("__next__()\n--\n\n")},
@@ -12992,6 +13265,7 @@ multicall___fetch_outputs_Multicall_gen_dealloc(multicall___multicall___fetch_ou
     multicall___fetch_outputs_Multicall_gen_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem multicall___fetch_outputs_Multicall_gen_vtable[7];
@@ -13012,6 +13286,7 @@ CPyDef_multicall___fetch_outputs_Multicall_gen_trait_vtable_setup(void)
 }
 
 static PyMethodDef multicall___fetch_outputs_Multicall_gen_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_multicall_____mypyc__fetch_outputs_Multicall_gen_setup, METH_O, NULL},
     {"__next__",
      (PyCFunction)CPyPy_multicall___fetch_outputs_Multicall_gen_____next__,
      METH_FASTCALL | METH_KEYWORDS, PyDoc_STR("__next__()\n--\n\n")},
@@ -13112,9 +13387,11 @@ int CPyExec_multicall___multicall(PyObject *module)
     CPyType_multicall___coroutine_Multicall_gen = (PyTypeObject *)CPyType_FromTemplate((PyObject *)CPyType_multicall___coroutine_Multicall_gen_template, NULL, modname);
     if (unlikely(!CPyType_multicall___coroutine_Multicall_gen))
         goto fail;
+    CPyDef_multicall___coroutine_Multicall_gen_trait_vtable_setup();
     CPyType_multicall___fetch_outputs_Multicall_gen = (PyTypeObject *)CPyType_FromTemplate((PyObject *)CPyType_multicall___fetch_outputs_Multicall_gen_template, NULL, modname);
     if (unlikely(!CPyType_multicall___fetch_outputs_Multicall_gen))
         goto fail;
+    CPyDef_multicall___fetch_outputs_Multicall_gen_trait_vtable_setup();
     if (CPyGlobalsInit() < 0)
         goto fail;
     char result = CPyDef_multicall_____top_level__();
@@ -22637,6 +22914,7 @@ signature___Signature_dealloc(multicall___signature___SignatureObject *self)
     signature___Signature_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
+    done: ;
 }
 
 static CPyVTableItem signature___Signature_vtable[3];
@@ -22707,6 +22985,7 @@ static PyGetSetDef signature___Signature_getseters[] = {
 };
 
 static PyMethodDef signature___Signature_methods[] = {
+    {"__internal_mypyc_setup", (PyCFunction)CPyDef_signature_____mypyc__Signature_setup, METH_O, NULL},
     {"__init__",
      (PyCFunction)CPyPy_signature___Signature_____init__,
      METH_FASTCALL | METH_KEYWORDS, PyDoc_STR("__init__($self, signature)\n--\n\n")},
@@ -23262,7 +23541,7 @@ CPyL4: ;
         goto CPyL36;
     }
     cpy_r_r8 = CPyStatics[289]; /* '(' */
-    cpy_r_r9 = CPyStr_Equal(cpy_r_r7, cpy_r_r8);
+    cpy_r_r9 = CPyStr_EqualLiteral(cpy_r_r7, cpy_r_r8, 1);
     if (!cpy_r_r9) goto CPyL13;
     cpy_r_r10 = PyList_Append(cpy_r_r1, cpy_r_r7);
     cpy_r_r11 = cpy_r_r10 >= 0;
@@ -23298,7 +23577,7 @@ CPyL4: ;
     cpy_r_start = cpy_r_end;
 CPyL13: ;
     cpy_r_r20 = CPyStatics[290]; /* ')' */
-    cpy_r_r21 = CPyStr_Equal(cpy_r_r7, cpy_r_r20);
+    cpy_r_r21 = CPyStr_EqualLiteral(cpy_r_r7, cpy_r_r20, 1);
     CPy_DECREF(cpy_r_r7);
     if (!cpy_r_r21) goto CPyL39;
     cpy_r_r22 = CPyList_PopLast(cpy_r_r1);
@@ -23533,7 +23812,7 @@ PyObject *CPyDef_signature___parse_typestring(PyObject *cpy_r_typestring) {
     char cpy_r_r27;
     PyObject *cpy_r_r28;
     cpy_r_r0 = CPyStatics[291]; /* '()' */
-    cpy_r_r1 = CPyStr_Equal(cpy_r_typestring, cpy_r_r0);
+    cpy_r_r1 = CPyStr_EqualLiteral(cpy_r_typestring, cpy_r_r0, 2);
     if (!cpy_r_r1) goto CPyL3;
     cpy_r_r2 = PyList_New(0);
     if (unlikely(cpy_r_r2 == NULL)) {
@@ -23578,7 +23857,7 @@ CPyL8: ;
         goto CPyL25;
     }
     cpy_r_r12 = CPyStatics[289]; /* '(' */
-    cpy_r_r13 = CPyStr_Equal(cpy_r_r11, cpy_r_r12);
+    cpy_r_r13 = CPyStr_EqualLiteral(cpy_r_r11, cpy_r_r12, 1);
     if (!cpy_r_r13) goto CPyL12;
     cpy_r_r14 = CPyTagged_Add(cpy_r_inside_tuples, 2);
     CPyTagged_DECREF(cpy_r_inside_tuples);
@@ -23586,7 +23865,7 @@ CPyL8: ;
     goto CPyL18;
 CPyL12: ;
     cpy_r_r15 = CPyStatics[290]; /* ')' */
-    cpy_r_r16 = CPyStr_Equal(cpy_r_r11, cpy_r_r15);
+    cpy_r_r16 = CPyStr_EqualLiteral(cpy_r_r11, cpy_r_r15, 1);
     if (!cpy_r_r16) goto CPyL14;
     cpy_r_r17 = CPyTagged_Subtract(cpy_r_inside_tuples, 2);
     CPyTagged_DECREF(cpy_r_inside_tuples);
@@ -23594,7 +23873,7 @@ CPyL12: ;
     goto CPyL18;
 CPyL14: ;
     cpy_r_r18 = CPyStatics[292]; /* ',' */
-    cpy_r_r19 = CPyStr_Equal(cpy_r_r11, cpy_r_r18);
+    cpy_r_r19 = CPyStr_EqualLiteral(cpy_r_r11, cpy_r_r18, 1);
     if (!cpy_r_r19) goto CPyL18;
     cpy_r_r20 = cpy_r_inside_tuples == 0;
     if (cpy_r_r20) {
@@ -25019,6 +25298,9 @@ CPyThreadLocal multicall___call_____mypyc_lambda__0_decode_output_Call_objObject
 PyTypeObject *CPyType_call_____mypyc_lambda__1_decode_output_Call_obj;
 PyObject *CPyDef_call_____mypyc_lambda__1_decode_output_Call_obj(void);
 CPyThreadLocal multicall___call_____mypyc_lambda__1_decode_output_Call_objObject *call_____mypyc_lambda__1_decode_output_Call_obj_free_instance;
+PyTypeObject *CPyType_call___coroutine_Call_env;
+PyObject *CPyDef_call___coroutine_Call_env(void);
+CPyThreadLocal multicall___call___coroutine_Call_envObject *call___coroutine_Call_env_free_instance;
 PyTypeObject *CPyType_call___coroutine_Call_gen;
 PyObject *CPyDef_call___coroutine_Call_gen(void);
 CPyThreadLocal multicall___call___coroutine_Call_genObject *call___coroutine_Call_gen_free_instance;
