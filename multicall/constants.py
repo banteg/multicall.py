@@ -9,14 +9,14 @@ from eth_typing import ChecksumAddress, HexStr
 # If brownie is installed and connected, we will use brownie's Web3
 # Otherwise, we will use w3 from web3py.
 try:
-    from brownie import network, web3  # type: ignore
+    from brownie import network, web3
 
     if network.is_connected():
         w3 = web3
     else:
         from web3.auto import w3  # noqa
 except ImportError:
-    pass
+    from web3.auto import w3  # noqa
 
 
 GAS_LIMIT: Final = int(os.environ.get("GAS_LIMIT", 50_000_000))
