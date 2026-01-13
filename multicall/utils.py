@@ -2,10 +2,12 @@
 from asyncio import AbstractEventLoop, Semaphore, new_event_loop, set_event_loop
 from asyncio import gather as _gather
 from asyncio import get_event_loop as _get_event_loop
-from typing import Any, Awaitable, Dict, Final, Iterable, List, TypeVar
+from collections.abc import Awaitable, Iterable
+from typing import Any, Final, TypeVar
 
 import eth_retry
 from aiohttp import ClientTimeout
+import web3
 from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
@@ -25,7 +27,7 @@ except ImportError:
 
 __T = TypeVar("__T")
 
-chainids: Final[Dict[Web3, int]] = {}
+chainids: Final[dict[Web3, int]] = {}
 
 
 @eth_retry.auto_retry(min_sleep_time=1, max_sleep_time=2)
@@ -40,7 +42,7 @@ def chain_id(w3: Web3) -> int:
         return chainids[w3]
 
 
-async_w3s: Final[Dict[Web3, Web3]] = {}
+async_w3s: Final[dict[Web3, Web3]] = {}
 
 
 def get_endpoint(w3: Web3) -> str:
@@ -75,8 +77,13 @@ def get_async_w3(w3: Web3) -> Web3:
 
     # In older web3 versions, AsyncHTTPProvider objects come
     # with incompatible synchronous middlewares by default.
-    if AsyncWeb3:  # type: ignore [truthy-function]
-        async_w3 = AsyncWeb3(provider=provider, middlewares=[])  # type: ignore [call-arg]
+    if AsyncWeb3 is not None:
+        # Older versions of web3.py (v6 and below) use 'middlewares' instead of 'middleware'.
+        major_version = int(web3.__version__.split(".")[0])
+        if major_version >= 7:
+            async_w3 = AsyncWeb3(provider, middleware=[])
+        else:
+            async_w3 = AsyncWeb3(provider, middlewares=[])  # type: ignore [call-arg]
     else:
         async_w3 = Web3(provider=provider, middlewares=[])
         async_w3.eth = AsyncEth(async_w3)
@@ -110,13 +117,13 @@ def raise_if_exception_in(iterable: Iterable[Any]) -> None:
         raise_if_exception(obj)
 
 
-async def gather(coroutines: Iterable[Awaitable[__T]]) -> List[__T]:
+async def gather(coroutines: Iterable[Awaitable[__T]]) -> list[__T]:
     results = await _gather(*coroutines, return_exceptions=True)
     raise_if_exception_in(results)
     return results  # type: ignore [return-value]
 
 
-_state_override_supported: Final[Dict[Web3, bool]] = {}
+_state_override_supported: Final[dict[Web3, bool]] = {}
 
 
 def state_override_supported(w3: Web3) -> bool:
@@ -128,7 +135,7 @@ def state_override_supported(w3: Web3) -> bool:
         return is_supported
 
 
-_semaphores: Final[Dict[AbstractEventLoop, Semaphore]] = {}
+_semaphores: Final[dict[AbstractEventLoop, Semaphore]] = {}
 
 
 def _get_semaphore() -> Semaphore:

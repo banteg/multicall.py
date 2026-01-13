@@ -1,0 +1,27 @@
+name: Lint All The Things
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '.github/workflows/**'
+      - '!.github/workflows/lint.yaml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-all-the-things:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Lint All The Things
+        uses: BobTheBuidler/lint-all-the-things@v0.0.3
+        with:
+          python-version: 3.14
+          pyupgrade-target-version: py310

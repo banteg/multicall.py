@@ -1,12 +1,12 @@
-#ifndef MYPYC_NATIVE_INTERNAL_847fc2cb349a9b029d5a_H
-#define MYPYC_NATIVE_INTERNAL_847fc2cb349a9b029d5a_H
+#ifndef MYPYC_LIBRT_INTERNAL_847fc2cb349a9b029d5a_H
+#define MYPYC_LIBRT_INTERNAL_847fc2cb349a9b029d5a_H
 #include <Python.h>
 #include <CPy.h>
 #include "__native_847fc2cb349a9b029d5a.h"
 
 int CPyGlobalsInit(void);
 
-extern PyObject *CPyStatics[429];
+extern PyObject *CPyStatics[430];
 extern const char * const CPyLit_Str[];
 extern const char * const CPyLit_Bytes[];
 extern const char * const CPyLit_Int[];
@@ -14,23 +14,24 @@ extern const double CPyLit_Float[];
 extern const double CPyLit_Complex[];
 extern const int CPyLit_Tuple[];
 extern const int CPyLit_FrozenSet[];
-extern CPyModule *CPyModule_multicall___call_internal;
+extern CPyModule *CPyModule_multicall___call__internal;
 extern CPyModule *CPyModule_multicall___call;
 extern PyObject *CPyStatic_call___globals;
 extern CPyModule *CPyModule_builtins;
 extern CPyModule *CPyModule_typing;
+extern CPyModule *CPyModule_collections___abc;
 extern CPyModule *CPyModule_eth_retry;
 extern CPyModule *CPyModule_cchecksum;
 extern CPyModule *CPyModule_eth_typing;
 extern CPyModule *CPyModule_eth_typing___abi;
 extern CPyModule *CPyModule_web3;
-extern CPyModule *CPyModule_multicall___constants_internal;
+extern CPyModule *CPyModule_multicall___constants__internal;
 extern CPyModule *CPyModule_multicall___constants;
-extern CPyModule *CPyModule_multicall___exceptions_internal;
+extern CPyModule *CPyModule_multicall___exceptions__internal;
 extern CPyModule *CPyModule_multicall___exceptions;
-extern CPyModule *CPyModule_multicall___loggers_internal;
+extern CPyModule *CPyModule_multicall___loggers__internal;
 extern CPyModule *CPyModule_multicall___loggers;
-extern CPyModule *CPyModule_multicall___signature_internal;
+extern CPyModule *CPyModule_multicall___signature__internal;
 extern CPyModule *CPyModule_multicall___signature;
 extern CPyModule *CPyModule_multicall___utils;
 extern PyObject *CPyStatic_constants___globals;
@@ -42,7 +43,7 @@ extern CPyModule *CPyModule_web3___auto;
 extern PyObject *CPyStatic_exceptions___globals;
 extern PyObject *CPyStatic_loggers___globals;
 extern CPyModule *CPyModule_logging;
-extern CPyModule *CPyModule_multicall___multicall_internal;
+extern CPyModule *CPyModule_multicall___multicall__internal;
 extern CPyModule *CPyModule_multicall___multicall;
 extern PyObject *CPyStatic_multicall___globals;
 extern CPyModule *CPyModule_asyncio;
@@ -60,12 +61,19 @@ extern PyTypeObject *CPyType_call___Call;
 extern PyObject *CPyDef_call___Call(PyObject *cpy_r_target, PyObject *cpy_r_function, PyObject *cpy_r_returns, PyObject *cpy_r_block_id, PyObject *cpy_r_gas_limit, PyObject *cpy_r_state_override_code, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
 extern PyTypeObject *CPyType_call___decode_output_Call_env;
 extern PyObject *CPyDef_call___decode_output_Call_env(void);
+extern CPyThreadLocal multicall___call___decode_output_Call_envObject *call___decode_output_Call_env_free_instance;
 extern PyTypeObject *CPyType_call_____mypyc_lambda__0_decode_output_Call_obj;
 extern PyObject *CPyDef_call_____mypyc_lambda__0_decode_output_Call_obj(void);
+extern CPyThreadLocal multicall___call_____mypyc_lambda__0_decode_output_Call_objObject *call_____mypyc_lambda__0_decode_output_Call_obj_free_instance;
 extern PyTypeObject *CPyType_call_____mypyc_lambda__1_decode_output_Call_obj;
 extern PyObject *CPyDef_call_____mypyc_lambda__1_decode_output_Call_obj(void);
+extern CPyThreadLocal multicall___call_____mypyc_lambda__1_decode_output_Call_objObject *call_____mypyc_lambda__1_decode_output_Call_obj_free_instance;
+extern PyTypeObject *CPyType_call___coroutine_Call_env;
+extern PyObject *CPyDef_call___coroutine_Call_env(void);
+extern CPyThreadLocal multicall___call___coroutine_Call_envObject *call___coroutine_Call_env_free_instance;
 extern PyTypeObject *CPyType_call___coroutine_Call_gen;
 extern PyObject *CPyDef_call___coroutine_Call_gen(void);
+extern CPyThreadLocal multicall___call___coroutine_Call_genObject *call___coroutine_Call_gen_free_instance;
 extern char CPyDef_call___Call_____init__(PyObject *cpy_r_self, PyObject *cpy_r_target, PyObject *cpy_r_function, PyObject *cpy_r_returns, PyObject *cpy_r_block_id, PyObject *cpy_r_gas_limit, PyObject *cpy_r_state_override_code, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
 extern PyObject *CPyPy_call___Call_____init__(PyObject *self, PyObject *args, PyObject *kw);
 extern PyObject *CPyDef_call___Call_____repr__(PyObject *cpy_r_self);
@@ -86,7 +94,7 @@ extern PyObject *CPyDef_call___Call_____call__(PyObject *cpy_r_self, PyObject *c
 extern PyObject *CPyPy_call___Call_____call__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_call___Call_____await__(PyObject *cpy_r_self);
 extern PyObject *CPyPy_call___Call_____await__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
-extern PyObject *CPyDef_call___coroutine_Call_gen_____mypyc_generator_helper__(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg);
+extern PyObject *CPyDef_call___coroutine_Call_gen_____mypyc_generator_helper__(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg, PyObject **cpy_r_stop_iter_ptr);
 extern PyObject *CPyDef_call___coroutine_Call_gen_____next__(PyObject *cpy_r___mypyc_self__);
 extern PyObject *CPyPy_call___coroutine_Call_gen_____next__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_call___coroutine_Call_gen___send(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_arg);
@@ -167,6 +175,8 @@ extern PyObject *CPyStatic_constants___Network___PulseChainTestnet;
 extern PyObject *CPyStatic_constants___Network___Sei;
 extern PyObject *CPyStatic_constants___Network___Hoodi;
 extern PyObject *CPyStatic_constants___Network___HyperEVM;
+extern PyObject *CPyStatic_constants___Network___Berachain;
+extern PyObject *CPyStatic_constants___Network___Katana;
 extern PyObject *CPyStatic_constants___MULTICALL_ADDRESSES;
 extern PyObject *CPyStatic_constants___MULTICALL2_ADDRESSES;
 extern PyObject *CPyStatic_constants___MULTICALL3_ADDRESSES;
@@ -194,8 +204,10 @@ extern PyTypeObject *CPyType_multicall___NotSoBrightBatcher;
 extern PyObject *CPyDef_multicall___NotSoBrightBatcher(void);
 extern PyTypeObject *CPyType_multicall___coroutine_Multicall_gen;
 extern PyObject *CPyDef_multicall___coroutine_Multicall_gen(void);
+extern CPyThreadLocal multicall___multicall___coroutine_Multicall_genObject *multicall___coroutine_Multicall_gen_free_instance;
 extern PyTypeObject *CPyType_multicall___fetch_outputs_Multicall_gen;
 extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen(void);
+extern CPyThreadLocal multicall___multicall___fetch_outputs_Multicall_genObject *multicall___fetch_outputs_Multicall_gen_free_instance;
 extern PyObject *CPyDef_multicall___get_args(PyObject *cpy_r_calls, char cpy_r_require_success);
 extern PyObject *CPyPy_multicall___get_args(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___unpack_aggregate_outputs(PyObject *cpy_r_outputs);
@@ -208,7 +220,7 @@ extern PyObject *CPyDef_multicall___Multicall_____await__(PyObject *cpy_r_self);
 extern PyObject *CPyPy_multicall___Multicall_____await__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___Multicall___multicall_sig(PyObject *cpy_r_self);
 extern PyObject *CPyPy_multicall___Multicall___multicall_sig(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
-extern PyObject *CPyDef_multicall___coroutine_Multicall_gen_____mypyc_generator_helper__(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg);
+extern PyObject *CPyDef_multicall___coroutine_Multicall_gen_____mypyc_generator_helper__(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg, PyObject **cpy_r_stop_iter_ptr);
 extern PyObject *CPyDef_multicall___coroutine_Multicall_gen_____next__(PyObject *cpy_r___mypyc_self__);
 extern PyObject *CPyPy_multicall___coroutine_Multicall_gen_____next__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___coroutine_Multicall_gen___send(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_arg);
@@ -245,7 +257,7 @@ extern char CPyDef_multicall___Multicall___add_eth_balance(PyObject *cpy_r_self,
 extern PyObject *CPyPy_multicall___Multicall___add_eth_balance(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern char CPyDef_multicall___Multicall___add_last_block_hash(PyObject *cpy_r_self, PyObject *cpy_r_return_signature);
 extern PyObject *CPyPy_multicall___Multicall___add_last_block_hash(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
-extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen_____mypyc_generator_helper__(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg);
+extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen_____mypyc_generator_helper__(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_type, PyObject *cpy_r_value, PyObject *cpy_r_traceback, PyObject *cpy_r_arg, PyObject **cpy_r_stop_iter_ptr);
 extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen_____next__(PyObject *cpy_r___mypyc_self__);
 extern PyObject *CPyPy_multicall___fetch_outputs_Multicall_gen_____next__(PyObject *self, PyObject *const *args, size_t nargs, PyObject *kwnames);
 extern PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen___send(PyObject *cpy_r___mypyc_self__, PyObject *cpy_r_arg);
