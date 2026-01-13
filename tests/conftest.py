@@ -1,5 +1,6 @@
 import os
 import sys
+
 from brownie import network
 
 if not network.is_connected():
