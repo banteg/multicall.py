@@ -54,6 +54,7 @@ jobs:
         
       - name: Install Dependencies
         run: poetry install
+        shell: bash
 
       - name: Install web3.py ${{ matrix.web3-major }}.x
         shell: bash
@@ -66,14 +67,17 @@ jobs:
         
       - name: Install Setuptools for `pkg_resources` so web3.py works
         run: poetry run pip install -U setuptools
+        shell: bash
       
       - name: Setup brownie networks
         run: |
           poetry run brownie networks modify mainnet host=${{ secrets.WEB3_PROVIDER }}
+        shell: bash
         continue-on-error: true
 
       - name: Install Multicall
         run: poetry run python -m pip install .
+        shell: bash
 
       - name: Run test suite
         env:
@@ -81,3 +85,4 @@ jobs:
           ETHERSCAN_TOKEN: ${{ secrets.ETHERSCAN_TOKEN  }}
           GAS_LIMIT: 5000000
         run: poetry run pytest
+        shell: bash
