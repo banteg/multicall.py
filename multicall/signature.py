@@ -1,4 +1,4 @@
-from typing import Any, Dict, Final, List, Optional, Tuple, Union, final
+from typing import Any, Final, final
 
 import faster_eth_abi.abi
 import faster_eth_abi.decoding
@@ -7,7 +7,7 @@ import eth_hash.auto
 from eth_typing import Decodable, TypeStr
 
 
-_SIGNATURES: Final[Dict[str, "Signature"]] = {}
+_SIGNATURES: Final[dict[str, "Signature"]] = {}
 
 TupleEncoder: Final = faster_eth_abi.encoding.TupleEncoder
 TupleDecoder: Final = faster_eth_abi.decoding.TupleDecoder
@@ -22,7 +22,7 @@ def get_4byte_selector(signature: str) -> bytes:
     return _keccak(signature.replace(" ", "").encode("utf-8"))[:4]
 
 
-def parse_signature(signature: str) -> Tuple[str, List[TypeStr], List[TypeStr]]:
+def parse_signature(signature: str) -> tuple[str, list[TypeStr], list[TypeStr]]:
     """
     Breaks a function signature into its selector and lists of input and output ABI types.
 
@@ -45,8 +45,8 @@ def parse_signature(signature: str) -> Tuple[str, List[TypeStr], List[TypeStr]]:
     See Also:
         :func:`eth_utils.function_signature_to_4byte_selector`
     """
-    parts: List[str] = []
-    stack: List[str] = []
+    parts: list[str] = []
+    stack: list[str] = []
     start: int = 0
     for end, character in enumerate(signature):
         if character == "(":
@@ -65,7 +65,7 @@ def parse_signature(signature: str) -> Tuple[str, List[TypeStr], List[TypeStr]]:
     return function, input_types, output_types
 
 
-def parse_typestring(typestring: str) -> List[TypeStr]:
+def parse_typestring(typestring: str) -> list[TypeStr]:
     if typestring == "()":
         return []
     parts = []
@@ -124,7 +124,7 @@ class Signature:
             decoders=tuple(_get_decoder(type_str) for type_str in output_types)
         )
 
-    def encode_data(self, args: Optional[Union[List[Any], Tuple[Any, ...]]] = None) -> bytes:
+    def encode_data(self, args: list[Any] | tuple[Any, ...] | None = None) -> bytes:
         return self.fourbyte + self._encoder(args) if args else self.fourbyte  # type: ignore [misc]
 
     def decode_data(self, output: Decodable) -> Any:

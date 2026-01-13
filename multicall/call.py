@@ -1,5 +1,6 @@
 # mypy: disable-error-code="attr-defined"
-from typing import Any, Callable, Final, Generator, List, Optional, Sequence, Tuple, Union, final
+from typing import Any, Final, Union, final
+from collections.abc import Callable, Generator, Sequence
 
 import eth_retry
 from cchecksum import to_checksum_address
@@ -44,14 +45,14 @@ class Call:
         self,
         target: AnyAddress,
         # 'funcName(dtype)(dtype)' or ['funcName(dtype)(dtype)', input0, input1, ...]
-        function: Union[str, List[Union[str, Any]]],
-        returns: Optional[Sequence[Tuple[Any, Callable]]] = None,
-        block_id: Optional[int] = None,
-        gas_limit: Optional[int] = None,
-        state_override_code: Optional[HexStr] = None,
+        function: str | list[str | Any],
+        returns: Sequence[tuple[Any, Callable]] | None = None,
+        block_id: int | None = None,
+        gas_limit: int | None = None,
+        state_override_code: HexStr | None = None,
         # This needs to be None in order to use process_pool_executor
-        _w3: Optional[Web3] = None,
-        origin: Optional[AnyAddress] = None,
+        _w3: Web3 | None = None,
+        origin: AnyAddress | None = None,
     ) -> None:
         self.target: Final = to_checksum_address(target)
         self.returns: Final = returns
@@ -81,8 +82,8 @@ class Call:
     def decode_output(
         output: Decodable,
         signature: Signature,
-        returns: Optional[Sequence[Tuple[Any, Optional[Callable]]]] = None,
-        success: Optional[bool] = None,
+        returns: Sequence[tuple[Any, Callable | None]] | None = None,
+        success: bool | None = None,
     ) -> Any:
 
         if success is None:
@@ -109,10 +110,10 @@ class Call:
     @eth_retry.auto_retry(min_sleep_time=1, max_sleep_time=3)
     def __call__(
         self,
-        args: Optional[Any] = None,
-        _w3: Optional[Web3] = None,
+        args: Any | None = None,
+        _w3: Web3 | None = None,
         *,
-        block_id: Optional[int] = None,
+        block_id: int | None = None,
     ) -> Any:
         _w3 = self.w3 or _w3 or w3
         args = prep_args(
@@ -138,10 +139,10 @@ class Call:
     @eth_retry.auto_retry(min_sleep_time=1, max_sleep_time=3)
     async def coroutine(
         self,
-        args: Optional[Any] = None,
-        _w3: Optional[Web3] = None,
+        args: Any | None = None,
+        _w3: Web3 | None = None,
         *,
-        block_id: Optional[int] = None,
+        block_id: int | None = None,
     ) -> Any:
         _w3 = self.w3 or _w3 or w3
 
@@ -171,12 +172,12 @@ class Call:
 def prep_args(
     target: str,
     signature: Signature,
-    args: Optional[Any],
-    block_id: Optional[int],
-    origin: Optional[ChecksumAddress],
-    gas_limit: Optional[int],
-    state_override_code: Optional[HexStr],
-) -> List[Any]:
+    args: Any | None,
+    block_id: int | None,
+    origin: ChecksumAddress | None,
+    gas_limit: int | None,
+    state_override_code: HexStr | None,
+) -> list[Any]:
 
     calldata = signature.encode_data(args)
 
