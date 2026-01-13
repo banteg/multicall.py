@@ -24,11 +24,8 @@ jobs:
         with:
           python-version: "3.12"
           
-      - name: Install Mypyc and Dependencies
-        run: pip install mypy[mypyc]==1.18.1 types-requests .
-        
-      - name: Run Mypyc
-        run: make compile
+      - name: Install Multicall.py
+        run: pip install .
 
       - name: Check for changes
         run: |
