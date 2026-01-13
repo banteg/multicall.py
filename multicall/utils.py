@@ -13,7 +13,8 @@ from web3 import AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from web3.providers.async_base import AsyncBaseProvider
 
-from multicall.constants import AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE, NO_STATE_OVERRIDE
+from multicall.constants import (AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE,
+                                 NO_STATE_OVERRIDE)
 
 try:
     from web3 import AsyncWeb3
