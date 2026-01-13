@@ -14,7 +14,7 @@ try:
     if network.is_connected():
         w3 = web3
     else:
-        pass
+        from web3.auto import w3  # noqa
 except ImportError:
     pass
 
