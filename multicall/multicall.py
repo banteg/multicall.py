@@ -1,7 +1,7 @@
 from asyncio import TimeoutError
+from collections.abc import Generator, Sequence
 from time import time
 from typing import Any, Final, Union, final
-from collections.abc import Generator, Sequence
 
 import aiohttp
 import cchecksum
