@@ -4,17 +4,9 @@ import pytest
 from brownie import web3
 from web3.providers.async_base import AsyncBaseProvider
 
-from multicall.utils import (
-    Web3,
-    await_awaitable,
-    chain_id,
-    gather,
-    get_async_w3,
-    get_endpoint,
-    get_event_loop,
-    raise_if_exception,
-    raise_if_exception_in,
-)
+from multicall.utils import (Web3, await_awaitable, chain_id, gather,
+                             get_async_w3, get_endpoint, get_event_loop,
+                             raise_if_exception, raise_if_exception_in)
 
 
 class UST(Exception):
