@@ -12,7 +12,8 @@ from multicall.constants import Network, w3
 from multicall.exceptions import StateOverrideNotSupported
 from multicall.loggers import setup_logger
 from multicall.signature import Signature, _get_signature
-from multicall.utils import _get_semaphore, chain_id, get_async_w3, state_override_supported
+from multicall.utils import (_get_semaphore, chain_id, get_async_w3,
+                             state_override_supported)
 
 logger: Final = setup_logger(__name__)
 log_debug: Final = logger.debug
