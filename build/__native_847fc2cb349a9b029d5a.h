@@ -88,10 +88,16 @@ typedef struct {
 typedef struct {
     PyObject_HEAD
     CPyVTableItem *vtable;
+    PyObject *___mypyc_self__;
     PyObject *___mypyc_generator_attribute__self;
     PyObject *___mypyc_generator_attribute__args;
     PyObject *___mypyc_generator_attribute___w3;
     PyObject *___mypyc_generator_attribute__block_id;
+    PyObject *_type;
+    PyObject *_value;
+    PyObject *_traceback;
+    PyObject *_arg;
+    PyObject **_stop_iter_ptr;
     int32_t ___mypyc_next_label__;
     PyObject *___mypyc_temp__0;
     PyObject *___mypyc_temp__1;
@@ -107,6 +113,12 @@ typedef struct {
     PyObject *___mypyc_temp__10;
     tuple_T3OOO ___mypyc_temp__11;
     PyObject *___mypyc_generator_attribute__result;
+} multicall___call___coroutine_Call_envObject;
+
+typedef struct {
+    PyObject_HEAD
+    CPyVTableItem *vtable;
+    PyObject *___mypyc_env__;
 } multicall___call___coroutine_Call_genObject;
 
 typedef struct {
