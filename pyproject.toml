@@ -53,10 +53,11 @@ yarl = { "version" = "*", python = ">=3.10,<4" }
 requires = [
     "setuptools", 
     "wheel", 
-    "mypy[mypyc]>=1.14.1,<1.18.2", 
+    "mypy[mypyc]==1.19.1", 
     "tomli>=2.0.0; python_version < '3.11'",
     "types-requests",
-    "faster-eth-abi>=5.2.1,<6",
+    "eth_retry==0.3.5",
+    "faster-eth-abi==5.2.15",
 ]
 build-backend = "setuptools.build_meta"
 

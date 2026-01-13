@@ -167,7 +167,7 @@ def combine_markers(a, b):
     return f"({a}) and ({b})" if a and b else a or b
 
 
-with open("readme.md", "r", encoding="utf-8") as readme:
+with open("readme.md", encoding="utf-8") as readme:
     long_description = readme.read()
 
 
