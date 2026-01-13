@@ -23,7 +23,7 @@ authors = ["banteg"]
 [tool.poetry.dependencies]
 python = ">=3.10,<4"
 cchecksum = ">=0.0.3,<1"
-faster-eth-abi = ">=5.2.1,<6"
+faster-eth-abi = ">=5.2.16,<6"
 # These web3.py versions have a busted async provider and cannot be used in any multithreaded applications
 web3 = ">=5.27,!=5.29.*,!=5.30.*,!=5.31.0,!=5.31.1,!=5.31.2"
 eth_retry = ">=0.3.5"
@@ -57,7 +57,7 @@ requires = [
     "tomli>=2.0.0; python_version < '3.11'",
     "types-requests",
     "eth_retry==0.3.5",
-    "faster-eth-abi==5.2.15",
+    "faster-eth-abi==5.2.23",
 ]
 build-backend = "setuptools.build_meta"
 
