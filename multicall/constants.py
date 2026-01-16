@@ -37,63 +37,285 @@ class Network(IntEnum):
     Rinkeby = 4
     Gorli = 5
     Optimism = 10
+    Flare = 14
     CostonTestnet = 16
     ThundercoreTestnet = 18
     SongbirdCanaryNetwork = 19
     Cronos = 25
     RSK = 30
     RSKTestnet = 31
+    Telos = 40
     Kovan = 42
+    LUKSO = 42
+    DarwiniaCrabNetwork = 44
+    DarwiniaNetwork = 46
     Bsc = 56
+    Syscoin = 57
+    Ontology = 58
+    EthereumClassic = 61
     OKC = 66
     OptimismKovan = 69
+    Meter = 82
+    MeterTestnet = 83
+    Viction = 88
+    VictionTestnet = 89
     BscTestnet = 97
     Gnosis = 100
     Velas = 106
     Thundercore = 108
+    Shibarium = 109
     Coston2Testnet = 114
     Fuse = 122
     Heco = 128
     Polygon = 137
+    DefiOracleMeta = 138
+    Monad = 143
+    Sonic = 146
+    ShimmerEVM = 148
+    MantaPacific = 169
+    X1Testnet = 195
+    XLayer = 196
+    BitTorrentChain = 199
+    opBNB = 204
     Fantom = 250
+    Fraxtal = 252
+    Kroma = 255
+    zkSyncEraGoerliTestnet = 280
     Boba = 288
+    zkSyncEraSepoliaTestnet = 300
+    Omax = 311
+    Filecoin = 314
     KCC = 321
     ZkSync = 324
+    DFKChainTest = 335
+    CronosTestnet = 338
+    PulseChain = 369
     OptimismGorli = 420
+    PGNPublicGoodsNetwork = 424
+    AreonNetworkTestnet = 462
+    AreonNetwork = 463
+    WorldChain = 480
+    Rupaya = 499
+    FlowTestnet = 545
+    SyscoinRollux = 570
     Astar = 592
+    MetisGoerli = 599
+    HighburyEVM = 710
+    Flow = 747
+    QitmeerQNG = 813
+    Callisto = 820
+    PulseChainTestnet = 943
+    Bittensor = 964
+    ZoraGoerliTestnet = 999
+    HyperEVM = 999
+    KlaytnTestnetBaobab = 1001
+    BTTChainTestnet = 1029
+    ConfluxEspace = 1030
     Metis = 1088
+    PolygonzkEVM = 1101
+    WEMIX30 = 1111
+    CoreTestnet2 = 1114
+    CoreTestnet = 1115
+    CORE = 1116
+    DeFiChainEVM = 1130
+    DeFiChainEVMTestnet = 1131
+    Lisk = 1135
+    StepNetwork = 1234
     Moonbeam = 1284
     Moonriver = 1285
     MoonbaseAlphaTestnet = 1287
+    StoryAeneidTestnet = 1315
+    Sei = 1329
+    PolygonzkEVMTestnet = 1442
+    Story = 1514
+    StarchainTestnet = 1570
+    Starchain = 1578
+    GravityAlpha = 1625
+    ReyaNetwork = 1729
+    Whitechain = 1875
+    SankoTestnet = 1992
+    Sanko = 1996
+    Dogechain = 2000
     Milkomeda = 2001
+    EdgewareEdgeEVM = 2021
     Kava = 2222
+    RSS3VSLSepoliaTestnet = 2331
+    KromaTestnetSepolia = 2358
+    Xodex = 2415
+    CardonazkEVMTestnet = 2442
+    FraxtalHoleskyTestnet = 2522
+    MorphSepoliaTestnet = 2710
+    Abstract = 2741
+    MorphHoleskyTestnet = 2810
+    Morph = 2818
+    peaq = 3338
+    JFINChain = 3501
+    JFINChainTestnet = 3502
+    Crossbell = 3737
+    AstarzkEVM = 3776
+    TangleTestnet = 3799
+    DOSChainTestnet = 3939
     FantomTestnet = 4002
+    Nahmii3 = 4061
+    Nahmii3Testnet = 4062
+    LUKSOTestnet = 4201
+    Iotex = 4689
+    MEVerseChainTestnet = 4759
+    Mantle = 5000
+    MantleTestnet = 5001
+    MantleSepoliaTestnet = 5003
+    SyndicateFrameChain = 5101
+    ChainVerse = 5555
+    opBNBTestnet = 5611
+    SyscoinTannebaumTestnet = 5700
+    OntologyTestnet = 5851
+    Aura = 6322
+    MegaETHTestnet = 6342
+    OXChain = 6699
+    ZetaChain = 7000
+    ZetaChainAthens3Testnet = 7001
+    Planq = 7070
+    MEVerseChain = 7518
+    Cyber = 7560
     Canto = 7700
+    CantoTestnet = 7701
+    Powerloom = 7869
+    DOSChain = 7979
+    ShardeumSphinx = 8082
+    QitmeerTestnet = 8131
     Klaytn = 8217
     Base = 8453
+    Tangle = 8545
+    IOTAEVM = 8822
+    JIBCHAINL1 = 8899
+    AlgenL1 = 8911
     EvmosTestnet = 9000
     Evmos = 9001
+    DelaSepolia = 9393
+    MonadTestnet = 10143
+    ChiadoGnosisChainTestnet = 10200
+    Arthera = 10242
+    ArtheraTestnet = 10243
+    Hashbit = 11119
+    AbstractTestnet = 11124
+    Haqq = 11235
+    BEVMTestnet = 11503
+    RSS3VSL = 12553
+    ImmutablezkEVM = 13371
+    ImmutablezkEVMTestnet = 13473
+    EOSEVMTestnet = 15557
     Holesky = 17000
+    EOSEVM = 17777
+    OasisSapphire = 23294
+    DreyerX = 23451
+    Bitgert = 32520
+    Fusion = 32659
+    ApeChain = 33139
+    Mode = 34443
+    Q = 35441
+    QDevnet = 35442
+    QTestnet = 35443
+    AlephZeroEVM = 41455
     Arbitrum = 42161
+    ArbitrumNova = 42170
     Celo = 42220
     Oasis = 42262
+    BOXChain = 42299
+    zkFair = 42766
+    Etherlink = 42793
     AvalancheFuji = 43113
     Avax = 43114
+    CeloAlfajoresTestnet = 44787
+    FusionTestnet = 46688
+    ZircuitSepoliaTestnet = 48899
+    Superseed = 53302
+    DFKChain = 53935
+    OverProtocol = 54176
+    Superposition = 55244
+    SyscoinTannebaumRollux = 57000
+    Ink = 57073
+    SepoliaPGNPublicGoodsNetworkTestnet = 58008
+    LineaGoerliTestnet = 59140
+    LineaSepoliaTestnet = 59141
+    Linea = 59144
+    MetisSepolia = 59902
+    Bob = 60808
+    FantomSonic = 64240
     GodwokenTestnet = 71401
     Godwoken = 71402
     Mumbai = 80001
+    Amoy = 80002
+    BerachainBepoliaTestnet = 80069
+    Berachain = 80094
+    Blast = 81457
+    BaseTestnetGoerli = 84531
+    BaseTestnetSepolia = 84532
+    UnitZero = 88811
+    UnitZeroTestnet = 88817
+    UnitZeroStagenet = 88819
+    ChilizSpicyTestnet = 88882
+    ChilizChain = 88888
+    LumiterraLayer3 = 94168
+    Plume = 98866
+    PlumeTestnet = 98867
+    SuperpositionTestnet = 98985
+    real = 111188
+    XterioChain = 112358
+    EtherlinkTestnet = 128123
+    FormTestnet = 132902
+    Taiko = 167000
+    JolnirTaikoTestnet = 167007
+    KatlaTaikoA6Testnet = 167008
+    HeklaTaikoA7Testnet = 167009
+    Bitlayer = 200901
+    SaharaTestnet = 313313
+    FilecoinCalibrationTestnet = 314159
+    CampTestnetV2 = 325000
     ArbitrumRinkeby = 421611
     ArbitrumGorli = 421613
-    Sepolia = 11155111
-    Aurora = 1313161554
-    Harmony = 1666600000
-    PulseChain = 369
-    PulseChainTestnet = 943
-    Sei = 1329
+    ArbitrumSepolia = 421614
+    ScrollSepoliaTestnet = 534351
+    Scroll = 534352
+    ScrollAlphaTestnet = 534353
+    OverProtocolDolphinTestnet = 541764
     Hoodi = 560048
-    HyperEVM = 999
-    Berachain = 80094
-    Katana = 747474
+    EDUChainTestnet = 656476
+    Xai = 660279
+    MerlinTestnet = 686868
+    SeiEVMDevnet = 713715
+    InkSepolia = 763373
+    PlayFiAlbireoTestnet = 1612127
+    XterioTestnet = 1637450
+    AstarzKyotoTestnet = 6038361
+    Zora = 7777777
+    Fluence = 9999999
+    Sepolia = 11155111
+    OptimismSepolia = 11155420
+    NeoXTestnet = 12227330
+    StylusTestnet = 23011913
+    SKALENebulaTestnet = 37084624
+    FluenceTestnet = 52164803
+    FrameTestnet = 68840142
+    ReyaCronos = 89346162
+    CyberTestnet = 111557560
+    BlastSepolia = 168587773
+    NeonEVMDevNet = 245022926
+    Neon = 245022934
+    SKALECalypsoTestnet = 974399131
+    ZoraSepoliaTestnet = 999999999
+    SKALETitanTestnet = 1020352220
+    Aurora = 1313161554
+    SKALETitanAIHub = 1350216234
+    SKALEEuropaTestnet = 1444673419
+    SKALENebulaGamingHub = 1482601649
+    SKALECalypsoHub = 1564830818
+    Harmony = 1666600000
+    SKALEEuropaLiquidityHub = 2046399126
+    Yominet = 5264468217
+    PalmTestnet = 11297108099
+    Palm = 11297108109
+    XaiTestnet = 47279324479
+    FluenceStage = 123420000220
 
 
 MULTICALL_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
@@ -135,65 +357,290 @@ MULTICALL2_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
 
 # based on https://github.com/mds1/multicall#readme
 MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
-    Network.Mainnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Ropsten: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Rinkeby: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Gorli: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Optimism: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.CostonTestnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.ThundercoreTestnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.SongbirdCanaryNetwork: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Cronos: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.RSK: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.RSKTestnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Kovan: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Bsc: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.OKC: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.OptimismKovan: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.BscTestnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Gnosis: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Velas: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Thundercore: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Coston2Testnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Fuse: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Heco: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Polygon: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Fantom: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Boba: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.KCC: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.ZkSync: "0x47898B2C52C957663aE9AB46922dCec150a2272c",
-    Network.OptimismGorli: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Astar: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Metis: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Moonbeam: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Moonriver: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.MoonbaseAlphaTestnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Milkomeda: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.FantomTestnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Canto: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Klaytn: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.EvmosTestnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Evmos: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Arbitrum: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Celo: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Oasis: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.AvalancheFuji: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Avax: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.GodwokenTestnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Godwoken: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Mumbai: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.ArbitrumRinkeby: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.ArbitrumGorli: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Sepolia: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Aurora: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Harmony: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.PulseChain: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.PulseChainTestnet: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Base: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Holesky: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Sei: "0xcA11bde05977b3631167028862bE2a173976CA11",
-    Network.Hoodi: "0xca11bde05977b3631167028862be2a173976ca11",
-    Network.HyperEVM: "0xcA11bde05977b3631167028862bE2a173976CA11",
+    Network.Mainnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Ropsten: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Rinkeby: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Gorli: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Optimism: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Flare: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CostonTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ThundercoreTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SongbirdCanaryNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Cronos: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.RSK: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.RSKTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Telos: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Kovan: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.LUKSO: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DarwiniaCrabNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DarwiniaNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Bsc: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Syscoin: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Ontology: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.EthereumClassic: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.OKC: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.OptimismKovan: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Meter: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MeterTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Viction: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.VictionTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BscTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Gnosis: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Velas: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Thundercore: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Shibarium: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Coston2Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Fuse: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Heco: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Polygon: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DefiOracleMeta: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Monad: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Sonic: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ShimmerEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MantaPacific: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.X1Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.XLayer: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BitTorrentChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.opBNB: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Fantom: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Fraxtal: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Kroma: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.zkSyncEraGoerliTestnet: '0xF9cda624FBC7e059355ce98a31693d299FACd963',
+    Network.Boba: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.zkSyncEraSepoliaTestnet: '0xF9cda624FBC7e059355ce98a31693d299FACd963',
+    Network.Omax: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Filecoin: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.KCC: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ZkSync: '0xF9cda624FBC7e059355ce98a31693d299FACd963',
+    Network.DFKChainTest: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CronosTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PulseChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.OptimismGorli: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PGNPublicGoodsNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.AreonNetworkTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.AreonNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.WorldChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Rupaya: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FlowTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SyscoinRollux: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Astar: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MetisGoerli: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.HighburyEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Flow: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.QitmeerQNG: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Callisto: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PulseChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Bittensor: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ZoraGoerliTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.HyperEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.KlaytnTestnetBaobab: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BTTChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ConfluxEspace: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Metis: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PolygonzkEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.WEMIX30: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CoreTestnet2: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CoreTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CORE: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DeFiChainEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DeFiChainEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Lisk: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.StepNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Moonbeam: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Moonriver: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MoonbaseAlphaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.StoryAeneidTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Sei: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PolygonzkEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Story: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.StarchainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Starchain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.GravityAlpha: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ReyaNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Whitechain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SankoTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Sanko: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Dogechain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Milkomeda: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.EdgewareEdgeEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Kava: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.RSS3VSLSepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.KromaTestnetSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Xodex: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CardonazkEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FraxtalHoleskyTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MorphSepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Abstract: '0xF9cda624FBC7e059355ce98a31693d299FACd963',
+    Network.MorphHoleskyTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Morph: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.peaq: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.JFINChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.JFINChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Crossbell: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.AstarzkEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.TangleTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DOSChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FantomTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Nahmii3: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Nahmii3Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.LUKSOTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Iotex: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MEVerseChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Mantle: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MantleTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MantleSepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SyndicateFrameChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ChainVerse: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.opBNBTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SyscoinTannebaumTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.OntologyTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Aura: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MegaETHTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.OXChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ZetaChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ZetaChainAthens3Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Planq: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MEVerseChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Cyber: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Canto: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CantoTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Powerloom: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DOSChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ShardeumSphinx: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.QitmeerTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Klaytn: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Base: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Tangle: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.IOTAEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.JIBCHAINL1: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.AlgenL1: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.EvmosTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Evmos: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DelaSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MonadTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ChiadoGnosisChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Arthera: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ArtheraTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Hashbit: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.AbstractTestnet: '0xF9cda624FBC7e059355ce98a31693d299FACd963',
+    Network.Haqq: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.RSS3VSL: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ImmutablezkEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ImmutablezkEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.EOSEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Holesky: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.EOSEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.OasisSapphire: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DreyerX: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Bitgert: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Fusion: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ApeChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Mode: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Q: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.QDevnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.QTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.AlephZeroEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Arbitrum: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ArbitrumNova: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Celo: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Oasis: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BOXChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.zkFair: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Etherlink: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.AvalancheFuji: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Avax: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CeloAlfajoresTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FusionTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ZircuitSepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Superseed: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.DFKChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.OverProtocol: '0x03657CDcDA1523C073b5e09c37dd199E6fBD1b99',
+    Network.Superposition: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SyscoinTannebaumRollux: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Ink: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SepoliaPGNPublicGoodsNetworkTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.LineaGoerliTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.LineaSepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Linea: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MetisSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Bob: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FantomSonic: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.GodwokenTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Godwoken: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Mumbai: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Amoy: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BerachainBepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Berachain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Blast: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BaseTestnetGoerli: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BaseTestnetSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.UnitZero: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.UnitZeroTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.UnitZeroStagenet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ChilizSpicyTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ChilizChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.LumiterraLayer3: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Plume: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PlumeTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SuperpositionTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.real: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.XterioChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.EtherlinkTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FormTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Taiko: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.JolnirTaikoTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.KatlaTaikoA6Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.HeklaTaikoA7Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Bitlayer: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SaharaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FilecoinCalibrationTestnet: '0xdBFa261Cd7d17bb40479A0493AD6c0FEE435859e',
+    Network.CampTestnetV2: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ArbitrumRinkeby: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ArbitrumGorli: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ArbitrumSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ScrollSepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Scroll: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ScrollAlphaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.OverProtocolDolphinTestnet: '0x03657CDcDA1523C073b5e09c37dd199E6fBD1b99',
+    Network.Hoodi: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.EDUChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Xai: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.MerlinTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SeiEVMDevnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.InkSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PlayFiAlbireoTestnet: '0xF9cda624FBC7e059355ce98a31693d299FACd963',
+    Network.XterioTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.AstarzKyotoTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Zora: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Fluence: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Sepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.OptimismSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.NeoXTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.StylusTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SKALENebulaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FluenceTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FrameTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ReyaCronos: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CyberTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BlastSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.NeonEVMDevNet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Neon: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SKALECalypsoTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ZoraSepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SKALETitanTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Aurora: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SKALETitanAIHub: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SKALEEuropaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SKALENebulaGamingHub: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SKALECalypsoHub: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Harmony: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SKALEEuropaLiquidityHub: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Yominet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PalmTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Palm: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.XaiTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.FluenceStage: '0xcA11bde05977b3631167028862bE2a173976CA11',
 }
 
 # With default AsyncBaseProvider settings, some dense calls will fail
@@ -207,6 +654,7 @@ NO_STATE_OVERRIDE: Final = {
     Network.Moonriver,
     Network.Kovan,
     Network.Fuse,
+    Network.PolygonzkEVM,
     Network.ZkSync,
 }
 
