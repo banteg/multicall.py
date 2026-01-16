@@ -1,11 +1,10 @@
 from typing import Any, Final, final
 
+import eth_hash.auto
 import faster_eth_abi.abi
 import faster_eth_abi.decoding
 import faster_eth_abi.encoding
-import eth_hash.auto
 from eth_typing import Decodable, TypeStr
-
 
 _SIGNATURES: Final[dict[str, "Signature"]] = {}
 

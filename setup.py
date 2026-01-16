@@ -1,8 +1,8 @@
 import os
 import platform
 from pathlib import Path
-from setuptools import find_packages, setup
 
+from setuptools import find_packages, setup
 
 if os.environ.get("MULTICALL_NOCOMPILE") or platform.python_implementation() != "CPython":
     # We only compile this library for CPython, other implementations will use it as normal interpreted python code
@@ -173,7 +173,7 @@ with open("readme.md", encoding="utf-8") as readme:
 
 setup(
     name=poetry_config["name"].replace("-", "_"),
-    version="0.15.1",
+    version=poetry_config["version"],
     description=poetry_config["description"],
     python_requires=">=3.10,<4",
     packages=find_packages(),

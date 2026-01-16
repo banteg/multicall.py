@@ -8,6 +8,9 @@ dynamic = ["version", "dependencies", "readme", "classifiers"]
 [tool.setuptools.dynamic.readme]
 file = "readme.md"
 
+[tool.setuptools.dynamic.version]
+attr = "multicall.__version__"
+
 [tool.setuptools.dynamic.classifiers]
 file = "attr:classifiers"
 
@@ -45,6 +48,7 @@ rpds-py = { "version" = "*", python = ">=3.10,<4" }
 urllib3 = { "version" = "*", python = ">=3.10,<4" }
 websockets = { "version" = "*", python = ">=3.10,<4" }
 yarl = { "version" = "*", python = ">=3.10,<4" }
+types-requests = "^2.32.4.20260107"
 
 [build-system]
 requires = [

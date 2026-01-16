@@ -2,6 +2,8 @@ import asyncio
 
 import pytest
 from brownie import web3
+from web3.providers.async_base import AsyncBaseProvider
+
 from multicall.utils import (
     Web3,
     await_awaitable,
@@ -13,7 +15,6 @@ from multicall.utils import (
     raise_if_exception,
     raise_if_exception_in,
 )
-from web3.providers.async_base import AsyncBaseProvider
 
 
 class UST(Exception):
