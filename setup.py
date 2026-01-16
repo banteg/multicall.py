@@ -1,8 +1,8 @@
 import os
 import platform
 from pathlib import Path
-from setuptools import find_packages, setup
 
+from setuptools import find_packages, setup
 
 if os.environ.get("MULTICALL_NOCOMPILE") or platform.python_implementation() != "CPython":
     # We only compile this library for CPython, other implementations will use it as normal interpreted python code
