@@ -655,6 +655,7 @@ NO_STATE_OVERRIDE: Final = {
     Network.Kovan,
     Network.Fuse,
     Network.PolygonzkEVM,
+    Network.RSK,
     Network.ZkSync,
 }
 
