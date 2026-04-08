@@ -115,12 +115,12 @@ class Signature:
         self.output_types: Final = output_types
         self.fourbyte: Final = get_4byte_selector(self.function)
         self._encoder: Final = (
-            TupleEncoder(encoders=tuple(_get_encoder(type_str) for type_str in input_types))
+            TupleEncoder(encoders=tuple(map(_get_encoder, input_types)))
             if input_types
             else None
         )
-        self._decoder: Final = TupleDecoder(
-            decoders=tuple(_get_decoder(type_str) for type_str in output_types)
+        self._decoder: Final[TupleDecoder[Any]] = TupleDecoder(
+            decoders=tuple(map(_get_decoder, output_types))
         )
 
     def encode_data(self, args: list[Any] | tuple[Any, ...] | None = None) -> bytes:
