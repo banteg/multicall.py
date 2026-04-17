@@ -67,16 +67,20 @@ class Network(IntEnum):
     Coston2Testnet = 114
     Fuse = 122
     Heco = 128
+    Unichain = 130
     Polygon = 137
     DefiOracleMeta = 138
     Monad = 143
-    Sonic = 146
+    SonicNetwork = 146
     ShimmerEVM = 148
     MantaPacific = 169
+    Mint = 185
     X1Testnet = 195
     XLayer = 196
     BitTorrentChain = 199
     opBNB = 204
+    BSquared = 223
+    Tac = 239
     Fantom = 250
     Fraxtal = 252
     Kroma = 255
@@ -95,18 +99,21 @@ class Network(IntEnum):
     AreonNetworkTestnet = 462
     AreonNetwork = 463
     WorldChain = 480
+    CampNetwork = 484
     Rupaya = 499
     FlowTestnet = 545
     SyscoinRollux = 570
     Astar = 592
     MetisGoerli = 599
+    NEROTestnet = 689
     HighburyEVM = 710
     Flow = 747
     QitmeerQNG = 813
     Callisto = 820
     PulseChainTestnet = 943
     Bittensor = 964
-    ZoraGoerliTestnet = 999
+    Stable = 988
+    HyperEVMTestnet = 998
     HyperEVM = 999
     KlaytnTestnetBaobab = 1001
     BTTChainTestnet = 1029
@@ -131,7 +138,9 @@ class Network(IntEnum):
     StarchainTestnet = 1570
     Starchain = 1578
     GravityAlpha = 1625
+    NERO = 1689
     ReyaNetwork = 1729
+    Soneium = 1868
     Whitechain = 1875
     SankoTestnet = 1992
     Sanko = 1996
@@ -140,6 +149,7 @@ class Network(IntEnum):
     EdgewareEdgeEVM = 2021
     Kava = 2222
     RSS3VSLSepoliaTestnet = 2331
+    GOAT = 2345
     KromaTestnetSepolia = 2358
     Xodex = 2415
     CardonazkEVMTestnet = 2442
@@ -151,6 +161,8 @@ class Network(IntEnum):
     peaq = 3338
     JFINChain = 3501
     JFINChainTestnet = 3502
+    BotanixTestnet = 3636
+    Botanix = 3637
     Crossbell = 3737
     AstarzkEVM = 3776
     TangleTestnet = 3799
@@ -165,10 +177,13 @@ class Network(IntEnum):
     MantleTestnet = 5001
     MantleSepoliaTestnet = 5003
     SyndicateFrameChain = 5101
+    SagaEVM = 5464
     ChainVerse = 5555
     opBNBTestnet = 5611
     SyscoinTannebaumTestnet = 5700
+    Tangle = 5845
     OntologyTestnet = 5851
+    Mantra = 5888
     Aura = 6322
     MegaETHTestnet = 6342
     OXChain = 6699
@@ -185,13 +200,14 @@ class Network(IntEnum):
     QitmeerTestnet = 8131
     Klaytn = 8217
     Base = 8453
-    Tangle = 8545
     IOTAEVM = 8822
     JIBCHAINL1 = 8899
     AlgenL1 = 8911
     EvmosTestnet = 9000
     Evmos = 9001
     DelaSepolia = 9393
+    Plasma = 9745
+    GateLayer = 10088
     MonadTestnet = 10143
     ChiadoGnosisChainTestnet = 10200
     Arthera = 10242
@@ -204,10 +220,14 @@ class Network(IntEnum):
     ImmutablezkEVM = 13371
     ImmutablezkEVMTestnet = 13473
     EOSEVMTestnet = 15557
+    ZeroG = 16661
     Holesky = 17000
     EOSEVM = 17777
     OasisSapphire = 23294
     DreyerX = 23451
+    Incentiv = 24101
+    IncentivTestnet = 28802
+    Mezo = 31612
     Bitgert = 32520
     Fusion = 32659
     ApeChain = 33139
@@ -216,6 +236,7 @@ class Network(IntEnum):
     QDevnet = 35442
     QTestnet = 35443
     AlephZeroEVM = 41455
+    EDUChain = 41923
     Arbitrum = 42161
     ArbitrumNova = 42170
     Celo = 42220
@@ -223,6 +244,7 @@ class Network(IntEnum):
     BOXChain = 42299
     zkFair = 42766
     Etherlink = 42793
+    Hemi = 43111
     AvalancheFuji = 43113
     Avax = 43114
     CeloAlfajoresTestnet = 44787
@@ -256,6 +278,7 @@ class Network(IntEnum):
     ChilizSpicyTestnet = 88882
     ChilizChain = 88888
     LumiterraLayer3 = 94168
+    Doma = 97477
     Plume = 98866
     PlumeTestnet = 98867
     SuperpositionTestnet = 98985
@@ -268,6 +291,7 @@ class Network(IntEnum):
     KatlaTaikoA6Testnet = 167008
     HeklaTaikoA7Testnet = 167009
     Bitlayer = 200901
+    PlatON = 210425
     SaharaTestnet = 313313
     FilecoinCalibrationTestnet = 314159
     CampTestnetV2 = 325000
@@ -279,10 +303,13 @@ class Network(IntEnum):
     ScrollAlphaTestnet = 534353
     OverProtocolDolphinTestnet = 541764
     Hoodi = 560048
+    Cross = 612055
     EDUChainTestnet = 656476
     Xai = 660279
     MerlinTestnet = 686868
     SeiEVMDevnet = 713715
+    HemiSepolia = 743111
+    Katana = 747474
     InkSepolia = 763373
     PlayFiAlbireoTestnet = 1612127
     XterioTestnet = 1637450
@@ -392,16 +419,20 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.Coston2Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Fuse: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Heco: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Unichain: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Polygon: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.DefiOracleMeta: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Monad: '0xcA11bde05977b3631167028862bE2a173976CA11',
-    Network.Sonic: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SonicNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.ShimmerEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.MantaPacific: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Mint: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.X1Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.XLayer: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.BitTorrentChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.opBNB: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BSquared: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Tac: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Fantom: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Fraxtal: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Kroma: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -420,18 +451,21 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.AreonNetworkTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.AreonNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.WorldChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.CampNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Rupaya: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.FlowTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.SyscoinRollux: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Astar: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.MetisGoerli: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.NEROTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.HighburyEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Flow: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.QitmeerQNG: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Callisto: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.PulseChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Bittensor: '0xcA11bde05977b3631167028862bE2a173976CA11',
-    Network.ZoraGoerliTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Stable: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.HyperEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.HyperEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.KlaytnTestnetBaobab: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.BTTChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -456,7 +490,9 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.StarchainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Starchain: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.GravityAlpha: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.NERO: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.ReyaNetwork: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Soneium: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Whitechain: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.SankoTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Sanko: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -465,6 +501,7 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.EdgewareEdgeEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Kava: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.RSS3VSLSepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.GOAT: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.KromaTestnetSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Xodex: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.CardonazkEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -476,6 +513,8 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.peaq: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.JFINChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.JFINChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.BotanixTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Botanix: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Crossbell: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.AstarzkEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.TangleTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -490,10 +529,13 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.MantleTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.MantleSepoliaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.SyndicateFrameChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.SagaEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.ChainVerse: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.opBNBTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.SyscoinTannebaumTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Tangle: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.OntologyTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Mantra: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Aura: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.MegaETHTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.OXChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -510,13 +552,14 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.QitmeerTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Klaytn: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Base: '0xcA11bde05977b3631167028862bE2a173976CA11',
-    Network.Tangle: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.IOTAEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.JIBCHAINL1: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.AlgenL1: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.EvmosTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Evmos: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.DelaSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Plasma: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.GateLayer: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.MonadTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.ChiadoGnosisChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Arthera: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -529,10 +572,14 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.ImmutablezkEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.ImmutablezkEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.EOSEVMTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.ZeroG: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Holesky: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.EOSEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.OasisSapphire: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.DreyerX: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Incentiv: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.IncentivTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Mezo: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Bitgert: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Fusion: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.ApeChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -541,6 +588,7 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.QDevnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.QTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.AlephZeroEVM: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.EDUChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Arbitrum: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.ArbitrumNova: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Celo: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -548,6 +596,7 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.BOXChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.zkFair: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Etherlink: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Hemi: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.AvalancheFuji: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Avax: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.CeloAlfajoresTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -581,6 +630,7 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.ChilizSpicyTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.ChilizChain: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.LumiterraLayer3: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Doma: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Plume: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.PlumeTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.SuperpositionTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -593,6 +643,7 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.KatlaTaikoA6Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.HeklaTaikoA7Testnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Bitlayer: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.PlatON: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.SaharaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.FilecoinCalibrationTestnet: '0xdBFa261Cd7d17bb40479A0493AD6c0FEE435859e',
     Network.CampTestnetV2: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -604,10 +655,13 @@ MULTICALL3_ADDRESSES: Final[dict[int, ChecksumAddress]] = {
     Network.ScrollAlphaTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.OverProtocolDolphinTestnet: '0x03657CDcDA1523C073b5e09c37dd199E6fBD1b99',
     Network.Hoodi: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Cross: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.EDUChainTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.Xai: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.MerlinTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.SeiEVMDevnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.HemiSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    Network.Katana: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.InkSepolia: '0xcA11bde05977b3631167028862bE2a173976CA11',
     Network.PlayFiAlbireoTestnet: '0xF9cda624FBC7e059355ce98a31693d299FACd963',
     Network.XterioTestnet: '0xcA11bde05977b3631167028862bE2a173976CA11',
