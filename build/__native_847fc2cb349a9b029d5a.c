@@ -1,19 +1,19 @@
-#include "init.c"
-#include "getargs.c"
-#include "getargsfast.c"
-#include "int_ops.c"
-#include "float_ops.c"
-#include "str_ops.c"
-#include "bytes_ops.c"
-#include "list_ops.c"
-#include "dict_ops.c"
-#include "set_ops.c"
-#include "tuple_ops.c"
-#include "exc_ops.c"
-#include "misc_ops.c"
-#include "generic_ops.c"
-#include "pythonsupport.c"
-#include "function_wrapper.c"
+#include <init.c>
+#include <getargs.c>
+#include <getargsfast.c>
+#include <int_ops.c>
+#include <float_ops.c>
+#include <str_ops.c>
+#include <bytes_ops.c>
+#include <list_ops.c>
+#include <dict_ops.c>
+#include <set_ops.c>
+#include <tuple_ops.c>
+#include <exc_ops.c>
+#include <misc_ops.c>
+#include <generic_ops.c>
+#include <pythonsupport.c>
+#include <function_wrapper.c>
 #include "__native_847fc2cb349a9b029d5a.h"
 #include "__native_internal_847fc2cb349a9b029d5a.h"
 
@@ -25,25 +25,6 @@ call___Call_init(PyObject *self, PyObject *args, PyObject *kwds)
 static PyAsyncMethods call___Call_as_async = {
     .am_await = CPyDef_call___Call_____await__,
 };
-PyObject *CPyDef_call_____mypyc__Call_setup(PyObject *cpy_r_type);
-PyObject *CPyDef_call___Call(PyObject *cpy_r_target, PyObject *cpy_r_function, PyObject *cpy_r_returns, PyObject *cpy_r_block_id, PyObject *cpy_r_gas_limit, PyObject *cpy_r_state_override_code, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
-
-static PyObject *
-call___Call_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-{
-    if (type != CPyType_call___Call) {
-        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-        return NULL;
-    }
-    PyObject *self = CPyDef_call_____mypyc__Call_setup((PyObject*)type);
-    if (self == NULL)
-        return NULL;
-    PyObject *ret = CPyPy_call___Call_____init__(self, args, kwds);
-    if (ret == NULL)
-        return NULL;
-    return self;
-}
-
 static int
 call___Call_traverse(multicall___call___CallObject *self, visitproc visit, void *arg)
 {
@@ -57,7 +38,8 @@ call___Call_traverse(multicall___call___CallObject *self, visitproc visit, void 
     Py_VISIT(self->_function);
     Py_VISIT(self->_args);
     Py_VISIT(self->_signature);
-    return 0;
+    int rv = 0;
+    return rv;
 }
 
 static int
@@ -85,6 +67,28 @@ call___Call_dealloc(multicall___call___CallObject *self)
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
     done: ;
+}
+
+PyObject *CPyDef_call_____mypyc__Call_setup(PyObject *cpy_r_type);
+PyObject *CPyDef_call___Call(PyObject *cpy_r_target, PyObject *cpy_r_function, PyObject *cpy_r_returns, PyObject *cpy_r_block_id, PyObject *cpy_r_gas_limit, PyObject *cpy_r_state_override_code, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
+
+static PyObject *
+call___Call_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+{
+    if (type != CPyType_call___Call) {
+        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+        return NULL;
+    }
+    PyObject *self = CPyDef_call_____mypyc__Call_setup((PyObject*)type);
+    if (self == NULL)
+        return NULL;
+    PyObject *ret = CPyPy_call___Call_____init__(self, args, kwds);
+    if (ret == NULL) {
+            Py_DECREF(self);
+            return NULL;
+    }
+    Py_DECREF(ret);
+    return self;
 }
 
 static CPyVTableItem call___Call_vtable[7];
@@ -713,22 +717,6 @@ call___Call_get_data(multicall___call___CallObject *self, void *closure)
     return CPyDef_call___Call___data((PyObject *) self);
 }
 
-PyObject *CPyDef_call_____mypyc__decode_output_Call_env_setup(PyObject *cpy_r_type);
-PyObject *CPyDef_call___decode_output_Call_env(void);
-
-static PyObject *
-call___decode_output_Call_env_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-{
-    if (type != CPyType_call___decode_output_Call_env) {
-        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-        return NULL;
-    }
-    PyObject *self = CPyDef_call_____mypyc__decode_output_Call_env_setup((PyObject*)type);
-    if (self == NULL)
-        return NULL;
-    return self;
-}
-
 static int
 call___decode_output_Call_env_traverse(multicall___call___decode_output_Call_envObject *self, visitproc visit, void *arg)
 {
@@ -738,7 +726,8 @@ call___decode_output_Call_env_traverse(multicall___call___decode_output_Call_env
     Py_VISIT(self->_signature);
     Py_VISIT(self->_returns);
     Py_VISIT(self->_apply_handler);
-    return 0;
+    int rv = 0;
+    return rv;
 }
 
 static int
@@ -772,6 +761,22 @@ call___decode_output_Call_env_dealloc(multicall___call___decode_output_Call_envO
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
     done: ;
+}
+
+PyObject *CPyDef_call_____mypyc__decode_output_Call_env_setup(PyObject *cpy_r_type);
+PyObject *CPyDef_call___decode_output_Call_env(void);
+
+static PyObject *
+call___decode_output_Call_env_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+{
+    if (type != CPyType_call___decode_output_Call_env) {
+        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+        return NULL;
+    }
+    PyObject *self = CPyDef_call_____mypyc__decode_output_Call_env_setup((PyObject*)type);
+    if (self == NULL)
+        return NULL;
+    return self;
 }
 
 static CPyVTableItem call___decode_output_Call_env_vtable[1];
@@ -843,28 +848,14 @@ static PyObject *CPyDunder___get__call_____mypyc_lambda__0_decode_output_Call_ob
     instance = instance ? instance : Py_None;
     return CPyDef_call_____mypyc_lambda__0_decode_output_Call_obj_____get__(self, instance, owner);
 }
-PyObject *CPyDef_call_____mypyc___3__mypyc_lambda__0_decode_output_Call_obj_setup(PyObject *cpy_r_type);
-PyObject *CPyDef_call_____mypyc_lambda__0_decode_output_Call_obj(void);
-
-static PyObject *
-call_____mypyc_lambda__0_decode_output_Call_obj_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-{
-    if (type != CPyType_call_____mypyc_lambda__0_decode_output_Call_obj) {
-        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-        return NULL;
-    }
-    PyObject *self = CPyDef_call_____mypyc___3__mypyc_lambda__0_decode_output_Call_obj_setup((PyObject*)type);
-    if (self == NULL)
-        return NULL;
-    return self;
-}
-
 static int
 call_____mypyc_lambda__0_decode_output_Call_obj_traverse(multicall___call_____mypyc_lambda__0_decode_output_Call_objObject *self, visitproc visit, void *arg)
 {
     Py_VISIT(self->___mypyc_env__);
-    PyObject_VisitManagedDict((PyObject *)self, visit, arg);
-    return 0;
+    int rv = 0;
+    rv = PyObject_VisitManagedDict((PyObject *)self, visit, arg);
+    if (rv != 0) return rv;
+    return rv;
 }
 
 static int
@@ -889,6 +880,22 @@ call_____mypyc_lambda__0_decode_output_Call_obj_dealloc(multicall___call_____myp
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
     done: ;
+}
+
+PyObject *CPyDef_call_____mypyc___3__mypyc_lambda__0_decode_output_Call_obj_setup(PyObject *cpy_r_type);
+PyObject *CPyDef_call_____mypyc_lambda__0_decode_output_Call_obj(void);
+
+static PyObject *
+call_____mypyc_lambda__0_decode_output_Call_obj_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+{
+    if (type != CPyType_call_____mypyc_lambda__0_decode_output_Call_obj) {
+        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+        return NULL;
+    }
+    PyObject *self = CPyDef_call_____mypyc___3__mypyc_lambda__0_decode_output_Call_obj_setup((PyObject*)type);
+    if (self == NULL)
+        return NULL;
+    return self;
 }
 
 static CPyVTableItem call_____mypyc_lambda__0_decode_output_Call_obj_vtable[2];
@@ -1022,28 +1029,14 @@ static PyObject *CPyDunder___get__call_____mypyc_lambda__1_decode_output_Call_ob
     instance = instance ? instance : Py_None;
     return CPyDef_call_____mypyc_lambda__1_decode_output_Call_obj_____get__(self, instance, owner);
 }
-PyObject *CPyDef_call_____mypyc___3__mypyc_lambda__1_decode_output_Call_obj_setup(PyObject *cpy_r_type);
-PyObject *CPyDef_call_____mypyc_lambda__1_decode_output_Call_obj(void);
-
-static PyObject *
-call_____mypyc_lambda__1_decode_output_Call_obj_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-{
-    if (type != CPyType_call_____mypyc_lambda__1_decode_output_Call_obj) {
-        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-        return NULL;
-    }
-    PyObject *self = CPyDef_call_____mypyc___3__mypyc_lambda__1_decode_output_Call_obj_setup((PyObject*)type);
-    if (self == NULL)
-        return NULL;
-    return self;
-}
-
 static int
 call_____mypyc_lambda__1_decode_output_Call_obj_traverse(multicall___call_____mypyc_lambda__1_decode_output_Call_objObject *self, visitproc visit, void *arg)
 {
     Py_VISIT(self->___mypyc_env__);
-    PyObject_VisitManagedDict((PyObject *)self, visit, arg);
-    return 0;
+    int rv = 0;
+    rv = PyObject_VisitManagedDict((PyObject *)self, visit, arg);
+    if (rv != 0) return rv;
+    return rv;
 }
 
 static int
@@ -1068,6 +1061,22 @@ call_____mypyc_lambda__1_decode_output_Call_obj_dealloc(multicall___call_____myp
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
     done: ;
+}
+
+PyObject *CPyDef_call_____mypyc___3__mypyc_lambda__1_decode_output_Call_obj_setup(PyObject *cpy_r_type);
+PyObject *CPyDef_call_____mypyc_lambda__1_decode_output_Call_obj(void);
+
+static PyObject *
+call_____mypyc_lambda__1_decode_output_Call_obj_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+{
+    if (type != CPyType_call_____mypyc_lambda__1_decode_output_Call_obj) {
+        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+        return NULL;
+    }
+    PyObject *self = CPyDef_call_____mypyc___3__mypyc_lambda__1_decode_output_Call_obj_setup((PyObject*)type);
+    if (self == NULL)
+        return NULL;
+    return self;
 }
 
 static CPyVTableItem call_____mypyc_lambda__1_decode_output_Call_obj_vtable[2];
@@ -1197,22 +1206,6 @@ call_____mypyc_lambda__1_decode_output_Call_obj_set___3_mypyc_env__(multicall___
     return 0;
 }
 
-PyObject *CPyDef_call_____mypyc__coroutine_Call_env_setup(PyObject *cpy_r_type);
-PyObject *CPyDef_call___coroutine_Call_env(void);
-
-static PyObject *
-call___coroutine_Call_env_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-{
-    if (type != CPyType_call___coroutine_Call_env) {
-        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-        return NULL;
-    }
-    PyObject *self = CPyDef_call_____mypyc__coroutine_Call_env_setup((PyObject*)type);
-    if (self == NULL)
-        return NULL;
-    return self;
-}
-
 static int
 call___coroutine_Call_env_traverse(multicall___call___coroutine_Call_envObject *self, visitproc visit, void *arg)
 {
@@ -1248,7 +1241,8 @@ call___coroutine_Call_env_traverse(multicall___call___coroutine_Call_envObject *
     Py_VISIT(self->___mypyc_temp__11.f1);
     Py_VISIT(self->___mypyc_temp__11.f2);
     Py_VISIT(self->___mypyc_generator_attribute__result);
-    return 0;
+    int rv = 0;
+    return rv;
 }
 
 static int
@@ -1339,6 +1333,22 @@ call___coroutine_Call_env_dealloc(multicall___call___coroutine_Call_envObject *s
     done: ;
 }
 
+PyObject *CPyDef_call_____mypyc__coroutine_Call_env_setup(PyObject *cpy_r_type);
+PyObject *CPyDef_call___coroutine_Call_env(void);
+
+static PyObject *
+call___coroutine_Call_env_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+{
+    if (type != CPyType_call___coroutine_Call_env) {
+        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+        return NULL;
+    }
+    PyObject *self = CPyDef_call_____mypyc__coroutine_Call_env_setup((PyObject*)type);
+    if (self == NULL)
+        return NULL;
+    return self;
+}
+
 static CPyVTableItem call___coroutine_Call_env_vtable[1];
 static bool
 CPyDef_call___coroutine_Call_env_trait_vtable_setup(void)
@@ -1414,27 +1424,12 @@ PyObject *CPyDef_call___coroutine_Call_env(void)
 static PyAsyncMethods call___coroutine_Call_gen_as_async = {
     .am_await = CPyDef_call___coroutine_Call_gen_____await__,
 };
-PyObject *CPyDef_call_____mypyc__coroutine_Call_gen_setup(PyObject *cpy_r_type);
-PyObject *CPyDef_call___coroutine_Call_gen(void);
-
-static PyObject *
-call___coroutine_Call_gen_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-{
-    if (type != CPyType_call___coroutine_Call_gen) {
-        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-        return NULL;
-    }
-    PyObject *self = CPyDef_call_____mypyc__coroutine_Call_gen_setup((PyObject*)type);
-    if (self == NULL)
-        return NULL;
-    return self;
-}
-
 static int
 call___coroutine_Call_gen_traverse(multicall___call___coroutine_Call_genObject *self, visitproc visit, void *arg)
 {
     Py_VISIT(self->___mypyc_env__);
-    return 0;
+    int rv = 0;
+    return rv;
 }
 
 static int
@@ -1458,6 +1453,22 @@ call___coroutine_Call_gen_dealloc(multicall___call___coroutine_Call_genObject *s
     Py_TYPE(self)->tp_free((PyObject *)self);
     CPy_TRASHCAN_END(self)
     done: ;
+}
+
+PyObject *CPyDef_call_____mypyc__coroutine_Call_gen_setup(PyObject *cpy_r_type);
+PyObject *CPyDef_call___coroutine_Call_gen(void);
+
+static PyObject *
+call___coroutine_Call_gen_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+{
+    if (type != CPyType_call___coroutine_Call_gen) {
+        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+        return NULL;
+    }
+    PyObject *self = CPyDef_call_____mypyc__coroutine_Call_gen_setup((PyObject*)type);
+    if (self == NULL)
+        return NULL;
+    return self;
 }
 
 static CPyVTableItem call___coroutine_Call_gen_vtable[7];
@@ -25323,25 +25334,6 @@ CPyL5: ;
                 static PyAsyncMethods multicall___Multicall_as_async = {
                     .am_await = CPyDef_multicall___Multicall_____await__,
                 };
-                PyObject *CPyDef_multicall_____mypyc__Multicall_setup(PyObject *cpy_r_type);
-                PyObject *CPyDef_multicall___Multicall(PyObject *cpy_r_calls, PyObject *cpy_r_block_id, char cpy_r_require_success, CPyTagged cpy_r_gas_limit, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
-                
-                static PyObject *
-                multicall___Multicall_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-                {
-                    if (type != CPyType_multicall___Multicall) {
-                        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-                        return NULL;
-                    }
-                    PyObject *self = CPyDef_multicall_____mypyc__Multicall_setup((PyObject*)type);
-                    if (self == NULL)
-                        return NULL;
-                    PyObject *ret = CPyPy_multicall___Multicall_____init__(self, args, kwds);
-                    if (ret == NULL)
-                        return NULL;
-                    return self;
-                }
-                
                 static int
                 multicall___Multicall_traverse(multicall___multicall___MulticallObject *self, visitproc visit, void *arg)
                 {
@@ -25356,7 +25348,8 @@ CPyL5: ;
                         Py_VISIT(CPyTagged_LongAsObject(self->_chainid));
                     }
                     Py_VISIT(self->_multicall_address);
-                    return 0;
+                    int rv = 0;
+                    return rv;
                 }
                 
                 static int
@@ -25389,6 +25382,28 @@ CPyL5: ;
                     Py_TYPE(self)->tp_free((PyObject *)self);
                     CPy_TRASHCAN_END(self)
                     done: ;
+                }
+                
+                PyObject *CPyDef_multicall_____mypyc__Multicall_setup(PyObject *cpy_r_type);
+                PyObject *CPyDef_multicall___Multicall(PyObject *cpy_r_calls, PyObject *cpy_r_block_id, char cpy_r_require_success, CPyTagged cpy_r_gas_limit, PyObject *cpy_r__w3, PyObject *cpy_r_origin);
+                
+                static PyObject *
+                multicall___Multicall_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+                {
+                    if (type != CPyType_multicall___Multicall) {
+                        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+                        return NULL;
+                    }
+                    PyObject *self = CPyDef_multicall_____mypyc__Multicall_setup((PyObject*)type);
+                    if (self == NULL)
+                        return NULL;
+                    PyObject *ret = CPyPy_multicall___Multicall_____init__(self, args, kwds);
+                    if (ret == NULL) {
+                            Py_DECREF(self);
+                            return NULL;
+                    }
+                    Py_DECREF(ret);
+                    return self;
                 }
                 
                 static CPyVTableItem multicall___Multicall_vtable[18];
@@ -25927,32 +25942,14 @@ __LL53: ;
                 {
                     return 0;
                 }
-                PyObject *CPyDef_multicall_____mypyc__NotSoBrightBatcher_setup(PyObject *cpy_r_type);
-                PyObject *CPyDef_multicall___NotSoBrightBatcher(void);
-                
-                static PyObject *
-                multicall___NotSoBrightBatcher_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-                {
-                    if (type != CPyType_multicall___NotSoBrightBatcher) {
-                        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-                        return NULL;
-                    }
-                    PyObject *self = CPyDef_multicall_____mypyc__NotSoBrightBatcher_setup((PyObject*)type);
-                    if (self == NULL)
-                        return NULL;
-                    PyObject *ret = CPyPy_multicall___NotSoBrightBatcher_____init__(self, args, kwds);
-                    if (ret == NULL)
-                        return NULL;
-                    return self;
-                }
-                
                 static int
                 multicall___NotSoBrightBatcher_traverse(multicall___multicall___NotSoBrightBatcherObject *self, visitproc visit, void *arg)
                 {
                     if (CPyTagged_CheckLong(self->_step)) {
                         Py_VISIT(CPyTagged_LongAsObject(self->_step));
                     }
-                    return 0;
+                    int rv = 0;
+                    return rv;
                 }
                 
                 static int
@@ -25975,6 +25972,28 @@ __LL53: ;
                     Py_TYPE(self)->tp_free((PyObject *)self);
                     CPy_TRASHCAN_END(self)
                     done: ;
+                }
+                
+                PyObject *CPyDef_multicall_____mypyc__NotSoBrightBatcher_setup(PyObject *cpy_r_type);
+                PyObject *CPyDef_multicall___NotSoBrightBatcher(void);
+                
+                static PyObject *
+                multicall___NotSoBrightBatcher_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+                {
+                    if (type != CPyType_multicall___NotSoBrightBatcher) {
+                        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+                        return NULL;
+                    }
+                    PyObject *self = CPyDef_multicall_____mypyc__NotSoBrightBatcher_setup((PyObject*)type);
+                    if (self == NULL)
+                        return NULL;
+                    PyObject *ret = CPyPy_multicall___NotSoBrightBatcher_____init__(self, args, kwds);
+                    if (ret == NULL) {
+                            Py_DECREF(self);
+                            return NULL;
+                    }
+                    Py_DECREF(ret);
+                    return self;
                 }
                 
                 static CPyVTableItem multicall___NotSoBrightBatcher_vtable[4];
@@ -26107,22 +26126,6 @@ __LL53: ;
                 static PyAsyncMethods multicall___coroutine_Multicall_gen_as_async = {
                     .am_await = CPyDef_multicall___coroutine_Multicall_gen_____await__,
                 };
-                PyObject *CPyDef_multicall_____mypyc__coroutine_Multicall_gen_setup(PyObject *cpy_r_type);
-                PyObject *CPyDef_multicall___coroutine_Multicall_gen(void);
-                
-                static PyObject *
-                multicall___coroutine_Multicall_gen_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-                {
-                    if (type != CPyType_multicall___coroutine_Multicall_gen) {
-                        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-                        return NULL;
-                    }
-                    PyObject *self = CPyDef_multicall_____mypyc__coroutine_Multicall_gen_setup((PyObject*)type);
-                    if (self == NULL)
-                        return NULL;
-                    return self;
-                }
-                
                 static int
                 multicall___coroutine_Multicall_gen_traverse(multicall___multicall___coroutine_Multicall_genObject *self, visitproc visit, void *arg)
                 {
@@ -26138,7 +26141,8 @@ __LL53: ;
                     Py_VISIT(self->___mypyc_temp__5.f1);
                     Py_VISIT(self->___mypyc_temp__5.f2);
                     Py_VISIT(self->___mypyc_generator_attribute__batches);
-                    return 0;
+                    int rv = 0;
+                    return rv;
                 }
                 
                 static int
@@ -26193,6 +26197,22 @@ __LL53: ;
                     Py_TYPE(self)->tp_free((PyObject *)self);
                     CPy_TRASHCAN_END(self)
                     done: ;
+                }
+                
+                PyObject *CPyDef_multicall_____mypyc__coroutine_Multicall_gen_setup(PyObject *cpy_r_type);
+                PyObject *CPyDef_multicall___coroutine_Multicall_gen(void);
+                
+                static PyObject *
+                multicall___coroutine_Multicall_gen_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+                {
+                    if (type != CPyType_multicall___coroutine_Multicall_gen) {
+                        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+                        return NULL;
+                    }
+                    PyObject *self = CPyDef_multicall_____mypyc__coroutine_Multicall_gen_setup((PyObject*)type);
+                    if (self == NULL)
+                        return NULL;
+                    return self;
                 }
                 
                 static CPyVTableItem multicall___coroutine_Multicall_gen_vtable[7];
@@ -26295,22 +26315,6 @@ __LL53: ;
                 static PyAsyncMethods multicall___fetch_outputs_Multicall_gen_as_async = {
                     .am_await = CPyDef_multicall___fetch_outputs_Multicall_gen_____await__,
                 };
-                PyObject *CPyDef_multicall_____mypyc__fetch_outputs_Multicall_gen_setup(PyObject *cpy_r_type);
-                PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen(void);
-                
-                static PyObject *
-                multicall___fetch_outputs_Multicall_gen_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-                {
-                    if (type != CPyType_multicall___fetch_outputs_Multicall_gen) {
-                        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-                        return NULL;
-                    }
-                    PyObject *self = CPyDef_multicall_____mypyc__fetch_outputs_Multicall_gen_setup((PyObject*)type);
-                    if (self == NULL)
-                        return NULL;
-                    return self;
-                }
-                
                 static int
                 multicall___fetch_outputs_Multicall_gen_traverse(multicall___multicall___fetch_outputs_Multicall_genObject *self, visitproc visit, void *arg)
                 {
@@ -26377,7 +26381,8 @@ __LL53: ;
                     Py_VISIT(self->___mypyc_temp__36);
                     Py_VISIT(self->___mypyc_generator_attribute__result.f0);
                     Py_VISIT(self->___mypyc_generator_attribute__result.f1);
-                    return 0;
+                    int rv = 0;
+                    return rv;
                 }
                 
                 static int
@@ -26543,6 +26548,22 @@ __LL53: ;
                     Py_TYPE(self)->tp_free((PyObject *)self);
                     CPy_TRASHCAN_END(self)
                     done: ;
+                }
+                
+                PyObject *CPyDef_multicall_____mypyc__fetch_outputs_Multicall_gen_setup(PyObject *cpy_r_type);
+                PyObject *CPyDef_multicall___fetch_outputs_Multicall_gen(void);
+                
+                static PyObject *
+                multicall___fetch_outputs_Multicall_gen_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+                {
+                    if (type != CPyType_multicall___fetch_outputs_Multicall_gen) {
+                        PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+                        return NULL;
+                    }
+                    PyObject *self = CPyDef_multicall_____mypyc__fetch_outputs_Multicall_gen_setup((PyObject*)type);
+                    if (self == NULL)
+                        return NULL;
+                    return self;
                 }
                 
                 static CPyVTableItem multicall___fetch_outputs_Multicall_gen_vtable[7];
@@ -36213,25 +36234,6 @@ CPyL79: ;
                     {
                         return 0;
                     }
-                    PyObject *CPyDef_signature_____mypyc__Signature_setup(PyObject *cpy_r_type);
-                    PyObject *CPyDef_signature___Signature(PyObject *cpy_r_signature);
-                    
-                    static PyObject *
-                    signature___Signature_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
-                    {
-                        if (type != CPyType_signature___Signature) {
-                            PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
-                            return NULL;
-                        }
-                        PyObject *self = CPyDef_signature_____mypyc__Signature_setup((PyObject*)type);
-                        if (self == NULL)
-                            return NULL;
-                        PyObject *ret = CPyPy_signature___Signature_____init__(self, args, kwds);
-                        if (ret == NULL)
-                            return NULL;
-                        return self;
-                    }
-                    
                     static int
                     signature___Signature_traverse(multicall___signature___SignatureObject *self, visitproc visit, void *arg)
                     {
@@ -36242,7 +36244,8 @@ CPyL79: ;
                         Py_VISIT(self->_fourbyte);
                         Py_VISIT(self->__encoder);
                         Py_VISIT(self->__decoder);
-                        return 0;
+                        int rv = 0;
+                        return rv;
                     }
                     
                     static int
@@ -36267,6 +36270,28 @@ CPyL79: ;
                         Py_TYPE(self)->tp_free((PyObject *)self);
                         CPy_TRASHCAN_END(self)
                         done: ;
+                    }
+                    
+                    PyObject *CPyDef_signature_____mypyc__Signature_setup(PyObject *cpy_r_type);
+                    PyObject *CPyDef_signature___Signature(PyObject *cpy_r_signature);
+                    
+                    static PyObject *
+                    signature___Signature_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+                    {
+                        if (type != CPyType_signature___Signature) {
+                            PyErr_SetString(PyExc_TypeError, "interpreted classes cannot inherit from compiled");
+                            return NULL;
+                        }
+                        PyObject *self = CPyDef_signature_____mypyc__Signature_setup((PyObject*)type);
+                        if (self == NULL)
+                            return NULL;
+                        PyObject *ret = CPyPy_signature___Signature_____init__(self, args, kwds);
+                        if (ret == NULL) {
+                                Py_DECREF(self);
+                                return NULL;
+                        }
+                        Py_DECREF(ret);
+                        return self;
                     }
                     
                     static CPyVTableItem signature___Signature_vtable[3];
@@ -39389,6 +39414,7 @@ CPyL34: ;
                             }
                             if (exec_847fc2cb349a9b029d5a__mypyc(module) < 0) {
                                 Py_DECREF(module);
+                                module = NULL;
                                 return NULL;
                             }
                             return module;
