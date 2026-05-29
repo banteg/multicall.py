@@ -114,12 +114,12 @@ class Signature:
         output_types = parsed[2]
         self.output_types: Final = output_types
         self.fourbyte: Final = get_4byte_selector(self.function)
-        self._encoder: Final = (
+        self._encoder: Final[faster_eth_abi.encoding.TupleEncoder | None] = (
             TupleEncoder(encoders=tuple(_get_encoder(type_str) for type_str in input_types))
             if input_types
             else None
         )
-        self._decoder: Final = TupleDecoder(
+        self._decoder: Final[faster_eth_abi.decoding.TupleDecoder[Any]] = TupleDecoder(
             decoders=tuple(_get_decoder(type_str) for type_str in output_types)
         )
 
