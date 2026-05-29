@@ -24,15 +24,14 @@ authors = ["banteg"]
 python = ">=3.10,<4"
 cchecksum = ">=0.0.3,<1"
 faster-eth-abi = ">=5.2.1,<6"
-# These web3.py versions have a busted async provider and cannot be used in any multithreaded applications
-web3 = ">=5.27,!=5.29.*,!=5.30.*,!=5.31.0,!=5.31.1,!=5.31.2"
+web3 = ">=7,<8"
 eth_retry = ">=0.3.5"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=6.2.5"
 ruff = ">=0.3.5"
 joblib = ">=1.2"
-eth-brownie = ">=1.21,<1.22"
+eth-brownie = ">=1.22,<1.23"
 
 aiohttp = { "version" = "*", python = ">=3.10,<4" }
 frozenlist = { "version" = "*", python = ">=3.10,<4" }
@@ -52,9 +51,9 @@ types-requests = "^2.32.4.20260107"
 
 [build-system]
 requires = [
-    "setuptools", 
-    "wheel", 
-    "mypy[mypyc]==1.19.1", 
+    "setuptools",
+    "wheel",
+    "mypy[mypyc]==1.20.2",
     "tomli>=2.0.0; python_version < '3.11'",
     "types-requests",
     "eth_retry==0.3.5",
