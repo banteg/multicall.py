@@ -7,24 +7,11 @@ from collections.abc import Awaitable, Iterable
 from typing import Any, Final, TypeVar
 
 import eth_retry
-import web3
 from aiohttp import ClientTimeout
-from web3 import AsyncHTTPProvider, Web3
-from web3.eth import AsyncEth
+from web3 import AsyncHTTPProvider, AsyncWeb3, Web3, WebSocketProvider
 from web3.providers.async_base import AsyncBaseProvider
 
 from multicall.constants import AIOHTTP_TIMEOUT, ASYNC_SEMAPHORE, NO_STATE_OVERRIDE
-
-try:
-    from web3 import AsyncWeb3
-except ImportError:
-    AsyncWeb3 = None  # type: ignore [assignment, misc]
-
-try:
-    from web3 import WebsocketProviderV2
-except ImportError:
-    WebsocketProviderV2 = None
-
 
 __T = TypeVar("__T")
 
@@ -59,35 +46,26 @@ def get_async_w3(w3: Web3) -> Web3:
     if w3 in async_w3s:
         return async_w3s[w3]
     if w3.eth.is_async and isinstance(w3.provider, AsyncBaseProvider):
-        timeout = w3.provider._request_kwargs["timeout"]
-        if isinstance(timeout, ClientTimeout):
-            timeout = timeout.total
+        if isinstance(w3.provider, AsyncHTTPProvider):
+            timeout = w3.provider._request_kwargs["timeout"]
+            if isinstance(timeout, ClientTimeout):
+                timeout = timeout.total
 
-        if timeout < AIOHTTP_TIMEOUT.total:
-            w3.provider._request_kwargs["timeout"] = AIOHTTP_TIMEOUT
+            if timeout < AIOHTTP_TIMEOUT.total:
+                w3.provider._request_kwargs["timeout"] = AIOHTTP_TIMEOUT
 
         async_w3s[w3] = w3
         return w3
 
     endpoint = get_endpoint(w3)
     request_kwargs = {"timeout": AIOHTTP_TIMEOUT}
-    if WebsocketProviderV2 and endpoint.startswith(("wss:", "ws:")):
-        provider = WebsocketProviderV2(endpoint, request_kwargs)
+    provider: AsyncBaseProvider
+    if endpoint.startswith(("wss:", "ws:")):
+        provider = WebSocketProvider(endpoint)
     else:
         provider = AsyncHTTPProvider(endpoint, request_kwargs)
 
-    # In older web3 versions, AsyncHTTPProvider objects come
-    # with incompatible synchronous middlewares by default.
-    if AsyncWeb3 is not None:
-        # Older versions of web3.py (v6 and below) use 'middlewares' instead of 'middleware'.
-        major_version = int(web3.__version__.split(".")[0])
-        if major_version >= 7:
-            async_w3 = AsyncWeb3(provider, middleware=[])
-        else:
-            async_w3 = AsyncWeb3(provider, middlewares=[])  # type: ignore [call-arg]
-    else:
-        async_w3 = Web3(provider=provider, middlewares=[])
-        async_w3.eth = AsyncEth(async_w3)
+    async_w3 = AsyncWeb3(provider, middleware=[])
 
     async_w3s[w3] = async_w3  # type: ignore [assignment]
     return async_w3  # type: ignore [return-value]
