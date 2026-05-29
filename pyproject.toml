@@ -57,7 +57,7 @@ requires = [
     "tomli>=2.0.0; python_version < '3.11'",
     "types-requests",
     "eth_retry==0.3.5",
-    "faster-eth-abi==5.2.29",
+    "faster-eth-abi==5.2.15",
 ]
 build-backend = "setuptools.build_meta"
 
