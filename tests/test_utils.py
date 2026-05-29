@@ -2,6 +2,7 @@ import asyncio
 
 import pytest
 from brownie import web3
+from web3 import HTTPProvider
 from web3.providers.async_base import AsyncBaseProvider
 
 from multicall.utils import (
@@ -70,7 +71,7 @@ def test_get_endpoint_brownie():
 
 
 def test_get_endpoint_web3py():
-    web3py_w3 = Web3(get_endpoint(web3))
+    web3py_w3 = Web3(HTTPProvider(get_endpoint(web3)))
     assert get_endpoint(web3py_w3) == web3.provider.endpoint_uri
 
 
